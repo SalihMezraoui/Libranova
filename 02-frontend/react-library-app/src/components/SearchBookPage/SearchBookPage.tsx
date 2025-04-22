@@ -15,6 +15,7 @@ export const SearchBookPage = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [search, setSearch] = useState('');
     const [searchUrl, setSearchUrl] = useState('');
+    const [category, setCategory] = useState('Kategorie');
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -26,7 +27,8 @@ export const SearchBookPage = () => {
                 url = `${apiUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
             }
             else {
-                url = apiUrl + searchUrl;
+                let searchAndPage = searchUrl.replace('<pageNumber>', `${currentPage - 1}`);
+                url = apiUrl + searchAndPage;
             }
 
             const response = await fetch(url);
@@ -82,11 +84,29 @@ export const SearchBookPage = () => {
     }
 
     const searchHandler = () => {
+        setCurrentPage(1);
         if (search === '') {
             setSearchUrl('');
         }
         else {
-            setSearchUrl(`/search/findByTitleContainingIgnoreCase?title=${search}&page=0&size=${booksPerPage}`);
+            setSearchUrl(`/search/findByTitleContainingIgnoreCase?title=${search}&page=<pageNumber>&size=${booksPerPage}`);
+        }
+        setCategory('Kategorie');
+    }
+
+    const categoryHandler = (categoryInput: string) => {
+        setCurrentPage(1);
+        if (
+            categoryInput.toLowerCase() === 'fe' ||
+            categoryInput.toLowerCase() === 'be' ||
+            categoryInput.toLowerCase() === 'data' ||
+            categoryInput.toLowerCase() === 'devops'       
+        ) {
+            setCategory(categoryInput);
+            setSearchUrl(`/search/findByCategory?category=${categoryInput}&page=<pageNumber>&size=${booksPerPage}`);
+        } else {    
+            setCategory('All');
+            setSearchUrl(`?page=<pageNumber>&size=${booksPerPage}`);
         }
     }
 
@@ -107,10 +127,10 @@ export const SearchBookPage = () => {
                         <div className='col-6'>
                             <div className='d-flex'>
                                 <input className='form-control me-2 rounded-pill' type='search'
-                                    placeholder='Suchen' aria-labelledby='Search' 
-                                    onChange={e => setSearch(e.target.value)}/>
-                                <button className='btn btn-outline-success rounded-pill' 
-                                onClick={() => searchHandler()}>
+                                    placeholder='Suchen' aria-labelledby='Search'
+                                    onChange={e => setSearch(e.target.value)} />
+                                <button className='btn btn-outline-success rounded-pill'
+                                    onClick={() => searchHandler()}>
                                     Suchen
                                 </button>
 
@@ -121,30 +141,30 @@ export const SearchBookPage = () => {
                                 <button className='btn btn-outline-dark rounded-pill px-4 shadow-sm dropdown-toggle' type='button'
                                     id='categoryDropdownButton' data-bs-toggle='dropdown'
                                     aria-expanded='false'>
-                                    Kategorie
+                                    {category}
                                 </button>
                                 <ul className='dropdown-menu rounded-3 shadow-sm' aria-labelledby='categoryDropdownButton'>
-                                    <li>
+                                    <li onClick={() => categoryHandler('All')}>
                                         <a className='dropdown-item' href='#'>
                                             Alle
                                         </a>
                                     </li>
-                                    <li>
+                                    <li onClick={() => categoryHandler('FE')}>
                                         <a className='dropdown-item' href='#'>
                                             Front-End
                                         </a>
                                     </li>
-                                    <li>
+                                    <li onClick={() => categoryHandler('BE')}>
                                         <a className='dropdown-item' href='#'>
                                             Back-End
                                         </a>
                                     </li>
-                                    <li>
+                                    <li onClick={() => categoryHandler('Data')}>
                                         <a className='dropdown-item' href='#'>
                                             Data Science
                                         </a>
                                     </li>
-                                    <li>
+                                    <li onClick={() => categoryHandler('DevOps')}>
                                         <a className='dropdown-item' href='#'>
                                             DevOps
                                         </a>
@@ -153,18 +173,28 @@ export const SearchBookPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='mt-3'>
-                        <h5 className='fw-bold text-dark'>Anzahl der Ergebnisse: ({totalBooks})</h5>
-                    </div>
-                    <p className='text-muted'>
-                        {indexOfFirstBook + 1}-{lastItem} von {totalBooks} Ergebnissen:
-                    </p>
-                    {books.map(book => (
-                        <div key={book.id} className="mb-4">
-                            <SearchBook book={book} />
+                    {totalBooks > 0 ?
+                        <>
+                            <div className='mt-3'>
+                                <h5 className='fw-bold text-dark'>Anzahl der Ergebnisse: ({totalBooks})</h5>
+                            </div>
+                            <p className='text-muted'>
+                                {indexOfFirstBook + 1}-{lastItem} von {totalBooks} Ergebnissen:
+                            </p>
+                            {books.map(book => (
+                                <div key={book.id} className="mb-4">
+                                    <SearchBook book={book} />
+                                </div>
+                            ))}
+                        </>
+                        :
+                        <div className='m-5'>
+                            <h5 className='fw-bold text-dark'>Keine Ergebnisse gefunden</h5>
+                            <p className='text-muted'>Bitte versuchen Sie es mit einem anderen Suchbegriff.</p>
+                            <a type="button" className='btn btn-md main-color text-white rounded-pill px-3 invert-hover' href='/'>
+                                Bibliotheksdienste </a>
                         </div>
-                    ))}
-
+                    }
                     {totalBooks > 1 &&
                         <Pagination currentPage={currentPage} totalPages={totalPages}
                             paginate={paginate} />

@@ -177,5 +177,18 @@
   font-weight: bold !important;
 }
 
+/* SearchBook*/
+.invert-hover {
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #0d6efd; 
+}
+
+.invert-hover:hover {
+    background-color: white !important;
+    color: #0d6efd !important;
+    text-decoration: none;
+}
+
+
 
 

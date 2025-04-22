@@ -1,0 +1,176 @@
+import { useState, useEffect } from "react";
+import Book from "../../models/Book";
+import { LoadingSpinner } from "../widgets/LoadingSpinner";
+import { SearchBook } from "./layouts/SearchBook";
+import { Pagination } from "../widgets/Pagination";
+
+export const SearchBookPage = () => {
+
+    const [books, setBooks] = useState<Book[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [httpError, setHttpError] = useState(null);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [booksPerPage] = useState(6);
+    const [totalBooks, setTotalBooks] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
+    const [search, setSearch] = useState('');
+    const [searchUrl, setSearchUrl] = useState('');
+
+    useEffect(() => {
+        const fetchBooks = async () => {
+            const apiUrl: string = "http://localhost:8080/api/books";
+
+            let url: string = `${apiUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
+
+            if (searchUrl === '') {
+                url = `${apiUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
+            }
+            else {
+                url = apiUrl + searchUrl;
+            }
+
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Something went wrong!');
+            }
+
+            const jsonResponse = await response.json();
+
+            const responseData = jsonResponse._embedded.books;
+
+            setTotalBooks(jsonResponse.page.totalElements);
+            setTotalPages(jsonResponse.page.totalPages);
+
+
+            const loadedBooks: Book[] = [];
+
+            for (const key in responseData) {
+                loadedBooks.push({
+                    id: responseData[key].id,
+                    title: responseData[key].title,
+                    author: responseData[key].author,
+                    overview: responseData[key].overview,
+                    totalCopies: responseData[key].totalCopies,
+                    copiesInStock: responseData[key].copiesInStock,
+                    category: responseData[key].category,
+                    image: responseData[key].image,
+                });
+            }
+            setBooks(loadedBooks);
+            setLoading(false);
+
+        };
+        fetchBooks().catch((error: any) => {
+            setLoading(false);
+            setHttpError(error.message);
+        })
+        window.scrollTo(0, 0);
+    }, [currentPage, searchUrl]);
+
+    if (loading) {
+        return (
+            <LoadingSpinner />
+        );
+    }
+
+    if (httpError) {
+        return (
+            <div className='container mt-5'>
+                <p>{httpError}</p>
+            </div>
+        );
+    }
+
+    const searchHandler = () => {
+        if (search === '') {
+            setSearchUrl('');
+        }
+        else {
+            setSearchUrl(`/search/findByTitleContainingIgnoreCase?title=${search}&page=0&size=${booksPerPage}`);
+        }
+    }
+
+    const indexOfLastBook = currentPage * booksPerPage;
+    const indexOfFirstBook = indexOfLastBook - booksPerPage;
+    let lastItem = booksPerPage * currentPage <= totalBooks ?
+        booksPerPage * currentPage : totalBooks;
+
+    const paginate = (pageNumber: number) => {
+        setCurrentPage(pageNumber);
+    }
+
+    return (
+        <div>
+            <div className='container py-5 bg-light rounded shadow-sm'>
+                <div>
+                    <div className='row mt-4 align-items-center'>
+                        <div className='col-6'>
+                            <div className='d-flex'>
+                                <input className='form-control me-2 rounded-pill' type='search'
+                                    placeholder='Suchen' aria-labelledby='Search' 
+                                    onChange={e => setSearch(e.target.value)}/>
+                                <button className='btn btn-outline-success rounded-pill' 
+                                onClick={() => searchHandler()}>
+                                    Suchen
+                                </button>
+
+                            </div>
+                        </div>
+                        <div className='col-4'>
+                            <div className='dropdown'>
+                                <button className='btn btn-outline-dark rounded-pill px-4 shadow-sm dropdown-toggle' type='button'
+                                    id='categoryDropdownButton' data-bs-toggle='dropdown'
+                                    aria-expanded='false'>
+                                    Kategorie
+                                </button>
+                                <ul className='dropdown-menu rounded-3 shadow-sm' aria-labelledby='categoryDropdownButton'>
+                                    <li>
+                                        <a className='dropdown-item' href='#'>
+                                            Alle
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className='dropdown-item' href='#'>
+                                            Front-End
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className='dropdown-item' href='#'>
+                                            Back-End
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className='dropdown-item' href='#'>
+                                            Data Science
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a className='dropdown-item' href='#'>
+                                            DevOps
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='mt-3'>
+                        <h5 className='fw-bold text-dark'>Anzahl der Ergebnisse: ({totalBooks})</h5>
+                    </div>
+                    <p className='text-muted'>
+                        {indexOfFirstBook + 1}-{lastItem} von {totalBooks} Ergebnissen:
+                    </p>
+                    {books.map(book => (
+                        <div key={book.id} className="mb-4">
+                            <SearchBook book={book} />
+                        </div>
+                    ))}
+
+                    {totalBooks > 1 &&
+                        <Pagination currentPage={currentPage} totalPages={totalPages}
+                            paginate={paginate} />
+                    }
+                </div>
+            </div>
+        </div>
+    );
+}

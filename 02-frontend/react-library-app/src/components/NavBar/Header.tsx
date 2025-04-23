@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styles from './Header.module.css';
 
 export const Header = () => {
@@ -16,10 +17,10 @@ export const Header = () => {
                 <div className='collapse navbar-collapse' id='navbarContent'>
                     <ul className='navbar-nav me-auto'>
                         <li className='nav-item'>
-                            <a className='nav-link hover-underline' href='#'> Startseite</a>
+                            <NavLink className='nav-link hover-underline' to='/home'> Startseite</NavLink>
                         </li>
                         <li className='nav-item'>
-                            <a className='nav-link hover-underline' href='#'> Bücher suchen</a>
+                            <NavLink className='nav-link hover-underline' to='/search'> Bücher suchen</NavLink>
                         </li>
 
                     </ul>

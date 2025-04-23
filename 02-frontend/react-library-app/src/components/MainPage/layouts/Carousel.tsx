@@ -2,6 +2,7 @@ import { BookReturn } from "./BookReturn";
 import {useEffect, useState} from 'react';
 import Book  from "../../../models/Book";
 import { LoadingSpinner } from "../../widgets/LoadingSpinner";
+import { Link } from "react-router-dom";
 
 
 export const Carousel = () => {
@@ -117,7 +118,7 @@ export const Carousel = () => {
                 </div>
             </div>
             <div className='books-footer mt-3'>
-                <a className='btn btn-outline-secondary btn-lg hover-grow' href='#'>Mehr anzeigen</a>
+                <Link className='btn btn-outline-secondary btn-lg hover-grow' to='/search'>Mehr anzeigen</Link>
             </div>
         </div>
     );

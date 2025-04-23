@@ -9,7 +9,7 @@ export const SearchBookPage = () => {
     const [books, setBooks] = useState<Book[]>([]);
     const [loading, setLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const [booksPerPage] = useState(6);
     const [totalBooks, setTotalBooks] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
@@ -128,7 +128,12 @@ export const SearchBookPage = () => {
                             <div className='d-flex'>
                                 <input className='form-control me-2 rounded-pill' type='search'
                                     placeholder='Suchen' aria-labelledby='Search'
-                                    onChange={e => setSearch(e.target.value)} />
+                                    onChange={e => setSearch(e.target.value)}
+                                    onKeyDown={(e) => {
+                                        if (e.key === 'Enter') {
+                                            searchHandler(); // 
+                                        }
+                                    }} />
                                 <button className='btn btn-outline-success rounded-pill'
                                     onClick={() => searchHandler()}>
                                     Suchen

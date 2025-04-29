@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Book from "../../models/Book";
-import { LoadingSpinner } from "../widgets/LoadingSpinner";
 import { SearchBook } from "./layouts/SearchBook";
-import { Pagination } from "../widgets/Pagination";
+import { Pagination } from "../Widgets/Pagination";
+import { BreathingLoader } from "../Widgets/BreathingLoader";
 
 export const SearchBookPage = () => {
 
@@ -71,7 +71,7 @@ export const SearchBookPage = () => {
 
     if (loading) {
         return (
-            <LoadingSpinner />
+            <BreathingLoader size={80} color="#003366" speed={1} />
         );
     }
 
@@ -100,11 +100,11 @@ export const SearchBookPage = () => {
             categoryInput.toLowerCase() === 'fe' ||
             categoryInput.toLowerCase() === 'be' ||
             categoryInput.toLowerCase() === 'data' ||
-            categoryInput.toLowerCase() === 'devops'       
+            categoryInput.toLowerCase() === 'devops'
         ) {
             setCategory(categoryInput);
             setSearchUrl(`/search/findByCategory?category=${categoryInput}&page=<pageNumber>&size=${booksPerPage}`);
-        } else {    
+        } else {
             setCategory('All');
             setSearchUrl(`?page=<pageNumber>&size=${booksPerPage}`);
         }

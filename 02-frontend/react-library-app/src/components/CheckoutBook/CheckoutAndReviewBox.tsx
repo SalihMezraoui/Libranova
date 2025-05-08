@@ -8,7 +8,7 @@ export const CheckoutAndReviewBox: React.FC<{ book: Book | undefined, mobile: bo
                 <div className="mt-3">
                     <p>
                         <b>0/5 </b>
-                        books checkedd out
+                        books checked out
                     </p>
                     <hr />
                     {props.book && props.book.copiesInStock && props.book.copiesInStock > 0

@@ -1,8 +1,6 @@
-// components/BreathingLoader.tsx
 import React from 'react';
 
 type BreathingLoaderProps = {
-  /** Size in pixels (default: 40) */
   size?: number;
   /** Color (default: '#3b82f6' - blue) */
   color?: string;

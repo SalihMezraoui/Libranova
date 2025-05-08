@@ -1,6 +1,7 @@
 package com.libranova.spring_boot_library.configuration;
 
 import com.libranova.spring_boot_library.model.Book;
+import com.libranova.spring_boot_library.model.Review;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -17,8 +18,10 @@ public class MySpringDataRestConfig implements RepositoryRestConfigurer
         HttpMethod [] unSupportedActions = {HttpMethod.POST, HttpMethod.PATCH, HttpMethod.DELETE, HttpMethod.PUT};
 
         config.exposeIdsFor(Book.class);
+        config.exposeIdsFor(Review.class);
 
         restrictHttpMethods(Book.class, config, unSupportedActions);
+        restrictHttpMethods(Review.class, config, unSupportedActions);
 
         // CORS mapping configuaration
         corsRegistry.addMapping(config.getBasePath() + "/**").allowedOrigins(allowedFrontendOrigin);

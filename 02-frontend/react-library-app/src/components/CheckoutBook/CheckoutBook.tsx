@@ -3,12 +3,19 @@ import Book from "../../models/Book";
 import { BreathingLoader } from "../Widgets/BreathingLoader";
 import { RatingStars } from "../Widgets/RatingStars";
 import { CheckoutAndReviewBox } from "./CheckoutAndReviewBox";
+import Review from "../../models/Review";
+import { RecentReviews } from "./RecentReviews";
 
 export const CheckoutBook = () => {
 
     const [book, setBook] = useState<Book>();
     const [loading, setLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
+
+    // Review states
+    const [reviews, setReviews] = useState<Review[]>([]);
+    const [numberOfStars, setNumberOfStars] = useState(0);
+    const [isLoadingReview, setIsLoadingReview] = useState(true);
 
     const bookId = (window.location.pathname).split('/')[2];
 
@@ -44,7 +51,50 @@ export const CheckoutBook = () => {
         })
     }, []);
 
-    if (loading) {
+    useEffect(() => {
+        const fetchReviews = async () => {
+            const apiUrl: string = `http://localhost:8080/api/reviews/search/findByBookId?bookId=${bookId}`;
+
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error('Something went wrong!');
+            }
+
+            const jsonResponse = await response.json();
+
+            const responseData = jsonResponse._embedded.reviews
+
+            const loadedReviews: Review[] = [];
+            
+            let totalStars: number = 0;
+
+            for (const key in responseData) {
+                loadedReviews.push({
+                    id: responseData[key].id,
+                    userEmail: responseData[key].userEmail,
+                    date: responseData[key].date,
+                    rating: responseData[key].rating,
+                    bookId: responseData[key].bookId,
+                    reviewDescription: responseData[key].reviewDescription,
+                });
+                totalStars += responseData[key].rating;
+            }
+
+            if (loadedReviews) {
+                const rounded = (Math.round((totalStars / loadedReviews.length) * 2)/2).toFixed(1);
+                setNumberOfStars(parseFloat(rounded));     
+        }
+
+            setReviews(loadedReviews);
+            setIsLoadingReview(false);
+        };
+        fetchReviews().catch((error: any) => {
+            setIsLoadingReview(false);
+            setHttpError(error.message);
+        })
+    }, []);
+
+    if (loading || isLoadingReview) {
         return (
             <BreathingLoader size={80} color="#003366" speed={1} />
         );
@@ -85,12 +135,13 @@ export const CheckoutBook = () => {
                             <h1 className="fw-bold mb-3">{book?.title}</h1>
                             <h5 className="text-primary">{book?.author}</h5>
                             <p className="card-text">{book?.overview}</p>
-                            <RatingStars rating={4.6} size={22} />
+                            <RatingStars rating={numberOfStars} size={22} />
                         </div>
                     </div>
                     <CheckoutAndReviewBox book={book} mobile={false} />
                 </div>
                 <hr />
+                <RecentReviews reviews={reviews} bookId={book?.id} mobile={false} />
             </div>
             {/* Mobile Layout */}
             <div className="container d-lg-none">
@@ -109,11 +160,12 @@ export const CheckoutBook = () => {
                         <h2 className="fw-bold mb-2">{book?.title}</h2>
                         <h5 className="text-primary mb-3">{book?.author}</h5>
                         <p className="card-text">{book?.overview}</p>
-                        <RatingStars rating={4.5} size={22} />
+                        <RatingStars rating={numberOfStars} size={22} />
                     </div>
                 </div>
                 <CheckoutAndReviewBox book={book} mobile={true} />
                 <hr />
+                <RecentReviews reviews={reviews} bookId={book?.id} mobile={true} />
             </div>
         </div>
     );

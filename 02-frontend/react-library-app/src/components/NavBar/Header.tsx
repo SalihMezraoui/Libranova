@@ -1,7 +1,21 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styles from './Header.module.css';
+import { useOktaAuth } from '@okta/okta-react';
+import { BreathingLoader } from '../Widgets/BreathingLoader';
+import { ok } from 'assert';
 
 export const Header = () => {
+
+    const { oktaAuth, authState } = useOktaAuth();
+
+    if (!authState) {
+        return <BreathingLoader />;
+    }
+
+    const manageLogout = async () => oktaAuth.signOut();
+
+
+    console.log('authState', authState);
 
     return (
         <nav className='navbar navbar-expand-lg navbar-dark main-color py-3'>
@@ -24,13 +38,22 @@ export const Header = () => {
                         </li>
 
                     </ul>
-                    <div className='d-flex'>
-                        <button className='btn btn-auth rounded-pill px-4'>
-                            Login
-                        </button>
-                    </div>
+                    {!authState.isAuthenticated ?
+                        <div className='d-flex'>
+                            <Link type='button' className='btn btn-auth rounded-pill px-4' to='/login'>
+                                Login
+                            </Link>
+                        </div>
+                        :
+                        <div className='d-flex'>
+                            <button className='btn btn-auth rounded-pill px-4' onClick={manageLogout}>
+                                Logout
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
         </nav>
+
     );
 }

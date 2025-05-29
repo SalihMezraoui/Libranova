@@ -43,7 +43,7 @@ public class SecurityConfig
         configuration.setAllowedOriginPatterns(List.of("http://localhost:3000"));
 
         // Allow all HTTP methods
-        configuration.setAllowedMethods(List.of("GET", "OPTIONS"));
+        configuration.setAllowedMethods(List.of("GET", "PUT", "POST", "DELETE", "OPTIONS"));
 
         // Allow all headers
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));

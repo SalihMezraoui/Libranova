@@ -22,11 +22,14 @@ public class BookController
     }
 
     @GetMapping("/secure/ischeckedout")
-    public boolean checkoutBookByUserEmail(@RequestParam Long bookId, Authentication authentication)
-    {
-        System.out.println("Received request for isCheckout with bookId: " + bookId);
+    public boolean checkoutBookByUserEmail(@RequestParam Long bookId, Authentication authentication) {
+        System.out.println("Received request for /secure/ischeckedout with bookId: " + bookId);
+        System.out.println("Authentication: " + authentication);
         String userEmail = authentication.getName();
-        return bookService.checkoutBookByUserEmail(userEmail, bookId);
+        System.out.println("User email: " + userEmail);
+        boolean result = bookService.checkoutBookByUserEmail(userEmail, bookId);
+        System.out.println("Returning result: " + result);
+        return result;
     }
 
     @PutMapping("/secure/checkout")

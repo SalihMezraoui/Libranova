@@ -35,7 +35,8 @@ public class BookService
         return book;
     }
 
-    private void checkAvailability(Book book, String userEmail) {
+    private void checkAvailability(Book book, String userEmail)
+    {
         if (checkoutRepository.findByUserEmailAndBookId(userEmail, book.getId()) != null) {
             throw new BookNotAvailableException("Das Buch ist bereits ausgeliehen.");
         }
@@ -44,12 +45,14 @@ public class BookService
         }
     }
 
-    private void decrementBookStock(Book book) {
+    private void decrementBookStock(Book book)
+    {
         book.setCopiesInStock(book.getCopiesInStock() - 1);
         bookRepository.save(book);
     }
 
-    private void createCheckoutRecord(String userEmail, Book book) {
+    private void createCheckoutRecord(String userEmail, Book book)
+    {
         Checkout checkout = new Checkout(userEmail, LocalDate.now().toString(),
                 LocalDate.now().plusDays(CHECKOUT_PERIOD_DAYS).toString(), book.getId());
         checkoutRepository.save(checkout);

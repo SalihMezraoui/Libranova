@@ -5,6 +5,8 @@ import { ReviewComponent } from "../Widgets/ReviewComponent";
 export const RecentReviews: React.FC<{
     reviews: Review[], bookId: number | undefined, mobile: boolean
 }> = (props) => {
+        console.log("RecentReviews props.bookId:", props.bookId);
+
     return (
         <div className={props.mobile ? 'mt-4' : 'row mt-5'}>
             <div className={props.mobile ? '' : 'col-sm-3 col-md-2'}>
@@ -19,7 +21,7 @@ export const RecentReviews: React.FC<{
 
                         <div className='mt-3 mb-4'>
                             <Link type='button' className='btn main-color btn-md text-white'
-                                to='#'>
+                                to={`/reviewsList/${props.bookId}`}>
                                 See all reviews
                             </Link>
                         </div>

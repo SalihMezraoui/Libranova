@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
 import Book from "../../models/Book";
+import { PostAReview } from "../Widgets/PostAReview";
 
 export const CheckoutAndReviewBox: React.FC<{
     book: Book | undefined, mobile: boolean,
     currentLoans: number, isAuthenticated: any, isCheckedOut: boolean
-    checkoutBook: any
+    checkoutBook: any, isReviewRemaining: boolean, submitReview: any
 }> = (props) => {
 
     function renderButton() {
         if (props.isAuthenticated) {
             if (!props.isCheckedOut && props.currentLoans < 5) {
                 return (
-                    <button onClick={() => props.checkoutBook()} 
-                    className="btn btn-success btn-lg"> Checkout</button>
+                    <button onClick={() => props.checkoutBook()}
+                        className="btn btn-success btn-lg"> Checkout</button>
                 )
             }
             else if (props.isCheckedOut) {
@@ -28,6 +29,23 @@ export const CheckoutAndReviewBox: React.FC<{
             <Link to='/login' className="btn btn-success btn-lg"> Sign in</Link>
         )
     }
+
+    function renderReview() {
+        if (props.isAuthenticated && !props.isReviewRemaining) {
+            return (
+                <p><PostAReview submitReview={props.submitReview}/></p>
+            )
+        }
+        else if (props.isAuthenticated && props.isReviewRemaining) {
+            return (
+                <p><b>Thank you for your Review</b></p>
+            )
+        }
+        return (
+            <div><hr /><p> You need to sign in to leave a review.</p></div>
+        )
+    }
+
     return (
         <div className={props.mobile ? "card d-flex mt-5" : "card col-3 container d-flex mb-5"}>
             <div className="card-body container">
@@ -58,9 +76,7 @@ export const CheckoutAndReviewBox: React.FC<{
                 <p className="mt-3">
                     this number can change until placing the order.
                 </p>
-                <p>
-                    Sign in to be able to leave a review.
-                </p>
+                {renderReview()}
 
 
             </div>

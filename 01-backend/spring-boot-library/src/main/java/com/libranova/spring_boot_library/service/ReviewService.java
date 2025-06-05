@@ -1,6 +1,5 @@
 package com.libranova.spring_boot_library.service;
 
-import com.libranova.spring_boot_library.Repository.BookRepository;
 import com.libranova.spring_boot_library.Repository.ReviewRepository;
 import com.libranova.spring_boot_library.dto.ReviewRequest;
 import com.libranova.spring_boot_library.model.Review;

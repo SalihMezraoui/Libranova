@@ -17,18 +17,20 @@ public class ReviewService
 {
     private final ReviewRepository reviewRepository;
 
-    public void addReview(String userEmail, ReviewRequest reviewRequest) throws Exception {
-        Review existingReview = reviewRepository.findByUserEmailAndBookId(userEmail, reviewRequest.getBookId());
-        if (existingReview != null) {
-            throw new Exception("You have already reviewed this book.");
+    public void addReview(String userEmail, ReviewRequest request) {
+        boolean alreadyReviewed = hasReviewed(userEmail, request.getBookId());
+        if (alreadyReviewed) {
+            throw new IllegalStateException("You have already reviewed this book.");
         }
 
-        Review review = new Review();
-        review.setBookId(reviewRequest.getBookId());
-        review.setRating(reviewRequest.getRating());
-        review.setUserEmail(userEmail);
-        review.setReviewDescription(reviewRequest.getReviewDescription());
-        review.setDate(Date.valueOf(LocalDate.now()));
+        Review review = Review.builder()
+                .bookId(request.getBookId())
+                .rating(request.getRating())
+                .userEmail(userEmail)
+                .reviewDescription(request.getReviewDescription())
+                .date(Date.valueOf(LocalDate.now()))
+                .build();
+
         reviewRepository.save(review);
     }
 

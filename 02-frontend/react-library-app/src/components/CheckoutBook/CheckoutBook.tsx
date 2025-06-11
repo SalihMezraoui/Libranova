@@ -138,7 +138,7 @@ export const CheckoutBook = () => {
     useEffect(() => {
         const fetchUserLoans = async () => {
             if (authState && authState.isAuthenticated) {
-                const apiUrl = `http://localhost:8080/api/books/secure/currentloans`;
+                const apiUrl = `http://localhost:8080/api/books/secure/currentloans/size`;
                 const response = {
                     method: 'GET',
                     headers: {

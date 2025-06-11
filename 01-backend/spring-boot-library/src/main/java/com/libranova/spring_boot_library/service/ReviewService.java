@@ -1,7 +1,7 @@
 package com.libranova.spring_boot_library.service;
 
 import com.libranova.spring_boot_library.Repository.ReviewRepository;
-import com.libranova.spring_boot_library.dto.ReviewRequest;
+import com.libranova.spring_boot_library.dto.request.ReviewRequest;
 import com.libranova.spring_boot_library.model.Review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

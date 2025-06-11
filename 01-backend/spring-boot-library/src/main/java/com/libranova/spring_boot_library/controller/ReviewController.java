@@ -1,6 +1,6 @@
 package com.libranova.spring_boot_library.controller;
 
-import com.libranova.spring_boot_library.dto.ReviewRequest;
+import com.libranova.spring_boot_library.dto.request.ReviewRequest;
 import com.libranova.spring_boot_library.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

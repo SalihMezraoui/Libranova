@@ -1,4 +1,4 @@
-package com.libranova.spring_boot_library.dto;
+package com.libranova.spring_boot_library.dto.request;
 
 import lombok.Data;
 

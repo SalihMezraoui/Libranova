@@ -1,10 +1,13 @@
 package com.libranova.spring_boot_library.controller;
 
+import com.libranova.spring_boot_library.dto.response.UserLoansSummary;
 import com.libranova.spring_boot_library.model.Book;
 import com.libranova.spring_boot_library.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
@@ -15,6 +18,12 @@ public class BookController
     private final BookService bookService;
 
     @GetMapping("/secure/currentloans")
+    public List<UserLoansSummary> getUserLoansSummary(Authentication authentication) throws Exception {
+        String userEmail = authentication.getName();
+        return bookService.getUserLoansSummary(userEmail);
+    }
+
+    @GetMapping("/secure/currentloans/size")
     public int getNumberOfLoans(Authentication authentication)
     {
         String userEmail = authentication.getName();

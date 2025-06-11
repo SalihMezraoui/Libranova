@@ -3,6 +3,7 @@ package com.libranova.spring_boot_library.service;
 
 import com.libranova.spring_boot_library.Repository.BookRepository;
 import com.libranova.spring_boot_library.Repository.CheckoutRepository;
+import com.libranova.spring_boot_library.dto.response.UserLoansSummary;
 import com.libranova.spring_boot_library.exception.BookNotAvailableException;
 import com.libranova.spring_boot_library.model.Book;
 import com.libranova.spring_boot_library.model.Checkout;
@@ -10,7 +11,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -66,6 +72,41 @@ public class BookService
     public int getNumberOfLoans(String userEmail)
     {
         return checkoutRepository.findByUserEmail(userEmail).size();
+    }
+
+    public List<UserLoansSummary> getUserLoansSummary(String userEmail) throws ParseException {
+        // Retrieving all checkouts for the user
+        List<Checkout> checkouts = checkoutRepository.findByUserEmail(userEmail);
+
+        // Extracting book IDs from checkouts
+        List<Long> bookIds = checkouts.stream()
+                .map(Checkout::getBookId)
+                .toList();
+
+        // Get corresponding books
+        List<Book> books = bookRepository.findBooksByBookIds(bookIds);
+
+        // date objects
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = sdf.parse(LocalDate.now().toString());
+
+        // map of bookId -> returnDate
+        Map<Long, String> returnDateMap = checkouts.stream()
+                .collect(Collectors.toMap(Checkout::getBookId, Checkout::getReturnDate));
+
+        // Build response list
+        List<UserLoansSummary> summaryList = new ArrayList<>();
+        for (Book book : books) {
+            String returnDateStr = returnDateMap.get(book.getId());
+            if (returnDateStr != null) {
+                Date returnDate = sdf.parse(returnDateStr);
+                long diffMillis = returnDate.getTime() - today.getTime();
+                int daysRemaining = (int) TimeUnit.MILLISECONDS.toDays(diffMillis);
+                summaryList.add(new UserLoansSummary(book, daysRemaining));
+            }
+        }
+
+        return summaryList;
     }
 
 }

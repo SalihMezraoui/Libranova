@@ -9,9 +9,10 @@ import { CheckoutBook } from './components/CheckoutBook/CheckoutBook';
 import { ok } from 'assert';
 import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
 import { oktaConfig } from './lib/oktaConfig';
-import { LoginCallback, Security } from '@okta/okta-react';
+import { LoginCallback, SecureRoute, Security } from '@okta/okta-react';
 import OktaLoginWidget from './access/OktaLoginWidget';
 import { ReviewList } from './components/ReviewListPage/ReviewList';
+import { LibraryActivity } from './components/CheckoutBook/LibraryActivityPage/LibraryActivity';
 
 
 const oktaAuth = new OktaAuth(oktaConfig);
@@ -51,6 +52,7 @@ export const App = () => {
             </Route>
             <Route path='/login' render={() => <OktaLoginWidget config={oktaConfig} />} />
             <Route path='login/callback' component={LoginCallback} />
+            <SecureRoute path='/libraryActivity'> <LibraryActivity /> </SecureRoute>
 
           </Switch>
         </div>

@@ -36,7 +36,11 @@ export const Header = () => {
                         <li className='nav-item'>
                             <NavLink className='nav-link hover-underline' to='/search'> Bücher suchen</NavLink>
                         </li>
-
+                        { authState.isAuthenticated &&
+                        <li className='nav-item'>
+                            <NavLink className='nav-link hover-underline' to='/libraryActivity'> Bibliotheksaktivität</NavLink>
+                        </li>
+                        }
                     </ul>
                     {!authState.isAuthenticated ?
                         <div className='d-flex'>

@@ -12,7 +12,7 @@ import { oktaConfig } from './lib/oktaConfig';
 import { LoginCallback, SecureRoute, Security } from '@okta/okta-react';
 import OktaLoginWidget from './access/OktaLoginWidget';
 import { ReviewList } from './components/ReviewListPage/ReviewList';
-import { LibraryActivity } from './components/CheckoutBook/LibraryActivityPage/LibraryActivity';
+import { LibraryActivity } from './components/LibraryActivityPage/LibraryActivity';
 
 
 const oktaAuth = new OktaAuth(oktaConfig);

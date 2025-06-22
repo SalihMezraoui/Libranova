@@ -109,4 +109,37 @@ public class BookService
         return summaryList;
     }
 
+    public void returnBook(String userEmail, Long bookId) {
+
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new BookNotAvailableException("Buch mit ID " + bookId + " ist nicht verfügbar."));
+
+        Checkout checkout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
+        if (checkout == null) {
+            throw new BookNotAvailableException("Keine aktive Ausleihe für Buch mit ID " + bookId + " gefunden.");
+        }
+
+        book.setCopiesInStock(book.getCopiesInStock() + 1);
+        bookRepository.save(book);
+        checkoutRepository.deleteById(checkout.getId());
+    }
+
+    public void renewLoan(String userEmail, Long bookId) throws Exception {
+        Checkout checkout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
+        if (checkout == null) {
+            throw new BookNotAvailableException("Keine aktive Ausleihe für Buch mit ID " + bookId + " gefunden.");
+        }
+
+        LocalDate returnDate = LocalDate.parse(checkout.getReturnDate());
+        LocalDate today = LocalDate.now();
+
+        if (!returnDate.isBefore(today)) {
+            checkout.setReturnDate(today.plusDays(7).toString());
+            checkoutRepository.save(checkout);
+        }
+        else {
+            throw new Exception("Das Buch kann nicht verlängert werden, da es bereits überfällig ist.");
+        }
+    }
+
 }

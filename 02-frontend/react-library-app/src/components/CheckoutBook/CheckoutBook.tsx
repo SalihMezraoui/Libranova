@@ -145,7 +145,7 @@ export const CheckoutBook = () => {
                         Authorization: `Bearer ${authState.accessToken?.accessToken}`,
                         'Content-Type': 'application/json'
                     }
-                };
+                }; 
                 const res = await fetch(apiUrl, response);
                 if (!res.ok) {
                     throw new Error('Something went wrong!');

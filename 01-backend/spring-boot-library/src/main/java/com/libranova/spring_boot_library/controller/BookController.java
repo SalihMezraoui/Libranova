@@ -48,4 +48,20 @@ public class BookController
         String userEmail = authentication.getName();
         return bookService.checkoutBook(userEmail,bookId);
     }
+
+    @PutMapping("/secure/return")
+    public void returnBook(Authentication authentication,
+                           @RequestParam Long bookId)
+    {
+        String userEmail = authentication.getName();
+        bookService.returnBook(userEmail, bookId);
+    }
+
+    @PutMapping("/secure/extend/loan")
+    public void renewLoan(Authentication authentication,
+                          @RequestParam Long bookId) throws Exception
+    {
+        String userEmail = authentication.getName();
+        bookService.renewLoan(userEmail, bookId);
+    }
 }

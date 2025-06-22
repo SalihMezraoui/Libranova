@@ -1,3 +1,5 @@
+import { Loans } from "./Layouts/Loans";
+
 export const LibraryActivity = () => {
     return (
         <div className='container mt-5'>
@@ -18,7 +20,7 @@ export const LibraryActivity = () => {
                 <div className="tab-content" id="nav-tabContent">
                     <div className="tab-pane fade show active" id="nav-loans" role="tabpanel"
                         aria-labelledby="nav-loans-tab">
-                            <p>Loans</p>
+                            <Loans />
                     </div>
                     <div className="tab-pane fade" id="nav-history" role="tabpanel"
                         aria-labelledby="nav-history-tab">

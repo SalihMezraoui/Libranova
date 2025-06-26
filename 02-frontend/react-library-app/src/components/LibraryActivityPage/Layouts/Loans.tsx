@@ -91,10 +91,10 @@ export const Loans = () => {
     return (
         <div>
             {/* Desktop view */}
-            <div className="d-none d-lg-block mt-2">
+            <div className="d-none d-lg-block mt-2 py-4">
                 {userLoansSummary.length > 0 ?
                     <>
-                        <h5>Aktuelle Ausleihen:</h5>
+                        <h3 className="mb-4 fw-semibold text-secondary">Aktuelle Ausleihen</h3>
 
                         {userLoansSummary.map(userLoanSummary => (
                             <div key={userLoanSummary.book.id}>

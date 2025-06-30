@@ -9,10 +9,10 @@ export const BookReturn: React.FC<{ book: Book }> = (props) => {
         {props.book.image ?
           <img
             src={props.book.image}
-            width='180'
-            height='270'
+            width='200'
+            height='230'
             alt={"book"}
-            className='img-fluid rounded shadow-sm hover-scale'
+            className=' rounded shadow-sm hover-scale'
           />
           :
           <img

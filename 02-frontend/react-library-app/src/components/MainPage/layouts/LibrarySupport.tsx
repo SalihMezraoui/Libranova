@@ -18,7 +18,7 @@ export const LibrarySupport = () => {
                         {authState?.isAuthenticated ?
                             <Link type='button' className='btn main-color btn-lg  
                             text-white hover-scale'
-                                to='#'>Bibliotheksdienste</Link>
+                                to='/messages'>Bibliotheksdienste</Link>
                             :
                             <Link type='button' className='btn main-color btn-lg text-white hover-scale'
                                 to='/login'>Registrieren</Link>

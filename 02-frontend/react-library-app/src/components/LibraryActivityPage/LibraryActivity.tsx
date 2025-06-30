@@ -6,7 +6,6 @@ export const LibraryActivity = () => {
 
     const [historyRefresh, setHistoryRefresh] = useState(false);
 
-
     return (
         <div className='container mt-5'>
             <div className="mt-3">

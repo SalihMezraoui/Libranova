@@ -21,6 +21,15 @@
     background-color: #003366;
 }
 
+.bg-main-color {
+    background-color: #09447f !important;
+}
+
+.btn-primary {
+    background-color: #09447f !important;
+    border-color: #09447f !important;
+}
+
 .col-image-left {
     background-image: url("./Images/Public/image-4.jpg");
     height: 25em !important;

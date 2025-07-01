@@ -14,6 +14,7 @@ import OktaLoginWidget from './access/OktaLoginWidget';
 import { ReviewList } from './components/ReviewListPage/ReviewList';
 import { LibraryActivity } from './components/LibraryActivityPage/LibraryActivity';
 import { MessagePage } from './components/MessagesPage/MessagePage';
+import { LibraryAdminPanel } from './components/LibraryAdminPanel/LibraryAdminPanel';
 
 
 const oktaAuth = new OktaAuth(oktaConfig);
@@ -55,6 +56,8 @@ export const App = () => {
             <Route path='login/callback' component={LoginCallback} />
             <SecureRoute path='/libraryActivity'> <LibraryActivity /> </SecureRoute>
             <SecureRoute path='/messages'> <MessagePage /> </SecureRoute>
+            <SecureRoute path='/admin'> <LibraryAdminPanel /> </SecureRoute>
+
           </Switch>
         </div>
         <Footer />

@@ -16,7 +16,7 @@ export const MessagePage = () => {
                                     ? 'active bg-success text-white fw-bold shadow-sm'
                                     : 'text-success bg-white border border-success'
                                 }`}
-                            id="nav-sent-messages-tab" data-bs-toggle="tab" data-bs-target="#nav-sent-message"
+                            id="nav-sent-messages-tab" 
                             type="button" role="tab" aria-controls="nav-send-message" aria-selected={!messagesToggled}>
                             Submit Question
                         </button>
@@ -25,22 +25,21 @@ export const MessagePage = () => {
                                     ? 'active bg-success text-white fw-bold shadow-sm'
                                     : 'text-success bg-white border border-success'
                                 }`}
-                            id="nav-message-tab" data-bs-toggle="tab" data-bs-target="#nav-message"
+                            id="nav-message-tab" 
                             type="button" role="tab" aria-controls="nav-message" aria-selected={messagesToggled}>
                             Received Messages
                         </button>
                     </div>
                 </nav>
                 <div className="tab-content" id="nav-tabContent">
-                    <div className="tab-pane fade show active" id="nav-sentd-message" role="tabpanel"
-                        aria-labelledby="nav-send-message-tab" >
+                    <div className={`tab-pane fade ${!messagesToggled ? "show active" : ""}`} id="nav-sent-message" role="tabpanel"
+                        aria-labelledby="nav-sent-messages-tab" >
                         <PostNewMessage />
                     </div>
-                    <div className="tab-pane fade" id="nav-message" role="tabpanel"
+                    <div className={`tab-pane fade ${messagesToggled ? "show active" : ""}`} id="nav-message" role="tabpanel"
                         aria-labelledby="nav-message-tab">
-                        {messagesToggled ? <Messages /> : <></>}
+                        <Messages />
                     </div>
-
                 </div>
             </div>
         </div>

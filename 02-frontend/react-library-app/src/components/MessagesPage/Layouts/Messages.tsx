@@ -33,7 +33,7 @@ export const Messages = () => {
                 }
                 const responseData = await response.json();
                 setMessages(responseData._embedded.messages);
-                setTotalPages(responseData.page.total);
+                setTotalPages(responseData.page.totalPages);
             }
             setIsLoading(false);
         }
@@ -106,7 +106,15 @@ export const Messages = () => {
                     </div>
                 </div>
             }
-            {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />}
+            {totalPages > 1 && (
+                <div className="mt-4">
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        paginate={paginate}
+                    />
+                </div>
+            )}
         </div >
     );
 }

@@ -108,7 +108,7 @@ export const AdminInbox = () => {
                     </div>
                 </>
             ) : (
-                <div className="text-center text-muted">
+                <div className="alert alert-secondary text-center" role="alert">
                     <h5>No pending questions at the moment.</h5>
                 </div>
             )}

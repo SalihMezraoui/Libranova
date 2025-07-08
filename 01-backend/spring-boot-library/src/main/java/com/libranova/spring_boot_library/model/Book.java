@@ -1,11 +1,13 @@
 package com.libranova.spring_boot_library.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Table(name = "book")
 @Data
+@Builder
 public class Book
 {
     @Id

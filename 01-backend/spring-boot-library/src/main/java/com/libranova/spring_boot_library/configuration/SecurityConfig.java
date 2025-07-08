@@ -24,7 +24,8 @@ public class SecurityConfig
                 .authorizeHttpRequests(configurer -> configurer
                         .requestMatchers("/api/books/secure/**"
                         , "/api/reviews/secure/**"
-                        , "api/messages/secure/**").authenticated()
+                        , "/api/messages/secure/**"
+                        , "/api/admin/secure/**").authenticated()
                         .anyRequest().permitAll()
                         //.anyRequest().permitAll()
                 )

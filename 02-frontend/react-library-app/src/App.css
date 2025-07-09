@@ -21,6 +21,10 @@
     background-color: #003366;
 }
 
+.bg-color {
+    background-color: #4982576d !important;
+}
+
 .bg-main-color {
     background-color: #09447f !important;
 }

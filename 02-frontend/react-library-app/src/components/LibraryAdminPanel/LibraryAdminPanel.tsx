@@ -2,6 +2,7 @@ import { useOktaAuth } from "@okta/okta-react";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { AdminInbox } from "./Layouts/AdminInbox";
+import { AddBook } from "./Layouts/AddBook";
 
 export const LibraryAdminPanel = () => {
 
@@ -95,7 +96,7 @@ export const LibraryAdminPanel = () => {
                 <div className="tab-content" id="nav-tabContent">
                     <div className="tab-pane fade show active" id="nav-add-book" role="tabpanel"
                         aria-labelledby="nav-add-book-tab">
-                        Add new book
+                        <AddBook />
                     </div>
                     <div className="tab-pane fade" id="nav-update-quantity" role="tabpanel"
                         aria-labelledby="nav-update-quantity-tab">

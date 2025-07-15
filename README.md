@@ -1,4 +1,4 @@
-# LibraNova: Full-Stack Library Management System with React and Spring Boot
+# LibraNova: Full-Stack Library Management System with Spring Boot and React 
 
 This project was developed as part of my **Bachelorarbeit (Bachelor’s Thesis)**.
 
@@ -17,20 +17,27 @@ The application also features a robust **authentication and authorization** syst
 
 2. **Book Discovery & Borrowing**  
    - Search books by title, author, or category.  
-   - View availability, reserve or borrow books.  
-   - Get notified of wait times for unavailable books.
-
+   - View availability and borrow up to **five books** at a time.
+ 
 3. **Book Details & Reviews**  
    - View ratings and reviews for each book.  
-   - Add personal reviews after borrowing a book.
+   - Submit personal reviews after borrowing.
+  
+4. **Shelf page**  
+   - Track current borrowings and return history.  
+   - Extend borrow periods and return books manually.
+  
+5. **Inquiries**  
+   - Send inquiries to library admins.  
+   - Browse the response history of answered messages.
 
 ### 🛠️ Admin Features
 1. **Book Catalog Management**  
-   - Add, edit, or delete books and stock info.  
-   - Track borrow/return activity in real-time.
+   - Add and update book entries and quantities.  
+   - Delete books or update stock information. 
 
 2. **User Communication**  
-   - Respond to user messages and manage feedback.
+   - Read and respond to user messages and inquiries.
 
 3. **Payment Integration**  
    - Handle paid services via secure **Stripe API**.

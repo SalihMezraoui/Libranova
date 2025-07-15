@@ -30,6 +30,38 @@ public class AdminController
 
         adminService.addNewBook(addBook);
     }
+    @PutMapping("/secure/increment/book/copies")
+    public void incrementBookCopies(@RequestParam Long bookId, JwtAuthenticationToken jwt) throws AccessDeniedException {
+        String userType = jwt.getToken().getClaimAsString("userType");
+
+        if (!"admin".equals(userType)) {
+            throw new AccessDeniedException("Only admins can increment book copies.");
+        }
+
+        adminService.incrementBookCopies(bookId);
+    }
+
+    @PutMapping("/secure/decrement/book/copies")
+    public void decrementBookCopies(@RequestParam Long bookId, JwtAuthenticationToken jwt) throws AccessDeniedException {
+        String userType = jwt.getToken().getClaimAsString("userType");
+
+        if (!"admin".equals(userType)) {
+            throw new AccessDeniedException("Only admins can decrement book copies.");
+        }
+
+        adminService.decrementBookCopies(bookId);
+    }
+
+    @DeleteMapping("/secure/delete/book")
+    public void deleteBook(@RequestParam Long bookId, JwtAuthenticationToken jwt) throws AccessDeniedException {
+        String userType = jwt.getToken().getClaimAsString("userType");
+
+        if (!"admin".equals(userType)) {
+            throw new AccessDeniedException("Only admins can delete books.");
+        }
+
+        adminService.deleteBook(bookId);
+    }
 
 
 

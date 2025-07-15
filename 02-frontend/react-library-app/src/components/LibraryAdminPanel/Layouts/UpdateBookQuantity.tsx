@@ -1,0 +1,151 @@
+import { use, useEffect, useState } from "react";
+import Book from "../../../models/Book";
+import { useOktaAuth } from "@okta/okta-react";
+import Swal from 'sweetalert2';
+
+export const UpdateBookQuantity: React.FC<{ book: Book, deleteBook: any }> = (props) => {
+
+    const { authState } = useOktaAuth();
+
+    const [bookQuantity, setBookQuantity] = useState<number>(0);
+    const [left, setLeft] = useState<number>(0);
+
+    useEffect(() => {
+        const loadBook = () => {
+            props.book.totalCopies ? setBookQuantity(props.book.totalCopies) : setBookQuantity(0);
+            props.book.copiesInStock ? setLeft(props.book.copiesInStock) : setLeft(0);
+        };
+        loadBook();
+    }, []);
+
+    async function incrementQuantity() {
+
+        const apiUrl = `http://localhost:8080/api/admin/secure/increment/book/copies?bookId=${props.book.id}`;
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                'Content-Type': 'application/json',
+            }
+        };
+
+        const response = await fetch(apiUrl, requestOptions);
+        if (!response.ok) {
+            throw new Error('Failed to increment book quantity.');
+        }
+        setBookQuantity(prev => prev + 1);
+        setLeft(prev => prev + 1);
+    }
+
+    async function decrementQuantity() {
+        const apiUrl = `http://localhost:8080/api/admin/secure/decrement/book/copies?bookId=${props.book.id}`;
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                'Content-Type': 'application/json',
+            }
+        };
+
+        const response = await fetch(apiUrl, requestOptions);
+        if (!response.ok) {
+            throw new Error('Failed to decrement book quantity.');
+        }
+        setBookQuantity(prev => prev - 1);
+        setLeft(prev => prev - 1);
+    }
+
+    async function deleteBook() {
+        const result = await Swal.fire({
+            title: `Are you sure you want to delete "${props.book.title}"?`,
+            html: `<p><strong>Author:</strong> ${props.book.author}</p><p>This action cannot be undone.</p>`,
+            icon: 'warning',
+            imageUrl: props.book.image || "../../../Images/Books/book-1.png", 
+            imageWidth: 120,   
+            imageHeight: 180,  
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        });
+
+        if (result.isConfirmed) {
+            const apiUrl = `http://localhost:8080/api/admin/secure/delete/book?bookId=${props.book.id}`;
+            const requestOptions = {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                    'Content-Type': 'application/json',
+                }
+            };
+            const response = await fetch(apiUrl, requestOptions);
+            if (!response.ok) {
+                await Swal.fire('Error', 'Failed to delete book.', 'error');
+                throw new Error('Failed to delete book.');
+            }
+
+            await Swal.fire('Deleted!', 'The book has been removed.', 'success');
+            props.deleteBook();
+        }
+    }
+
+
+    return (
+        <div className="card mt-4 shadow-sm p-3 mb-3 bg-body rounded">
+            <div className="row g-3 align-items-center">
+                {/* Book Image */}
+                <div className="col-md-2 text-center">
+                    <img
+                        src={props.book.image || require("../../../Images/Books/book-1.png")}
+                        alt={props.book.title}
+                        className="rounded shadow-sm"
+                        style={{ width: '130px', height: '195px', objectFit: 'cover' }}
+                    />
+                </div>
+                {/* Book Info */}
+                <div className="col-md-6 pe-md-5">
+                    <div className="card-body px-2">
+                        <h5 className="card-title fw-semibold text-dark">{props.book.title}</h5>
+                        <p className="card-text mb-1 text-secondary">
+                            <strong>Author:</strong> {props.book.author}
+                        </p>
+                        <p className="card-text justify-text" >
+                            {props.book.overview}
+                        </p>
+                    </div>
+                </div>
+                {/* Quantity Info */}
+                <div className="col-md-3">
+                    <div className="text-center text-md-start">
+                        <p className="mb-2">
+                            📦 <strong>Total:</strong> {bookQuantity}
+                        </p>
+                        <p className="mb-2">
+                            ✅ <strong>Available:</strong> {left}
+                        </p>
+                        <div className="d-flex flex-wrap gap-2 mt-3">
+                            <div className="d-flex gap-2 flex-wrap justify-content-center">
+                                <button className="btn btn-sm btn-success" onClick={incrementQuantity}>
+                                    Increase Quantity
+                                </button>
+                                <button className="btn btn-sm btn-warning text-dark" onClick={decrementQuantity} disabled={left <= 0}>
+                                    Decrease Quantity
+                                </button>
+                            </div>
+                            <div className="d-flex justify-content-center align-items-center h-100">
+                                <button
+                                    className="btn btn-sm btn-danger mt-2"
+                                    onClick={deleteBook}
+                                    title="Remove"
+                                >
+                                    <i className="bi bi-trash3 me-1"></i> Remove
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}

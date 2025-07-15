@@ -17,6 +17,10 @@
     height: 100%;
 }
 
+.justify-text {
+  text-align: justify;
+}
+
 .main-color {
     background-color: #003366;
 }

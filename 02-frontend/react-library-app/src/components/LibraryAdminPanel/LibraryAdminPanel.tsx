@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { AdminInbox } from "./Layouts/AdminInbox";
 import { AddBook } from "./Layouts/AddBook";
+import { UpdateBooksQuantity } from "./Layouts/UpdateBooksQuantity";
 
 export const LibraryAdminPanel = () => {
 
@@ -100,7 +101,7 @@ export const LibraryAdminPanel = () => {
                     </div>
                     <div className="tab-pane fade" id="nav-update-quantity" role="tabpanel"
                         aria-labelledby="nav-update-quantity-tab">
-                        {updateBooksQuantity ? <p>Update book quantity form goes here</p> : <></>}
+                        {updateBooksQuantity ? <UpdateBooksQuantity /> : <></>}
                     </div>
                     <div className="tab-pane fade" id="nav-messages" role="tabpanel"
                         aria-labelledby="nav-messages-tab">

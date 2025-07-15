@@ -60,6 +60,10 @@ The application also features a robust **authentication and authorization** syst
 - **JUnit** & **Mockito** for backend testing
 - **Selenium** for end-to-end frontend testing
 
+### 🐳 Deployment & Containerization:
+- **Docker** to containerize backend, frontend, and database  
+- **Docker Compose** to orchestrate multi-container setup for development 
+
 ## Acknowledgments
 
 Special thanks to my supervisor **Prof. Dr. Georg Schneider** for continuous support and academic guidance throughout the Bachelor thesis period.

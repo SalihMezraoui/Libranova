@@ -72,7 +72,7 @@ export const LibraryAdminPanel = () => {
                             aria-controls="nav-update-quantity"
                             aria-selected='true'
                         >
-                            Update quantity
+                            Manage Books
                         </button>
 
                         <button

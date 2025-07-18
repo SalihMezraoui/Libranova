@@ -21,7 +21,7 @@ export const ReviewList = () => {
 
     useEffect(() => {
         const fetchReviews = async () => {
-            const apiUrl: string = `http://localhost:8080/api/reviews/search/findByBookId?bookId=${bookId}&page=${currentPage - 1}&size=${pageSize}`;
+            const apiUrl: string = `${process.env.REACT_APP_API_URL}/reviews/search/findByBookId?bookId=${bookId}&page=${currentPage - 1}&size=${pageSize}`;
 
             const response = await fetch(apiUrl);
             if (!response.ok) {

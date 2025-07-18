@@ -11,7 +11,7 @@ export const PostNewMessage = () => {
     const [showSuccess, setShowSuccess] = useState(false);
 
     async function submitNewMessage() {
-        const apiUrl = "http://localhost:8080/api/messages/secure/post/message";
+        const apiUrl = `${process.env.REACT_APP_API_URL}/messages/secure/post/message`;
         if (authState?.isAuthenticated && subject !== "" && inquiry !== "") {
             const messageRequest: Message = new Message(subject, inquiry);
             const requestOptions = {

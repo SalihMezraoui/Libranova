@@ -25,7 +25,7 @@ export const AdminInbox = () => {
     useEffect(() => {
         const fetchInbox = async () => {
             if (authState && authState.isAuthenticated) {
-                const apiUrl = `http://localhost:8080/api/messages/search/findByClosed?closed=false&page=${currentPage - 1}&size=${questionsPerPage}`;
+                const apiUrl = `${process.env.REACT_APP_API_URL}/messages/search/findByClosed?closed=false&page=${currentPage - 1}&size=${questionsPerPage}`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
@@ -66,7 +66,7 @@ export const AdminInbox = () => {
             return;
         }
 
-        const apiUrl = 'http://localhost:8080/api/messages/secure/admin/message';
+        const apiUrl = '${process.env.REACT_APP_API_URL}/messages/secure/admin/message';
 
         const messageRequestModel: MessageRequest = new MessageRequest(id, responseText);
         const requestOptions = {

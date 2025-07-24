@@ -32,6 +32,10 @@ export const CheckoutBook = () => {
     const [isBookCheckedOut, setIsBookCheckedOut] = useState(false);
     const [isLoadingBookCheckedOut, setIsLoadingBookCheckedOut] = useState(true);
 
+    // Language state
+    const [language, setLanguage] = useState<'en' | 'de'>('en');
+
+
     const bookId = (window.location.pathname).split('/')[2];
 
     useEffect(() => {
@@ -50,6 +54,7 @@ export const CheckoutBook = () => {
                 title: jsonResponse.title,
                 author: jsonResponse.author,
                 overview: jsonResponse.overview,
+                overviewDe: jsonResponse.overviewDe,
                 totalCopies: jsonResponse.totalCopies,
                 copiesInStock: jsonResponse.copiesInStock,
                 category: jsonResponse.category,
@@ -145,7 +150,7 @@ export const CheckoutBook = () => {
                         Authorization: `Bearer ${authState.accessToken?.accessToken}`,
                         'Content-Type': 'application/json'
                     }
-                }; 
+                };
                 const res = await fetch(apiUrl, response);
                 if (!res.ok) {
                     throw new Error('Something went wrong!');
@@ -218,7 +223,7 @@ export const CheckoutBook = () => {
     }
 
     async function submitReview(starInput: number, reviewDescription: string) {
-    
+
         let bookId: number = 0;
         if (book?.id) {
             bookId = book.id;
@@ -230,7 +235,7 @@ export const CheckoutBook = () => {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
-                'Content-Type': 'application/json'      
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(reviewRequest)
         };
@@ -267,13 +272,22 @@ export const CheckoutBook = () => {
                         <div className="ml-2">
                             <h1 className="fw-bold mb-3">{book?.title}</h1>
                             <h5 className="text-primary">{book?.author}</h5>
-                            <p className="card-text">{book?.overview}</p>
+                            <button
+                                className="btn btn-sm btn-outline-secondary mb-2"
+                                onClick={() => setLanguage(language === 'en' ? 'de' : 'en')}
+                            >
+                                {language === 'en' ? 'Deutsch anzeigen' : 'Show English'}
+                            </button>
+                            <p className="card-text">
+                                {language === 'en' ? book?.overview : book?.overviewDe}
+                            </p>
+
                             <RatingStars rating={numberOfStars} size={22} />
                         </div>
                     </div>
                     <CheckoutAndReviewBox book={book} mobile={false} currentLoans={currentLoans}
                         isAuthenticated={authState?.isAuthenticated} isCheckedOut={isBookCheckedOut}
-                        checkoutBook={checkoutBook} isReviewRemaining={isReviewRemaining} submitReview={submitReview}/>
+                        checkoutBook={checkoutBook} isReviewRemaining={isReviewRemaining} submitReview={submitReview} />
                 </div>
                 <hr />
                 <RecentReviews reviews={reviews} bookId={book?.id} mobile={false} />
@@ -300,7 +314,7 @@ export const CheckoutBook = () => {
                 </div>
                 <CheckoutAndReviewBox book={book} mobile={true} currentLoans={currentLoans}
                     isAuthenticated={authState?.isAuthenticated} isCheckedOut={isBookCheckedOut}
-                    checkoutBook={checkoutBook} isReviewRemaining={isReviewRemaining} submitReview={submitReview}/>
+                    checkoutBook={checkoutBook} isReviewRemaining={isReviewRemaining} submitReview={submitReview} />
                 <hr />
                 <RecentReviews reviews={reviews} bookId={book?.id} mobile={true} />
             </div>

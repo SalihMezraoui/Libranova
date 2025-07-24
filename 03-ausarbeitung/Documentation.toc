@@ -1,0 +1,92 @@
+\babel@toc {ngerman}{}\relax 
+\babel@toc {ngerman}{}\relax 
+\contentsline {chapter}{\numberline {1}Einleitung und Anforderungen}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Überblick}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Anforderungen}{1}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Funktionale Anforderungen}{2}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Nich-funktionale Anforderungen}{3}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Technische Anforderungen}{4}{subsection.1.2.3}%
+\contentsline {chapter}{\numberline {2}Methodologie und Systementwurf }{6}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Entwurf und Konzeption}{6}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Einführung in UML}{6}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Klassendiagramm}{6}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Sequenzdiagramm}{7}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Front-End Technologien}{9}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}HTML/CSS}{9}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Bootstrap}{9}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Typescript}{10}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}React}{10}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}Back-End Technologien}{10}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Java}{11}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Spring Boot}{11}{subsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.1}Einführung}{11}{subsubsection.2.3.2.1}%
+\contentsline {subsubsection}{\numberline {2.3.2.2}Gründe für die Wahl von Spring Boot}{11}{subsubsection.2.3.2.2}%
+\contentsline {subsubsection}{\numberline {2.3.2.3}Funktionsweise von Spring Boot}{12}{subsubsection.2.3.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.2.4}Eingesetzte Abhängigkeiten (Dependencies)}{13}{subsubsection.2.3.2.4}%
+\contentsline {subsubsection}{\numberline {2.3.2.5}Spring Security}{13}{subsubsection.2.3.2.5}%
+\contentsline {subsection}{\numberline {2.3.3}REST-API}{13}{subsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.3.1}Einführung in REST}{14}{subsubsection.2.3.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.3.2}Absicherung der REST-Endpunkte mit Spring Security}{14}{subsubsection.2.3.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3.3}CORS-Konfiguration und Einschränkung von HTTP-Methoden}{15}{subsubsection.2.3.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}HTTPS und SSL/TLS}{15}{subsection.2.3.4}%
+\contentsline {subsubsection}{\numberline {2.3.4.1}Grundlagen von HTTPS und SSL/TLS}{15}{subsubsection.2.3.4.1}%
+\contentsline {subsubsection}{\numberline {2.3.4.2}SSL-Konfiguration im Backend}{16}{subsubsection.2.3.4.2}%
+\contentsline {subsubsection}{\numberline {2.3.4.3}SSL-Konfiguration im Frontend}{16}{subsubsection.2.3.4.3}%
+\contentsline {subsection}{\numberline {2.3.5}Stripe API}{17}{subsection.2.3.5}%
+\contentsline {subsubsection}{\numberline {2.3.5.1}Überblick}{17}{subsubsection.2.3.5.1}%
+\contentsline {subsubsection}{\numberline {2.3.5.2}Hauptmerkmale der Stripe API}{17}{subsubsection.2.3.5.2}%
+\contentsline {subsubsection}{\numberline {2.3.5.3}Stripe API Integration für nahtlose Zahlungsabwicklung}{17}{subsubsection.2.3.5.3}%
+\contentsline {section}{\numberline {2.4}Datenbankstruktur}{17}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Übersicht über relationale Datenbanken und Auswahl von MySQL}{18}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Entitäten und Datenbankabbildung mit Spring Data JPA}{18}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}MySQL-Workbench und SQL}{19}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Authentifizierungs- und Autorisierungsprotokolle}{19}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Okta}{19}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}JWT}{20}{subsection.2.5.2}%
+\contentsline {subsection}{\numberline {2.5.3}OAuth2}{20}{subsection.2.5.3}%
+\contentsline {subsection}{\numberline {2.5.4}OpenID Connect}{20}{subsection.2.5.4}%
+\contentsline {section}{\numberline {2.6}Entwicklungsumgebung und Versionskontrolle}{21}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}Entwicklungsumgebung}{21}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Versionskontrollsysteme: Git und GitHub}{21}{subsection.2.6.2}%
+\contentsline {section}{\numberline {2.7}Testen und Qualitätssicherung}{22}{section.2.7}%
+\contentsline {subsection}{\numberline {2.7.1}Backend-Tests}{22}{subsection.2.7.1}%
+\contentsline {subsection}{\numberline {2.7.2}Frontend-Tests}{22}{subsection.2.7.2}%
+\contentsline {subsection}{\numberline {2.7.3}API-Tests}{22}{subsection.2.7.3}%
+\contentsline {chapter}{\numberline {3}Implementierung}{23}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Architektur und Projektstruktur}{23}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Backend-Struktur}{23}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Frontend-Struktur}{23}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Backend-Implementierung}{23}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Spring Boot Hauptklasse und Konfiguration}{23}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}REST API Endpunkte}{23}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Datenzugriff}{23}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Frontend-Implementierung}{23}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Hauptkomponenten und Routing}{23}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Authentifizierung und Autorisierung im Frontend}{23}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}State Management}{23}{subsection.3.3.3}%
+\contentsline {section}{\numberline {3.4}Teststrategien und Qualitätssicherung}{23}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Backend-Tests}{23}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Frontend-Tests}{23}{subsection.3.4.2}%
+\contentsline {chapter}{\numberline {4}Ergebnisse und Analyse}{24}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Allgemeine Benutzeroberfläche}{24}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Header und Navigation}{24}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Footer}{24}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Startseite (Main Page)}{24}{subsection.4.1.3}%
+\contentsline {subsubsection}{\numberline {4.1.3.1}Karussell (Carousel)}{24}{subsubsection.4.1.3.1}%
+\contentsline {subsubsection}{\numberline {4.1.3.2}Links und Informationen}{24}{subsubsection.4.1.3.2}%
+\contentsline {section}{\numberline {4.2}Seitenübersicht}{24}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Buchsuche (Search Page)}{24}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Buchdetails (Book Page)}{24}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Rezensionsseite (Reviews Page)}{24}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Benutzerbezogene Funktionen}{24}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Bibliotheksaktivität (Library Activity)}{24}{subsection.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.3.1.1}Ausleihen (Loans)}{24}{subsubsection.4.3.1.1}%
+\contentsline {subsubsection}{\numberline {4.3.1.2}Ausleihhistorie (History)}{24}{subsubsection.4.3.1.2}%
+\contentsline {subsection}{\numberline {4.3.2}Bibliotheksservice (Library Service)}{24}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Admin-Bereich}{24}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Buchverwaltung}{24}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Benutzeranfragenverwaltung}{24}{subsection.4.4.2}%
+\contentsline {chapter}{\numberline {5}Zusammenfassung und Ausblick}{25}{chapter.5}%
+\contentsline {chapter}{Literaturverzeichnis}{26}{chapter*.6}%
+\contentsline {chapter}{Abkürzungsverzeichnis}{29}{appendix.A}%
+\contentsline {chapter}{Selbstständigkeitserklärung}{30}{appendix.B}%

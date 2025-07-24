@@ -27,6 +27,9 @@ public class Book
     @Column(name = "description")
     private String overview;
 
+    @Column(name = "description_de")
+    private String overviewDe;
+
     @Column(name = "copies")
     private int totalCopies;
 
@@ -38,5 +41,9 @@ public class Book
 
     @Column(name = "img")
     private String image;
+
+    @Column(name = "pending_deletion")
+    private boolean pendingDeletion = false;
+
 
 }

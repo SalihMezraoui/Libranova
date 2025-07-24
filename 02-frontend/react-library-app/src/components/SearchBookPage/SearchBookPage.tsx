@@ -19,6 +19,8 @@ export const SearchBookPage = () => {
 
     useEffect(() => {
         const fetchBooks = async () => {
+            const start = performance.now(); // ⏱ START
+
             const apiUrl: string = `${process.env.REACT_APP_API_URL}/books`;
 
             let url: string = `${apiUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
@@ -60,6 +62,9 @@ export const SearchBookPage = () => {
             }
             setBooks(loadedBooks);
             setLoading(false);
+
+            const end = performance.now(); // ⏱ END
+            console.log(`⏱️ Reaktionszeit (Such-/Filteraktion): ${(end - start).toFixed(2)} ms`);
 
         };
         fetchBooks().catch((error: any) => {

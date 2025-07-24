@@ -1,0 +1,180 @@
+%------------------ vorlage.tex ------------------------------------------------
+%
+% LaTeX-Vorlage zur Erstellung von Projektdokumentationen
+% im Fachbereich Informatik der Hochschule Trier
+%
+% Basis: Vorlage 'svmono' des Springer Verlags
+% Bearbeiter: Hermann Schloß, Christian Bettinger
+%
+%-------------------------------------------------------------------------------
+
+
+%------------------ Präambel ---------------------------------------------------
+\documentclass[envcountsame, envcountchap, deutsch]{i-studis}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage[a4paper]{geometry}
+\usepackage[english, ngerman]{babel}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{epstopdf}
+
+\usepackage{listings}
+\usepackage{titlesec}
+\setcounter{secnumdepth}{4}
+
+\usepackage[german, ruled, vlined]{algorithm2e}
+\usepackage{amssymb, amsfonts, amstext, amsmath}
+\usepackage{array}
+\usepackage[skip=10pt]{caption}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage[pdftex, plainpages=false]{hyperref}
+\usepackage{textcomp}
+
+\usepackage{bibgerm}
+\bibliographystyle{geralpha}
+
+\usepackage{xcolor} % Include the xcolor package for color definitions
+\definecolor{lightgray}{gray}{0.9} % Define the lightgray color
+
+\usepackage{graphicx}
+\usepackage{placeins} % For \FloatBarrier
+\usepackage{float} % Include this package for the [H] option
+
+
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{float}
+
+\usepackage{listings}
+\lstdefinelanguage{ini}{
+	basicstyle=\ttfamily\small,
+	sensitive=false,
+	morecomment=[s][\color{gray}]{;}{\newline},
+	morecomment=[l]{\#},
+	morecomment=[l]{//},
+	morestring=[b]",
+	morekeywords={},
+}
+
+
+\makeatletter
+\def\LT@makecaption#1#2#3{%
+	\global\setbox\@tempboxa\hbox{\textbf{#1~#2}: #3}%
+	\ifdim \wd\@tempboxa >\hsize
+	\textbf{#1~#2}: #3\par
+	\else
+	\hbox to\hsize{\hfil\box\@tempboxa\hfil}%
+	\fi
+	\vskip\belowcaptionskip
+}
+\makeatother
+
+\newcounter{frcounter}
+\newcommand{\fr}[1]{%
+	\stepcounter{frcounter}%
+	FR\arabic{frcounter} & #1 \\ \hline
+}
+
+\newcounter{nfrcounter}
+\newcommand{\nfr}[1]{%
+	\stepcounter{nfrcounter}%
+	NFR\arabic{nfrcounter} & #1 \\ \hline
+}
+
+\newcounter{trcounter}
+\newcommand{\tr}[1]{%
+	\stepcounter{trcounter}%
+	TR\arabic{trcounter} & #1 \\ \hline
+}
+
+
+
+
+\usepackage{makeidx}
+\usepackage{multicol}
+\makeindex
+
+\pagestyle{myheadings}
+\setlength{\textheight}{1.1\textheight}
+
+\lstset{
+	basicstyle=\scriptsize\ttfamily,
+	commentstyle=\scriptsize\ttfamily\color{Gray},
+	identifierstyle=\scriptsize\ttfamily,
+	keywordstyle=\scriptsize\ttfamily,
+	stringstyle=\scriptsize\ttfamily,
+	tabsize=4,
+	numbers=left,
+	numberstyle=\tiny,
+	numberblanklines=false,
+	frame=single,
+	framesep=3mm,
+	framexleftmargin=7mm,
+	xleftmargin=10mm,
+	linewidth=144mm,
+	captionpos=b,
+}
+
+
+%------------------ Manuelle Silbentrennung ------------------------------------
+\hyphenation{Ele-men-tar-ob-jek-te ab-ge-tas-tet Aus-wer-tung House-holder-Matrix Least-Squares-Al-go-ri-th-men}
+
+
+%------------------ Titelseite -------------------------------------------------
+\begin{document}
+
+\title{„LibraNova“: Full-Stack-Bibliotheksmanagementapp für die Ausleihe von Büchern}
+\subtitle{"LibraNova" – A Full-Stack Library Management System for Lending Books}
+
+\author{Bearbeiter: Mohammed Salih Mezraoui}
+
+\supervisor{Prof. Dr. Georg Schneider}
+
+\address{Trier}
+\submitdate{den 15.08.2025}
+
+%------------------ Projektart -------------------------------------------------
+%\project{Bachelor-Projektarbeit}
+\project{Bachelor-Abschlussarbeit}
+%\project{Master-Projektstudium}
+%\project{Master-Abschlussarbeit}
+%\project{Seminar}
+%\project{Hausarbeit}
+
+\mytitlepage
+
+%------------------ Vorwort, Kurzfassung, Verzeichnisse ------------------------
+\frontmatter
+%\input{chapters/Vorwort}								% Vorwort (optional)
+\input{chapters/Kurzfassung}							% Kurzfassung/Abstract
+\tableofcontents										% Inhaltsverzeichnis
+\listoffigures											% Abbildungsverzeichnis (optional)
+%\listoftables											% Tabellenverzeichnis (optional)
+%\lstlistoflistings										% Listings (optional)
+
+
+%------------------ Kapitel ----------------------------------------------------
+\mainmatter
+\input{chapters/EinleitungAnforderungen}
+\input{chapters/WeitereKapitel}
+\input{chapters/Bausteine}
+\input{chapters/Beispiel}
+\input{chapters/ZusammenfassungAusblick}
+
+
+%------------------ Literaturverzeichnis & Index -------------------------------
+\backmatter
+\bibliography{literatur}								% Literaturverzeichnis (literatur.bib)
+\printindex												% Index (optional)
+
+
+%------------------ Anhänge ----------------------------------------------------
+\begin{appendix}
+	\include{chapters/Abkürzungsverzeichnis}							% Glossar (optional)
+	\include{chapters/Selbststaendigkeitserklaerung}	% Selbstständigkeitserklärung
+\end{appendix}
+
+
+\end{document}

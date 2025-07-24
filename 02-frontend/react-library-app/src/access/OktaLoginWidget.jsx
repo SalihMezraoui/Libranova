@@ -6,6 +6,15 @@ import OktaSigninWidget from "./OktaSigninWidget";
 const OktaLoginWidget = ({ config }) => {
     const { oktaAuth, authState } = useOktaAuth();
     const onSuccess = (tokens) => {
+        const loginEndTime = Date.now();
+
+        if (window.__loginStartTime) {
+            const duration = loginEndTime - window.__loginStartTime;
+            console.log(`✅ Login response time: ${duration} ms`);
+        } else {
+            console.warn("⚠️ Login start time not captured.");
+        }
+        
         oktaAuth.handleLoginRedirect(tokens);
     };
 
@@ -17,9 +26,9 @@ const OktaLoginWidget = ({ config }) => {
         return <BreathingLoader />;
     }
 
-    return authState.isAuthenticated ? 
+    return authState.isAuthenticated ?
         <Redirect to={{ pathname: "/" }} />
-        : 
+        :
         <OktaSigninWidget config={config} onSuccess={onSuccess} onError={onError} />;
 };
 

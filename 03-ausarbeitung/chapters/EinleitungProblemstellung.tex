@@ -1,0 +1,25 @@
+\chapter{Einleitung und Anforderungen}
+Hier werden folgende Aspekte berücksichtigt: hhh
+\begin{itemize}
+	\item Ein kleiner Überblick über die Anwendung ShopNook
+	\item und deren funktionale, nicht funktionale und technische Anforderungen.
+\end{itemize}
+
+\section{Überblick}\index{Überblick}
+
+LibraNova ist ein modernes Full-Stack-Bibliotheksmanagementsystem, das eine einfache und effiziente Verwaltung von Buchausleihen ermöglicht. Nutzer können Bücher bequem suchen, ausleihen, bewerten und ihre Ausleihen verfolgen – alles über eine benutzerfreundliche und für mobile Geräte optimierte Webanwendung. Die Plattform funktioniert zuverlässig auf verschiedenen Geräten und Bildschirmgrößen.\\
+Neben der übersichtlichen Oberfläche bietet LibraNova wichtige Funktionen wie eine Echtzeit-Anzeige der Buchverfügbarkeit, ein Bewertungssystem sowie eine sichere Nutzeranmeldung mit JWT und OAuth2. Administratoren können Bücher verwalten und auf Nutzeranfragen reagieren. Die Integration externer Dienste wie Stripe ermöglicht sichere Zahlungen für kostenpflichtige Funktionen. Technologisch basiert die Anwendung auf Spring Boot, React und MySQL und ist somit gut skalierbar, sicher und leistungsfähig.
+
+\section{Globale Anforderungen}\index{Globale Anforderungen}
+
+\subsection{Funktionale Anforderungen}
+
+Die App wird über alle notwendigen Funktionen verfügen, um ein reibungsloses Einkaufserlebnis zu gewährleisten. Die Kunden werden die Möglichkeit haben, sich sicher zu registrieren, einzuloggen und einen Produktkatalog zu erkunden. Zu jedem Produkt werden vollständige Details wie Name, Beschreibung, Preis und Bilder angezeigt. Die Kunden können schnell Artikel in ihren Einkaufskorb legen, den Inhalt ändern und zur Zahlung übergehen. Sichere Kreditkartenzahlungen werden während des Kaufvorgangs über die Stripe-API abgewickelt. Administratoren können die Waren überwachen und die Bestellungen im Auge behalten, um sicherzustellen, dass das Online-Geschäft gut funktioniert. 
+
+\subsection{Nich -funktionale Anforderungen}
+
+Die App wird effizient mit gleichzeitigen Nutzern umgehen und die Ladezeiten der Seite sind minimal. HTTPS-Verschlüsselung und JWT-basierte Authentifizierung stellen die Sicherheit in den Vordergrund. Die Einheitlichkeit der Geräte wird durch eine reaktionsschnelle und einfach zu bedienende Schnittstelle gewährleistet.
+
+\subsection{Technische  Anforderungen}
+
+Die vollwertige E-Commerce-App wird mit npm für JavaScript-Dependenzen und Maven für die Java Dependenzen und Build-Prozesse entwickelt. Im Frontend wird Angular verwendet, um eine dynamische und reaktionsschnelle Schnittstelle für die Benutzer bereitzustellen, während im Backend das Spring Boot-Framework verwendet wird, um RESTful APIs zu erstellen. MySQL wird die Datenbank sein, die Benutzer-, Produkt- und Bestelldaten speichert. Git und GitHub werden für die Versionskontrolle verwendet, um Änderungen zu verwalten und die Teamarbeit zu erleichtern. 

@@ -1,0 +1,210 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{{Met}24b}
+
+\bibitem[Bae]{Baeldung:o.J}
+{\sc Baeldung}: {\em {JPA Entities}}.
+\newblock \url{https://www.baeldung.com/jpa-entities/}.
+\newblock Abgerufen am 14.08.2024.
+
+\bibitem[Bae24]{Baeldung-EntityManager:2024}
+{\sc Baeldung}: {\em {EntityManager}}.
+\newblock \url{https://www.baeldung.com/hibernate-entitymanager/}, 2024.
+\newblock Abgerufen am 14.08.2024.
+
+\bibitem[Bel23a]{UML:2023}
+{\sc Bell, Donald}: {\em {An introduction to the Unified Modeling Language}}.
+\newblock \url{https://developer.ibm.com/articles/an-introduction-to-uml/},
+  2023.
+\newblock Abgerufen am 20.07.2025.
+
+\bibitem[Bel23b]{SSL/TLS:2023}
+{\sc Bell, Donald}: {\em {What is SSL/TLS: An In-Depth Guide}}.
+\newblock \url{https://www.ssl.com/article/what-is-ssl-tls-an-in-depth-guide/},
+  2023.
+\newblock Abgerufen am 19.08.2024.
+
+\bibitem[{Boo}23]{bootstrap-docs}
+{\sc {Bootstrap Authors}}: {\em Bootstrap - The most popular HTML, CSS, and JS
+  library in the world}.
+\newblock
+  \url{https://getbootstrap.com/docs/5.3/getting-started/introduction/}, 2023.
+\newblock Zugegriffen am 22. Juli 2025.
+
+\bibitem[Car23]{OAuth2:2023}
+{\sc Carlier, Bertrand}: {\em An Introduction to OAuth2.0}.
+\newblock IDPro Body of Knowledge, 1, 10 2023.
+
+\bibitem[Cor21]{Sequenzdiagramm:2021}
+{\sc Corporation, IBM}: {\em Sequenzdiagramme}.
+\newblock
+  \url{https://www.ibm.com/docs/de/radfws/9.6.1?topic=diagrams-sequence}, 2021.
+\newblock abgerufen am 28.08.2024.
+
+\bibitem[Hib]{Hibernate:o.J}
+{\sc Hibernate}: {\em {Hibernate}}.
+\newblock \url{https://hibernate.org/orm/what-is-an-orm/}.
+\newblock Abgerufen am 14.08.2024.
+
+\bibitem[HTM24]{HTML/CSS:2024}
+{\em {HTML For Beginners}}.
+\newblock \url{https://html.com}, 2024.
+\newblock Abgerufen am 02.06.2024.
+
+\bibitem[HTT24]{HTTPS:2024}
+{\em {An overview of HTTP}}.
+\newblock \url{https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview},
+  2024.
+\newblock Abgerufen am 19.08.2024.
+
+\bibitem[IBM]{IBM:o.J}
+{\sc IBM}: {\em {What is a relational database?}}
+\newblock \url{https://www.ibm.com/topics/relational-databases/}.
+\newblock Abgerufen am 14.08.2024.
+
+\bibitem[IRM{\etalchar{+}}20]{Spring-Security:2020}
+{\sc Islam, Mazharul}, {\sc Sazzadur Rahaman}, {\sc Na~Meng}, {\sc Behnaz
+  Hassanshahi}, {\sc Padmanabhan Krishnan}, {\sc Danfeng} \btxandlong{}\ {\sc
+  Yao}: {\em Coding Practices and Recommendations of Spring Security for
+  Enterprise Applications}.
+\newblock 07 2020.
+
+\bibitem[Jav24]{Java:2024}
+{\em {What is Java technology and why do I need it?}}
+\newblock \url{https://www.java.com/en/download/help/whatis_java.html}, 2024.
+\newblock Abgerufen am 19.08.2024.
+
+\bibitem[Jet]{Jetbrains:o.J}
+{\sc Jetbrains}: {\em {The IDE for Spring developers}}.
+\newblock \url{https://www.jetbrains.com/idea/spring/}.
+\newblock Abgerufen am 14.08.2024.
+
+\bibitem[JT]{JWT:o.J}
+{\sc JWT-Team}: {\em Introduction to JSON Web Tokens}.
+\newblock \url{https://jwt.io/introduction}.
+\newblock Abgerufen am 19. August 2024.
+
+\bibitem[KMM21]{Kornienko_2021}
+{\sc Kornienko, D~V}, {\sc S~V Mishina} \btxandlong{}\ {\sc M~O Melnikov}: {\em
+  The Single Page Application architecture when developing secure Web
+  services}.
+\newblock Journal of Physics: Conference Series, 2091(1), 2021.
+
+\bibitem[{Met}24a]{react-spa}
+{\sc {Meta Platforms, Inc.}}: {\em Build a React app from Scratch}.
+\newblock
+  \url{https://react.dev/learn/build-a-react-app-from-scratch#step-2-build-common-application-patterns},
+  2024.
+\newblock Zugegriffen am 22. Juli 2025.
+
+\bibitem[{Met}24b]{react-docs}
+{\sc {Meta Platforms, Inc.}}: {\em Describing the UI}.
+\newblock \url{https://react.dev/learn/describing-the-ui}, 2024.
+\newblock Zugegriffen am 22. Juli 2025.
+
+\bibitem[{Mic}25]{typescriptDoc}
+{\sc {Microsoft Authors}}: {\em TypeScript for JavaScript Programmers}.
+\newblock
+  \url{https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html},
+  2025.
+\newblock Zugegriffen am 22. Juli 2025.
+
+\bibitem[myS]{mySQL:o.J}
+{\sc mySQL}: {\em {MySQL Workbench Manual}}.
+\newblock \url{https://dev.mysql.com/doc/workbench/en/wb-intro.html}.
+\newblock Abgerufen am 14.08.2024.
+
+\bibitem[OTa]{Okta:o.J}
+{\sc Okta-Team}: {\em What is Okta and what does Okta do?}
+\newblock
+  \url{https://support.okta.com/help/s/article/what-is-okta?language=en_US}.
+\newblock Abgerufen am 19. August 2024.
+
+\bibitem[OTb]{OpenId:o.J}
+{\sc OpenId-Team}: {\em How OpenId Connect Works}.
+\newblock \url{https://openid.net/developers/how-connect-works/}.
+\newblock Abgerufen am 19. August 2024.
+
+\bibitem[{Pau}25]{typescriptBenefits}
+{\sc {Paul Bratslavsky}}: {\em Top 6 Benefits of Implementing TypeScript}.
+\newblock \url{https://strapi.io/blog/benefits-of-typescript}, 2025.
+\newblock Zugegriffen am 22. Juli 2025.
+
+\bibitem[{Rak}23]{spring-rest-docs}
+{\sc {Rakesh Purohit}}: {\em A Step-by-Step Guide to Implementing React Spring
+  Boot in Your Application}.
+\newblock
+  \url{https://www.dhiwise.com/post/a-step-by-step-guide-to-implementing-react-spring-boot},
+  2023.
+\newblock Zugegriffen am 23. Juli 2025.
+
+\bibitem[RES24]{REST:2024}
+{\em {What is REST?}}
+\newblock \url{https://www.codecademy.com/article/what-is-rest}, 2024.
+\newblock Abgerufen am 18.08.2024.
+
+\bibitem[SMM10]{swain2010test}
+{\sc Swain, Santosh~Kumar}, {\sc Durga~Prasad Mohapatra} \btxandlong{}\ {\sc
+  Rajib Mall}: {\em Test case generation based on use case and sequence
+  diagram}.
+\newblock International Journal of Software Engineering, 3(2):21--52, 2010.
+
+\bibitem[Spra]{Docs-Spring-JPA-QueryMethods:o.J}
+{\sc Spring}: {\em {JPA Query Methods}}.
+\newblock
+  \url{/https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html/}.
+\newblock Abgerufen am 14.08.2024.
+
+\bibitem[Sprb]{Docs-Spring-JPA-Repo:o.J}
+{\sc Spring}: {\em {JPA Repositories}}.
+\newblock
+  \url{https://docs.spring.io/spring-data/jpa/docs/1.6.0.RELEASE/reference/html/jpa.repositories.html/}.
+\newblock Abgerufen am 14.08.2024.
+
+\bibitem[Sprc]{Docs-Spring:o.J}
+{\sc Spring}: {\em {Spring Data JPA}}.
+\newblock \url{https://www.ibm.com/topics/relational-databases/}.
+\newblock Abgerufen am 14.08.2024.
+
+\bibitem[Sprd]{Spring-Framework:o.J}
+{\sc Spring}: {\em Spring Framework}.
+\newblock \url{https://spring.io/projects/spring-boot}.
+\newblock Abgerufen am 28. August 2024.
+
+\bibitem[ST Ja]{Stripe-API:o.J}
+{\sc Stripe-Team}: {\em Stripe Docs Overview}.
+\newblock \url{https://docs.stripe.com/get-started/} and
+  \url{https://docs.stripe.com/api}, o. J.
+\newblock Accessed on August 19, 2024.
+
+\bibitem[ST Jb]{Stripe-Intents:o.J}
+{\sc StripeApi-Team}: {\em Stripe Payment Intents}.
+\newblock \url{https://docs.stripe.com/api/payment_intents}, o. J.
+\newblock Accessed on August 19, 2024.
+
+\bibitem[Teaa]{git-scmr:o.J}
+{\sc Team, Git}: {\em Git About}.
+\newblock \url{https://git-scm.com/about}.
+\newblock Abgerufen am 14. August 2024.
+
+\bibitem[Teab]{github:o.J}
+{\sc Team, GitHub}: {\em GitHub About}.
+\newblock
+  \url{https://docs.github.com/en/get-started/start-your-journey/about-github-and-git#about-github}.
+\newblock Abgerufen am 14. August 2024.
+
+\bibitem[Teac]{visualstudio-angular:o.J}
+{\sc Team, Visual~Studio}: {\em Using Angular in Visual Studio Code}.
+\newblock \url{https://code.visualstudio.com/docs/nodejs/angular-tutorial}.
+\newblock Abgerufen am 14. August 2024.
+
+\bibitem[Tead]{visual-studio:o.J}
+{\sc Team, Visual~Studio}: {\em Visual Studio Code Overview}.
+\newblock \url{https://code.visualstudio.com/docs}.
+\newblock Abgerufen am 14. August 2024.
+
+\bibitem[wik]{wiki:listing}
+{\em {Wikipedia: Interoperability}}.
+\newblock \url{https://en.wikipedia.org/wiki/Interoperability}.
+\newblock Abgerufen am 27.07.2024.
+
+\end{thebibliography}

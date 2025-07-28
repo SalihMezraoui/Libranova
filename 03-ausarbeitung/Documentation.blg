@@ -11,32 +11,22 @@ I was expecting a `,' or a `}'---line 346 of file literatur.bib
  :  year    = o. 
  :               J
 I'm skipping whatever remains of this entry
-Warning--string name "o." is undefined
---line 354 of file literatur.bib
 I was expecting a `,' or a `}'---line 354 of file literatur.bib
  :  year    = o. 
  :               J
 I'm skipping whatever remains of this entry
-Warning--string name "o." is undefined
---line 363 of file literatur.bib
 I was expecting a `,' or a `}'---line 363 of file literatur.bib
  :  year    = o. 
  :               J
 I'm skipping whatever remains of this entry
-Warning--string name "o." is undefined
---line 371 of file literatur.bib
 I was expecting a `,' or a `}'---line 371 of file literatur.bib
  :  year    = o. 
  :               J
 I'm skipping whatever remains of this entry
-Warning--string name "o." is undefined
---line 379 of file literatur.bib
 I was expecting a `,' or a `}'---line 379 of file literatur.bib
  :  year    = o. 
  :               J
 I'm skipping whatever remains of this entry
-Warning--string name "o." is undefined
---line 395 of file literatur.bib
 I was expecting a `,' or a `}'---line 395 of file literatur.bib
  :  year    = o. 
  :               J
@@ -47,20 +37,14 @@ I was expecting a `,' or a `}'---line 403 of file literatur.bib
  :  year    = o. 
  :               J
 I'm skipping whatever remains of this entry
-Warning--string name "o." is undefined
---line 412 of file literatur.bib
 I was expecting a `,' or a `}'---line 412 of file literatur.bib
  :  year    = o. 
  :               J
 I'm skipping whatever remains of this entry
-Warning--string name "o." is undefined
---line 420 of file literatur.bib
 I was expecting a `,' or a `}'---line 420 of file literatur.bib
  :   year         = o. 
  :                     J
 I'm skipping whatever remains of this entry
-Warning--string name "o." is undefined
---line 428 of file literatur.bib
 I was expecting a `,' or a `}'---line 428 of file literatur.bib
  :   year         = o. 
  :                     J
@@ -123,45 +107,45 @@ while executing---line 1361 of file geralpha.bst
 Name 7 in "Islam, Mazharul and Rahaman, Sazzadur and Meng, Na and Hassanshahi, Behnaz and Krishnan, Padmanabhan and Danfeng, and Yao," has a comma at the end for entry Spring-Security:2020
 while executing---line 1361 of file geralpha.bst
 Warning--empty journal in Spring-Security:2020
-You've used 37 entries,
+You've used 26 entries,
             2768 wiz_defined-function locations,
-            795 strings with 10202 characters,
-and the built_in function-call counts, 11294 in all, are:
-= -- 1180
-> -- 332
-< -- 29
-+ -- 106
-- -- 93
-* -- 655
-:= -- 1686
-add.period$ -- 107
-call.type$ -- 37
-change.case$ -- 153
-chr.to.int$ -- 27
-cite$ -- 48
-duplicate$ -- 487
-empty$ -- 1037
-format.name$ -- 148
-if$ -- 2538
-int.to.chr$ -- 11
+            744 strings with 8851 characters,
+and the built_in function-call counts, 8028 in all, are:
+= -- 836
+> -- 244
+< -- 18
++ -- 78
+- -- 71
+* -- 487
+:= -- 1201
+add.period$ -- 74
+call.type$ -- 26
+change.case$ -- 109
+chr.to.int$ -- 22
+cite$ -- 37
+duplicate$ -- 344
+empty$ -- 729
+format.name$ -- 106
+if$ -- 1798
+int.to.chr$ -- 5
 int.to.str$ -- 0
 missing$ -- 8
-newline$ -- 185
-num.names$ -- 96
-pop$ -- 377
+newline$ -- 130
+num.names$ -- 63
+pop$ -- 248
 preamble$ -- 1
-purify$ -- 227
+purify$ -- 161
 quote$ -- 0
-skip$ -- 405
+skip$ -- 298
 stack$ -- 0
-substring$ -- 286
-swap$ -- 112
-text.length$ -- 29
-text.prefix$ -- 24
+substring$ -- 209
+swap$ -- 79
+text.length$ -- 18
+text.prefix$ -- 15
 top$ -- 0
-type$ -- 296
+type$ -- 208
 warning$ -- 6
-while$ -- 69
-width$ -- 43
-write$ -- 456
+while$ -- 47
+width$ -- 31
+write$ -- 321
 (There were 22 error messages)

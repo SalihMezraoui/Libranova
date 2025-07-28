@@ -42,8 +42,4 @@ public class Book
     @Column(name = "img")
     private String image;
 
-    @Column(name = "pending_deletion")
-    private boolean pendingDeletion = false;
-
-
 }

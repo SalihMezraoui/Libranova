@@ -38,6 +38,12 @@
 			<version>3.0.6</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.stripe</groupId>
+			<artifactId>stripe-java</artifactId>
+			<version>29.3.0</version>
+		</dependency>
+
 		<!-- Spring Boot Starter Data JPA -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @CrossOrigin("https://localhost:3000")
@@ -51,8 +52,7 @@ public class BookController
 
     @PutMapping("/secure/return")
     public void returnBook(Authentication authentication,
-                           @RequestParam Long bookId)
-    {
+                           @RequestParam Long bookId) throws ParseException {
         String userEmail = authentication.getName();
         bookService.returnBook(userEmail, bookId);
     }

@@ -4,11 +4,13 @@ package com.libranova.spring_boot_library.service;
 import com.libranova.spring_boot_library.Repository.BookRepository;
 import com.libranova.spring_boot_library.Repository.CheckoutRepository;
 import com.libranova.spring_boot_library.Repository.HistoryRepository;
+import com.libranova.spring_boot_library.Repository.PaymentRepository;
 import com.libranova.spring_boot_library.dto.response.UserLoansSummary;
 import com.libranova.spring_boot_library.exception.BookNotAvailableException;
 import com.libranova.spring_boot_library.model.Book;
 import com.libranova.spring_boot_library.model.Checkout;
 import com.libranova.spring_boot_library.model.History;
+import com.libranova.spring_boot_library.model.Payment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -30,6 +33,8 @@ public class BookService {
 
     private final HistoryRepository historyRepository;
 
+    private final PaymentRepository paymentRepository;
+
     private static final int CHECKOUT_PERIOD_DAYS = 7;
 
     public Book checkoutBook(String userEmail, Long bookId) throws Exception {
@@ -37,6 +42,20 @@ public class BookService {
                 .orElseThrow(() -> new BookNotAvailableException("Buch mit ID nicht gefunden: " + bookId));
 
         checkAvailability(book, userEmail);
+
+        List<Checkout> userCheckouts = checkoutRepository.findByUserEmail(userEmail);
+        boolean hasOverdueBooks = hasOverdueBooks(userCheckouts);
+
+        Payment payment = paymentRepository.findByUserEmail(userEmail);
+
+        if ((payment != null && payment.getAmount() > 0) || (payment != null && hasOverdueBooks)) {
+            throw new Exception("Checkout blocked due to pending payment or overdue items.");
+        }
+
+        if (payment == null) {
+            createZeroPayment(userEmail);
+        }
+
         decrementBookStock(book);
         createCheckoutRecord(userEmail, book);
 
@@ -51,6 +70,27 @@ public class BookService {
             throw new BookNotAvailableException("Keine Kopien zur Ausleihe verfügbar.");
         }
     }
+
+    private boolean hasOverdueBooks(List<Checkout> checkouts) {
+        LocalDate today = LocalDate.now();
+
+        for (Checkout checkout : checkouts) {
+            LocalDate returnDate = LocalDate.parse(checkout.getReturnDate());
+            if (returnDate.isBefore(today)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private void createZeroPayment(String userEmail) {
+        Payment newPayment = new Payment();
+        newPayment.setUserEmail(userEmail);
+        newPayment.setAmount(0.0);
+        paymentRepository.save(newPayment);
+    }
+
 
     private void decrementBookStock(Book book) {
         book.setCopiesInStock(book.getCopiesInStock() - 1);
@@ -106,7 +146,7 @@ public class BookService {
         return summaryList;
     }
 
-    public void returnBook(String userEmail, Long bookId) {
+    public void returnBook(String userEmail, Long bookId) throws ParseException {
 
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new BookNotAvailableException("Buch mit ID " + bookId + " ist nicht verfügbar."));
@@ -118,6 +158,24 @@ public class BookService {
 
         book.setCopiesInStock(book.getCopiesInStock() + 1);
         bookRepository.save(book);
+
+        // Calculate days overdue
+        LocalDate dueDate = LocalDate.parse(checkout.getReturnDate());
+        LocalDate today = LocalDate.now();
+        long daysOverdue = ChronoUnit.DAYS.between(dueDate, today);
+
+        if (daysOverdue > 0) {
+            Payment payment = paymentRepository.findByUserEmail(userEmail);
+            if (payment == null) {
+                payment = new Payment();
+                payment.setUserEmail(userEmail);
+                payment.setAmount(0.0);
+            }
+
+            payment.setAmount(payment.getAmount() + daysOverdue);
+            paymentRepository.save(payment);
+        }
+
         checkoutRepository.deleteById(checkout.getId());
 
         History history = History.builder()

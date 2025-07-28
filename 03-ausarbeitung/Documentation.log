@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.1)  24 JUL 2025 14:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.1)  28 JUL 2025 01:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1014,34 +1014,28 @@ nd dar-ge-stellt. Ziel
 
 
 ] (./Documentation.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 5--8
-[]\OT1/cmr/m/sc/12 Baeldung\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 JPA En-ti-ties\OT
-1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / www . baeldung . com /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 10--13
-[]\OT1/cmr/m/sc/12 Baeldung\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 En-tity-Ma-na-ger
-\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / www . baeldung . com /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 15--19
+Underfull \hbox (badness 10000) in paragraph at lines 5--9
 []$\OT1/cmtt/m/n/12 https : / / developer . ibm . com / articles / an-[]introdu
 ction-[]to-[]uml/$[]\OT1/cmr/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 1371) in paragraph at lines 38--42
+Underfull \hbox (badness 1371) in paragraph at lines 28--32
 []\OT1/cmr/m/sc/12 Corporation, IBM\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Se-quenz-
 dia-gram-me\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / www . ibm . com /
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 44--47
-[]\OT1/cmr/m/sc/12 Hibernate\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Hi-ber-na-te\OT1
-/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / hibernate . org / orm /
+Underfull \hbox (badness 10000) in paragraph at lines 73--78
+[]\OT1/cmr/m/sc/12 Meta Plat-forms, Inc.\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Buil
+d a Re-act app from Scratch\OT1/cmr/m/n/12 .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 73--78
+[]$\OT1/cmtt/m/n/12 https : / / react . dev / learn / build-[]a-[]react-[]app-[
+]from-[]scratch #
  []
 
 [26
@@ -1050,104 +1044,68 @@ Underfull \hbox (badness 10000) in paragraph at lines 44--47
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 93--98
-[]\OT1/cmr/m/sc/12 Meta Plat-forms, Inc.\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Buil
-d a Re-act app from Scratch\OT1/cmr/m/n/12 .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 93--98
-[]$\OT1/cmtt/m/n/12 https : / / react . dev / learn / build-[]a-[]react-[]app-[
-]from-[]scratch #
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 105--110
+Underfull \hbox (badness 10000) in paragraph at lines 85--90
 []\OT1/cmr/m/sc/12 Microsoft Au-t-hors\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Ty-pe-
 S-cript for Ja-vaS-cript Pro-gram-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 105--110
+Underfull \hbox (badness 10000) in paragraph at lines 85--90
 \OT1/cmr/m/it/12 mers\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / www . t
 ypescriptlang . org / docs / handbook /
  []
 
 
-Underfull \hbox (badness 2310) in paragraph at lines 105--110
+Underfull \hbox (badness 2310) in paragraph at lines 85--90
 \OT1/cmtt/m/n/12 typescript-[]in-[]5-[]minutes . html$[]\OT1/cmr/m/n/12 , 2025.
   Zu-ge-grif-fen am 22. Ju-li
  []
 
 
-Underfull \hbox (badness 1292) in paragraph at lines 128--131
+Underfull \hbox (badness 1292) in paragraph at lines 108--111
 []\OT1/cmr/m/sc/12 Paul Brats-lavs-ky\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Top 6 B
 e-ne-fits of Im-ple-men-ting Ty-pe-S-cript\OT1/cmr/m/n/12 .
  []
 
 
-Underfull \hbox (badness 1990) in paragraph at lines 133--139
+Underfull \hbox (badness 1990) in paragraph at lines 113--119
 []\OT1/cmr/m/sc/12 Rakesh Pu-ro-hit\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 A Step-by
 -Step Gui-de to Im-ple-men-ting Re-act
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 141--144
+Underfull \hbox (badness 10000) in paragraph at lines 121--124
 []\OT1/cmr/m/it/12 What is REST?  []$\OT1/cmtt/m/n/12 https : / / www . codecad
 emy . com / article /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 152--156
-[]\OT1/cmr/m/sc/12 Spring\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 JPA Que-ry Me-thods
-\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 /https : / / docs . spring . io /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 152--156
-\OT1/cmtt/m/n/12 spring-[]data / jpa / reference / jpa / query-[]methods . html
-/$[]\OT1/cmr/m/n/12 .  Ab-ge-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 158--162
-\OT1/cmtt/m/n/12 jpa / docs / 1 . 6 . 0 . RELEASE / reference / html / jpa . re
-positories .
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 164--167
-[]\OT1/cmr/m/sc/12 Spring\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Spring Da-ta JPA\OT
-1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / www . ibm . com / topics /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 169--172
+Underfull \hbox (badness 10000) in paragraph at lines 132--135
 []\OT1/cmr/m/sc/12 Spring\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Spring Fra-me-work\
 OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / spring . io / projects /
  []
 
-[27]
-Underfull \hbox (badness 10000) in paragraph at lines 190--194
+
+Underfull \hbox (badness 10000) in paragraph at lines 142--146
 []\OT1/cmr/m/sc/12 Team, GitHub\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 GitHub About\
 OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / docs . github . com /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 190--194
+Underfull \hbox (badness 10000) in paragraph at lines 142--146
 \OT1/cmtt/m/n/12 en / get-[]started / start-[]your-[]journey / about-[]github-[
 ]and-[]git #
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 206--209
+Underfull \hbox (badness 10000) in paragraph at lines 148--151
 []\OT1/cmr/m/it/12 Wikipedia: In-te-r-ope-ra-bi-li-ty\OT1/cmr/m/n/12 .  []$\OT1
 /cmtt/m/n/12 https : / / en . wikipedia . org / wiki /
  []
 
 )
 No file Documentation.ind.
-[28]
+[27]
 \openout2 = `chapters/Abkürzungsverzeichnis.aux'.
 
  (./chapters/Abkürzungsverzeichnis.tex
@@ -1155,7 +1113,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--30
 
  []
 
-) [29
+) [28
 
 
 
@@ -1172,7 +1130,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
-) [30
+) [29
 
 
 
@@ -1184,10 +1142,10 @@ Package rerunfilecheck Info: File `Documentation.out' has not changed.
 (rerunfilecheck)             Checksum: 33A64F9FA33F3BB8DC80304D0CC9E083;12215.
  ) 
 Here is how much of TeX's memory you used:
- 17850 strings out of 478268
- 283833 string characters out of 5846348
- 876728 words of memory out of 5000000
- 35492 multiletter control sequences out of 15000+600000
+ 17827 strings out of 478268
+ 283331 string characters out of 5846348
+ 876242 words of memory out of 5000000
+ 35481 multiletter control sequences out of 15000+600000
  478934 words of font info for 65 fonts, out of 8000000 for 9000
  1146 hyphenation exceptions out of 8191
  60i,9n,63p,1017b,2117s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1204,10 +1162,10 @@ xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/tex
 live/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texli
 ve/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/t
 exlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Documentation.pdf (36 pages, 1481919 bytes).
+Output written on Documentation.pdf (35 pages, 1478820 bytes).
 PDF statistics:
- 919 PDF objects out of 1000 (max. 8388607)
- 842 compressed objects within 9 object streams
- 268 named destinations out of 1000 (max. 500000)
+ 879 PDF objects out of 1000 (max. 8388607)
+ 803 compressed objects within 9 object streams
+ 256 named destinations out of 1000 (max. 500000)
  592 words of extra memory for PDF output out of 10000 (max. 10000000)
 

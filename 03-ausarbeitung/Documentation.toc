@@ -88,5 +88,5 @@
 \contentsline {subsection}{\numberline {4.4.2}Benutzeranfragenverwaltung}{24}{subsection.4.4.2}%
 \contentsline {chapter}{\numberline {5}Zusammenfassung und Ausblick}{25}{chapter.5}%
 \contentsline {chapter}{Literaturverzeichnis}{26}{chapter*.6}%
-\contentsline {chapter}{Abkürzungsverzeichnis}{29}{appendix.A}%
-\contentsline {chapter}{Selbstständigkeitserklärung}{30}{appendix.B}%
+\contentsline {chapter}{Abkürzungsverzeichnis}{28}{appendix.A}%
+\contentsline {chapter}{Selbstständigkeitserklärung}{29}{appendix.B}%

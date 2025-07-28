@@ -35,6 +35,7 @@ export const CheckoutBook = () => {
     // Language state
     const [language, setLanguage] = useState<'en' | 'de'>('en');
 
+    const [showError, setShowError] = useState(false);
 
     const bookId = (window.location.pathname).split('/')[2];
 
@@ -217,8 +218,10 @@ export const CheckoutBook = () => {
         };
         const res = await fetch(apiUrl, response);
         if (!res.ok) {
-            throw new Error('Something went wrong while checking out the book!');
+            setShowError(true);
+            return;
         }
+        setShowError(false);
         setIsBookCheckedOut(true);
     }
 
@@ -250,6 +253,10 @@ export const CheckoutBook = () => {
         <div className="book-checkout">
             {/* Desktop Layout */}
             <div className="container d-none d-lg-block">
+                {showError &&
+                    <div className="alert alert-danger mt-4"
+                        role="alert">You have to return books before checking out new ones!
+                    </div>}
                 <div className="row mt-5">
                     <div className="col-lg-3">
                         <div className="book-cover shadow-lg rounded-3 overflow-hidden">
@@ -294,6 +301,10 @@ export const CheckoutBook = () => {
             </div>
             {/* Mobile Layout */}
             <div className="container d-lg-none">
+                {showError &&
+                    <div className="alert alert-danger mt-4"
+                        role="alert">You have to return books before checking out new ones!
+                    </div>}
                 <div className="book-mobile-card shadow-sm rounded-4 p-3 mt-4"> {/* Card layout */}
                     <div className="text-center mb-4">
                         {book?.image ?

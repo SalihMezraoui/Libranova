@@ -255,7 +255,7 @@ export const CheckoutBook = () => {
             <div className="container d-none d-lg-block">
                 {showError &&
                     <div className="alert alert-danger mt-4"
-                        role="alert">You have to return books before checking out new ones!
+                        role="alert">Pay due amounts or return books past their due date!
                     </div>}
                 <div className="row mt-5">
                     <div className="col-lg-3">

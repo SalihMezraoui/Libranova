@@ -41,6 +41,11 @@ export const Header = () => {
                                 <NavLink className='nav-link hover-underline' to='/libraryActivity'> Bibliotheksaktivität</NavLink>
                             </li>
                         }
+                        {authState.isAuthenticated &&
+                            <li className='nav-item'>
+                                <NavLink className='nav-link hover-underline' to='/charges'> Overdue Charges</NavLink>
+                            </li>
+                        }
                         {authState.isAuthenticated && authState.accessToken?.claims?.userType === 'admin' &&
                             <li className='nav-item'>
                                 <NavLink className='nav-link hover-underline' to='/admin'> Admin</NavLink>

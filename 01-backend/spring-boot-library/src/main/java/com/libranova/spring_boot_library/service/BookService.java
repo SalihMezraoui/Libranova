@@ -172,7 +172,7 @@ public class BookService {
                 payment.setAmount(0.0);
             }
 
-            payment.setAmount(payment.getAmount() + daysOverdue);
+            payment.setAmount(payment.getAmount() + daysOverdue * 2);
             paymentRepository.save(payment);
         }
 

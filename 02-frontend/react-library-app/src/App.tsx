@@ -15,6 +15,7 @@ import { ReviewList } from './components/ReviewListPage/ReviewList';
 import { LibraryActivity } from './components/LibraryActivityPage/LibraryActivity';
 import { MessagePage } from './components/MessagesPage/MessagePage';
 import { LibraryAdminPanel } from './components/LibraryAdminPanel/LibraryAdminPanel';
+import { PaymentDashboard } from './components/PaymentDashboard/PaymentDashboard';
 
 
 const oktaAuth = new OktaAuth(oktaConfig);
@@ -57,6 +58,7 @@ export const App = () => {
             <SecureRoute path='/libraryActivity'> <LibraryActivity /> </SecureRoute>
             <SecureRoute path='/messages'> <MessagePage /> </SecureRoute>
             <SecureRoute path='/admin'> <LibraryAdminPanel /> </SecureRoute>
+            <SecureRoute path='/charges'> <PaymentDashboard /> </SecureRoute>
 
           </Switch>
         </div>

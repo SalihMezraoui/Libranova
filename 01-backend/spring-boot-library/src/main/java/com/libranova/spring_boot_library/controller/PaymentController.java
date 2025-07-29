@@ -27,7 +27,7 @@ public class PaymentController {
         return ResponseEntity.ok(paymentIntent.toJson());
     }
 
-    @PostMapping("/execute")
+    @PutMapping("/execute")
     public ResponseEntity<String> processPayment(Authentication authentication) {
         String userEmail = authentication.getName();
 

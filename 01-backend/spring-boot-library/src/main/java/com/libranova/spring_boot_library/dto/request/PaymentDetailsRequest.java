@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class PaymentDetailsRequest {
     private String recipientEmail;
-    private double amount;
+    private int amount;
     private String currencyCode;
 }

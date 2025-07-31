@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Book from "../../../models/Book";
 import { Link } from "react-router-dom";
 import { BreathingLoader } from "../../Widgets/BreathingLoader";
+import { useTranslation } from "react-i18next";
 
 
 export const Carousel = () => {
@@ -10,6 +11,8 @@ export const Carousel = () => {
     const [books, setBooks] = useState<Book[]>([]);
     const [loading, setLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
+    const { t } = useTranslation();
+
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -66,7 +69,7 @@ export const Carousel = () => {
     return (
         <div className='container mt-5' style={{ height: 550 }}>
             <div className='books-header'>
-                <h3>Tauche ein in Geschichten, die dich die Zeit vergessen lassen.</h3>
+                <h3>{t("carousel.title")}</h3>
             </div>
             <div id='booksSlider' className='carousel carousel-dark slide mt-5 
                 d-none d-lg-block' data-bs-interval='false'>
@@ -99,14 +102,14 @@ export const Carousel = () => {
                         type='button' data-bs-target='#booksSlider' data-bs-slide='prev'
                         style={{ width: '3rem', height: '3rem', padding: '0.5rem', backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
                         <span className='carousel-control-prev-icon' aria-hidden='true'></span>
-                        <span className='visually-hidden'>Zurück</span>
+                        <span className='visually-hidden'>{t("carousel.prev")}</span>
                     </button>
 
                     <button className='carousel-control-next position-absolute top-50 end-0 translate-middle-y me-0 z-1 rounded-circle border-0'
                         type='button' data-bs-target='#booksSlider' data-bs-slide='next'
                         style={{ width: '3rem', height: '3rem', padding: '0.5rem', backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
                         <span className='carousel-control-next-icon' aria-hidden='true'></span>
-                        <span className='visually-hidden'>Weiter</span>
+                        <span className='visually-hidden'>{t("carousel.next")}</span>
                     </button>
                 </div>
             </div>
@@ -118,7 +121,7 @@ export const Carousel = () => {
                 </div>
             </div>
             <div className='books-footer mt-3'>
-                <Link className='btn btn-outline-secondary btn-lg hover-grow' to='/search'>Mehr anzeigen</Link>
+                <Link className='btn btn-outline-secondary btn-lg hover-grow' to='/search'>{t("carousel.more")}</Link>
             </div>
         </div>
     );

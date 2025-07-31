@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { HistoryTab } from "./Layouts/HistoryTab";
 import { Loans } from "./Layouts/Loans";
+import { useTranslation } from "react-i18next";
+
 
 export const LibraryActivity = () => {
 
     const [historyRefresh, setHistoryRefresh] = useState(false);
+    const { t } = useTranslation(); // ✅ Hook here
+
 
     return (
         <div className='container mt-5'>
@@ -18,8 +22,8 @@ export const LibraryActivity = () => {
                         <button
                             onClick={() => setHistoryRefresh(false)}
                             className={`nav-link rounded-pill fw-semibold ${!historyRefresh
-                                    ? 'active bg-primary text-white fw-bold shadow-sm'
-                                    : 'text-primary bg-white border border-primary'
+                                ? 'active bg-primary text-white fw-bold shadow-sm'
+                                : 'text-primary bg-white border border-primary'
                                 }`}
                             id="nav-loans-tab"
                             data-bs-toggle="tab"
@@ -29,14 +33,14 @@ export const LibraryActivity = () => {
                             aria-controls="nav-loans"
                             aria-selected={!historyRefresh}
                         >
-                            Loans
+                            {t("libraryActivity.loans")} 
                         </button>
 
                         <button
                             onClick={() => setHistoryRefresh(true)}
                             className={`nav-link rounded-pill fw-semibold ${historyRefresh
-                                    ? 'active bg-primary text-white fw-bold shadow-sm'
-                                    : 'text-primary bg-white border border-primary'
+                                ? 'active bg-primary text-white fw-bold shadow-sm'
+                                : 'text-primary bg-white border border-primary'
                                 }`}
                             id="nav-history-tab"
                             data-bs-toggle="tab"
@@ -46,7 +50,7 @@ export const LibraryActivity = () => {
                             aria-controls="nav-history"
                             aria-selected={historyRefresh}
                         >
-                            My History
+                            {t("libraryActivity.myHistory")}
                         </button>
                     </div>
                 </nav>

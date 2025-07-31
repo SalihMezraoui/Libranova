@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 import Message from "../../../models/Message";
 import { BreathingLoader } from "../../Widgets/BreathingLoader";
 import { Pagination } from "../../Widgets/Pagination";
+import { useTranslation } from "react-i18next";
 
 export const Messages = () => {
 
     const { authState } = useOktaAuth();
+    const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
 
@@ -67,30 +69,30 @@ export const Messages = () => {
         <div className="mt-4">
             {messages.length > 0 ?
                 <>
-                    <h4 className="text-center mb-4 fw-semibold text-secondary">Your Message History</h4>
+                    <h4 className="text-center mb-4 fw-semibold text-secondary">{t("messages.historyTitle")}</h4>
                     {messages.map(message => (
                         <div key={message.id} className="mb-4">
                             <div className="card shadow-sm border-0">
                                 <div className="card-body">
                                     <div className="mb-2"></div>
                                     <h5 className="card-title text-dark">
-                                        <span className="text-muted">Case #{message.id}:</span> {message.subject}
+                                        <span className="text-muted">{t("messages.case")} #{message.id}:</span> {message.subject}
                                     </h5>
                                     <h6 className="card-subtitle text-secondary mb-2">{message.userEmail}</h6>
                                     <p className="card-text">{message.inquiry}</p>
                                     <hr />
                                     <div>
-                                        <h6 className="text-success fw-bold mb-2">Response</h6>
+                                        <h6 className="text-success fw-bold mb-2">{t("messages.response")}</h6>
                                         {message.response && message.adminEmail ? (
                                             <>
                                                 <p className="mb-1">
-                                                    <strong>Admin:</strong> {message.adminEmail}
+                                                    <strong>{t("messages.admin")}:</strong> {message.adminEmail}
                                                 </p>
                                                 <p>{message.response}</p>
                                             </>
                                         ) : (
                                             <p className="text-muted fst-italic">
-                                                No response yet. Please be patient.
+                                                {t("messages.noResponse")}
                                             </p>
                                         )}
                                     </div>
@@ -102,7 +104,7 @@ export const Messages = () => {
                 :
                 <div className="container mt-5">
                     <div className="alert alert-info text-center" role="alert">
-                        You have no messages yet. Please post a new message.
+                         {t("messages.noMessages")}
                     </div>
                 </div>
             }

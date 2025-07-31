@@ -1,0 +1,211 @@
+{
+    "payment": {
+        "success_toast": "Zahlung erfolgreich abgeschlossen!",
+        "card_details": "Kreditkartendaten eingeben",
+        "submit_payment": "Zahlung absenden",
+        "no_payment": "Keine ausstehende Zahlung 🎉",
+        "pending_payment": "Ausstehende Zahlung",
+        "go_to_library": "Zur Bibliothek"
+    },
+    "reserve": "Reservieren",
+    "browseBooks": {
+        "title": "Entdecke dein nächstes Leseabenteuer",
+        "subtitle": "Was möchtest du als Nächstes lesen?",
+        "button": "Jetzt Bücher erkunden"
+    },
+    "carousel": {
+        "title": "Tauche ein in Geschichten, die dich die Zeit vergessen lassen.",
+        "prev": "Zurück",
+        "next": "Weiter",
+        "more": "Mehr anzeigen"
+    },
+    "librarySupport": {
+        "title": "Fehlt dir ein bestimmtes Buch?",
+        "subtitle": "Solltest du nicht finden, was du suchst, kontaktiere gerne unsere Admins persönlich.",
+        "button": {
+            "authenticated": "Bibliotheksdienste",
+            "unauthenticated": "Registrieren"
+        }
+    },
+    "header": {
+        "home": "Startseite",
+        "searchBooks": "Bücher suchen",
+        "libraryActivity": "Bibliotheksaktivität",
+        "overdueCharges": "Überfällige Gebühren",
+        "admin": "Admin",
+        "login": "Login",
+        "logout": "Abmelden"
+    },
+    "footer": {
+        "home": "Startseite",
+        "searchBooks": "Bücher suchen"
+    },
+    "checkout": {
+        "checkout": "Ausleihen",
+        "alreadyCheckedOut": "Bereits ausgeliehen",
+        "maxReached": "Du hast die maximale Anzahl an ausgeliehenen Büchern erreicht.",
+        "signIn": "Anmelden",
+        "thankYouReview": "Vielen Dank für deine Bewertung",
+        "signInToReview": "Du musst dich anmelden, um eine Bewertung zu hinterlassen.",
+        "booksCheckedOut": "ausgeliehene Bücher",
+        "available": "Verfügbar",
+        "notAvailable": "Nicht verfügbar",
+        "copies": "Exemplare",
+        "dynamicAvailabilityNote": "Diese Zahl kann sich bis zur Bestellung noch ändern."
+    },
+    "alerts": {
+        "checkoutError": "Bezahlen Sie ausstehende Beträge oder geben Sie Bücher zurück, die überfällig sind!"
+    },
+    "recentReviews": {
+        "title": "Neueste Rezensionen",
+        "seeAll": "Alle Rezensionen anzeigen",
+        "noReviews": "Noch keine Rezensionen."
+    },
+    "libraryActivity": {
+        "loans": "Ausleihen",
+        "myHistory": "Mein Verlauf"
+    },
+    "historyTab": {
+        "title": "Mein Verlauf",
+        "altBook": "Buch",
+        "checkedOut": "Ausgeliehen am",
+        "returnedOn": "Zurückgegeben am",
+        "noHistory": "Kein Verlauf gefunden.",
+        "searchBooks": "Nach Büchern suchen"
+    },
+    "loanDetails": {
+        "title": "Ausleihoptionen",
+        "close": "Schließen",
+        "bookAlt": "Buch",
+        "remainingDays": "Verbleibende Tage:",
+        "dueToday": "Fällig heute",
+        "overdueBy": "Überfällig seit:",
+        "days": "Tage",
+        "returnBook": "Buch zurückgeben",
+        "extendLoan": "Um 7 Tage verlängern",
+        "extendDisabled": "Verlängerung nicht möglich"
+    },
+    "loans": {
+        "loanOptions": "Ausleihoptionen",
+        "currentLoans": "Aktuelle Ausleihen",
+        "daysRemaining": "Verbleibende Tage:",
+        "dueToday": "Fällig heute",
+        "overdueBy": "Überfällig seit: ",
+        "days": "Tage",
+        "manageLoan": "Ausleihe verwalten",
+        "moreBooks": "Weitere Bücher",
+        "feedbackPrompt": "Helfen Sie uns, unseren Service zu verbessern, indem Sie Ihre Erfahrungen mit diesem Buch bewerten.",
+        "writeReview": "Rezension schreiben",
+        "noLoansTitle": "Keine aktuellen Ausleihen",
+        "noLoansText": "Sie haben derzeit keine Bücher ausgeliehen. Besuchen Sie die",
+        "bookSearchLink": "Buchsuche"
+    },
+    "adminPanel": {
+        "title": "Bibliotheksverwaltung",
+        "addBook": "Neues Buch hinzufügen",
+        "manageBooks": "Bücher verwalten",
+        "messages": "Nachrichten"
+    },
+    "addBook": {
+        "successMessage": "Buch erfolgreich hinzugefügt!",
+        "warningMessage": "Alle Felder sind erforderlich!",
+        "header": "Neues Buch hinzufügen",
+        "titleLabel": "Titel",
+        "titlePlaceholder": "Buchtitel eingeben",
+        "authorLabel": "Autor",
+        "authorPlaceholder": "Name des Autors eingeben",
+        "categoryLabel": "Kategorie",
+        "selectCategory": "Kategorie auswählen",
+        "overviewLabel": "Überblick",
+        "overviewPlaceholder": "Buchüberblick eingeben",
+        "totalCopiesLabel": "Gesamtanzahl",
+        "totalCopiesPlaceholder": "Gesamtanzahl eingeben",
+        "selectFile": "Datei auswählen",
+        "noFileChosen": "Keine Datei ausgewählt",
+        "submitButton": "Buch hinzufügen",
+        "category": {
+            "frontend": "Front-End",
+            "backend": "Back-End",
+            "dataScience": "Data Science",
+            "devops": "DevOps"
+        }
+    },
+    "adminInbox": {
+        "pendingQuestions": "Ausstehende Fragen",
+        "noPendingQuestions": "Derzeit keine ausstehenden Fragen."
+    },
+    "adminMessage": {
+        "case": "Fall",
+        "responseLabel": "Antwort",
+        "warningEmptyFields": "Alle Felder müssen ausgefüllt sein.",
+        "responsePlaceholder": "Geben Sie Ihre Antwort hier ein...",
+        "submitBtn": "Antwort senden"
+    },
+    "bookCard": {
+        "author": "Autor",
+        "total": "Gesamt",
+        "available": "Verfügbar",
+        "increaseBtn": "Anzahl erhöhen",
+        "decreaseBtn": "Anzahl verringern",
+        "remove": "Löschen",
+        "deleteConfirmTitle": "Möchten Sie \"{{title}}\" wirklich löschen?",
+        "deleteWarning": "Diese Aktion kann nicht rückgängig gemacht werden.",
+        "confirmDelete": "Ja, löschen!",
+        "cancelDelete": "Abbrechen",
+        "error": "Fehler",
+        "failedDelete": "Buch konnte nicht gelöscht werden.",
+        "deletedTitle": "Gelöscht!",
+        "deletedSuccess": "Das Buch wurde entfernt.",
+        "incrementError": "Fehler beim Erhöhen der Buchanzahl.",
+        "decrementError": "Fehler beim Verringern der Buchanzahl."
+    },
+    "updateBooks": {
+        "totalBooks": "Gesamtanzahl Bücher",
+        "showing": "{{from}}–{{to}} von {{total}} Ergebnissen werden angezeigt",
+        "noBooks": "Fügen Sie Bücher hinzu, bevor Sie ihre Anzahl ändern"
+    },
+    "messagePage": {
+        "submitQuestion": "Frage absenden",
+        "receivedMessages": "Erhaltene Nachrichten"
+    },
+    "messages": {
+        "historyTitle": "Ihr Nachrichtenverlauf",
+        "case": "Fall",
+        "response": "Antwort",
+        "admin": "Administrator",
+        "noResponse": "Noch keine Antwort. Bitte haben Sie etwas Geduld.",
+        "noMessages": "Sie haben noch keine Nachrichten. Bitte senden Sie eine neue Nachricht."
+    },
+    "post": {
+        "title": "Neue Nachricht senden",
+        "warning": "Bitte füllen Sie alle Felder aus, bevor Sie absenden.",
+        "success": "Ihre Nachricht wurde erfolgreich gesendet!",
+        "subject": "Betreff",
+        "subjectPlaceholder": "Betreff eingeben",
+        "inquiry": "Anfrage",
+        "inquiryPlaceholder": "Schreiben Sie Ihre Nachricht...",
+        "submitBtn": "Nachricht absenden"
+    },
+    "review_list": {
+        "title": "Bewertungen",
+        "pagination_text": "{{from}} bis {{to}} von {{total}} Bewertungen werden angezeigt"
+    },
+    "search_page": {
+        "search_placeholder": "Suchen",
+        "search_button": "Suchen",
+        "category": "Kategorie",
+        "categories": {
+            "category": "Kategorie",
+            "all": "Alle",
+            "fe": "Front-End",
+            "be": "Back-End",
+            "data": "Data Science",
+            "devops": "DevOps"
+        },
+        "total_results": "Anzahl der Ergebnisse:",
+        "showing_results": "{{from}}–{{to}} von {{total}} Ergebnissen:",
+        "no_results_title": "Keine Ergebnisse gefunden",
+        "no_results_desc": "Bitte versuchen Sie es mit einem anderen Suchbegriff.",
+        "library_services": "Bibliotheksdienste"
+    }
+}

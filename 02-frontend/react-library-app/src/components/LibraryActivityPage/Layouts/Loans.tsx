@@ -4,10 +4,12 @@ import UserLoansSummary from "../../../models/UserLoansSummary";
 import { BreathingLoader } from "../../Widgets/BreathingLoader";
 import { Link } from "react-router-dom";
 import { LoanDetailsModal } from "./LoanDetailsModal";
+import { useTranslation } from "react-i18next";
 
 export const Loans = () => {
 
     const { authState } = useOktaAuth();
+    const { t } = useTranslation();
     const [httpError, setHttpError] = useState(null);
 
     const [userLoansSummary, setUserLoansSummary] = useState<UserLoansSummary[]>([]);
@@ -94,7 +96,7 @@ export const Loans = () => {
             <div className="d-none d-lg-block mt-2 py-4">
                 {userLoansSummary.length > 0 ?
                     <>
-                        <h3 className="mb-4 fw-semibold text-secondary">Aktuelle Ausleihen</h3>
+                        <h3 className="mb-4 fw-semibold text-secondary">{t("loans.currentLoans")}</h3>
 
                         {userLoansSummary.map(userLoanSummary => (
                             <div key={userLoanSummary.book.id}>
@@ -110,22 +112,22 @@ export const Loans = () => {
                                         <div className="card-body" >
                                             <div className="mt-3">
                                                 <h4 className="text-dark fw-bold position-relative">
-                                                    Loan Options
+                                                    {t("loans.loanOptions")}
                                                     <span className="position-absolute bottom-0 start-0 border-bottom border-2 border-dark" style={{ width: 'fit-content' }}></span>
                                                 </h4>
                                                 {userLoanSummary.daysRemaining > 0 &&
                                                     <p className='text-secondary'>
-                                                        <strong>Days remaining: </strong>{userLoanSummary.daysRemaining}
+                                                        <strong>{t("loans.daysRemaining")} </strong>{userLoanSummary.daysRemaining}
                                                     </p>
                                                 }
                                                 {userLoanSummary.daysRemaining === 0 &&
                                                     <p className='text-success'>
-                                                        <strong>Due Today</strong>
+                                                        <strong>{t("loans.dueToday")}</strong>
                                                     </p>
                                                 }
                                                 {userLoanSummary.daysRemaining < 0 &&
                                                     <p className='text-danger'>
-                                                        <strong>Overdue by: </strong>{Math.abs(userLoanSummary.daysRemaining)} days
+                                                        <strong>{t("loans.overdueBy")}: </strong>{Math.abs(userLoanSummary.daysRemaining)} days
                                                     </p>
                                                 }
                                                 <div className="d-flex gap-2 mb-3">
@@ -135,7 +137,7 @@ export const Loans = () => {
                                                         data-bs-target={`#manageLoanModal${userLoanSummary.book.id}`}
                                                     >
                                                         <i className="bi bi-pencil-square me-2"></i>
-                                                        Ausleihe verwalten
+                                                        {t("loans.manageLoan")}
                                                     </button>
 
                                                     <Link
@@ -143,16 +145,16 @@ export const Loans = () => {
                                                         className="btn btn-outline-secondary d-flex align-items-center"
                                                     >
                                                         <i className="bi bi-search me-2"></i>
-                                                        Weitere Bücher
+                                                        {t("loans.moreBooks")}
                                                     </Link>
                                                 </div>
                                             </div>
                                             <hr />
                                             <p className="mt-3">
-                                                Help us improve our service by providing feedback on your experience with this book.
+                                                {t("loans.feedbackPrompt")}
                                             </p>
                                             <Link to={`/checkout/${userLoanSummary.book.id}`} className="btn btn-md main-color rounded-pill text-white invert-hover">
-                                                Write a Review
+                                                {t("loans.writeReview")}
                                             </Link>
                                         </div>
                                     </div>
@@ -163,10 +165,11 @@ export const Loans = () => {
                         ))}
                     </> :
                     <>
-                        <h5 className="text-center mb-4">Keine aktuellen Ausleihen</h5>
-                        <p className="text-center">Sie haben derzeit keine Bücher ausgeliehen. Besuchen Sie die
-                            <Link to={'search'}>Buchsuche</Link>, um neue Bücher auszuleihen.
+                        <h5 className="text-center mb-4">{t("loans.noLoansTitle")}</h5>
+                        <p className="text-center">
+                            {t("loans.noLoansText")} <Link to={'search'}>{t("loans.bookSearchLink")}</Link>.
                         </p>
+
                     </>
                 }
             </div>

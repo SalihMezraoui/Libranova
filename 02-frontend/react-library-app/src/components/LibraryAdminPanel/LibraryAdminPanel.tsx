@@ -4,10 +4,11 @@ import { Redirect } from "react-router-dom";
 import { AdminInbox } from "./Layouts/AdminInbox";
 import { AddBook } from "./Layouts/AddBook";
 import { UpdateBooksQuantity } from "./Layouts/UpdateBooksQuantity";
-
+import { useTranslation } from "react-i18next";
 export const LibraryAdminPanel = () => {
 
     const { authState } = useOktaAuth();
+    const { t } = useTranslation();
 
     const [updateBooksQuantity, setUpdateBooksQuantity] = useState(false);
     const [messagesSectionToggled, setMessagesSectionToggled] = useState(false);
@@ -34,7 +35,7 @@ export const LibraryAdminPanel = () => {
     return (
         <div className='container mt-5'>
             <div className="mt-3">
-                <h1 className="text-dark fw-bold mb-4 pb-2 text-center">⚙️ Library Management</h1>
+                <h1 className="text-dark fw-bold mb-4 pb-2 text-center">⚙️ {t("adminPanel.title")}</h1>
                 <nav>
                     <div
                         className="nav nav-tabs justify-content-center gap-3 pb-3"
@@ -55,7 +56,7 @@ export const LibraryAdminPanel = () => {
                             aria-controls="nav-add-book"
                             aria-selected='false'
                         >
-                            Add new book
+                            {t("adminPanel.addBook")}
                         </button>
 
                         <button
@@ -72,7 +73,7 @@ export const LibraryAdminPanel = () => {
                             aria-controls="nav-update-quantity"
                             aria-selected='true'
                         >
-                            Manage Books
+                            {t("adminPanel.manageBooks")}
                         </button>
 
                         <button
@@ -89,7 +90,7 @@ export const LibraryAdminPanel = () => {
                             aria-controls="nav-messages"
                             aria-selected='true'
                         >
-                            Messages
+                            {t("adminPanel.messages")}
                         </button>
                     </div>
                 </nav>

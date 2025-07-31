@@ -7,10 +7,14 @@ import Review from "../../models/Review";
 import { RecentReviews } from "./RecentReviews";
 import { useOktaAuth } from "@okta/okta-react";
 import ReviewRequest from "../../models/ReviewRequest";
+import { useTranslation } from "react-i18next";
+
 
 export const CheckoutBook = () => {
 
     const { authState } = useOktaAuth();
+
+    const { t } = useTranslation();
 
     const [book, setBook] = useState<Book>();
     const [loading, setLoading] = useState(true);
@@ -255,7 +259,7 @@ export const CheckoutBook = () => {
             <div className="container d-none d-lg-block">
                 {showError &&
                     <div className="alert alert-danger mt-4"
-                        role="alert">Pay due amounts or return books past their due date!
+                        role="alert">{t('alerts.checkoutError')}
                     </div>}
                 <div className="row mt-5">
                     <div className="col-lg-3">
@@ -303,7 +307,7 @@ export const CheckoutBook = () => {
             <div className="container d-lg-none">
                 {showError &&
                     <div className="alert alert-danger mt-4"
-                        role="alert">You have to return books before checking out new ones!
+                        role="alert">{t('alerts.checkoutError')}
                     </div>}
                 <div className="book-mobile-card shadow-sm rounded-4 p-3 mt-4"> {/* Card layout */}
                     <div className="text-center mb-4">

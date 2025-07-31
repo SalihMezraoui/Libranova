@@ -3,10 +3,14 @@ import styles from './Header.module.css';
 import { useOktaAuth } from '@okta/okta-react';
 import { BreathingLoader } from '../Widgets/BreathingLoader';
 import { ok } from 'assert';
+import { useTranslation } from 'react-i18next';
+
 
 export const Header = () => {
 
     const { oktaAuth, authState } = useOktaAuth();
+    const { t, i18n } = useTranslation();
+
 
     if (!authState) {
         return <BreathingLoader />;
@@ -31,40 +35,53 @@ export const Header = () => {
                 <div className='collapse navbar-collapse' id='navbarContent'>
                     <ul className='navbar-nav me-auto'>
                         <li className='nav-item'>
-                            <NavLink className='nav-link hover-underline' to='/home'> Startseite</NavLink>
+                            <NavLink className='nav-link hover-underline' to='/home'> {t("header.home")}</NavLink>
                         </li>
                         <li className='nav-item'>
-                            <NavLink className='nav-link hover-underline' to='/search'> Bücher suchen</NavLink>
+                            <NavLink className='nav-link hover-underline' to='/search'> {t("header.searchBooks")}</NavLink>
                         </li>
                         {authState.isAuthenticated &&
                             <li className='nav-item'>
-                                <NavLink className='nav-link hover-underline' to='/libraryActivity'> Bibliotheksaktivität</NavLink>
+                                <NavLink className='nav-link hover-underline' to='/libraryActivity'> {t("header.libraryActivity")}</NavLink>
                             </li>
                         }
                         {authState.isAuthenticated &&
                             <li className='nav-item'>
-                                <NavLink className='nav-link hover-underline' to='/charges'> Overdue Charges</NavLink>
+                                <NavLink className='nav-link hover-underline' to='/charges'> {t("header.overdueCharges")}</NavLink>
                             </li>
                         }
                         {authState.isAuthenticated && authState.accessToken?.claims?.userType === 'admin' &&
                             <li className='nav-item'>
-                                <NavLink className='nav-link hover-underline' to='/admin'> Admin</NavLink>
+                                <NavLink className='nav-link hover-underline' to='/admin'> {t("header.admin")}</NavLink>
                             </li>
                         }
                     </ul>
-                    {!authState.isAuthenticated ?
-                        <div className='d-flex'>
-                            <Link type='button' className='btn btn-auth rounded-pill px-4' to='/login'>
-                                Login
+                    <div className="d-flex align-items-center gap-2">
+
+                        <button
+                            onClick={() => i18n.changeLanguage('en')}
+                            className="btn btn-sm btn-outline-secondary-light"
+                        >
+                            EN
+                        </button>
+                        <button
+                            onClick={() => i18n.changeLanguage('de')}
+                            className="btn btn-sm btn-outline-secondary-light"
+                        >
+                            DE
+                        </button>
+
+                        {!authState.isAuthenticated ? (
+                            <Link type="button" className="btn btn-auth rounded-pill px-4 ms-2" to="/login">
+                                {t("header.login")}
                             </Link>
-                        </div>
-                        :
-                        <div className='d-flex'>
-                            <button className='btn btn-auth rounded-pill px-4' onClick={manageLogout}>
-                                Logout
+                        ) : (
+                            <button className="btn btn-auth rounded-pill px-4 ms-2" onClick={manageLogout}>
+                                {t("header.logout")}
                             </button>
-                        </div>
-                    }
+                        )}
+                    </div>
+
                 </div>
             </div>
         </nav>

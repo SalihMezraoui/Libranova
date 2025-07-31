@@ -4,10 +4,13 @@ import { BreathingLoader } from "../Widgets/BreathingLoader";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Link } from "react-router-dom";
 import PaymentDetailsRequest from "../../models/PaymentDetailsRequest";
+import { useTranslation } from "react-i18next";
+
 
 export const PaymentDashboard = () => {
 
     const { authState } = useOktaAuth();
+    const { t } = useTranslation();
     const [httpError, setHttpError] = useState(false);
     const [showSuccessToast, setShowSuccessToast] = useState(false);
     const [submitDisactivated, setSubmitDisactivated] = useState(false);
@@ -126,7 +129,7 @@ export const PaymentDashboard = () => {
                     <div className="toast show align-items-center text-white bg-success border-0 shadow" role="alert">
                         <div className="d-flex">
                             <div className="toast-body fw-semibold px-3">
-                                ✅ Payment completed successfully!
+                                ✅ {t('payment.success_toast')}
                             </div>
                             <button
                                 type="button"
@@ -144,13 +147,13 @@ export const PaymentDashboard = () => {
                         {charges > 0 ? (
                             <div className="shadow rounded bg-light p-4">
                                 <div className="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
-                                    <h4 className="fw-bold text-primary m-0">Pending Payment</h4>
+                                    <h4 className="fw-bold text-primary m-0">{t('payment.pending_payment')}</h4>
                                     <span className="badge bg-danger fs-6">${charges}</span>
                                 </div>
 
                                 <div className="mb-3">
                                     <label htmlFor="card-element" className="form-label fw-semibold">
-                                        Enter Credit Card Details
+                                        {t('payment.card_details')}
                                     </label>
                                     <div className="border rounded px-3 py-2 bg-white">
                                         <CardElement id="card-element" />
@@ -162,15 +165,15 @@ export const PaymentDashboard = () => {
                                     disabled={submitDisactivated}
                                     onClick={handlePayment}
                                 >
-                                    Submit Payment
+                                    {t('payment.submit_payment')}
                                 </button>
                             </div>
                         ) : (
 
                             <div className="text-center shadow rounded bg-light bg-opacity-10 p-5">
-                                <h4 className="fw-bold text-success mb-3">No Payment Pending 🎉</h4>
+                                <h4 className="fw-bold text-success mb-3">{t('payment.no_payment')} 🎉</h4>
                                 <Link to="search" className="btn btn-outline-success px-4 py-2">
-                                    Go to Library
+                                    {t('payment.go_to_library')}
                                 </Link>
                             </div>
                         )}

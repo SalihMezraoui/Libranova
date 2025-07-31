@@ -1,20 +1,22 @@
 import { useOktaAuth } from "@okta/okta-react";
 import { useState } from "react";
 import AddBookModel from "../../../models/AddBoookModel";
+import { useTranslation } from "react-i18next";
 
 export const AddBook = () => {
 
     const { authState } = useOktaAuth();
-
+    const { t } = useTranslation();
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [overview, setOverview] = useState('');
     const [totalCopies, setTotalCopies] = useState(0);
     const [category, setCategory] = useState('Category');
     const [image, setImage] = useState<any>(null);
-
     const [showWarning, setShowWarning] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
+    const [fileName, setFileName] = useState('');
+
 
     function categorySelector(input: any) {
         setCategory(input);
@@ -81,49 +83,49 @@ export const AddBook = () => {
                 <div className="alert alert-success d-flex align-items-center" role="alert">
                     <i className="bi bi-check-circle-fill me-2"></i>
                     <div>
-                        <strong>Book added successfully!</strong>
+                        <strong>{t("addBook.successMessage")}</strong>
                     </div>
                 </div>
             )}
             {showWarning && (
                 <div className="alert alert-warning d-flex align-items-center" role="alert">
                     <i className="bi bi-exclamation-triangle-fill me-2"></i>
-                    <div><strong>All fields are required!</strong></div>
+                    <div><strong>{t("addBook.warningMessage")}</strong></div>
                 </div>
             )}
             <div className="card shadow-sm border-0">
                 <div className="card-header bg-color text-white fw-bold fs-5">
-                    <i className="bi bi-journal-plus me-2"></i>Add a New Book
+                    <i className="bi bi-journal-plus me-2"></i>{t("addBook.header")}
                 </div>
                 <div className="card-body">
                     <form method="POST">
                         <div className="row g-4">
                             <div className="col-md-6 ">
-                                <label className="form-label">Title</label>
+                                <label className="form-label">{t("addBook.titleLabel")}</label>
                                 <input
                                     type="text"
                                     className="form-control shadow-sm"
                                     value={title}
-                                    placeholder="Enter book title"
+                                    placeholder={t("addBook.titlePlaceholder")}
                                     onChange={(e) => setTitle(e.target.value)}
                                     name="title"
                                     required
                                 />
                             </div>
                             <div className="col-md-3">
-                                <label className="form-label">Author</label>
+                                <label className="form-label">{t("addBook.authorLabel")}</label>
                                 <input
                                     type="text"
                                     className="form-control shadow-sm"
                                     value={author}
-                                    placeholder="Enter author's name"
+                                    placeholder={t("addBook.authorPlaceholder")}
                                     onChange={(e) => setAuthor(e.target.value)}
                                     name="author"
                                     required
                                 />
                             </div>
                             <div className="col-md-3">
-                                <label className="form-label">Category</label>
+                                <label className="form-label">{t("addBook.categoryLabel")}</label>
                                 <div className="dropdown">
                                     <button
                                         className="btn btn-outline-secondary w-100 text-start dropdown-toggle"
@@ -132,50 +134,70 @@ export const AddBook = () => {
                                         data-bs-toggle="dropdown"
                                         aria-expanded="false"
                                     >
-                                        {category || "Select category"}
+                                        {category === 'FE' && t("addBook.category.frontend")}
+                                        {category === 'BE' && t("addBook.category.backend")}
+                                        {category === 'Data' && t("addBook.category.dataScience")}
+                                        {category === 'DevOps' && t("addBook.category.devops")}
+                                        {(!category || category === 'Category') && t("addBook.selectCategory")}
                                     </button>
+
                                     <ul className="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                                        <li><a className="dropdown-item" onClick={() => categorySelector('FE')}>Front End</a></li>
-                                        <li><a className="dropdown-item" onClick={() => categorySelector('BE')}>Backend</a></li>
-                                        <li><a className="dropdown-item" onClick={() => categorySelector('Data')}>Data Science</a></li>
-                                        <li><a className="dropdown-item" onClick={() => categorySelector('DevOps')}>DevOps</a></li>
+                                        <li><a className="dropdown-item" onClick={() => categorySelector('FE')}>{t("addBook.category.frontend")}</a></li>
+                                        <li><a className="dropdown-item" onClick={() => categorySelector('BE')}>{t("addBook.category.backend")}</a></li>
+                                        <li><a className="dropdown-item" onClick={() => categorySelector('Data')}>{t("addBook.category.dataScience")}</a></li>
+                                        <li><a className="dropdown-item" onClick={() => categorySelector('DevOps')}>{t("addBook.category.devops")}</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div className="col-12">
-                            <label className="form-label">Overview</label>
+                            <label className="form-label">{t("addBook.overviewLabel")}</label>
                             <textarea
                                 className="form-control shadow-sm"
                                 value={overview}
                                 onChange={(e) => setOverview(e.target.value)}
                                 id="sampleTextarea"
                                 rows={4}
-                                placeholder="Enter book overview"
+                                placeholder={t("addBook.overviewPlaceholder")}
                                 name="overview"
                                 required
                             ></textarea>
                         </div>
                         <div className="col-md-2">
-                            <label className="form-label">Total Copies</label>
+                            <label className="form-label">{t("addBook.totalCopiesLabel")}</label>
                             <input
                                 type="number"
                                 className="form-control shadow-sm"
                                 value={totalCopies}
                                 onChange={(e) => setTotalCopies(Number(e.target.value))}
                                 name="totalCopies"
-                                placeholder="Enter total copies"
+                                placeholder={t("addBook.totalCopiesPlaceholder")}
                                 min="1"
                                 max="1000"
                                 required
                             />
                         </div>
                         <div className="col-md-8">
-                            <label className="form-label fw-semibold">Cover Image</label>
-                            <div>
-                                <input type='file' onChange={e => convertImagesToBase64(e)} />
+                            <label className="form-label fw-semibold">{t("addBook.coverImageLabel")}</label>
+                            <div className="custom-file-wrapper">
+                                <label htmlFor="fileUpload" className="btn btn-outline-secondary">
+                                    {t("addBook.selectFile")}
+                                </label>
+                                <input
+                                    id="fileUpload"
+                                    type="file"
+                                    style={{ display: "none" }}
+                                    onChange={e => {
+                                        convertImagesToBase64(e);
+                                        setFileName(e.target.files?.[0]?.name || '');
+                                    }}
+                                />
+                                <span className="ms-2">
+                                    {fileName || t("addBook.noFileChosen")}
+                                </span>
                             </div>
                         </div>
+
 
                         <div className="mt-4 text-center">
                             <button
@@ -185,7 +207,7 @@ export const AddBook = () => {
                                 style={{ minWidth: '220px' }}
                             >
                                 <i className="bi bi-plus-circle-fill fs-4"></i>
-                                Add Book
+                                {t("addBook.submitButton")}
                             </button>
                         </div>
 

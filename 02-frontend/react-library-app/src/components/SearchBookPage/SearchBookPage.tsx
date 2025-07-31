@@ -3,9 +3,11 @@ import Book from "../../models/Book";
 import { SearchBook } from "./layouts/SearchBook";
 import { Pagination } from "../Widgets/Pagination";
 import { BreathingLoader } from "../Widgets/BreathingLoader";
+import { useTranslation } from "react-i18next";
 
 export const SearchBookPage = () => {
 
+    const { t } = useTranslation();
     const [books, setBooks] = useState<Book[]>([]);
     const [loading, setLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
@@ -15,7 +17,7 @@ export const SearchBookPage = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [search, setSearch] = useState('');
     const [searchUrl, setSearchUrl] = useState('');
-    const [category, setCategory] = useState('Kategorie');
+    const [category, setCategory] = useState('Category');
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -96,7 +98,7 @@ export const SearchBookPage = () => {
         else {
             setSearchUrl(`/search/findByTitleContainingIgnoreCase?title=${search}&page=<pageNumber>&size=${booksPerPage}`);
         }
-        setCategory('Kategorie');
+        setCategory('Category');
     }
 
     const categoryHandler = (categoryInput: string) => {
@@ -132,7 +134,8 @@ export const SearchBookPage = () => {
                         <div className='col-6'>
                             <div className='d-flex'>
                                 <input className='form-control me-2 rounded-pill' type='search'
-                                    placeholder='Suchen' aria-labelledby='Search'
+                                    placeholder={t('search_page.search_placeholder')}
+                                    aria-labelledby='Search'
                                     onChange={e => setSearch(e.target.value)}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter') {
@@ -141,7 +144,7 @@ export const SearchBookPage = () => {
                                     }} />
                                 <button className='btn btn-outline-success rounded-pill'
                                     onClick={() => searchHandler()}>
-                                    Suchen
+                                    {t('search_page.search_button')}
                                 </button>
 
                             </div>
@@ -151,32 +154,38 @@ export const SearchBookPage = () => {
                                 <button className='btn btn-outline-dark rounded-pill px-4 shadow-sm dropdown-toggle' type='button'
                                     id='categoryDropdownButton' data-bs-toggle='dropdown'
                                     aria-expanded='false'>
-                                    {category}
+                                    {category === 'FE' && t("search_page.categories.fe")}
+                                    {category === 'BE' && t("search_page.categories.be")}
+                                    {category === 'Data' && t("search_page.categories.data")}
+                                    {category === 'DevOps' && t("search_page.categories.devops")}
+                                    {category === 'All' && t("search_page.categories.all")}
+                                    {category === 'Category' && t("search_page.categories.category")}
                                 </button>
+
                                 <ul className='dropdown-menu rounded-3 shadow-sm' aria-labelledby='categoryDropdownButton'>
                                     <li onClick={() => categoryHandler('All')}>
                                         <a className='dropdown-item' href='#'>
-                                            Alle
+                                            {t('search_page.categories.all')}
                                         </a>
                                     </li>
                                     <li onClick={() => categoryHandler('FE')}>
                                         <a className='dropdown-item' href='#'>
-                                            Front-End
+                                            {t('search_page.categories.fe')}
                                         </a>
                                     </li>
                                     <li onClick={() => categoryHandler('BE')}>
                                         <a className='dropdown-item' href='#'>
-                                            Back-End
+                                            {t('search_page.categories.be')}
                                         </a>
                                     </li>
                                     <li onClick={() => categoryHandler('Data')}>
                                         <a className='dropdown-item' href='#'>
-                                            Data Science
+                                            {t('search_page.categories.data')}
                                         </a>
                                     </li>
                                     <li onClick={() => categoryHandler('DevOps')}>
                                         <a className='dropdown-item' href='#'>
-                                            DevOps
+                                            {t('search_page.categories.devops')}
                                         </a>
                                     </li>
                                 </ul>
@@ -186,11 +195,16 @@ export const SearchBookPage = () => {
                     {totalBooks > 0 ?
                         <>
                             <div className='mt-3'>
-                                <h5 className='fw-bold text-dark'>Anzahl der Ergebnisse: ({totalBooks})</h5>
+                                <h5 className='fw-bold text-dark'>{t('search_page.total_results')} ({totalBooks})</h5>
                             </div>
                             <p className='text-muted'>
-                                {indexOfFirstBook + 1}-{lastItem} von {totalBooks} Ergebnissen:
+                                {t('search_page.showing_results', {
+                                    from: indexOfFirstBook + 1,
+                                    to: lastItem,
+                                    total: totalBooks
+                                })}
                             </p>
+
                             {books.map(book => (
                                 <div key={book.id} className="mb-4">
                                     <SearchBook book={book} />
@@ -199,10 +213,10 @@ export const SearchBookPage = () => {
                         </>
                         :
                         <div className='m-5'>
-                            <h5 className='fw-bold text-dark'>Keine Ergebnisse gefunden</h5>
-                            <p className='text-muted'>Bitte versuchen Sie es mit einem anderen Suchbegriff.</p>
+                            <h5 className='fw-bold text-dark'>{t('search_page.no_results_title')}</h5>
+                            <p className='text-muted'>{t('search_page.no_results_desc')}</p>
                             <a type="button" className='btn btn-md main-color text-white rounded-pill px-3 invert-hover' href='/'>
-                                Bibliotheksdienste </a>
+                                {t('search_page.library_services')} </a>
                         </div>
                     }
                     {totalBooks > 1 &&

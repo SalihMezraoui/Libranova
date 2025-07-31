@@ -5,10 +5,12 @@ import { BreathingLoader } from "../../Widgets/BreathingLoader";
 import { Pagination } from "../../Widgets/Pagination";
 import { AdminMessage } from "./AdminMessage";
 import MessageRequest from "../../../models/MessageRequest";
+import { useTranslation } from "react-i18next";
 
 export const AdminInbox = () => {
 
     const { authState } = useOktaAuth();
+    const { t } = useTranslation();
 
     const [isLoadingInbox, setIsLoadingInbox] = useState(true);
     const [httpError, setHttpError] = useState(null);
@@ -99,7 +101,7 @@ export const AdminInbox = () => {
         <div className="mt-4">
             {inbox.length > 0 ? (
                 <>
-                    <h4 className="mb-4 text-dark fw-bold border-bottom pb-2">📩 Pending Questions</h4>
+                    <h4 className="mb-4 text-dark fw-bold border-bottom pb-2">📩 {t("adminInbox.pendingQuestions")}</h4>
 
                     <div className="d-flex flex-column gap-4">
                         {inbox.map((message) => (
@@ -109,7 +111,7 @@ export const AdminInbox = () => {
                 </>
             ) : (
                 <div className="alert alert-secondary text-center" role="alert">
-                    <h5>No pending questions at the moment.</h5>
+                    <h5>{t("adminInbox.noPendingQuestions")}</h5>
                 </div>
             )}
 

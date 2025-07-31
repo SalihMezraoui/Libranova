@@ -1,0 +1,211 @@
+{
+    "payment": {
+        "success_toast": "Payment completed successfully!",
+        "card_details": "Enter Credit Card Details",
+        "submit_payment": "Submit Payment",
+        "no_payment": "No Payment Pending 🎉",
+        "pending_payment": "Pending Payment",
+        "go_to_library": "Go to Library"
+    },
+    "reserve": "Reserve",
+    "browseBooks": {
+        "title": "Discover your next reading adventure",
+        "subtitle": "What would you like to read next?",
+        "button": "Browse books now"
+    },
+    "carousel": {
+        "title": "Dive into stories that make you forget time.",
+        "prev": "Previous",
+        "next": "Next",
+        "more": "Show more"
+    },
+    "librarySupport": {
+        "title": "Missing a specific book?",
+        "subtitle": "If you can’t find what you’re looking for, feel free to contact our admins personally.",
+        "button": {
+            "authenticated": "Library Services",
+            "unauthenticated": "Register"
+        }
+    },
+    "header": {
+        "home": "Home",
+        "searchBooks": "Search Books",
+        "libraryActivity": "Library Activity",
+        "overdueCharges": "Overdue Charges",
+        "admin": "Admin",
+        "login": "Login",
+        "logout": "Logout"
+    },
+    "footer": {
+        "home": "Home",
+        "searchBooks": "Search Books"
+    },
+    "checkout": {
+        "checkout": "Checkout",
+        "alreadyCheckedOut": "Already Checked Out",
+        "maxReached": "You have reached the maximum number of books you can check out.",
+        "signIn": "Sign in",
+        "thankYouReview": "Thank you for your review",
+        "signInToReview": "You need to sign in to leave a review.",
+        "booksCheckedOut": "books checked out",
+        "available": "Available",
+        "notAvailable": "Not Available",
+        "copies": "copies",
+        "dynamicAvailabilityNote": "This number can change until placing the order."
+    },
+    "alerts": {
+        "checkoutError": "Pay due amounts or return books past their due date!"
+    },
+    "recentReviews": {
+        "title": "Recent Reviews",
+        "seeAll": "See all reviews",
+        "noReviews": "No reviews yet."
+    },
+    "libraryActivity": {
+        "loans": "Loans",
+        "myHistory": "My History"
+    },
+    "historyTab": {
+        "title": "My History",
+        "altBook": "Book",
+        "checkedOut": "Checked out",
+        "returnedOn": "Returned on",
+        "noHistory": "No history found.",
+        "searchBooks": "Search for Books"
+    },
+    "loanDetails": {
+        "title": "Loan Options",
+        "close": "Close",
+        "bookAlt": "Book",
+        "remainingDays": "Days remaining:",
+        "dueToday": "Due Today",
+        "overdueBy": "Overdue by:",
+        "days": "days",
+        "returnBook": "Return Book",
+        "extendLoan": "Extend by 7 days",
+        "extendDisabled": "Extension not possible"
+    },
+    "loans": {
+        "loanOptions": "Loan Options",
+        "currentLoans": "Current Loans",
+        "daysRemaining": "Days remaining:",
+        "dueToday": "Due Today",
+        "overdueBy": "Overdue by: ",
+        "days": "days",
+        "manageLoan": "Manage Loan",
+        "moreBooks": "More Books",
+        "feedbackPrompt": "Help us improve our service by providing feedback on your experience with this book.",
+        "writeReview": "Write a Review",
+        "noLoansTitle": "No current loans",
+        "noLoansText": "You currently have no books checked out. Visit the",
+        "bookSearchLink": "book search"
+    },
+    "adminPanel": {
+        "title": "Library Management",
+        "addBook": "Add new book",
+        "manageBooks": "Manage Books",
+        "messages": "Messages"
+    },
+    "addBook": {
+        "successMessage": "Book added successfully!",
+        "warningMessage": "All fields are required!",
+        "header": "Add a New Book",
+        "titleLabel": "Title",
+        "titlePlaceholder": "Enter book title",
+        "authorLabel": "Author",
+        "authorPlaceholder": "Enter author's name",
+        "categoryLabel": "Category",
+        "selectCategory": "Select category",
+        "overviewLabel": "Overview",
+        "overviewPlaceholder": "Enter book overview",
+        "totalCopiesLabel": "Total Copies",
+        "totalCopiesPlaceholder": "Enter total copies",
+        "selectFile": "Choose File",
+        "noFileChosen": "No file chosen",
+        "submitButton": "Add Book",
+        "category": {
+            "frontend": "Frontend",
+            "backend": "Backend",
+            "dataScience": "Data Science",
+            "devops": "DevOps"
+        }
+    },
+    "adminInbox": {
+        "pendingQuestions": "Pending Questions",
+        "noPendingQuestions": "No pending questions at the moment."
+    },
+    "adminMessage": {
+        "case": "Case",
+        "responseLabel": "Response",
+        "warningEmptyFields": "All fields must be filled out.",
+        "responsePlaceholder": "Type your response here...",
+        "submitBtn": "Submit Response"
+    },
+    "bookCard": {
+        "author": "Author",
+        "total": "Total",
+        "available": "Available",
+        "increaseBtn": "Increase Quantity",
+        "decreaseBtn": "Decrease Quantity",
+        "remove": "Remove",
+        "deleteConfirmTitle": "Are you sure you want to delete \"{{title}}\"?",
+        "deleteWarning": "This action cannot be undone.",
+        "confirmDelete": "Yes, delete it!",
+        "cancelDelete": "Cancel",
+        "error": "Error",
+        "failedDelete": "Failed to delete book.",
+        "deletedTitle": "Deleted!",
+        "deletedSuccess": "The book has been removed.",
+        "incrementError": "Failed to increment book quantity.",
+        "decrementError": "Failed to decrement book quantity."
+    },
+    "updateBooks": {
+        "totalBooks": "Total Books",
+        "showing": "Showing {{from}}–{{to}} of {{total}} results",
+        "noBooks": "Include books before changing their quantity"
+    },
+    "messagePage": {
+        "submitQuestion": "Submit Question",
+        "receivedMessages": "Received Messages"
+    },
+    "messages": {
+        "historyTitle": "Your Message History",
+        "case": "Case",
+        "response": "Response",
+        "admin": "Admin",
+        "noResponse": "No response yet. Please be patient.",
+        "noMessages": "You have no messages yet. Please post a new message."
+    },
+    "post": {
+        "title": "Post New Message",
+        "warning": "Please fill in all fields before submitting.",
+        "success": "Your message has been successfully sent!",
+        "subject": "Subject",
+        "subjectPlaceholder": "Enter subject",
+        "inquiry": "Inquiry",
+        "inquiryPlaceholder": "Type your message...",
+        "submitBtn": "Submit Message"
+    },
+    "review_list": {
+        "title": "Reviews",
+        "pagination_text": "Showing {{from}} to {{to}} of {{total}} reviews"
+    },
+    "search_page": {
+        "search_placeholder": "Search",
+        "search_button": "Search",
+        "category": "Category",
+        "categories": {
+            "category": "Category",
+            "all": "All",
+            "fe": "Front-End",
+            "be": "Back-End",
+            "data": "Data Science",
+            "devops": "DevOps"
+        },
+        "total_results": "Total results:",
+        "showing_results": "Showing {{from}}–{{to}} of {{total}} results:",
+        "no_results_title": "No results found",
+        "no_results_desc": "Please try another keyword.",
+        "library_services": "Library Services"
+    }
+}

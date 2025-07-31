@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import Message from "../../../models/Message";
+import { useTranslation } from "react-i18next";
+
 
 export const AdminMessage: React.FC<{ message: Message, handleSubmitResponse: any }> = (props) => {
 
     const [showWarning, setShowWarning] = useState(false);
     const [showAnswer, setShowAnswer] = useState('');
+    const { t } = useTranslation();
 
     function handleSubmitResponse() {
         if (props.message.id !== null && showAnswer !== '') {
             props.handleSubmitResponse(props.message.id, showAnswer);
             setShowWarning(false);
-            }
+        }
         else {
             setShowWarning(true);
         }
@@ -20,7 +23,7 @@ export const AdminMessage: React.FC<{ message: Message, handleSubmitResponse: an
         <div className="mb-4">
             <div className="card shadow-sm p-4 rounded-4 border-0" style={{ backgroundColor: "#f9f9fb" }}>
                 <h5 className="fw text-primary">
-                    📘 Case #{props.message.id}: <span className="text-dark">{props.message.subject}</span>
+                    📘 {t("adminMessage.case")}  #{props.message.id}: <span className="text-dark">{props.message.subject}</span>
                 </h5>
                 <p className="text-muted small mb-2"> {props.message.userEmail}</p>
                 <p className="mb-3">❓: {props.message.inquiry}</p>
@@ -28,12 +31,12 @@ export const AdminMessage: React.FC<{ message: Message, handleSubmitResponse: an
                 <hr />
 
                 <div>
-                    <h6 className="fw-semibold text-secondary mb-3">📝 Response</h6>
+                    <h6 className="fw-semibold text-secondary mb-3">📝 {t("adminMessage.responseLabel")}</h6>
 
                     <form action="PUT">
                         {showWarning && (
                             <div className="alert alert-warning py-2 px-3 rounded-3" role="alert">
-                                All fields must be filled out.
+                                {t("adminMessage.warningEmptyFields")}
                             </div>
                         )}
 
@@ -42,7 +45,7 @@ export const AdminMessage: React.FC<{ message: Message, handleSubmitResponse: an
                                 className="form-control border-primary-subtle shadow-sm"
                                 id="sampleFormControlTextarea1"
                                 rows={4}
-                                placeholder="Type your response here..."
+                                placeholder={t("adminMessage.responsePlaceholder")}
                                 onChange={e => setShowAnswer(e.target.value)}
                                 value={showAnswer}
                             />
@@ -54,7 +57,7 @@ export const AdminMessage: React.FC<{ message: Message, handleSubmitResponse: an
                                 type="button"
                                 onClick={handleSubmitResponse}
                             >
-                                Submit Response
+                                {t("adminMessage.submitBtn")}
                             </button>
                         </div>
                     </form>

@@ -1,10 +1,12 @@
 import { useOktaAuth } from "@okta/okta-react";
 import { useState } from "react";
 import Message from "../../../models/Message";
+import { useTranslation } from "react-i18next";
 
 export const PostNewMessage = () => {
 
     const { authState } = useOktaAuth();
+    const { t } = useTranslation();
     const [subject, setSubject] = useState("");
     const [inquiry, setInquiry] = useState("");
     const [showWarning, setShowWarning] = useState(false);
@@ -42,41 +44,41 @@ export const PostNewMessage = () => {
 
 
                 <div className="card-header bg-dark text-white	text-center py-3 rounded-top">
-                    <h4 className="mb-0">Post New Message</h4>
+                    <h4 className="mb-0">{t("post.title")}</h4>
                 </div>
                 <div className="card-body bg-light">
                     <form method="post">
                         {showWarning && (
                             <div className="alert alert-warning text-center" role="alert">
-                                ⚠️ Please fill in all fields before submitting.
+                                ⚠️ {t("post.warning")}
                             </div>
                         )}
                         {showSuccess && (
                             <div className="alert alert-success mb-0 rounded-top text-center" role="alert">
-                                Your message has been successfully sent!
+                                 {t("post.success")}
                             </div>
                         )}
                         <div className="mb-3">
                             <label htmlFor="sampleInputSubject1" className="form-label fw-bold fs-5 text-dark">
-                                Subject
+                                 {t("post.subject")}
                             </label>
                             <input
                                 type="text"
                                 className="form-control form-control-lg"
                                 id="sampleInputSubject1"
-                                placeholder="Enter subject"
+                                placeholder={t("post.subjectPlaceholder")}
                                 onChange={(e) => setSubject(e.target.value)}
                                 value={subject} />
                         </div>
 
                         <div className="mb-3">
                             <label htmlFor="sampleInputInquiry1" className="form-label fw-bold fs-5 text-dark">
-                                Inquiry
+                                {t("post.inquiry")}
                             </label>
                             <textarea
                                 className="form-control form-control-lg"
                                 id="sampleInputInquiry1"
-                                placeholder="Type your message..."
+                                placeholder={t("post.inquiryPlaceholder")}
                                 rows={4}
                                 onChange={(e) => setInquiry(e.target.value)}
                                 value={inquiry} />
@@ -86,7 +88,7 @@ export const PostNewMessage = () => {
                                 type="button"
                                 className="btn btn-primary btn-lg mt-2 w-200"
                                 onClick={submitNewMessage}>
-                                Submit Message
+                                {t("post.submitBtn")}
                             </button>
                         </div>
                     </form>

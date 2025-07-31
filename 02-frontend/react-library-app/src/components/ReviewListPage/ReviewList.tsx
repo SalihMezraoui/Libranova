@@ -3,9 +3,11 @@ import Review from "../../models/Review";
 import { BreathingLoader } from "../Widgets/BreathingLoader";
 import { ReviewComponent } from "../Widgets/ReviewComponent";
 import { Pagination } from "../Widgets/Pagination";
+import { useTranslation } from "react-i18next";
 
 export const ReviewList = () => {
 
+    const { t } = useTranslation();
     const [reviews, setReviews] = useState<Review[]>([]);
     const [loading, setLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
@@ -80,10 +82,14 @@ export const ReviewList = () => {
     return (
         <div className="container mt-5 mb-5">
             <div d-flex justify-content-between align-items-center mb-4>
-                <h2>Reviews: ({reviews.length})</h2>
+                <h2>{t('review_list.title')} ({reviews.length})</h2>
             </div>
             <div className="text fs-5">
-                Showing {indexOfFirstReview + 1} to {lastItem} of {totalReviews} reviews
+                {t('review_list.pagination_text', {
+                    from: indexOfFirstReview + 1,
+                    to: lastItem,
+                    total: totalReviews
+                })}
             </div>
             <div className="row g-4 mt-4">
                 {reviews.map(review => (

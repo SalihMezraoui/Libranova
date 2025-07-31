@@ -3,9 +3,11 @@ import Book from "../../../models/Book";
 import { BreathingLoader } from "../../Widgets/BreathingLoader";
 import { Pagination } from "../../Widgets/Pagination";
 import { UpdateBookQuantity } from "./UpdateBookQuantity";
+import { useTranslation } from "react-i18next";
 
 export const UpdateBooksQuantity = () => {
 
+    const { t } = useTranslation();
     const [bookItems, setBookItems] = useState<Book[]>([]);
     const [loading, setLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
@@ -83,11 +85,15 @@ export const UpdateBooksQuantity = () => {
                 <>
                     <div className="mb-4">
                         <h3 className="fw-bold text-dark">
-                            Total Books: {totalBooks}
+                             {t("updateBooks.totalBooks")}: {totalBooks}
                         </h3>
 
                         <p className="lead text-muted mb-0">
-                            Showing {firstBookIndex + 1}–{lastItem} of {totalBooks} results
+                            {t("updateBooks.showing", {
+                                from: firstBookIndex + 1,
+                                to: lastItem,
+                                total: totalBooks
+                            })}
                         </p>
                     </div>
 
@@ -101,7 +107,7 @@ export const UpdateBooksQuantity = () => {
                 </>
             ) : (
                 <div className="text-center my-5">
-                    <h5 className="text-muted">Include books before changing their quantity</h5>
+                    <h5 className="text-muted">{t("updateBooks.noBooks")}</h5>
                 </div>
             )}
             {pageCount > 1 && (

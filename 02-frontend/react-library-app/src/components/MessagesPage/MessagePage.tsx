@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { PostNewMessage } from "./Layouts/PostNewMessage";
 import { Messages } from "./Layouts/Messages";
+import { useTranslation } from "react-i18next";
+
 
 export const MessagePage = () => {
 
     const [messagesToggled, setMessagesToggled] = useState(false);
+    const { t } = useTranslation();
 
     return (
         <div className="container mt-5">
@@ -13,21 +16,21 @@ export const MessagePage = () => {
                     <div className="nav nav-tabs justify-content-center gap-3 pb-3" id="nav-tab" role="tablist">
                         <button onClick={() => setMessagesToggled(false)}
                             className={`nav-link rounded-pill fw-semibold ${!messagesToggled
-                                    ? 'active bg-success text-white fw-bold shadow-sm'
-                                    : 'text-success bg-white border border-success'
+                                ? 'active bg-success text-white fw-bold shadow-sm'
+                                : 'text-success bg-white border border-success'
                                 }`}
-                            id="nav-sent-messages-tab" 
+                            id="nav-sent-messages-tab"
                             type="button" role="tab" aria-controls="nav-send-message" aria-selected={!messagesToggled}>
-                            Submit Question
+                            {t("messagePage.submitQuestion")}
                         </button>
-                        <button onClick={() => setMessagesToggled(true)} 
-                        className={`nav-link rounded-pill fw-semibold ${messagesToggled
-                                    ? 'active bg-success text-white fw-bold shadow-sm'
-                                    : 'text-success bg-white border border-success'
+                        <button onClick={() => setMessagesToggled(true)}
+                            className={`nav-link rounded-pill fw-semibold ${messagesToggled
+                                ? 'active bg-success text-white fw-bold shadow-sm'
+                                : 'text-success bg-white border border-success'
                                 }`}
-                            id="nav-message-tab" 
+                            id="nav-message-tab"
                             type="button" role="tab" aria-controls="nav-message" aria-selected={messagesToggled}>
-                            Received Messages
+                            {t("messagePage.receivedMessages")}
                         </button>
                     </div>
                 </nav>

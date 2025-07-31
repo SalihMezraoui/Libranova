@@ -4,10 +4,13 @@ import History from "../../../models/History";
 import { BreathingLoader } from "../../Widgets/BreathingLoader";
 import { Link } from "react-router-dom";
 import { Pagination } from "../../Widgets/Pagination";
+import { useTranslation } from "react-i18next";
+
 
 export const HistoryTab = () => {
 
     const { authState } = useOktaAuth();
+    const { t } = useTranslation();
     const [isLoadingHistory, setIsLoadingHistory] = useState(true);
     const [httpError, setHttpError] = useState(null);
 
@@ -67,7 +70,7 @@ export const HistoryTab = () => {
         <div className="container py-4">
             {history.length > 0 ? (
                 <>
-                    <h3 className="mb-4 fw-semibold text-secondary">My History</h3>
+                    <h3 className="mb-4 fw-semibold text-secondary">{t("historyTab.title")}</h3>
 
                     {history.map((historyItem) => (
                         <div key={historyItem.id} className="mb-4">
@@ -100,10 +103,10 @@ export const HistoryTab = () => {
                                     <div className="col-md-4">
                                         <div className="bg-light-subtle border-start border-3 border-primary ps-3 ms-2 rounded">
                                             <p className="mb-2 small text-primary-emphasis">
-                                                <strong>Checked out:</strong> {historyItem.checkoutDate}
+                                                <strong>{t("historyTab.checkedOut")}:</strong> {historyItem.checkoutDate}
                                             </p>
                                             <p className="mb-0 small text-success-emphasis">
-                                                <strong>Returned on:</strong> {historyItem.returnedDate}
+                                                <strong>{t("historyTab.returnedOn")}:</strong> {historyItem.returnedDate}
                                             </p>
                                         </div>
                                     </div>
@@ -115,12 +118,12 @@ export const HistoryTab = () => {
                 </>
             ) : (
                 <div className="text-center mt-5">
-                    <h4 className="text-muted">No history found.</h4>
+                    <h4 className="text-muted">{t("historyTab.noHistory")}</h4>
                     <Link
                         className="btn main-color text-white mt-3 px-4 py-2 rounded-pill shadow-sm"
                         to={'search'}
                     >
-                        Search for Books
+                        {t("historyTab.searchBooks")}
                     </Link>
                 </div>
             )}

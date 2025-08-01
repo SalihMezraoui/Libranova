@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 export const Pagination: React.FC<{
     currentPage: number,
     totalPages: number,
@@ -5,6 +7,7 @@ export const Pagination: React.FC<{
 }> = (props) => {
 
     const visiblePages = [];
+    const { t } = useTranslation();
 
     if (props.currentPage === 1) {
         visiblePages.push(props.currentPage);
@@ -39,8 +42,9 @@ export const Pagination: React.FC<{
                     <button
                         className="btn btn-md main-color text-white rounded-pill px-3 invert-hover"
                         onClick={() => props.paginate(1)}
+                        disabled={props.currentPage === 1}
                     >
-                        ⏮ Erste 
+                        {t("pagination.first")}
                     </button>
                 </li>
 
@@ -61,8 +65,9 @@ export const Pagination: React.FC<{
                     <button
                         className="btn btn-md main-color text-white rounded-pill px-3 invert-hover"
                         onClick={() => props.paginate(props.totalPages)}
+                        disabled={props.currentPage === props.totalPages}
                     >
-                        Letzte ⏭
+                       {t("pagination.last")}
                     </button>
                 </li>
             </ul>

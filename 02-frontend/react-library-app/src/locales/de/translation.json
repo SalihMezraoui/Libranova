@@ -100,7 +100,8 @@
         "noLoansText": "Sie haben derzeit keine Bücher ausgeliehen. Besuchen Sie die",
         "important": "⚠ Wichtig",
         "deletedBookMessage": "Dieses Buch wurde aus unserem System entfernt. Eine Verlängerung der Ausleihe ist nicht mehr möglich. Sobald Sie das Buch zurückgeben, wird es nicht mehr in unserer Suche erscheinen.",
-        "close": "Schließen","bookSearchLink": "Buchsuche"
+        "close": "Schließen",
+        "bookSearchLink": "Buchsuche"
     },
     "adminPanel": {
         "title": "Bibliotheksverwaltung",
@@ -210,5 +211,17 @@
         "no_results_title": "Keine Ergebnisse gefunden",
         "no_results_desc": "Bitte versuchen Sie es mit einem anderen Suchbegriff.",
         "library_services": "Bibliotheksdienste"
+    },
+    "pagination": {
+        "first": "Erste",
+        "last": "Letzte"
+    },
+    "post_review": {
+        "title": "Eine Bewertung schreiben",
+        "label": "Bewertungstext",
+        "placeholder": "Teile deine Meinung über das Buch (optional)",
+        "submit_button": "Bewertung absenden",
+        "star_option": "{{count}} Stern",
+        "star_option_plural": "{{count}} Sterne"
     }
 }

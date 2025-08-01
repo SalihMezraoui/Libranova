@@ -98,7 +98,9 @@
         "writeReview": "Rezension schreiben",
         "noLoansTitle": "Keine aktuellen Ausleihen",
         "noLoansText": "Sie haben derzeit keine Bücher ausgeliehen. Besuchen Sie die",
-        "bookSearchLink": "Buchsuche"
+        "important": "⚠ Wichtig",
+        "deletedBookMessage": "Dieses Buch wurde aus unserem System entfernt. Eine Verlängerung der Ausleihe ist nicht mehr möglich. Sobald Sie das Buch zurückgeben, wird es nicht mehr in unserer Suche erscheinen.",
+        "close": "Schließen","bookSearchLink": "Buchsuche"
     },
     "adminPanel": {
         "title": "Bibliotheksverwaltung",
@@ -194,6 +196,7 @@
         "search_placeholder": "Suchen",
         "search_button": "Suchen",
         "category": "Kategorie",
+        "viewDetails": "Details anzeigen",
         "categories": {
             "category": "Kategorie",
             "all": "Alle",

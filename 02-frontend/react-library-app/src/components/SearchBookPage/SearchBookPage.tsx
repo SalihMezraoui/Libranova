@@ -21,18 +21,14 @@ export const SearchBookPage = () => {
 
     useEffect(() => {
         const fetchBooks = async () => {
-            const start = performance.now(); // ⏱ START
+            const start = performance.now();
 
-            const apiUrl: string = `${process.env.REACT_APP_API_URL}/books`;
-
-            let url: string = `${apiUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
+            let url: string;
 
             if (searchUrl === '') {
-                url = `${apiUrl}?page=${currentPage - 1}&size=${booksPerPage}`;
-            }
-            else {
-                let searchAndPage = searchUrl.replace('<pageNumber>', `${currentPage - 1}`);
-                url = apiUrl + searchAndPage;
+                url = `${process.env.REACT_APP_API_URL}/books/search/findByDeletedFalse?page=${currentPage - 1}&size=${booksPerPage}`;
+            } else {
+                url = `${process.env.REACT_APP_API_URL}/books${searchUrl.replace('<pageNumber>', `${currentPage - 1}`)}`;
             }
 
             const response = await fetch(url);
@@ -41,15 +37,12 @@ export const SearchBookPage = () => {
             }
 
             const jsonResponse = await response.json();
-
             const responseData = jsonResponse._embedded.books;
 
             setTotalBooks(jsonResponse.page.totalElements);
             setTotalPages(jsonResponse.page.totalPages);
 
-
             const loadedBooks: Book[] = [];
-
             for (const key in responseData) {
                 loadedBooks.push({
                     id: responseData[key].id,
@@ -62,17 +55,18 @@ export const SearchBookPage = () => {
                     image: responseData[key].image,
                 });
             }
+
             setBooks(loadedBooks);
             setLoading(false);
-
-            const end = performance.now(); // ⏱ END
+            const end = performance.now();
             console.log(`⏱️ Reaktionszeit (Such-/Filteraktion): ${(end - start).toFixed(2)} ms`);
-
         };
+
         fetchBooks().catch((error: any) => {
             setLoading(false);
             setHttpError(error.message);
-        })
+        });
+
         window.scrollTo(0, 0);
     }, [currentPage, searchUrl]);
 
@@ -92,30 +86,57 @@ export const SearchBookPage = () => {
 
     const searchHandler = () => {
         setCurrentPage(1);
-        if (search === '') {
+
+        // BOTH title and category are active
+        if (
+            search.trim() !== '' &&
+            category !== 'Category' &&
+            category !== 'All'
+        ) {
+            setSearchUrl(`/search/findByTitleContainingIgnoreCaseAndCategoryAndDeletedFalse?title=${search}&category=${category}&page=<pageNumber>&size=${booksPerPage}`);
+        }
+        // ONLY title
+        else if (search.trim() !== '') {
+            setSearchUrl(`/search/findByTitleContainingIgnoreCaseAndDeletedFalse?title=${search}&page=<pageNumber>&size=${booksPerPage}`);
+        }
+        // ONLY category
+        else if (category !== 'Category' && category !== 'All') {
+            setSearchUrl(`/search/findByCategoryAndDeletedFalse?category=${category}&page=<pageNumber>&size=${booksPerPage}`);
+        }
+        // NEITHER
+        else {
             setSearchUrl('');
         }
-        else {
-            setSearchUrl(`/search/findByTitleContainingIgnoreCase?title=${search}&page=<pageNumber>&size=${booksPerPage}`);
-        }
-        setCategory('Category');
-    }
+    };
+
 
     const categoryHandler = (categoryInput: string) => {
         setCurrentPage(1);
+        setCategory(categoryInput);
+
+        // BOTH category + search
         if (
+            search.trim() !== '' &&
+            categoryInput !== 'Category' &&
+            categoryInput !== 'All'
+        ) {
+            setSearchUrl(`/search/findByTitleContainingIgnoreCaseAndCategoryAndDeletedFalse?title=${search}&category=${categoryInput}&page=<pageNumber>&size=${booksPerPage}`);
+        }
+        // ONLY category
+        else if (
             categoryInput.toLowerCase() === 'fe' ||
             categoryInput.toLowerCase() === 'be' ||
             categoryInput.toLowerCase() === 'data' ||
             categoryInput.toLowerCase() === 'devops'
         ) {
-            setCategory(categoryInput);
-            setSearchUrl(`/search/findByCategory?category=${categoryInput}&page=<pageNumber>&size=${booksPerPage}`);
-        } else {
-            setCategory('All');
-            setSearchUrl(`?page=<pageNumber>&size=${booksPerPage}`);
+            setSearchUrl(`/search/findByCategoryAndDeletedFalse?category=${categoryInput}&page=<pageNumber>&size=${booksPerPage}`);
         }
-    }
+        // fallback
+        else {
+            setSearchUrl('');
+        }
+    };
+
 
     const indexOfLastBook = currentPage * booksPerPage;
     const indexOfFirstBook = indexOfLastBook - booksPerPage;

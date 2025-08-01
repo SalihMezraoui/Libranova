@@ -8,10 +8,11 @@ class Book {
     copiesInStock?: number;
     category?: string;
     image?: string;
+    deleted?: boolean;
 
     constructor(id: number, title: string, author: string, overview: string, overviewDe: string,
         totalCopies: number, copiesInStock: number, category: string,
-        image: string) {
+        image: string, deleted: boolean) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -21,6 +22,7 @@ class Book {
         this.copiesInStock = copiesInStock;
         this.category = category;
         this.image = image;
+        this.deleted = deleted;
     }
 }
 

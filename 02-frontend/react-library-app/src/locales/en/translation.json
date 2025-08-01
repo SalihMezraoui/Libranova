@@ -98,6 +98,9 @@
         "writeReview": "Write a Review",
         "noLoansTitle": "No current loans",
         "noLoansText": "You currently have no books checked out. Visit the",
+        "important": "⚠ Important",
+        "deletedBookMessage": "This book has been deleted from our records. You will not be able to extend the loan. Once you return the book, it will disappear from our search listings.",
+        "close": "Close",
         "bookSearchLink": "book search"
     },
     "adminPanel": {
@@ -194,11 +197,12 @@
         "search_placeholder": "Search",
         "search_button": "Search",
         "category": "Category",
+        "viewDetails": "View Details",
         "categories": {
             "category": "Category",
             "all": "All",
-            "fe": "Front-End",
-            "be": "Back-End",
+            "fe": "Frontend",
+            "be": "Backend",
             "data": "Data Science",
             "devops": "DevOps"
         },

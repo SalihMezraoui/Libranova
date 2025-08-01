@@ -1,5 +1,6 @@
 package com.libranova.spring_boot_library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,5 +42,8 @@ public class Book
 
     @Column(name = "img")
     private String image;
+
+    @Column(name = "deleted")
+    private boolean deleted = false;
 
 }

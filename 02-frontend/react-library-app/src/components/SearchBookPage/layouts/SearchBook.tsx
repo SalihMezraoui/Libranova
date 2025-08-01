@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import Book from "../../../models/Book";
+import { useTranslation } from "react-i18next";
 
 export const SearchBook: React.FC<{ book: Book }> = (props) => {
+    const { t } = useTranslation();
+
     return (
         <div className='card mt-4 p-4 border-0 shadow-sm rounded-4 bg-white'>
             <div className='row g-0'>
@@ -57,7 +60,7 @@ export const SearchBook: React.FC<{ book: Book }> = (props) => {
                 </div>
                 <div className='col-md-4 d-flex justify-content-center align-items-center'>
                     <Link className='btn btn-md main-color rounded-pill text-white invert-hover' to={`/checkout/${props.book.id}`}>
-                        View Details
+                        {t('search_page.viewDetails')}
                     </Link>
                 </div>
             </div>

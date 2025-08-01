@@ -9,9 +9,13 @@ export const LoanDetailsModal: React.FC<{
 
         const { t } = useTranslation();
 
+
         const modalId = props.mobile
             ? `manageMobileLoanModal${props.userLoanSummary.book.id}`
             : `manageLoanModal${props.userLoanSummary.book.id}`;
+
+        console.log('Deleted value:', props.userLoanSummary.book.deleted);
+        
 
         return (
             <div className="modal fade" id={modalId} data-bs-backdrop="static" data-bs-keyboard="false"
@@ -78,7 +82,7 @@ export const LoanDetailsModal: React.FC<{
                                     {t("loanDetails.returnBook")}
                                 </button>
                                 <button onClick={
-                                    props.userLoanSummary.daysRemaining < 0 ?
+                                    props.userLoanSummary.daysRemaining < 0 || props.userLoanSummary.book.deleted?
                                         (event) => event.preventDefault()
                                         :
                                         () => props.extendLoan(props.userLoanSummary.book.id)
@@ -86,12 +90,12 @@ export const LoanDetailsModal: React.FC<{
                                     type="button"
                                     data-bs-dismiss="modal"
                                     className={
-                                        props.userLoanSummary.daysRemaining < 0
+                                        props.userLoanSummary.daysRemaining < 0 || props.userLoanSummary.book.deleted
                                             ? "btn btn-outline-secondary rounded-pill py-1 px-2 small disabled"
                                             : "btn btn-outline-primary rounded-pill py-1 px-2 small"
                                     }
                                 >
-                                    {props.userLoanSummary.daysRemaining < 0
+                                    {props.userLoanSummary.daysRemaining < 0 || props.userLoanSummary.book.deleted
                                         ? t("loanDetails.extendDisabled")
                                         : t("loanDetails.extendLoan")}
                                 </button>

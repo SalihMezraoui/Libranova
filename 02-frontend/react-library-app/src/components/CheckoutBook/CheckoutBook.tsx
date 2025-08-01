@@ -45,7 +45,7 @@ export const CheckoutBook = () => {
 
     useEffect(() => {
         const fetchBook = async () => {
-            const apiUrl: string = `${process.env.REACT_APP_API_URL}/books/${bookId}`;
+            const apiUrl: string = `${process.env.REACT_APP_API_URL}/books/search/findByIdAndDeletedFalse?id=${bookId}`;
 
             const response = await fetch(apiUrl);
             if (!response.ok) {

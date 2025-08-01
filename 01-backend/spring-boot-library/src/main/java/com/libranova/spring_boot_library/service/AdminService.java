@@ -64,10 +64,11 @@ public class AdminService
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new BookNotAvailableException("Book with ID " + bookId + " not found."));
 
-        bookRepository.deleteById(bookId);
+        book.setDeleted(true);
+        bookRepository.save(book);
+        //bookRepository.deleteById(bookId);
         reviewRepository.deleteAllByBookId(bookId);
-        checkoutRepository.deleteAllByBookId(bookId);
-
+        //checkoutRepository.deleteAllByBookId(bookId);
     }
 
 }

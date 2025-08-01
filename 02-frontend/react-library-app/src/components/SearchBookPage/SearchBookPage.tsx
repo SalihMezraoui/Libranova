@@ -236,7 +236,7 @@ export const SearchBookPage = () => {
                         <div className='m-5'>
                             <h5 className='fw-bold text-dark'>{t('search_page.no_results_title')}</h5>
                             <p className='text-muted'>{t('search_page.no_results_desc')}</p>
-                            <a type="button" className='btn btn-md main-color text-white rounded-pill px-3 invert-hover' href='/'>
+                            <a type="button" className='btn btn-md main-color text-white rounded-pill px-3 invert-hover' href='/messages'>
                                 {t('search_page.library_services')} </a>
                         </div>
                     }

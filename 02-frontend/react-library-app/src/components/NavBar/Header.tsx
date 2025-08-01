@@ -58,26 +58,37 @@ export const Header = () => {
                     </ul>
                     <div className="d-flex align-items-center gap-2">
 
-                        <button
-                            onClick={() => i18n.changeLanguage('en')}
-                            className="btn btn-sm btn-outline-secondary-light"
-                        >
-                            EN
-                        </button>
-                        <button
-                            onClick={() => i18n.changeLanguage('de')}
-                            className="btn btn-sm btn-outline-secondary-light"
-                        >
-                            DE
-                        </button>
+                        <div className="dropdown me-2">
+                            <button
+                                className="btn btn-outline-light dropdown-toggle"
+                                type="button"
+                                id="languageDropdown"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                🌐 {i18n.language === 'de' ? '🇩🇪' : '🇬🇧'}
+                            </button>
+                            <ul className="dropdown-menu" aria-labelledby="languageDropdown">
+                                <li>
+                                    <button className="dropdown-item" onClick={() => i18n.changeLanguage('en')}>
+                                        🇬🇧 English
+                                    </button>
+                                </li>
+                                <li>
+                                    <button className="dropdown-item" onClick={() => i18n.changeLanguage('de')}>
+                                        🇩🇪 Deutsch
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
 
                         {!authState.isAuthenticated ? (
                             <Link type="button" className="btn btn-auth rounded-pill px-4 ms-2" to="/login">
-                                {t("header.login")}
+                               👤 {t("header.login")}
                             </Link>
                         ) : (
                             <button className="btn btn-auth rounded-pill px-4 ms-2" onClick={manageLogout}>
-                                {t("header.logout")}
+                               👤 {t("header.logout")}
                             </button>
                         )}
                     </div>

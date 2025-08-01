@@ -211,5 +211,17 @@
         "no_results_title": "No results found",
         "no_results_desc": "Please try another keyword.",
         "library_services": "Library Services"
+    },
+    "pagination": {
+        "first": "First",
+        "last": "Last"
+    },
+    "post_review": {
+        "title": "Post a Review",
+        "label": "Review Description",
+        "placeholder": "Share your thoughts about the book (optional)",
+        "submit_button": "Submit review",
+        "star_option": "{{count}} star",
+        "star_option_plural": "{{count}} stars"
     }
 }

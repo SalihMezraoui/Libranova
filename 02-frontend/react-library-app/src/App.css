@@ -252,3 +252,17 @@ strong {
     transition: all 0.3s ease;
 }
 
+.modal.show {
+  display: block !important;
+  opacity: 1;
+  z-index: 1050;
+}
+
+.modal-backdrop.show {
+  opacity: 0.5;
+}
+
+
+
+
+

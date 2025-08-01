@@ -16,7 +16,7 @@ export const Carousel = () => {
 
     useEffect(() => {
         const fetchBooks = async () => {
-            const apiUrl: string = `${process.env.REACT_APP_API_URL}/books`;
+            const apiUrl: string = `${process.env.REACT_APP_API_URL}/books/search/findByDeletedFalse`;
 
             const url: string = `${apiUrl}?page=0&size=9`;
 

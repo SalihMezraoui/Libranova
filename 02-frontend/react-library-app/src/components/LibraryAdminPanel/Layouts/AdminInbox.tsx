@@ -3,31 +3,37 @@ import { useEffect, useState } from "react";
 import Message from "../../../models/Message";
 import { BreathingLoader } from "../../Widgets/BreathingLoader";
 import { Pagination } from "../../Widgets/Pagination";
-import { AdminMessage } from "./AdminMessage";
+import { AdminMessages } from "./AdminMessages";
 import MessageRequest from "../../../models/MessageRequest";
 import { useTranslation } from "react-i18next";
 
 export const AdminInbox = () => {
 
+    // Auth & Translation hooks
     const { authState } = useOktaAuth();
     const { t } = useTranslation();
 
+    // Loading & error states
     const [isLoadingInbox, setIsLoadingInbox] = useState(true);
     const [httpError, setHttpError] = useState(null);
 
+    // Data states
     const [inbox, setInbox] = useState<Message[]>([]);
-    const [questionsPerPage, setQuestionsPerPage] = useState(5);
 
-    const [currentPage, setCurrentPage] = useState(1);
+    // Pagination states
+
+    const [questionsPerPage, setQuestionsPerPage] = useState(5);
+    const [actualPage, setActualPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
+    // Button state to trigger re-fetching of inbox
     const [buttonSubmit, setButtonSubmit] = useState(false);
 
 
     useEffect(() => {
         const fetchInbox = async () => {
             if (authState && authState.isAuthenticated) {
-                const apiUrl = `${process.env.REACT_APP_API_URL}/messages/search/findByClosed?closed=false&page=${currentPage - 1}&size=${questionsPerPage}`;
+                const apiUrl = `${process.env.REACT_APP_API_URL}/messages/search/findByAnswered?answered=false&page=${actualPage - 1}&size=${questionsPerPage}`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
@@ -38,7 +44,7 @@ export const AdminInbox = () => {
                 };
                 const response = await fetch(apiUrl, requestOptions);
                 if (!response.ok) {
-                    throw new Error("Something went wrong!");
+                    throw new Error("Something went wrong while fetching the messages!");
                 }
                 const data = await response.json();
 
@@ -52,7 +58,7 @@ export const AdminInbox = () => {
             setHttpError(error.message || "Something went wrong!");
         })
         window.scrollTo(0, 0);
-    }, [authState, currentPage, buttonSubmit]);
+    }, [authState, actualPage, buttonSubmit]);
 
     if (isLoadingInbox) {
         return <BreathingLoader />;
@@ -68,7 +74,7 @@ export const AdminInbox = () => {
             return;
         }
 
-        const apiUrl = '${process.env.REACT_APP_API_URL}/messages/secure/admin/message';
+        const apiUrl = `${process.env.REACT_APP_API_URL}/messages/secure/admin/answer/message`;
 
         const messageRequestModel: MessageRequest = new MessageRequest(id, responseText);
         const requestOptions = {
@@ -94,7 +100,7 @@ export const AdminInbox = () => {
 
 
     const paginate = (pageNumber: number) => {
-        setCurrentPage(pageNumber);
+        setActualPage(pageNumber);
     };
 
     return (
@@ -105,7 +111,7 @@ export const AdminInbox = () => {
 
                     <div className="d-flex flex-column gap-4">
                         {inbox.map((message) => (
-                            <AdminMessage message={message} key={message.id} handleSubmitResponse={handleSubmitResponse} />
+                            <AdminMessages message={message} key={message.id} handleSubmitResponse={handleSubmitResponse} />
                         ))}
                     </div>
                 </>
@@ -118,7 +124,7 @@ export const AdminInbox = () => {
             {totalPages > 1 && (
                 <div className="mt-4 d-flex justify-content-center">
                     <Pagination
-                        currentPage={currentPage}
+                        currentPage={actualPage}
                         totalPages={totalPages}
                         paginate={paginate}
                     />

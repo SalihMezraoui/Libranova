@@ -1,7 +1,6 @@
 package com.libranova.spring_boot_library.service;
 
 import com.libranova.spring_boot_library.Repository.BookRepository;
-import com.libranova.spring_boot_library.Repository.CheckoutRepository;
 import com.libranova.spring_boot_library.Repository.ReviewRepository;
 import com.libranova.spring_boot_library.dto.request.AddBook;
 import com.libranova.spring_boot_library.exception.BookNotAvailableException;
@@ -21,8 +20,6 @@ public class AdminService
 
     private final ReviewRepository reviewRepository;
 
-    private final CheckoutRepository checkoutRepository;
-
     public void addNewBook(AddBook addBook) {
         Book book = Book.builder()
                 .title(addBook.getTitle())
@@ -38,25 +35,29 @@ public class AdminService
     }
 
     public void incrementBookCopies(Long bookId) {
-        Book book = bookRepository.findById(bookId)
+        var book = bookRepository.findById(bookId)
+                .map(b -> {
+                    b.setCopiesInStock(b.getCopiesInStock() + 1);
+                    b.setTotalCopies(b.getTotalCopies() + 1);
+                    return b;
+                })
                 .orElseThrow(() -> new BookNotAvailableException("Book with ID " + bookId + " not found."));
-
-        book.setCopiesInStock(book.getCopiesInStock() + 1);
-        book.setTotalCopies(book.getTotalCopies() + 1);
 
         bookRepository.save(book);
     }
 
     public void decrementBookCopies(Long bookId) {
-        Book book = bookRepository.findById(bookId)
+        var book = bookRepository.findById(bookId)
+                .map(b -> {
+                    if (b.getCopiesInStock() <= 0 || b.getTotalCopies() <= 0) {
+                        throw new BookNotAvailableException("No copies available for book with ID " + bookId);
+                    }
+                    b.setCopiesInStock(b.getCopiesInStock() - 1);
+                    b.setTotalCopies(b.getTotalCopies() - 1);
+                    return b;
+                })
                 .orElseThrow(() -> new BookNotAvailableException("Book with ID " + bookId + " not found."));
 
-        if (book.getCopiesInStock() <= 0 || book.getTotalCopies() <= 0) {
-            throw new BookNotAvailableException("No copies available for book with ID " + bookId);
-        }
-
-        book.setCopiesInStock(book.getCopiesInStock() - 1);
-        book.setTotalCopies(book.getTotalCopies() - 1);
         bookRepository.save(book);
     }
 
@@ -66,9 +67,7 @@ public class AdminService
 
         book.setDeleted(true);
         bookRepository.save(book);
-        //bookRepository.deleteById(bookId);
-        reviewRepository.deleteAllByBookId(bookId);
-        //checkoutRepository.deleteAllByBookId(bookId);
+        reviewRepository.removeReviewsByBookId(bookId);
     }
 
 }

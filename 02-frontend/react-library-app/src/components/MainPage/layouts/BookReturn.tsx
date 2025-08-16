@@ -3,35 +3,42 @@ import Book from '../../../models/Book';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-
 export const BookReturn: React.FC<{ book: Book }> = (props) => {
+  const { t } = useTranslation();
+  const bookLink = `/checkout/${props.book.id}`;
 
-    const { t } = useTranslation();
   return (
-    <div className='col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-3'>
-      <div className='text-center'>
-        {props.book.image ?
-          <img
-            src={props.book.image}
-            width='200'
-            height='230'
-            alt={"book"}
-            className=' rounded shadow-sm hover-scale'
-          />
-          :
-          <img
-            src={require(`../../../Images/Books/book-1.png`)}
-            width='180'
-            height='270'
-            alt={"book"}
-            className='img-fluid rounded shadow-sm hover-scale'
-          />}
+    <div className="col-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div className="text-center">
+        <Link to={bookLink} className="book-image-container mb-2 d-block">
+          {props.book.image ? (
+            <img
+              src={props.book.image}
+              alt={props.book.title}
+              className=""
+            />
+          ) : (
+            <img
+              src={require(`../../../Images/Books/book-1.png`)}
+              alt="default book"
+              className=""
+            />
+          )}
+        </Link>
 
-        <h6 className='mt-2'>{props.book.title}</h6>
-        <p>{props.book.author}</p>
-        <Link className='btn main-color text-white hover-scale' to={`checkout/${props.book.id}`}>{t('reserve')}</Link>
+        <h6 className="mt-2">
+          <Link to={bookLink} className="title-hover-effect fw-semibold">
+            {props.book.title}
+          </Link>
+        </h6>
+
+
+        <p className="text-muted">{props.book.author}</p>
+
+        <Link to={bookLink} className="btn main-color text-white mt-2 hover-scale">
+          {t('reserve')}
+        </Link>
       </div>
     </div>
   );
 };
-

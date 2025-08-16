@@ -18,13 +18,29 @@ export const Header = () => {
 
     const manageLogout = async () => oktaAuth.signOut();
 
+    let username =
+        authState.accessToken?.claims?.given_name ||
+        authState.accessToken?.claims?.preferred_username ||
+        authState.accessToken?.claims?.sub ||
+        'User';
 
+    // If it's an email, grab only the part before '@'
+    if (username.includes('@')) {
+        username = username.split('@')[0];
+    }
     console.log('authState', authState);
 
     return (
         <nav className='navbar navbar-expand-lg navbar-dark main-color py-3'>
             <div className='container-fluid'>
-                <span className='navbar-brand fw-bold fs-4'>Libranova</span>
+                <NavLink to="/" className="navbar-brand d-flex align-items-center">
+                    <img
+                        src="/Libranova-logo.png"
+                        alt="Libranova Logo"
+                        height="42"
+                        className="me-2"
+                    />
+                </NavLink>
                 <button className='navbar-toggler' type='button'
                     data-bs-toggle='collapse' data-bs-target='#navbarContent'
                     aria-controls='navbarContent' aria-expanded='false'
@@ -38,25 +54,38 @@ export const Header = () => {
                             <NavLink className='nav-link hover-underline' to='/home'> {t("header.home")}</NavLink>
                         </li>
                         <li className='nav-item'>
+                            <NavLink className='nav-link hover-underline' to='/aboutUs'> {t("header.aboutUs")}</NavLink>
+                        </li>
+                        <li className='nav-item'>
                             <NavLink className='nav-link hover-underline' to='/search'> {t("header.searchBooks")}</NavLink>
                         </li>
-                        {authState.isAuthenticated &&
-                            <li className='nav-item'>
-                                <NavLink className='nav-link hover-underline' to='/libraryActivity'> {t("header.libraryActivity")}</NavLink>
-                            </li>
-                        }
-                        {authState.isAuthenticated &&
-                            <li className='nav-item'>
-                                <NavLink className='nav-link hover-underline' to='/charges'> {t("header.overdueCharges")}</NavLink>
-                            </li>
-                        }
-                        {authState.isAuthenticated && authState.accessToken?.claims?.userType === 'admin' &&
+                        {authState.isAuthenticated && authState.accessToken?.claims?.userType === 'admin' && (
                             <li className='nav-item'>
                                 <NavLink className='nav-link hover-underline' to='/admin'> {t("header.admin")}</NavLink>
                             </li>
-                        }
+                        )}
+                        {authState.isAuthenticated && authState.accessToken?.claims?.userType !== 'admin' && (
+                            <>
+                                <li className='nav-item'>
+                                    <NavLink className='nav-link hover-underline' to='/libraryActivity'> {t("header.libraryActivity")}</NavLink>
+                                </li>
+                                <li className='nav-item'>
+                                    <NavLink className='nav-link hover-underline' to='/messages'> {t("header.messages")}</NavLink>
+                                </li>
+                                <li className='nav-item'>
+                                    <NavLink className='nav-link hover-underline' to='/charges'> {t("header.overdueCharges")}</NavLink>
+                                </li>
+                            </>
+                        )}
                     </ul>
                     <div className="d-flex align-items-center gap-2">
+                        {/* Greeting for logged-in user */}
+                        {authState.isAuthenticated && (
+                            <div className="d-flex align-items-center me-3 px-3 py-1 rounded-pill bg-dark text-light shadow-sm">
+                                <span className="me-2">👋</span>
+                                <span className="fw-semibold">{t("header.hello")}, {username}</span>
+                            </div>
+                        )}
 
                         <div className="dropdown me-2">
                             <button
@@ -65,17 +94,24 @@ export const Header = () => {
                                 id="languageDropdown"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
+                                style={{ fontSize: "1.6rem" }}
                             >
                                 🌐 {i18n.language === 'de' ? '🇩🇪' : '🇬🇧'}
                             </button>
                             <ul className="dropdown-menu" aria-labelledby="languageDropdown">
                                 <li>
-                                    <button className="dropdown-item" onClick={() => i18n.changeLanguage('en')}>
+                                    <button className="dropdown-item"
+                                        onClick={() => i18n.changeLanguage('en')}
+                                        style={{ fontSize: "1.3rem" }}
+                                    >
                                         🇬🇧 English
                                     </button>
                                 </li>
                                 <li>
-                                    <button className="dropdown-item" onClick={() => i18n.changeLanguage('de')}>
+                                    <button className="dropdown-item"
+                                        onClick={() => i18n.changeLanguage('de')}
+                                        style={{ fontSize: "1.3rem" }}
+                                    >
                                         🇩🇪 Deutsch
                                     </button>
                                 </li>
@@ -84,11 +120,12 @@ export const Header = () => {
 
                         {!authState.isAuthenticated ? (
                             <Link type="button" className="btn btn-auth rounded-pill px-4 ms-2" to="/login">
-                               👤 {t("header.login")}
+                                👤 {t("header.login")}
                             </Link>
                         ) : (
-                            <button className="btn btn-auth rounded-pill px-4 ms-2" onClick={manageLogout}>
-                               👤 {t("header.logout")}
+                            <button className="btn btn-auth rounded-pill px-4 ms-2"
+                                onClick={manageLogout}>
+                                👤 {t("header.logout")}
                             </button>
                         )}
                     </div>
@@ -96,6 +133,5 @@ export const Header = () => {
                 </div>
             </div>
         </nav>
-
     );
 }

@@ -1,0 +1,42 @@
+\chapter{Verwandte Arbeiten}
+
+In diesem Kapitel werden ausgewählte bestehende Systeme untersucht, die ähnliche Funktionen wie LibraNova bereitstellen. Ziel ist es, deren Stärken und Schwächen zu analysieren, um die Positionierung und den Mehrwert der eigenen Anwendung im Vergleich zum aktuellen Stand der Technik (\emph{State-of-the-Art}) zu verdeutlichen.
+
+
+\section{Enführung}\index{Enführung}
+
+Die Analyse bestehender Systeme ist ein zentraler Bestandteil wissenschaftlicher Arbeiten, da sie den aktuellen Stand der Technik (\emph{State-of-the-Art}) verdeutlicht. Durch den Vergleich mit etablierten Lösungen lassen sich Stärken, Schwächen und bestehende Lücken identifizieren. Auf dieser Grundlage können die eigenen Beiträge klar positioniert und die Motivation für die Entwicklung eines neuen Systems nachvollziehbar begründet werden.
+
+
+\section{Existierende Systeme}\index{Existierende Systeme}
+
+Dieser Abschnitt untersucht ausgewählte bestehende Systeme, die ähnliche Funktionen wie LibraNova bieten. Ziel ist es, deren Merkmale, Stärken und Schwächen darzustellen und aufzuzeigen, wie sich die eigene Anwendung im Vergleich zum aktuellen Stand der Technik (\emph{State-of-the-Art}) positioniert.
+
+\subsection{Thalia Website}\index{Thalia Website}
+
+\textbf{Beschreibung:} \href{https://www.thalia.de/}{Thalia} ist ein führender Buchhändler im deutschsprachigen Raum mit einem stetig wachsenden Netz aus derzeit über 500 Filialen in Deutschland, Österreich und der Schweiz. Neben dem stationären Handel betreibt Thalia einen umfangreichen Online-Shop und baut seine Präsenz im E-Commerce kontinuierlich aus \cite{thaliaUnternehmen2025a}.
+
+\noindent \textbf{Funktionen:} Neben dem Online-Shop bietet Thalia mit der \emph{Lesen} \& \emph{Hören} App eine mobile Lösung zum Lesen und Hören von eBooks und Hörbüchern. Nutzer können ihre Titel in der tolino-Cloud speichern, offline lesen, Lesefortschritte automatisch synchronisieren sowie Schriftart, -größe und Layout individuell anpassen. Zusätzliche Funktionen wie Sammlungen und ein Nachtmodus erhöhen den Lesekomfort\cite{thaliaUnternehmen2025b}.
+
+
+\noindent \textbf{Sprachverfügbarkeit:} Obwohl Thalia ein breites Sortiment an Büchern in verschiedenen Sprachen (z.\,B. Englisch, Französisch, Spanisch) anbietet, ist die Website-Oberfläche ausschließlich auf Deutsch verfügbar. Auch manche Buchbeschreibungen sind nur auf Deutsch verfügbar, was die Navigation und Informationsbeschaffung für nicht-deutschsprachige Nutzer zusätzlich erschwert und die allgemeine Nutzerfreundlichkeit beim Online-Browsing reduziert \cite{thaliaUnternehmen2025c}.
+
+\subsection{Stadtbücherei Trier}\index{Stadtbücherei Trier}
+
+\textbf{Überblick:} Die Stadtbücherei Trier stellt mehr als 90.000 Medien zur Verfügung, einschließlich Bücher, Hörbücher, Musik-CDs sowie Computer- und Konsolenspiele, die sowohl vor Ort genutzt als auch ausgeliehen werden können. Auf fünf lichtdurchfluteten Etagen stehen Sitz- und Lernbereiche, PC-Arbeitsplätze, Drucker und ausleihbare Laptops zur Verfügung. Informationen zum Medienangebot sind über den Onlinekatalog verfügbar (\url{https://opac.trier.de/}) \cite{stadtbuechereiTrier2025}.
+
+\noindent \textbf{OPAC-System:} Das OPAC-System der Stadtbücherei Trier ist keine Single-Page Application (SPA). Eine Analyse mit den Browser-Entwicklertools zeigt, dass bei jeder Navigation innerhalb des OPAC – selbst beim Anwenden einfacher Filter wie der Suche nach Medien eines bestimmten Jahres – die gesamte HTML-Seite vollständig neu geladen wird, anstatt Inhalte dynamisch nachzuladen, wie es bei einer echten SPA der Fall wäre. Auch die Hauptwebsite (\url{https://www.stadtbuecherei-trier.de/startseite/}) ist nicht vollständig responsiv, was die Nutzerfreundlichkeit insbesondere auf mobilen Geräten einschränkt.
+
+\section{Beitrag von LibraNova}\index{Beitrag von LibraNova}
+
+LibraNova adressiert die identifizierten Schwächen bestehender Systeme auf mehreren Ebenen:  
+
+\begin{itemize}
+	\item \textbf{Bilinguale Verfügbarkeit:} Die Anwendung ist vollständig auf Deutsch und Englisch verfügbar, was die Nutzerbasis deutlich erweitert und die Zugänglichkeit für internationale oder nicht-deutschsprachige Nutzer verbessert.
+	\item \textbf{Single-Page Application (SPA):} Dank der Verwendung von React als Frontend-Framework verhält sich LibraNova als SPA. Inhalte werden dynamisch nachgeladen, wodurch bei Navigation und Filteranwendung kein vollständiger Seiten-Reload  erfolgt \cite{SPRINGBOOTREACT2025}. Dies erhöht die Effizienz und verbessert die Nutzererfahrung. 
+	\item \textbf{Responsives Design:} Die gesamte Anwendung ist vollständig responsiv gestaltet, wodurch alle Funktionen auf Desktop-, Tablet- und Mobilgeräten optimal genutzt werden können.
+\end{itemize}
+
+\section{Fazit}\index{Fazit}
+
+Die Analyse bestehender Systeme zeigt, dass Thalia und die Stadtbücherei Trier jeweils Stärken besitzen, jedoch auch wesentliche Einschränkungen aufweisen. So ist beispielsweise Thalia ausschließlich auf Deutsch verfügbar, während das OPAC-System der Stadtbücherei Trier keine Single-Page Application ist und die Hauptwebsite nicht vollständig responsiv ist. LibraNova positioniert sich im State-of-the-Art, indem es diese Schwächen adressiert: Die Anwendung ist vollständig bilingual (Deutsch und Englisch), vollständig responsiv und als SPA umgesetzt, sodass Inhalte dynamisch nachgeladen werden. Auf diese Weise werden bekannte Konzepte bestehender Plattformen übernommen, jedoch entscheidend verbessert, was die Notwendigkeit und den Mehrwert der eigenen Entwicklung von LibraNova verdeutlicht.

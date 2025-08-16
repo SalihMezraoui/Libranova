@@ -17,6 +17,11 @@ public class ReviewService
 {
     private final ReviewRepository reviewRepository;
 
+    public boolean hasReviewed(String userEmail, Long bookId)
+    {
+        return reviewRepository.findReviewByUserEmailAndBookId(userEmail, bookId) != null;
+    }
+
     public void addReview(String userEmail, ReviewRequest request) {
         boolean alreadyReviewed = hasReviewed(userEmail, request.getBookId());
         if (alreadyReviewed) {
@@ -25,18 +30,12 @@ public class ReviewService
 
         Review review = Review.builder()
                 .bookId(request.getBookId())
-                .rating(request.getRating())
+                .ratingValue(request.getRatingValue())
                 .userEmail(userEmail)
-                .reviewDescription(request.getReviewDescription())
-                .date(Date.valueOf(LocalDate.now()))
+                .comment(request.getComment())
+                .createdAt(Date.valueOf(LocalDate.now()))
                 .build();
 
         reviewRepository.save(review);
     }
-
-    public boolean hasReviewed(String userEmail, Long bookId)
-    {
-        return reviewRepository.findByUserEmailAndBookId(userEmail, bookId) != null;
-    }
-
 }

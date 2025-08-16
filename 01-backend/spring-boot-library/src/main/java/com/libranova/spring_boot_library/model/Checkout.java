@@ -8,6 +8,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Checkout
 {
     @Id
@@ -17,19 +18,15 @@ public class Checkout
     @Column(name = "user_email")
     private String userEmail;
 
-    @Column(name = "checkout_date")
-    private String checkoutDate;
+    @Column(name = "renewal_count")
+    private Integer renewalCount;
 
-    @Column(name = "return_date")
-    private String returnDate;
+    @Column(name = "checkout_at")
+    private String checkoutAt;
+
+    @Column(name = "returned_at")
+    private String returnedAt;
 
     @Column(name = "book_id")
     private Long bookId;
-
-    public Checkout(String userEmail, String checkoutDate, String returnDate, Long bookId) {
-        this.userEmail = userEmail;
-        this.checkoutDate = checkoutDate;
-        this.returnDate = returnDate;
-        this.bookId = bookId;
-    }
 }

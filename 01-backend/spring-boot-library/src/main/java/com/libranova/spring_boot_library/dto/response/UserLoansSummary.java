@@ -13,5 +13,4 @@ public class UserLoansSummary
     private Book book;
 
     private int daysRemaining;
-
 }

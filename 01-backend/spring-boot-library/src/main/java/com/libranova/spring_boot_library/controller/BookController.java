@@ -10,30 +10,25 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.List;
 
-@CrossOrigin("https://localhost:3000")
 @RestController
 @RequestMapping("/api/books")
+@CrossOrigin(origins = "${frontend.url}", allowCredentials = "true")
 @RequiredArgsConstructor
 public class BookController
 {
     private final BookService bookService;
 
-    @GetMapping("/secure/currentloans")
+    // --- READ endpoints ---
+    @GetMapping("/secure/active-loans")
     public List<UserLoansSummary> getUserLoansSummary(Authentication authentication) throws Exception {
         String userEmail = authentication.getName();
+        System.out.println("[DEBUG] Fetching loans summary for user: " + userEmail);
         return bookService.getUserLoansSummary(userEmail);
     }
 
-    @GetMapping("/secure/currentloans/size")
-    public int getNumberOfLoans(Authentication authentication)
-    {
-        String userEmail = authentication.getName();
-        return bookService.getNumberOfLoans(userEmail);
-    }
-
-    @GetMapping("/secure/ischeckedout")
+    @GetMapping("/secure/loans/exists")
     public boolean checkoutBookByUserEmail(@RequestParam Long bookId, Authentication authentication) {
-        System.out.println("Received request for /secure/ischeckedout with bookId: " + bookId);
+        System.out.println("Received request for secure/loans/exists with bookId: " + bookId);
         System.out.println("Authentication: " + authentication);
         String userEmail = authentication.getName();
         System.out.println("User email: " + userEmail);
@@ -42,26 +37,38 @@ public class BookController
         return result;
     }
 
-    @PutMapping("/secure/checkout")
+    @GetMapping("/secure/active-loans/size")
+    public int getNumberOfLoans(Authentication authentication)
+    {
+        String userEmail = authentication.getName();
+        System.out.println("[DEBUG] Fetching number of loans for user: " + userEmail);
+        return bookService.getNumberOfLoans(userEmail);
+    }
+
+    // --- WRITE endpoints ---
+    @PutMapping("/secure/loans/checkout")
     public Book checkoutBook(Authentication authentication,
                              @RequestParam Long bookId) throws Exception
     {
         String userEmail = authentication.getName();
+        System.out.println("[checkoutBook] Extracted userEmail: " + userEmail);
         return bookService.checkoutBook(userEmail,bookId);
     }
 
-    @PutMapping("/secure/return")
+    @PutMapping("/secure/loans/return")
     public void returnBook(Authentication authentication,
                            @RequestParam Long bookId) throws ParseException {
         String userEmail = authentication.getName();
+        System.out.println("[returnBook] Extracted userEmail: " + userEmail);
         bookService.returnBook(userEmail, bookId);
     }
 
-    @PutMapping("/secure/extend/loan")
-    public void renewLoan(Authentication authentication,
+    @PutMapping("/secure/loans/extend")
+    public void extendLoan(Authentication authentication,
                           @RequestParam Long bookId) throws Exception
     {
         String userEmail = authentication.getName();
-        bookService.renewLoan(userEmail, bookId);
+        System.out.println("[extendLoan] Extracted userEmail: " + userEmail);
+        bookService.extendLoan(userEmail, bookId);
     }
 }

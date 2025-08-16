@@ -1,4 +1,3 @@
-// src/i18n.ts
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
@@ -12,13 +11,13 @@ const resources = {
 };
 
 i18n
-  .use(LanguageDetector) // detects browser language
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(LanguageDetector)  // Detektiert die Sprache des Benutzers
+  .use(initReactI18next) // Bindet i18next an React
   .init({
     resources,
-    fallbackLng: "en", // use English if detected language is not available
+    fallbackLng: "en", // verwenden Sie Englisch als Fallback-Sprache
     interpolation: {
-      escapeValue: false // React already escapes
+      escapeValue: false // React bereits vor XSS-Angriffen schützt
     }
   });
 

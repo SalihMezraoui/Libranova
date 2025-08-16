@@ -21,11 +21,14 @@ public class History
     @Column(name = "user_email")
     private String userEmail;
 
-    @Column(name = "checkout_date")
-    private String checkoutDate;
+    @Column(name = "checkout_at")
+    private String checkoutAt;
 
-    @Column(name = "returned_date")
-    private String returnedDate;
+    @Column(name = "returned_at")
+    private String returnedAt;
+
+    @Column(name = "renewal_count")
+    private Integer renewalCount;
 
     @Column(name = "title")
     private String title;
@@ -33,20 +36,9 @@ public class History
     @Column(name = "author")
     private String author;
 
-    @Column(name = "description")
+    @Column(name = "overview")
     private String overview;
 
-    @Column(name = "img")
+    @Column(name = "image")
     private String image;
-
-    public History(String userEmail, String checkoutDate, String returnedDate, String title, String author,
-                   String overview, String image) {
-        this.userEmail = userEmail;
-        this.checkoutDate = checkoutDate;
-        this.returnedDate = returnedDate;
-        this.title = title;
-        this.author = author;
-        this.overview = overview;
-        this.image = image;
-    }
 }

@@ -1,8 +1,8 @@
 class History {
     id: number;
     userEmail: string;
-    checkoutDate: string;
-    returnedDate: string;
+    checkoutAt: string;
+    returnedAt: string;
     title: string;
     author: string;
     overview: string;
@@ -11,8 +11,8 @@ class History {
     constructor(
         id: number,
         userEmail: string,
-        checkoutDate: string,
-        returnedDate: string,
+        checkoutAt: string,
+        returnedAt: string,
         title: string,
         author: string,
         overview: string,
@@ -20,8 +20,8 @@ class History {
     ) {
         this.id = id;
         this.userEmail = userEmail;
-        this.checkoutDate = checkoutDate;
-        this.returnedDate = returnedDate;
+        this.checkoutAt = checkoutAt;
+        this.returnedAt = returnedAt;
         this.title = title;
         this.author = author;
         this.overview = overview;

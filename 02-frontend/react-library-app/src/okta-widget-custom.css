@@ -1,0 +1,21 @@
+.okta-sign-in-header-logo {
+  flex-shrink: 0 !important;   /* prevent shrinking */
+  width: 350px !important;
+  height: auto !important;
+}
+
+.okta-sign-in-header-logo img {
+  width: 100% !important;      /* fill the container */
+  height: auto !important;
+  max-height: 150px !important;
+}
+
+
+.okta-sign-in-header {
+    min-height: 180px !important;
+    padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

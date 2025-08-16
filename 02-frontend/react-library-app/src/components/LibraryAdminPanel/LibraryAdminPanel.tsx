@@ -28,7 +28,7 @@ export const LibraryAdminPanel = () => {
         setMessagesSectionToggled(true);
     }
 
-    if (authState?.accessToken?.claims.userType === undefined) {
+    if (!authState?.accessToken?.claims?.userType) {
         return <Redirect to='/home' />
     }
 
@@ -39,7 +39,7 @@ export const LibraryAdminPanel = () => {
                 <nav>
                     <div
                         className="nav nav-tabs justify-content-center gap-3 pb-3"
-                        id="nav-tab"
+                        id="admin-nav-tab"
                         role="tablist"
                     >
                         <button
@@ -48,13 +48,13 @@ export const LibraryAdminPanel = () => {
                                 ? 'active bg-primary text-white fw-bold shadow-sm'
                                 : 'text-primary bg-white border border-primary'
                                 }`}
-                            id="nav-add-book-tab"
+                            id="admin-add-book-tab"
                             data-bs-toggle="tab"
-                            data-bs-target="#nav-add-book"
+                            data-bs-target="#admin-add-book"
                             type="button"
                             role="tab"
-                            aria-controls="nav-add-book"
-                            aria-selected='false'
+                            aria-controls="admin-add-book"
+                            aria-selected={!messagesSectionToggled && !updateBooksQuantity ? 'true' : 'false'}
                         >
                             {t("adminPanel.addBook")}
                         </button>
@@ -65,13 +65,13 @@ export const LibraryAdminPanel = () => {
                                 ? 'active bg-primary text-white fw-bold shadow-sm'
                                 : 'text-primary bg-white border border-primary'
                                 }`}
-                            id="nav-update-quantity-tab"
+                            id="admin-update-quantity-tab"
                             data-bs-toggle="tab"
-                            data-bs-target="#nav-update-quantity"
+                            data-bs-target="#admin-update-quantity"
                             type="button"
                             role="tab"
-                            aria-controls="nav-update-quantity"
-                            aria-selected='true'
+                            aria-controls="admin-update-quantity"
+                            aria-selected={!messagesSectionToggled && updateBooksQuantity ? 'true' : 'false'}
                         >
                             {t("adminPanel.manageBooks")}
                         </button>
@@ -82,34 +82,47 @@ export const LibraryAdminPanel = () => {
                                 ? 'active bg-primary text-white fw-bold shadow-sm'
                                 : 'text-primary bg-white border border-primary'
                                 }`}
-                            id="nav-messages-tab"
+                            id="admin-messages-tab"
                             data-bs-toggle="tab"
-                            data-bs-target="#nav-messages"
+                            data-bs-target="#admin-messages"
                             type="button"
                             role="tab"
-                            aria-controls="nav-messages"
-                            aria-selected='true'
+                            aria-controls="admin-messages"
+                            aria-selected={messagesSectionToggled && !updateBooksQuantity ? 'true' : 'false'}
                         >
                             {t("adminPanel.messages")}
                         </button>
                     </div>
                 </nav>
 
-                <div className="tab-content" id="nav-tabContent">
-                    <div className="tab-pane fade show active" id="nav-add-book" role="tabpanel"
-                        aria-labelledby="nav-add-book-tab">
+                <div className="tab-content" id="admin-nav-tabContent">
+                    <div
+                        className={`tab-pane fade ${!messagesSectionToggled && !updateBooksQuantity ? 'show active' : ''}`}
+                        id="admin-add-book"
+                        role="tabpanel"
+                        aria-labelledby="admin-add-book-tab"
+                    >
                         <AddBook />
                     </div>
-                    <div className="tab-pane fade" id="nav-update-quantity" role="tabpanel"
-                        aria-labelledby="nav-update-quantity-tab">
+                    <div
+                        className={`tab-pane fade ${!messagesSectionToggled && updateBooksQuantity ? 'show active' : ''}`}
+                        id="admin-update-quantity"
+                        role="tabpanel"
+                        aria-labelledby="admin-update-quantity-tab"
+                    >
                         {updateBooksQuantity ? <UpdateBooksQuantity /> : <></>}
                     </div>
-                    <div className="tab-pane fade" id="nav-messages" role="tabpanel"
-                        aria-labelledby="nav-messages-tab">
+                    <div
+                        className={`tab-pane fade ${messagesSectionToggled && !updateBooksQuantity ? 'show active' : ''}`}
+                        id="admin-messages"
+                        role="tabpanel"
+                        aria-labelledby="admin-messages-tab"
+                    >
                         {messagesSectionToggled ? <AdminInbox /> : <></>}
                     </div>
                 </div>
             </div>
         </div>
     );
+
 }

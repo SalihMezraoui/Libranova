@@ -7,8 +7,7 @@ import { useTranslation } from "react-i18next";
 export const LibraryActivity = () => {
 
     const [historyRefresh, setHistoryRefresh] = useState(false);
-    const { t } = useTranslation(); // ✅ Hook here
-
+    const { t } = useTranslation();
 
     return (
         <div className='container mt-5'>
@@ -33,7 +32,7 @@ export const LibraryActivity = () => {
                             aria-controls="nav-loans"
                             aria-selected={!historyRefresh}
                         >
-                            {t("libraryActivity.loans")} 
+                            {t("libraryActivity.loans")}
                         </button>
 
                         <button
@@ -55,16 +54,25 @@ export const LibraryActivity = () => {
                     </div>
                 </nav>
 
-                <div className="tab-content" id="nav-tabContent">
-                    <div className="tab-pane fade show active" id="nav-loans" role="tabpanel"
-                        aria-labelledby="nav-loans-tab">
+                <div className="tab-content p-4 bg-light rounded shadow-sm" id="nav-tabContent">
+                    <div
+                        className="tab-pane fade show active"
+                        id="nav-loans"
+                        role="tabpanel"
+                        aria-labelledby="nav-loans-tab"
+                    >
                         <Loans />
                     </div>
-                    <div className="tab-pane fade" id="nav-history" role="tabpanel"
-                        aria-labelledby="nav-history-tab">
-                        {historyRefresh ? <HistoryTab /> : <></>}
+                    <div
+                        className="tab-pane fade"
+                        id="nav-history"
+                        role="tabpanel"
+                        aria-labelledby="nav-history-tab"
+                    >
+                        {historyRefresh ? <HistoryTab /> : null}
                     </div>
                 </div>
+
             </div>
         </div>
     );

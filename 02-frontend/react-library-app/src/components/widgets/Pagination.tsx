@@ -1,77 +1,95 @@
+import React from "react";
 import { useTranslation } from "react-i18next";
 
-export const Pagination: React.FC<{
-    currentPage: number,
-    totalPages: number,
-    paginate: any
-}> = (props) => {
-
-    const visiblePages = [];
-    const { t } = useTranslation();
-
-    if (props.currentPage === 1) {
-        visiblePages.push(props.currentPage);
-        if (props.totalPages >= props.currentPage + 1) {
-            visiblePages.push(props.currentPage + 1);
-        }
-        if (props.totalPages >= props.currentPage + 2) {
-            visiblePages.push(props.currentPage + 2);
-        }
-    } else if (props.currentPage > 1) {
-        if (props.currentPage >= 3) {
-            visiblePages.push(props.currentPage - 2);
-            visiblePages.push(props.currentPage - 1);
-        } else {
-            visiblePages.push(props.currentPage - 1);
-        }
-
-        visiblePages.push(props.currentPage);
-
-        if (props.totalPages >= props.currentPage + 1) {
-            visiblePages.push(props.currentPage + 1);
-        }
-        if (props.totalPages >= props.currentPage + 2) {
-            visiblePages.push(props.currentPage + 2);
-        }
-    }
-
-    return (
-        <nav aria-label="Pagination Navigation">
-            <ul className="pagination justify-content-center gap-2">
-                <li className="page-item">
-                    <button
-                        className="btn btn-md main-color text-white rounded-pill px-3 invert-hover"
-                        onClick={() => props.paginate(1)}
-                        disabled={props.currentPage === 1}
-                    >
-                        {t("pagination.first")}
-                    </button>
-                </li>
-
-                {visiblePages.map(number => (
-                    <li key={number} className="page-item">
-                        <button
-                            onClick={() => props.paginate(number)}
-                            className={`btn ${props.currentPage === number
-                                ? 'btn-md main-color text-white invert-hover'
-                                : 'btn-outline-secondary'} rounded-pill px-3`}
-                        >
-                            {number}
-                        </button>
-                    </li>
-                ))}
-
-                <li className="page-item">
-                    <button
-                        className="btn btn-md main-color text-white rounded-pill px-3 invert-hover"
-                        onClick={() => props.paginate(props.totalPages)}
-                        disabled={props.currentPage === props.totalPages}
-                    >
-                       {t("pagination.last")}
-                    </button>
-                </li>
-            </ul>
-        </nav>
-
-    );
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  paginate: (pageNumber: number) => void;
 }
+
+export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, paginate }) => {
+  const { t } = useTranslation();
+
+  // Generate visible pages around current page (2 before and 2 after)
+  const visiblePages = Array.from(
+    { length: 5 },
+    (_, i) => i + currentPage - 2
+  ).filter(page => page > 0 && page <= totalPages);
+
+  const handlePrevious = () => paginate(Math.max(1, currentPage - 1));
+  const handleNext = () => paginate(Math.min(totalPages, currentPage + 1));
+
+  return (
+    <nav aria-label="Pagination Navigation">
+      <ul className="pagination justify-content-center gap-2 flex-wrap">
+        {/* First Page */}
+        <li className="page-item">
+          <button
+            className="btn btn-primary btn-md rounded-pill px-3 hover-scale"
+            onClick={() => paginate(1)}
+            disabled={currentPage === 1}
+          >
+            {t("pagination.first")}
+          </button>
+        </li>
+
+        {/* Previous Page */}
+        <li className="page-item">
+          <button
+            className="btn btn-outline-primary btn-md rounded-pill px-3 hover-scale"
+            onClick={handlePrevious}
+            disabled={currentPage === 1}
+          >
+            &laquo;
+          </button>
+        </li>
+
+        {/* Numbered Pages */}
+        {visiblePages.map(number => (
+          <li key={number} className="page-item">
+            <button
+              onClick={() => paginate(number)}
+              className={`btn btn-md rounded-pill px-3 hover-scale ${
+                currentPage === number
+                  ? "btn-primary text-white shadow-lg"
+                  : "btn-outline-secondary"
+              }`}
+            >
+              {number}
+            </button>
+          </li>
+        ))}
+
+        {/* Next Page */}
+        <li className="page-item">
+          <button
+            className="btn btn-outline-primary btn-md rounded-pill px-3 hover-scale"
+            onClick={handleNext}
+            disabled={currentPage === totalPages}
+          >
+            &raquo;
+          </button>
+        </li>
+
+        {/* Last Page */}
+        <li className="page-item">
+          <button
+            className="btn btn-primary btn-md rounded-pill px-3 hover-scale"
+            onClick={() => paginate(totalPages)}
+            disabled={currentPage === totalPages}
+          >
+            {t("pagination.last")}
+          </button>
+        </li>
+      </ul>
+      <style>
+        {`
+          .hover-scale:hover {
+            transform: scale(1.05);
+            transition: transform 0.2s ease-in-out;
+          }
+        `}
+      </style>
+    </nav>
+  );
+};

@@ -15,7 +15,7 @@ export const LoanDetailsModal: React.FC<{
             : `manageLoanModal${props.userLoanSummary.book.id}`;
 
         console.log('Deleted value:', props.userLoanSummary.book.deleted);
-        
+
 
         return (
             <div className="modal fade" id={modalId} data-bs-backdrop="static" data-bs-keyboard="false"
@@ -31,22 +31,13 @@ export const LoanDetailsModal: React.FC<{
                         </div>
                         <div className="modal-body px-4">
                             <div className="d-flex align-items-start gap-3">
-                                <div className="flex-shrink-0">
-                                    {props.userLoanSummary.book?.image ? (
-                                        <img src={props.userLoanSummary.book?.image}
-                                            width='100'
-                                            height='140'
-                                            alt='Book'
-                                            className="rounded shadow-sm"
-                                        />
-                                    ) : (
-                                        <img src={require('../../../Images/Books/book-1.png')}
-                                            width='70'
-                                            height='100'
-                                            alt='Book'
-                                            className="rounded shadow-sm"
-                                        />
-                                    )}
+                                <div className="flex-shrink-0" style={{ width: 100, height: 140 }}>
+                                    <img
+                                        src={props.userLoanSummary.book?.image || require('../../../Images/Books/book-1.png')}
+                                        alt="Book"
+                                        className="rounded shadow-sm"
+                                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                                    />
                                 </div>
                                 <div className="flex-grow-1">
                                     <h6 className="mb-1 text-muted">{props.userLoanSummary.book.author}</h6>
@@ -82,7 +73,7 @@ export const LoanDetailsModal: React.FC<{
                                     {t("loanDetails.returnBook")}
                                 </button>
                                 <button onClick={
-                                    props.userLoanSummary.daysRemaining < 0 || props.userLoanSummary.book.deleted?
+                                    props.userLoanSummary.daysRemaining < 0 || props.userLoanSummary.book.deleted ?
                                         (event) => event.preventDefault()
                                         :
                                         () => props.extendLoan(props.userLoanSummary.book.id)

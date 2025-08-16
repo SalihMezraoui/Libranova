@@ -1,6 +1,5 @@
 package com.libranova.spring_boot_library.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,25 +24,30 @@ public class Book
     @Column(name = "author")
     private String author;
 
-    @Column(name = "description")
+    @Column(name = "overview")
     private String overview;
 
-    @Column(name = "description_de")
+    @Column(name = "overview_de")
     private String overviewDe;
 
-    @Column(name = "copies")
+    @Column(name = "total_copies")
     private int totalCopies;
 
-    @Column(name = "copies_available")
+    @Column(name = "copies_in_stock")
     private int copiesInStock;
+
+    @Column(name = "isbn")
+    private String isbn;
+
+    @Column(name = "year_published")
+    private Integer yearPublished;
 
     @Column(name = "category")
     private String category;
 
-    @Column(name = "img")
+    @Column(name = "image")
     private String image;
 
     @Column(name = "deleted")
     private boolean deleted = false;
-
 }

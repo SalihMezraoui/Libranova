@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.1)  28 JUL 2025 01:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.1)  16 AUG 2025 01:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -559,6 +559,31 @@ Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \c@LT@chunks=\count310
 \LT@p@ftn=\toks31
 )
+(/usr/local/texlive/2022/texmf-dist/tex/latex/pdflscape/pdflscape.sty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/ragged2e/ragged2e.sty
+Package: ragged2e 2021/12/15 v3.1 ragged2e Package
+\CenteringLeftskip=\skip80
+\RaggedLeftLeftskip=\skip81
+\RaggedRightLeftskip=\skip82
+\CenteringRightskip=\skip83
+\RaggedLeftRightskip=\skip84
+\RaggedRightRightskip=\skip85
+\CenteringParfillskip=\skip86
+\RaggedLeftParfillskip=\skip87
+\RaggedRightParfillskip=\skip88
+\JustifyingParfillskip=\skip89
+\CenteringParindent=\skip90
+\RaggedLeftParindent=\skip91
+\RaggedRightParindent=\skip92
+\JustifyingParindent=\skip93
+)
 \c@frcounter=\count311
 \c@nfrcounter=\count312
 \c@trcounter=\count313
@@ -580,8 +605,8 @@ Package: multicol 2021/10/28 v1.9b multicolumn formatting (FMi)
 \page@free=\dimen268
 \premulticols=\dimen269
 \postmulticols=\dimen270
-\multicolsep=\skip80
-\multicolbaselineskip=\skip81
+\multicolsep=\skip94
+\multicolbaselineskip=\skip95
 \partial@page=\box73
 \last@line=\box74
 \maxbalancingoverflow=\dimen271
@@ -645,28 +670,29 @@ File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count324
 \l__pdf_internal_box=\box117
 )
-(./Documentation.aux (./chapters/Abkürzungsverzeichnis.aux)
+(./Documentation.aux (./chapters/Systemanforderungen.aux)
+(./chapters/Abkürzungsverzeichnis.aux)
 (./chapters/Selbststaendigkeitserklaerung.aux))
 \openout1 = `Documentation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 183.
+LaTeX Font Info:    ... okay on input line 183.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 183.
+LaTeX Font Info:    ... okay on input line 183.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 183.
+LaTeX Font Info:    ... okay on input line 183.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 183.
+LaTeX Font Info:    ... okay on input line 183.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 183.
+LaTeX Font Info:    ... okay on input line 183.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 183.
+LaTeX Font Info:    ... okay on input line 183.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 183.
+LaTeX Font Info:    ... okay on input line 183.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 183.
+LaTeX Font Info:    ... okay on input line 183.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 183.
+LaTeX Font Info:    ... okay on input line 183.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -726,7 +752,7 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 126.
+Package hyperref Info: Link coloring OFF on input line 183.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
@@ -740,9 +766,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count332
 )
-LaTeX Info: Redefining \ref on input line 126.
-LaTeX Info: Redefining \pageref on input line 126.
-LaTeX Info: Redefining \nameref on input line 126.
+LaTeX Info: Redefining \ref on input line 183.
+LaTeX Info: Redefining \pageref on input line 183.
+LaTeX Info: Redefining \nameref on input line 183.
  (./Documentation.out) (./Documentation.out)
 \@outlinefile=\write4
 \openout4 = `Documentation.out'.
@@ -756,22 +782,22 @@ bibgerm.sty: babel.sty detected
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./images/logo-fb-informatik.
 pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
 
-<images/logo-fb-informatik.pdf, id=293, 811.81792pt x 157.11497pt>
+<images/logo-fb-informatik.pdf, id=397, 811.81792pt x 157.11497pt>
 File: images/logo-fb-informatik.pdf Graphic file (type pdf)
 <use images/logo-fb-informatik.pdf>
-Package pdftex.def Info: images/logo-fb-informatik.pdf  used on input line 146.
+Package pdftex.def Info: images/logo-fb-informatik.pdf  used on input line 203.
 
 (pdftex.def)             Requested size: 209.12683pt x 40.47253pt.
 [1
 
 {/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./image
-s/logo-fb-informatik.pdf>] (./chapters/Kurzfassung.tex
-LaTeX Font Info:    Trying to load font information for U+msa on input line 2.
+s/logo-fb-informatik.pdf>] (./chapters/Zusammenfassung.tex
+LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 2.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
 
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -780,237 +806,461 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 
+
 ]
-(./Documentation.toc [3
+(./chapters/Abstract.tex) [3
 
 
-] [4])
+
+
+] (./Documentation.toc [4
+
+
+] [5] [6] [7])
 \tf@toc=\write5
 \openout5 = `Documentation.toc'.
 
- [5] (./Documentation.lof)
+ [8]
+(./Documentation.lof [9
+
+
+])
 \tf@lof=\write6
 \openout6 = `Documentation.lof'.
 
- [6
-
-
-]
-(./chapters/EinleitungAnforderungen.tex
+ [10] (./chapters/Einleitung.tex
 Kapitel 1.
-
-Underfull \hbox (badness 10000) in paragraph at lines 20--22
-
- []
-
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.22 
-      [1
+l.21 	\item E
+             rmöglichung einer effizienten Verwaltung des Buchbestands durc...
+[1
 
 
 
 
-] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 70--72
-
+]
+Underfull \hbox (badness 2050) in paragraph at lines 22--23
+[]\OT1/cmr/m/n/12 Integration mo-der-ner Authentifizierungs- und Au-to-ri-sie-r
+ungs-me-cha-nis-men
  []
 
-
-Underfull \hbox (badness 4229) in paragraph at lines 90--90
-[]|\OT1/cmr/m/n/12 Die An-wen-dung muss grund-le-gen-de Bar-rie-re-frei-heits-a
-n-for-de-run-gen
- []
-
-
-Underfull \hbox (badness 1005) in paragraph at lines 91--91
-\OT1/cmr/m/n/12 va-li-dier-te An-fra-gen ver-ar-bei-ten, um die Sta-bi-lit[]at 
-des Sys-tems zu
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 99--99
-[]|\OT1/cmr/m/n/12 Das Sys-tem muss si-cher-stel-len, dass nur au-to-ri-sier-te
- Cli-ents
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 99--99
-\OT1/cmr/m/n/12 auf gesch[]utzte End-punk-te wie \OT1/cmtt/m/n/12 /api/books/se
-cure/** \OT1/cmr/m/n/12 oder
- []
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 112--114
-
- []
-
-[4]) (./chapters/WeitereKapitel.tex [5]
+) (./chapters/VerwandteArbeiten.tex [2]
 Kapitel 2.
+[3
+
+
+]
+Underfull \hbox (badness 1102) in paragraph at lines 35--36
+\OT1/cmr/m/n/12 und Eng-lisch verf[]ugbar, was die Nut-zer-ba-sis deut-lich er-
+wei-tert und die
+ []
+
+[4]) (./chapters/Grundlagen.tex [5]
+Kapitel 3.
 [6
 
 
 ]
-<images/ClassDiagram.png, id=444, 1039.885pt x 890.32625pt>
+Underfull \hbox (badness 1552) in paragraph at lines 37--38
+\OT1/cmr/m/n/12 bil-dung zwi-schen Ob-jek-ten und re-la-tio-na-len Da-ten-ban-k
+en erm[]oglicht, JPA
+ []
+
+
+Underfull \hbox (badness 1755) in paragraph at lines 37--38
+\OT1/cmr/m/n/12 un-terst[]utzt, kom-ple-xe Ab-fra-gen, Trans-ak-tio-nen, Ca-chi
+ng und Performance-
+ []
+
+[7] [8] [9] [10] [11] [12] [13]) (./chapters/Konzept.tex [14]
+Kapitel 4.
+<Images/SpringAndReact.png, id=744, 890.32625pt x 185.69376pt>
+File: Images/SpringAndReact.png Graphic file (type png)
+<use Images/SpringAndReact.png>
+Package pdftex.def Info: Images/SpringAndReact.png  used on input line 12.
+(pdftex.def)             Requested size: 376.42575pt x 78.50935pt.
+[15
+
+
+ <./Images/SpringAndReact.png>]
+<images/ClassDiagram.png, id=753, 997.7275pt x 510.90875pt>
 File: images/ClassDiagram.png Graphic file (type png)
 <use images/ClassDiagram.png>
-Package pdftex.def Info: images/ClassDiagram.png  used on input line 24.
-(pdftex.def)             Requested size: 418.25368pt x 358.09406pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 31--35
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 31--35
-
- []
-
-[7 <./images/ClassDiagram.png>]
-Overfull \hbox (22.2481pt too wide) in paragraph at lines 47--48
-[]\OT1/cmr/m/n/12 Der Au-to-ri-sie-rungs-ser-ver sen-det einen \OT1/cmr/m/it/12
- Au-to-ri-sie-rungs-co-de \OT1/cmr/m/n/12 an die React-Anwendung. 
- []
-
-<images/SequenceDiagram.jpg, id=456, 861.2175pt x 452.69125pt>
+Package pdftex.def Info: images/ClassDiagram.png  used on input line 38.
+(pdftex.def)             Requested size: 418.25368pt x 214.17482pt.
+ [16] [17 <./images/ClassDiagram.png>]
+<images/SequenceDiagram.jpg, id=764, 861.2175pt x 452.69125pt>
 File: images/SequenceDiagram.jpg Graphic file (type jpg)
 <use images/SequenceDiagram.jpg>
-Package pdftex.def Info: images/SequenceDiagram.jpg  used on input line 57.
+Package pdftex.def Info: images/SequenceDiagram.jpg  used on input line 59.
 (pdftex.def)             Requested size: 418.25368pt x 219.852pt.
-[8]
-Underfull \hbox (badness 10000) in paragraph at lines 76--79
+
+[18 <./images/SequenceDiagram.jpg>]
+<images/SequenceDiagram-Stripe.png, id=774, 600.2425pt x 344.28625pt>
+File: images/SequenceDiagram-Stripe.png Graphic file (type png)
+<use images/SequenceDiagram-Stripe.png>
+Package pdftex.def Info: images/SequenceDiagram-Stripe.png  used on input line 
+74.
+(pdftex.def)             Requested size: 418.25368pt x 239.90602pt.
+ [19 <./images/SequenceDiagram-Stripe.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 94--96
 
  []
 
-[9 <./images/SequenceDiagram.jpg>]
-Underfull \hbox (badness 10000) in paragraph at lines 82--85
+
+Underfull \hbox (badness 10000) in paragraph at lines 99--101
 
  []
 
-[10]
-Overfull \hbox (11.7518pt too wide) in paragraph at lines 106--107
-[]\OT1/cmr/bx/n/12 Einfache Be-reit-stel-lung: \OT1/cmr/m/n/12 Spring Boot-Anwe
-ndungen sind ei-genst[]andig lauff[]ahig
+
+Underfull \hbox (badness 1024) in paragraph at lines 99--101
+\OT1/cmr/m/n/12 Die Ta-bel-le []A.2[] fasst die wich-tigs-ten nicht-funktionale
+n An-for-de-run-gen f[]ur
  []
 
-[11] (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
+
+Underfull \hbox (badness 10000) in paragraph at lines 104--106
+
+ []
+
+[20]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 116.
+ [21]) (./chapters/Realisierung.tex [22]
+Kapitel 5.
+
+Underfull \hbox (badness 4266) in paragraph at lines 11--12
+\OT1/cmr/m/n/12 Spring Boot ver-ein-facht die Ent-wick-lung von Java-basierten 
+We-ban-wen-
+ []
+
+
+Underfull \hbox (badness 7291) in paragraph at lines 11--12
+\OT1/cmr/m/n/12 dun-gen durch kon-ven-ti-ons-ba-sier-te und au-to-ma-ti-sier-te
+ Pro-jekt-kon-fi-gu-ra-ti-
+ []
+
+
+Underfull \hbox (badness 2717) in paragraph at lines 11--12
+\OT1/cmr/m/n/12 on. Die-ses Fra-me-work bie-tet ei-ne stan-dar-di-sier-te Struk
+-tur, au-to-ma-ti-sches
+ []
+
+[23
+
+
+] (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 121.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 132.
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 45.
 
-[12]
-Underfull \hbox (badness 10000) in paragraph at lines 162--165
-
+Underfull \hbox (badness 10000) in paragraph at lines 45--46
+[]\OT1/cmr/bx/n/12 Konfiguration []uber \OT1/cmtt/m/n/12 application.properties
+\OT1/cmr/bx/n/12 : \OT1/cmr/m/n/12 Die Da-tei
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 162--165
-
+Underfull \hbox (badness 10000) in paragraph at lines 45--46
+\OT1/cmtt/m/n/12 application.properties \OT1/cmr/m/n/12 im Ver-zeich-nis \OT1/c
+mtt/m/n/12 src/main/resources \OT1/cmr/m/n/12 enth[]alt
  []
 
-[13]
-Overfull \hbox (2.2479pt too wide) in paragraph at lines 189--191
-\OT1/cmr/m/n/12 JWT-Validierung ver-wen-det. Die Ein-rich-tung ei-ner \OT1/cmtt
-/m/n/12 ContentNegotiationStrategy
- []
-
-[14] [15] (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
+[24]
+<images/backend_structure.png, id=862, 891.33pt x 413.545pt>
+File: images/backend_structure.png Graphic file (type png)
+<use images/backend_structure.png>
+Package pdftex.def Info: images/backend_structure.png  used on input line 82.
+(pdftex.def)             Requested size: 414.07343pt x 192.11343pt.
+ [25] [26 <./images/backend_structure.png>] [27]
+(/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
 )
 (/usr/local/texlive/2022/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
-) [16]
-Underfull \hbox (badness 10000) in paragraph at lines 298--300
-
- []
-
-[17]
-Underfull \hbox (badness 10000) in paragraph at lines 319--321
-
+) [28]
+Underfull \hbox (badness 1533) in paragraph at lines 176--177
+[]\OT1/cmr/m/n/12 Die Da-tei \OT1/cmtt/m/n/12 index.tsx \OT1/cmr/m/n/12 dient a
+ls zen-tra-les Ein-stiegs-skript f[]ur die React-
  []
 
 
-Overfull \hbox (15.25507pt too wide) in paragraph at lines 324--325
-[]\OT1/cmr/bx/n/12 Checkout\OT1/cmr/m/n/12 : Re-pr[]asentiert die Aus-leih-vorg
-[]ange, wo-bei je-dem Ein-trag ei-ne Benutzer-
+Underfull \hbox (badness 10000) in paragraph at lines 176--177
+\OT1/cmr/m/n/12 Anwendung. Sie im-por-tiert zun[]achst al-le not-wen-di-gen Mo-
+du-le und
+ []
+
+[29]
+<images/frontend_structure.png, id=932, 1154.3125pt x 582.175pt>
+File: images/frontend_structure.png Graphic file (type png)
+<use images/frontend_structure.png>
+Package pdftex.def Info: images/frontend_structure.png  used on input line 202.
+
+(pdftex.def)             Requested size: 418.25368pt x 210.94197pt.
+ [30 <./images/frontend_structure.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 231--234
+[]\OT1/cmr/bx/n/12 access: \OT1/cmr/m/n/12 Bein-hal-tet die In-te-gra-ti-on und
+ Steue-rung des Okta-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 329--330
-
+Underfull \hbox (badness 10000) in paragraph at lines 231--234
+\OT1/cmr/m/n/12 Authentifizierungswidgets. Die Kom-po-nen-ten \OT1/cmtt/m/n/12 
+OktaLoginWidget \OT1/cmr/m/n/12 und
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 329--330
-
+Underfull \hbox (badness 2970) in paragraph at lines 235--238
+[]\OT1/cmr/bx/n/12 lib: \OT1/cmr/m/n/12 Enth[]alt die Da-tei \OT1/cmtt/m/n/12 o
+ktaConfig.ts\OT1/cmr/m/n/12 , die die Ein-stel-lun-gen f[]ur die
  []
 
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 343--345
-
+[31]
+Underfull \hbox (badness 5490) in paragraph at lines 287--289
+\OT1/cmr/m/n/12 Importiert die Haupt-bi-blio-thek \OT1/cmtt/m/n/12 i18next\OT1/
+cmr/m/n/12 , die die In-ter-na-tio-na-li-sie-rung
  []
 
+LaTeX Font Info:    Trying to load font information for OMS+cmtt on input line 
+290.
+LaTeX Font Info:    No file OMScmtt.fd. on input line 290.
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--354
+LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbraceleft' on input line 290.
 
+[32] [33]
+Underfull \hbox (badness 6001) in paragraph at lines 352--353
+\OT1/cmr/m/n/12 Wie in Lis-ting []5.8[] und Lis-ting []5.9[] zu se-hen, wer-den
+ die Schl[]ussel
  []
 
+LaTeX Font Info:    Trying to load font information for OML+cmtt on input line 
+371.
+LaTeX Font Info:    No file OMLcmtt.fd. on input line 371.
 
-Underfull \hbox (badness 10000) in paragraph at lines 351--354
+LaTeX Font Warning: Font shape `OML/cmtt/m/n' undefined
+(Font)              using `OML/cmm/m/it' instead
+(Font)              for symbol `textless' on input line 371.
 
+[34] [35]
+<images/DB-Schema.png, id=1019, 1022.82124pt x 843.15pt>
+File: images/DB-Schema.png Graphic file (type png)
+<use images/DB-Schema.png>
+Package pdftex.def Info: images/DB-Schema.png  used on input line 407.
+(pdftex.def)             Requested size: 414.07343pt x 341.33235pt.
+ [36 <./images/DB-Schema.png>]
+Underfull \hbox (badness 1642) in paragraph at lines 457--458
+\OT1/cmr/m/n/12 der Prim[]arschl[]ussel von der Da-ten-bank au-to-ma-tisch (z.B
+. mit-tels AU-
  []
 
-[19]
-Underfull \hbox (badness 10000) in paragraph at lines 357--359
-
+[37]
+Underfull \hbox (badness 2452) in paragraph at lines 461--462
+[]\OT1/cmtt/m/n/12 @Data \OT1/cmr/m/n/12 (aus Lom-bok): Ge-ne-riert au-to-ma-ti
+sch Get-ter, Set-ter, \OT1/cmtt/m/n/12 equals()\OT1/cmr/m/n/12 ,
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 362--364
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 366--368
-
- []
-
-
-Overfull \hbox (4.76288pt too wide) in paragraph at lines 366--368
-\OT1/cmr/m/n/12 und in-te-r-ope-ra-ble Be-nut-zeran-mel-dung si-cher-zu-stel-le
-n. Da-bei stellt Ope-nID Connect
- []
-
-[20]
-Underfull \hbox (badness 10000) in paragraph at lines 378--380
-
- []
-
-[21]) (./chapters/Bausteine.tex [22]
-Kapitel 3.
-) (./chapters/Beispiel.tex [23
+) (./chapters/Implementierung.tex [38]
+Kapitel 6.
+[39
 
 
 ]
-Kapitel 4.
-) (./chapters/ZusammenfassungAusblick.tex [24
+Underfull \hbox (badness 10000) in paragraph at lines 59--70
 
-
-]
-Kapitel 5.
-
-Overfull \hbox (4.84703pt too wide) in paragraph at lines 3--4
-\OT1/cmr/m/n/12 Stack-Bibliotheksmanagement-Anwendung []Li-bra-No-va\ um-fas-se
-nd dar-ge-stellt. Ziel
  []
 
-) [25
+[40]
+Overfull \hbox (11.44176pt too wide) in paragraph at lines 89--90
+[][][][][][][][][][][][][][][][][][][] 
+ []
+
+[41] [42]
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
+154.
+ (/usr/local/texlive/2022/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+[43]
+Underfull \hbox (badness 10000) in paragraph at lines 206--212
+\OT1/cmr/m/n/12 - \OT1/cmtt/m/n/12 !props.isCheckedOut && props.currentLoans < 
+5\OT1/cmr/m/n/12 : Ausleih-Button er-
+ []
+
+[44] [45] [46]
+Underfull \hbox (badness 3568) in paragraph at lines 314--319
+\OT1/cmr/m/n/12 - \OT1/cmtt/m/n/12 t("loanDetails.returnBook")\OT1/cmr/m/n/12 :
+ Holt den lo-ka-li-sier-ten Text f[]ur []Buch
+ []
+
+) (./chapters/Beispiel.tex [47] [48]
+Kapitel 7.
+<images/UI-screenshots/Header.png, id=1305, 1798.72pt x 91.34125pt>
+File: images/UI-screenshots/Header.png Graphic file (type png)
+<use images/UI-screenshots/Header.png>
+Package pdftex.def Info: images/UI-screenshots/Header.png  used on input line 1
+3.
+(pdftex.def)             Requested size: 418.25368pt x 21.2394pt.
+[49
+
+
+ <./images/UI-screenshots/Header.png>]
+Underfull \hbox (badness 2012) in paragraph at lines 21--22
+[]\OT1/cmr/bx/n/12 Administratoren: \OT1/cmr/m/n/12 Al-le Men[]upunkte der ein-
+ge-logg-ten Nut-zer plus der
+ []
+
+<images/UI-screenshots/Footer.png, id=1312, 1798.72pt x 139.52126pt>
+File: images/UI-screenshots/Footer.png Graphic file (type png)
+<use images/UI-screenshots/Footer.png>
+Package pdftex.def Info: images/UI-screenshots/Footer.png  used on input line 2
+9.
+(pdftex.def)             Requested size: 418.25368pt x 32.44261pt.
+<images/UI-screenshots/Carousel_and_BookBrowser.png, id=1314, 1791.69376pt x 97
+7.6525pt>
+File: images/UI-screenshots/Carousel_and_BookBrowser.png Graphic file (type png
+)
+<use images/UI-screenshots/Carousel_and_BookBrowser.png>
+Package pdftex.def Info: images/UI-screenshots/Carousel_and_BookBrowser.png  us
+ed on input line 42.
+(pdftex.def)             Requested size: 418.25368pt x 228.21184pt.
+[50 <./images/UI-screenshots/Footer.png>]
+<images/UI-screenshots/Bibliotheksdienste-Link.png, id=1321, 1326.9575pt x 454.
+69875pt>
+File: images/UI-screenshots/Bibliotheksdienste-Link.png Graphic file (type png)
+
+<use images/UI-screenshots/Bibliotheksdienste-Link.png>
+Package pdftex.def Info: images/UI-screenshots/Bibliotheksdienste-Link.png  use
+d on input line 53.
+(pdftex.def)             Requested size: 418.25368pt x 143.32104pt.
+ [51 <./images/UI-screenshots/Carousel_and_BookBrowser.png> <./images/UI-screen
+shots/Bibliotheksdienste-Link.png>]
+<images/UI-screenshots/Search-page.png, id=1330, 1334.9875pt x 893.3375pt>
+File: images/UI-screenshots/Search-page.png Graphic file (type png)
+<use images/UI-screenshots/Search-page.png>
+Package pdftex.def Info: images/UI-screenshots/Search-page.png  used on input l
+ine 67.
+(pdftex.def)             Requested size: 418.25368pt x 279.8761pt.
+<images/UI-screenshots/Book-Page.png, id=1332, 1242.6425pt x 963.6pt>
+File: images/UI-screenshots/Book-Page.png Graphic file (type png)
+<use images/UI-screenshots/Book-Page.png>
+Package pdftex.def Info: images/UI-screenshots/Book-Page.png  used on input lin
+e 77.
+(pdftex.def)             Requested size: 418.25368pt x 324.32613pt.
+
+[52 <./images/UI-screenshots/Search-page.png>] [53 <./images/UI-screenshots/Boo
+k-Page.png>]
+<images/UI-screenshots/Loans-Page.png, id=1344, 1305.87875pt x 812.03375pt>
+File: images/UI-screenshots/Loans-Page.png Graphic file (type png)
+<use images/UI-screenshots/Loans-Page.png>
+Package pdftex.def Info: images/UI-screenshots/Loans-Page.png  used on input li
+ne 106.
+(pdftex.def)             Requested size: 418.25368pt x 260.07913pt.
+ [54 <./images/UI-screenshots/Loans-Page.png>]
+<images/UI-screenshots/Loans-History.png, id=1351, 1302.8675pt x 791.95876pt>
+File: images/UI-screenshots/Loans-History.png Graphic file (type png)
+<use images/UI-screenshots/Loans-History.png>
+Package pdftex.def Info: images/UI-screenshots/Loans-History.png  used on input
+ line 130.
+(pdftex.def)             Requested size: 418.25368pt x 254.24162pt.
+<images/UI-screenshots/Message-Send.png, id=1353, 1313.90875pt x 580.1675pt>
+File: images/UI-screenshots/Message-Send.png Graphic file (type png)
+<use images/UI-screenshots/Message-Send.png>
+Package pdftex.def Info: images/UI-screenshots/Message-Send.png  used on input 
+line 142.
+(pdftex.def)             Requested size: 418.25368pt x 184.6836pt.
+ [55 <./images/UI-screenshots/Loans-History.png>]
+<images/UI-screenshots/Messages-History.png, id=1360, 1344.02126pt x 594.22pt>
+File: images/UI-screenshots/Messages-History.png Graphic file (type png)
+<use images/UI-screenshots/Messages-History.png>
+Package pdftex.def Info: images/UI-screenshots/Messages-History.png  used on in
+put line 151.
+(pdftex.def)             Requested size: 418.25368pt x 184.91353pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 158--159
+
+ []
+
+[56 <./images/UI-screenshots/Message-Send.png> <./images/UI-screenshots/Message
+s-History.png>]
+<images/UI-screenshots/Outstanding-payment.png, id=1368, 642.4pt x 246.9225pt>
+File: images/UI-screenshots/Outstanding-payment.png Graphic file (type png)
+<use images/UI-screenshots/Outstanding-payment.png>
+Package pdftex.def Info: images/UI-screenshots/Outstanding-payment.png  used on
+ input line 164.
+(pdftex.def)             Requested size: 418.25368pt x 160.76898pt.
+<images/UI-screenshots/No-Payment.png, id=1370, 665.48625pt x 202.7575pt>
+File: images/UI-screenshots/No-Payment.png Graphic file (type png)
+<use images/UI-screenshots/No-Payment.png>
+Package pdftex.def Info: images/UI-screenshots/No-Payment.png  used on input li
+ne 173.
+(pdftex.def)             Requested size: 418.25368pt x 127.4347pt.
+ [57 <./images/UI-screenshots/Outstanding-payment.png> <./images/UI-screenshots
+/No-Payment.png>]
+<images/UI-screenshots/Add-New-Book.png, id=1379, 1309.89375pt x 553.06625pt>
+File: images/UI-screenshots/Add-New-Book.png Graphic file (type png)
+<use images/UI-screenshots/Add-New-Book.png>
+Package pdftex.def Info: images/UI-screenshots/Add-New-Book.png  used on input 
+line 186.
+(pdftex.def)             Requested size: 418.25368pt x 176.59662pt.
+<images/UI-screenshots/Manage-Books.png, id=1381, 1290.8225pt x 898.35625pt>
+File: images/UI-screenshots/Manage-Books.png Graphic file (type png)
+<use images/UI-screenshots/Manage-Books.png>
+Package pdftex.def Info: images/UI-screenshots/Manage-Books.png  used on input 
+line 197.
+(pdftex.def)             Requested size: 418.25368pt x 291.08502pt.
+ [58 <./images/UI-screenshots/Add-New-Book.png>]
+<images/UI-screenshots/Messages-Responses.png, id=1388, 1324.95pt x 475.7775pt>
+
+File: images/UI-screenshots/Messages-Responses.png Graphic file (type png)
+<use images/UI-screenshots/Messages-Responses.png>
+Package pdftex.def Info: images/UI-screenshots/Messages-Responses.png  used on 
+input line 207.
+(pdftex.def)             Requested size: 418.25368pt x 150.19012pt.
+) (./chapters/Anwendungsszenarien.tex [59 <./images/UI-screenshots/Manage-Books
+.png> <./images/UI-screenshots/Messages-Responses.png>]
+Kapitel 8.
+
+Underfull \hbox (badness 3557) in paragraph at lines 5--6
+\OT1/cmr/m/n/12 in de-nen das Sys-tem sinn-voll ein-ge-setzt oder er-wei-tert w
+er-den k[]onnte.
+ []
+
+
+Underfull \hbox (badness 1194) in paragraph at lines 5--6
+\OT1/cmr/m/n/12 Da-zu z[]ahlen ins-be-son-de-re der Bil-dungs-be-reich und E-Le
+arning-Plattformen,
+ []
+
+
+Underfull \hbox (badness 1442) in paragraph at lines 5--6
+\OT1/cmr/m/n/12 die mo-bi-le Nut-zung durch Er-wei-te-rung zu na-ti-ven Ap-ps s
+o-wie in-no-va-ti-ve
+ []
+
+
+Underfull \hbox (badness 1132) in paragraph at lines 5--6
+\OT1/cmr/m/n/12 Funk-tio-nen wie per-so-na-li-sier-te Bu-ch-emp-feh-lun-gen, Fe
+rn-lei-he so-wie Echtzeit-
+ []
+
+[60
+
+
+]) (./chapters/ZusammenfassungAusblick.tex [61]
+Kapitel 9.
+)
+Underfull \hbox (badness 3229) in paragraph at lines 7--233
+\OT1/cmr/m/n/12 Die Platt-form un-terst[]utzt zu-dem zuk[]unftige Er-wei-te-run
+-gen, et-wa Cloud-
+ []
+
+[62
 
 
 ] (./Documentation.bbl
@@ -1020,92 +1270,184 @@ ction-[]to-[]uml/$[]\OT1/cmr/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 1371) in paragraph at lines 28--32
-[]\OT1/cmr/m/sc/12 Corporation, IBM\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Se-quenz-
-dia-gram-me\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / www . ibm . com /
-
+Underfull \hbox (badness 4429) in paragraph at lines 11--15
+[]\OT1/cmr/m/sc/12 Bootstrap Au-t-hors\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Get st
+ar-ted with Boot-strap\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https :
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--78
-[]\OT1/cmr/m/sc/12 Meta Plat-forms, Inc.\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Buil
-d a Re-act app from Scratch\OT1/cmr/m/n/12 .
+Underfull \hbox (badness 10000) in paragraph at lines 11--15
+\OT1/cmtt/m/n/12 / / getbootstrap . com / docs / 5 . 3 / getting-[]started / in
+troduction/$[]\OT1/cmr/m/n/12 ,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--78
-[]$\OT1/cmtt/m/n/12 https : / / react . dev / learn / build-[]a-[]react-[]app-[
-]from-[]scratch #
+Underfull \hbox (badness 3375) in paragraph at lines 17--20
+[]\OT1/cmr/m/sc/12 Bratslavsky, Paul\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Top 6 Be
+-ne-fits of Im-ple-men-ting Ty-pe-S-
  []
 
-[26
+
+Underfull \hbox (badness 1337) in paragraph at lines 17--20
+\OT1/cmr/m/it/12 cript\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / strapi
+ . io / blog / benefits-[]of-[]typescript$[]\OT1/cmr/m/n/12 , 2025.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--32
+[]\OT1/cmr/m/sc/12 Corporation, Mi-cro-soft\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 T
+y-pe-S-cript for Ja-vaS-cript Pro-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--32
+\OT1/cmr/m/it/12 gram-mers\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / ww
+w . typescriptlang . org / docs / handbook /
+ []
+
+
+Underfull \hbox (badness 4518) in paragraph at lines 46--49
+[]\OT1/cmr/m/sc/12 Facebook\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Crea-te Re-act Ap
+p - Get-ting Star-ted\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / /
+ []
+
+[63
 
 
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 85--90
-[]\OT1/cmr/m/sc/12 Microsoft Au-t-hors\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Ty-pe-
-S-cript for Ja-vaS-cript Pro-gram-
+Underfull \hbox (badness 3838) in paragraph at lines 62--66
+\OT1/cmtt/m/n/12 / / www . thalia . de / vorteile / thalia-[]lesen-[]und-[]hoer
+en-[]app$[]\OT1/cmr/m/n/12 , 2025.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--90
-\OT1/cmr/m/it/12 mers\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / www . t
-ypescriptlang . org / docs / handbook /
+Underfull \hbox (badness 10000) in paragraph at lines 73--78
+[]\OT1/cmr/m/sc/12 GitHub-Team\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 About GitHub\O
+T1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / docs . github . com /
  []
 
 
-Underfull \hbox (badness 2310) in paragraph at lines 85--90
-\OT1/cmtt/m/n/12 typescript-[]in-[]5-[]minutes . html$[]\OT1/cmr/m/n/12 , 2025.
-  Zu-ge-grif-fen am 22. Ju-li
- []
-
-
-Underfull \hbox (badness 1292) in paragraph at lines 108--111
-[]\OT1/cmr/m/sc/12 Paul Brats-lavs-ky\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Top 6 B
-e-ne-fits of Im-ple-men-ting Ty-pe-S-cript\OT1/cmr/m/n/12 .
- []
-
-
-Underfull \hbox (badness 1990) in paragraph at lines 113--119
-[]\OT1/cmr/m/sc/12 Rakesh Pu-ro-hit\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 A Step-by
--Step Gui-de to Im-ple-men-ting Re-act
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 121--124
-[]\OT1/cmr/m/it/12 What is REST?  []$\OT1/cmtt/m/n/12 https : / / www . codecad
-emy . com / article /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 132--135
-[]\OT1/cmr/m/sc/12 Spring\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Spring Fra-me-work\
-OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / spring . io / projects /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 142--146
-[]\OT1/cmr/m/sc/12 Team, GitHub\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 GitHub About\
-OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / docs . github . com /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 142--146
+Underfull \hbox (badness 10000) in paragraph at lines 73--78
 \OT1/cmtt/m/n/12 en / get-[]started / start-[]your-[]journey / about-[]github-[
 ]and-[]git #
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 148--151
-[]\OT1/cmr/m/it/12 Wikipedia: In-te-r-ope-ra-bi-li-ty\OT1/cmr/m/n/12 .  []$\OT1
-/cmtt/m/n/12 https : / / en . wikipedia . org / wiki /
+Underfull \hbox (badness 1264) in paragraph at lines 103--106
+[]\OT1/cmr/m/sc/12 i18next Or-ga-ni-sa-ti-on\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 
+i18next do-cu-men-ta-ti-on\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / ww
+w .
+ []
+
+
+Underfull \hbox (badness 1052) in paragraph at lines 120--123
+[]\OT1/cmr/m/sc/12 JUNIT-Team\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Ju-nit 5 User G
+ui-de\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / docs . junit . org /
+ []
+
+
+Underfull \hbox (badness 5985) in paragraph at lines 130--135
+[]\OT1/cmr/m/sc/12 Meta Plat-forms, Inc.\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Buil
+d a Re-act app from Scratch\OT1/cmr/m/n/12 .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 130--135
+[]$\OT1/cmtt/m/n/12 https : / / react . dev / learn / build-[]a-[]react-[]app-[
+]from-[]scratch #
+ []
+
+[64]
+Underfull \hbox (badness 10000) in paragraph at lines 148--153
+[]\OT1/cmr/m/sc/12 Medium-Team\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Stri-pe In-te-
+gra-ti-on Using Flut-ter Web
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--153
+\OT1/cmr/m/it/12 and Nest-JS\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / 
+medium . com / %40akshelar . 18119 /
+ []
+
+
+Overfull \hbox (13.61263pt too wide) in paragraph at lines 148--153
+\OT1/cmtt/m/n/12 stripe-[]integration-[]using-[]flutter-[]web-[]and-[]nestjs-[]
+4e94ccd33b9f$[]\OT1/cmr/m/n/12 ,
+ []
+
+
+Underfull \hbox (badness 1460) in paragraph at lines 170--175
+[]\OT1/cmr/m/sc/12 Okta-Team\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 What is Ok-ta an
+d what does Ok-ta do?  []$\OT1/cmtt/m/n/12 https :
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 170--175
+\OT1/cmtt/m/n/12 / / support . okta . com / help / s / article / what-[]is-[]ok
+ta ? language =
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 187--193
+\OT1/cmtt/m/n/12 a-[]step-[]by-[]step-[]guide-[]to-[]implementing-[]react-[]spr
+ing-[]boot$[]\OT1/cmr/m/n/12 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 201--204
+[]\OT1/cmr/m/sc/12 Spring-Team\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Spring Boot\OT
+1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / spring . io / projects /
+ []
+
+[65]
+Underfull \hbox (badness 10000) in paragraph at lines 206--209
+[]\OT1/cmr/m/sc/12 Spring-Team\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 Spring Boot\OT
+1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / spring . io / projects /
+ []
+
+
+Underfull \hbox (badness 1152) in paragraph at lines 226--230
+[]\OT1/cmr/m/sc/12 Trier, Stadtb[]ucherei\OT1/cmr/m/n/12 : \OT1/cmr/m/it/12 In-
+for-ma-tio-nen f[]ur Sie\OT1/cmr/m/n/12 .  []$\OT1/cmtt/m/n/12 https : / / www 
+.
  []
 
 )
 No file Documentation.ind.
-[27]
+[66]
+\openout2 = `chapters/Systemanforderungen.aux'.
+
+ (./chapters/Systemanforderungen.tex [67
+
+
+
+]
+Underfull \hbox (badness 4229) in paragraph at lines 68--68
+[]|\OT1/cmr/m/n/12 Die An-wen-dung muss grund-le-gen-de Bar-rie-re-frei-heits-a
+n-for-de-run-gen
+ []
+
+
+Underfull \hbox (badness 1005) in paragraph at lines 69--69
+\OT1/cmr/m/n/12 va-li-dier-te An-fra-gen ver-ar-bei-ten, um die Sta-bi-lit[]at 
+des Sys-tems zu
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--77
+[]|\OT1/cmr/m/n/12 Das Sys-tem muss si-cher-stel-len, dass nur au-to-ri-sier-te
+ Cli-ents
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--77
+\OT1/cmr/m/n/12 auf gesch[]utzte End-punk-te wie \OT1/cmtt/m/n/12 /api/books/se
+cure/** \OT1/cmr/m/n/12 oder
+ []
+
+[68] [69]) [70]
 \openout2 = `chapters/Abkürzungsverzeichnis.aux'.
 
  (./chapters/Abkürzungsverzeichnis.tex
@@ -1113,7 +1455,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--30
 
  []
 
-) [28
+) [71
+
+
 
 
 
@@ -1130,42 +1474,51 @@ Underfull \hbox (badness 10000) in paragraph at lines 8--9
 
  []
 
-) [29
+) [72
 
 
 
 
 
-] (./Documentation.aux (./chapters/Abkürzungsverzeichnis.aux)
+] (./Documentation.aux (./chapters/Systemanforderungen.aux)
+(./chapters/Abkürzungsverzeichnis.aux)
 (./chapters/Selbststaendigkeitserklaerung.aux))
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package rerunfilecheck Info: File `Documentation.out' has not changed.
-(rerunfilecheck)             Checksum: 33A64F9FA33F3BB8DC80304D0CC9E083;12215.
+(rerunfilecheck)             Checksum: AD6586F0D4F47FC814C0192CE7C585F0;15038.
  ) 
 Here is how much of TeX's memory you used:
- 17827 strings out of 478268
- 283331 string characters out of 5846348
- 876242 words of memory out of 5000000
- 35481 multiletter control sequences out of 15000+600000
- 478934 words of font info for 65 fonts, out of 8000000 for 9000
+ 18818 strings out of 478268
+ 303663 string characters out of 5846348
+ 1012740 words of memory out of 5000000
+ 36071 multiletter control sequences out of 15000+600000
+ 479398 words of font info for 67 fonts, out of 8000000 for 9000
  1146 hyphenation exceptions out of 8191
- 60i,9n,63p,1017b,2117s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 60i,10n,63p,1029b,2160s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
-</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></
-usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></us
-r/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/l
-ocal/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/loca
-l/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/t
-exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/te
-xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/tex
-live/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texli
-ve/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/t
-exlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Documentation.pdf (35 pages, 1478820 bytes).
+</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
+/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
+sr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr
+/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/lo
+cal/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
+/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/te
+xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
+live/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texli
+ve/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texliv
+e/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive
+/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2
+022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/202
+2/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive
+/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2
+022/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb>
+Output written on Documentation.pdf (82 pages, 11372933 bytes).
 PDF statistics:
- 879 PDF objects out of 1000 (max. 8388607)
- 803 compressed objects within 9 object streams
- 256 named destinations out of 1000 (max. 500000)
- 592 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1725 PDF objects out of 1728 (max. 8388607)
+ 1543 compressed objects within 16 object streams
+ 593 named destinations out of 1000 (max. 500000)
+ 900 words of extra memory for PDF output out of 10000 (max. 10000000)
 

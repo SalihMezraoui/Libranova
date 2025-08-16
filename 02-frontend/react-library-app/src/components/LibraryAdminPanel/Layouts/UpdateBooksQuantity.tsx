@@ -7,27 +7,33 @@ import { useTranslation } from "react-i18next";
 
 export const UpdateBooksQuantity = () => {
 
+    // Translation hook
     const { t } = useTranslation();
+
+    // Data state
     const [bookItems, setBookItems] = useState<Book[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [httpError, setHttpError] = useState(null);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [booksPerPage] = useState(6);
     const [totalBooks, setTotalBooks] = useState(0);
+
+    // Pagination state
+    const [actualPage, setActualPage] = useState(1);
+    const [booksPerPage] = useState(6);
     const [pageCount, setPageCount] = useState(0);
 
+    // UI state
+    const [loading, setLoading] = useState(true);
+    const [httpError, setHttpError] = useState(null);
     const [bookRemove, setBookRemove] = useState(false);
 
     useEffect(() => {
         const loadBooks = async () => {
-            const apiUrl: string = `${process.env.REACT_APP_API_URL}/books/search/findByDeletedFalse?page=${currentPage - 1}&size=${booksPerPage}`;
-            const response = await fetch(apiUrl);
+            const apiUrl: string = `${process.env.REACT_APP_API_URL}/books/search/findByDeletedFalse?page=${actualPage - 1}&size=${booksPerPage}`;
+            const data = await fetch(apiUrl);
 
-            if (!response.ok) {
+            if (!data.ok) {
                 throw new Error('Failed to fetch book data.!');
             }
 
-            const jsonResponse = await response.json();
+            const jsonResponse = await data.json();
 
             const responseData = jsonResponse._embedded.books;
 
@@ -37,16 +43,16 @@ export const UpdateBooksQuantity = () => {
 
             const fetchedBooks: Book[] = [];
 
-            for (const key in responseData) {
+            for (const index in responseData) {
                 fetchedBooks.push({
-                    id: responseData[key].id,
-                    title: responseData[key].title,
-                    author: responseData[key].author,
-                    overview: responseData[key].overview,
-                    totalCopies: responseData[key].totalCopies,
-                    copiesInStock: responseData[key].copiesInStock,
-                    category: responseData[key].category,
-                    image: responseData[key].image,
+                    id: responseData[index].id,
+                    title: responseData[index].title,
+                    author: responseData[index].author,
+                    overview: responseData[index].overview,
+                    totalCopies: responseData[index].totalCopies,
+                    copiesInStock: responseData[index].copiesInStock,
+                    category: responseData[index].category,
+                    image: responseData[index].image,
                 });
             }
             setBookItems(fetchedBooks);
@@ -57,18 +63,18 @@ export const UpdateBooksQuantity = () => {
             setLoading(false);
             setHttpError(error.message);
         })
-    }, [currentPage, bookRemove]);
+    }, [actualPage, bookRemove]);
 
-    const lastBookIndex = currentPage * booksPerPage;
+    const lastBookIndex = actualPage * booksPerPage;
     const firstBookIndex = lastBookIndex - booksPerPage;
-    let lastItem = booksPerPage * currentPage <= totalBooks ?
-        booksPerPage * currentPage : totalBooks;
+    const lastItem = Math.min(lastBookIndex, totalBooks);
+
 
     const deleteBook = () => {
         setBookRemove(prev => !prev);
     }
     const handlePageChange = (pageNumber: number) => {
-        setCurrentPage(pageNumber);
+        setActualPage(pageNumber);
     }
 
     if (loading) {
@@ -85,7 +91,7 @@ export const UpdateBooksQuantity = () => {
                 <>
                     <div className="mb-4">
                         <h3 className="fw-bold text-dark">
-                             {t("updateBooks.totalBooks")}: {totalBooks}
+                            {t("updateBooks.totalBooks")}: {totalBooks}
                         </h3>
 
                         <p className="lead text-muted mb-0">
@@ -100,7 +106,7 @@ export const UpdateBooksQuantity = () => {
                     <div className="d-flex flex-column gap-4">
                         {bookItems.map(book => (
                             <div key={book.id} className="card shadow-sm border-0 bg-light p-3">
-                                <UpdateBookQuantity book={book} deleteBook={deleteBook}/>
+                                <UpdateBookQuantity book={book} deleteBook={deleteBook} />
                             </div>
                         ))}
                     </div>
@@ -112,7 +118,7 @@ export const UpdateBooksQuantity = () => {
             )}
             {pageCount > 1 && (
                 <div className="mt-5">
-                    <Pagination currentPage={currentPage} totalPages={pageCount} paginate={handlePageChange} />
+                    <Pagination currentPage={actualPage} totalPages={pageCount} paginate={handlePageChange} />
                 </div>
             )}
         </div>

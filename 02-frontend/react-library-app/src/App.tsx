@@ -16,6 +16,8 @@ import { LibraryActivity } from './components/LibraryActivityPage/LibraryActivit
 import { MessagePage } from './components/MessagesPage/MessagePage';
 import { LibraryAdminPanel } from './components/LibraryAdminPanel/LibraryAdminPanel';
 import { PaymentDashboard } from './components/PaymentDashboard/PaymentDashboard';
+import Accessibility from './components/Accessibility/Accessibility';
+import AboutUs from './components/AboutUs/AboutUs';
 
 
 const oktaAuth = new OktaAuth(oktaConfig);
@@ -52,6 +54,12 @@ export const App = () => {
             </Route>
             <Route path='/checkout/:bookId'>
               <CheckoutBook />
+            </Route>
+            <Route path='/accessibility'>
+              <Accessibility />
+            </Route>
+            <Route path='/aboutUs'>
+              <AboutUs/>
             </Route>
             <Route path='/login' render={() => <OktaLoginWidget config={oktaConfig} />} />
             <Route path='login/callback' component={LoginCallback} />

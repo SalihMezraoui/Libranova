@@ -1,0 +1,350 @@
+\chapter{Implementierung}
+
+Im Rahmen dieses Kapitels werden exemplarisch zwei wesentliche Funktionalitäten der Webanwendung behandelt – der Ausleihprozess sowie das Verfahren zur Rückgabe eines Buches. 
+
+
+\section{Ausleihprozess eines Buches}\index{Ausleihprozess eines Buches}
+Im Folgenden wird der Ausleihprozess eines Buches aus Sicht des Backends sowie des Frontends detailliert beschrieben.
+
+\subsection{Backend-Prozess}\index{Backend-Prozess}
+In diesem Abschnitt wird der gesamte Backend-Prozess der Buchausleihe detailliert beschrieben. Die folgende Darstellung umfasst die beteiligten Repositories, die Service-Schicht inklusive aller Hilfsmethoden sowie den REST-Endpunkt im Controller.
+
+\subsection*{Zugriff auf Daten: Repositories}
+
+\textbf{1. \texttt{PaymentRepository}} \\
+Da das \texttt{PaymentRepository} bereits im vorherigen Kapitel (siehe Listing~\ref{lst:Payment-repo} im Zusammenhang mit Spring Data REST und JPA vorgestellt wurde, wird an dieser Stelle lediglich darauf verwiesen. Es wird für die Überprüfung offener Zahlungen verwendet.
+
+\noindent \textbf{2. \texttt{CheckoutRepository}} \\
+Für den Ausleihprozess wurde in diesem Repository (siehe Listing~\ref{lst:Checkout-repo}) diese Methoden genutzt:
+\begin{lstlisting}[language=Java, caption=CheckoutRepository.java, label=lst:Checkout-repo, breaklines=true]
+	public interface CheckoutRepository extends JpaRepository<Checkout, Long> {
+		List<Checkout> findByUserEmail(String userEmail);
+		Checkout findByUserEmailAndBookId(String userEmail, Long bookId);
+	}
+\end{lstlisting}
+
+\noindent Die erste Methode ruft alle ausgeliehenen Bücher eines bestimmten Nutzers anhand seiner E-Mail-Adresse ab. Die zweite Methode ruft einen einzelnen Checkout-Eintrag aus der Datenbank ab, der zur angegebenen E-Mail-Adresse des Benutzers und der ID des Buches gehört.
+
+\subsection*{Geschäftslogik: Die Methode \texttt{checkoutBook} im BookService}
+
+Die Methode \texttt{checkoutBook} (siehe Listing~\ref{lst:Checkout-service}) enthält den gesamten Ablauf der Buchausleihe. Im Folgenden wird die Methode vollständig dargestellt und im Anschluss schrittweise erklärt:
+
+\begin{lstlisting}[style=pseudocode, caption=checkoutBook() Methode im BookService.java, label=lst:Checkout-service]
+	public Book checkoutBook(String userEmail, Long bookId) throws Exception {
+		Book book = bookRepository.findById(bookId)
+		.orElseThrow(() -> new BookNotAvailableException("Book with ID " + bookId + " is not available."));
+		
+		checkAvailability(book, userEmail);
+		
+		List<Checkout> userCheckouts = checkoutRepository.findByUserEmail(userEmail);
+		boolean hasOverdueBooks = hasOverdueBooks(userCheckouts);
+		
+		Payment payment = paymentRepository.findByUserEmail(userEmail);
+		
+		if ((payment != null && payment.getAmount() > 0) || (payment != null && hasOverdueBooks)) {
+			throw new Exception("The loan has been blocked due to outstanding payments or overdue books.");
+		}
+		
+		if (payment == null) {
+			createZeroPayment(userEmail);
+		}
+		
+		decrementBookStock(book);
+		createCheckoutRecord(userEmail, book);
+		
+		return book;
+	}
+\end{lstlisting}
+
+\noindent \textbf{Erklärung:}\\
+- \textbf{Zeile 2--3:} Das Buch wird anhand der ID geladen. Wenn es nicht existiert, wird eine Ausnahme geworfen. \\
+- \textbf{Zeile 5:} Es wird geprüft, ob das Buch verfügbar ist und noch nicht vom Benutzer ausgeliehen wurde. \\
+- \textbf{Zeile 7:} Alle bisherigen Ausleihen des Benutzers werden geladen. \\
+- \textbf{Zeile 8:} Es wird überprüft, ob überfällige Bücher dabei sind.\\
+- \textbf{Zeile 10:} Die Zahlungsinformationen des Benutzers werden geladen.\\
+- \textbf{Zeile 12--14:} Falls offene Zahlungen oder überfällige Bücher vorhanden sind, wird eine Sperre ausgelöst.\\
+- \textbf{Zeile 16--18:} Wenn kein Zahlungseintrag vorhanden ist, wird einer mit 0 Euro erstellt.\\
+- \textbf{Zeile 20:} Der Buchbestand wird um eins reduziert.\\
+- \textbf{Zeile 21:} Ein neuer Ausleihdatensatz wird erstellt.\\
+- \textbf{Zeile 23:} Das Buchobjekt wird zurückgegeben.\\
+
+\noindent \textbf{Hilfsmethoden:}
+\begin{lstlisting}[style=pseudocode, caption=checkAvailability(), label=checkAvailability]
+	private void checkAvailability(Book book, String userEmail) {
+		if (checkoutRepository.findByUserEmailAndBookId(userEmail, book.getId()) != null) {
+			throw new BookNotAvailableException("The book has already been borrowed.");
+		}
+		if (book.getCopiesInStock() <= 0) {
+			throw new BookNotAvailableException("No copies available for loan.");
+		}
+	}
+\end{lstlisting}
+Diese Methode \ref{checkAvailability} Prüft, ob das Buch bereits vom Benutzer ausgeliehen wurde und Verhindert Ausleihe, wenn keine Kopien mehr verfügbar sind.
+
+\begin{lstlisting}[language=Java, caption=hasOverdueBooks(), label=lst:hasOverdueBooks]
+	private boolean hasOverdueBooks(List<Checkout> checkouts) {
+		LocalDate today = LocalDate.now();
+		
+		for (Checkout checkout : checkouts) {
+			LocalDate returnDate = LocalDate.parse(checkout.getReturnDate());
+			if (returnDate.isBefore(today)) {
+				return true;
+			}
+		}
+		return false;
+	}
+\end{lstlisting}
+Diese Methode  \ref{lst:hasOverdueBooks} überprüft, ob in der übergebenen Liste von Checkout-Einträgen mindestens ein Buch enthalten ist, dessen Rückgabedatum vor dem heutigen Datum liegt – also überfällig ist.
+
+\begin{lstlisting}[language=Java, caption=createZeroPayment(), label=createZeroPayment]
+	private void createZeroPayment(String userEmail) {
+		Payment newPayment = new Payment();
+		newPayment.setUserEmail(userEmail);
+		newPayment.setAmount(0.0);
+		paymentRepository.save(newPayment);
+	}
+\end{lstlisting}
+Diese Methode \ref{createZeroPayment} erstellt eine neue Zahlung mit dem Betrag 0.0 für die angegebene Benutzer-E-Mail und speichert sie in der Datenbank über das PaymentRepository.
+
+\begin{lstlisting}[language=Java, caption=decrementBookStock(), label=decrementBookStock]
+	private void decrementBookStock(Book book) {
+		book.setCopiesInStock(book.getCopiesInStock() - 1);
+		bookRepository.save(book);
+	}
+\end{lstlisting}
+Diese Methode \ref{decrementBookStock} reduziert den Lagerbestand des übergebenen Buchs um eins und speichert die Änderung in der Datenbank.
+
+\begin{lstlisting}[language=Java, caption=createCheckoutRecord(), label=createCheckoutRecord, breaklines=true]
+	private void createCheckoutRecord(String userEmail, Book book) {
+		Checkout checkout = new Checkout(userEmail, LocalDate.now().toString(),
+		LocalDate.now().plusDays(CHECKOUT_PERIOD_DAYS).toString(), book.getId());
+		checkoutRepository.save(checkout);
+	}
+\end{lstlisting}
+Diese Methode \ref{createCheckoutRecord} erstellt einen neuen Ausleihdatensatz für das angegebene Buch und den Benutzer mit dem aktuellen Datum und speichert ihn in der Datenbank.
+
+
+\subsection*{Schnittstelle zum Frontend: BookController}
+
+Der REST-Endpunkt (siehe \ref{BookController.java}) empfängt Anfragen zur Ausleihe und leitet sie an den Service weiter:
+
+\begin{lstlisting}[language=Java, caption=checkoutBook() im BookController.java, label=BookController.java]
+	@PutMapping("/secure/checkout")
+	public Book checkoutBook(Authentication authentication,
+	@RequestParam Long bookId) throws Exception {
+		String userEmail = authentication.getName();
+		return bookService.checkoutBook(userEmail, bookId);
+	}
+\end{lstlisting}
+
+\noindent - \texttt{@PutMapping}: Definiert den Pfad zum Ausleih-Endpunkt.\\
+- \texttt{Authentication}: Ermöglicht Zugriff auf die Benutzerinformationen über Spring Security.\\
+- Die Methode ruft den Ausleihprozess im Service auf und gibt das ausgeliehene Buch zurück.
+
+\subsection{Frontend-Prozess}\index{Frontend-Prozess}
+
+Im Frontend wird der Ausleihprozess in der Komponente \texttt{CheckoutBook} umgesetzt. Hierzu werden zwei zentrale Methoden verwendet: \texttt{checkoutBook()} für den API-Aufruf und \texttt{renderButton()} zur Darstellung der passenden Benutzeroberfläche.
+
+\subsection*{API-Aufruf zur Ausleihe eines Buches}
+
+Die folgende Methode (siehe \ref{checkoutBook.tsx}) übernimmt den API-Aufruf an das Backend, um ein Buch auszuleihen:
+
+\begin{lstlisting}[language=Java, caption=checkoutBook() Methode in CheckoutBook.tsx, label=checkoutBook.tsx, breaklines=true]
+	async function checkoutBook() {
+		const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/checkout?bookId=${bookId}`;
+		const response = {
+			method: 'PUT',
+			headers: {
+				Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+				'Content-Type': 'application/json'
+			}
+		};
+		const res = await fetch(apiUrl, response);
+		if (!res.ok) {
+			setShowError(true);
+			return;
+		}
+		setShowError(false);
+		setIsBookCheckedOut(true);
+	}
+\end{lstlisting}
+
+\noindent \textbf{Erklärung:}\\
+- \texttt{apiUrl}: Baut die URL für den API-Endpunkt mit dem Buch-ID als Parameter.\\
+- \texttt{response}: Enthält die Methode (PUT) und den Authentifizierungs-Token.\\
+- \texttt{fetch()}: Sendet die Anfrage an das Backend.\\
+- \texttt{!res.ok}: Falls der Server einen Fehler zurückgibt, wird ein Fehler angezeigt.\\
+- \texttt{setShowError(false)}: Versteckt die Fehlermeldung, falls alles korrekt lief.\\
+- \texttt{setIsBookCheckedOut(true)}: Setzt den Status, dass das Buch nun ausgeliehen ist.
+
+\subsection*{Benutzeroberfläche: Auswahl der richtigen Aktion}
+
+Die Methode \texttt{renderButton()} (siehe \ref{renderButton()}) entscheidet, welcher Button oder Hinweis dem Benutzer angezeigt wird. Es werden vier Möglichkeiten unterschieden:
+
+\begin{lstlisting}[style=pseudocode, caption=renderButton() in CheckoutAndReviewBox.tsx, label=renderButton(), breaklines=true]
+	function renderButton() {
+		if (props.isAuthenticated) {
+			if (!props.isCheckedOut && props.currentLoans < 5) {
+				return (
+				<button onClick={() => props.checkoutBook()}
+				className="btn btn-success btn-lg">
+				{t("checkout.checkout")}</button>
+				)
+			} else if (props.isCheckedOut) {
+				return (<p><b>{t("checkout.alreadyCheckedOut")}</b></p>)
+			} else if (!props.isCheckedOut) {
+				return (<p className="text-danger">{t("checkout.maxReached")}</p>)
+			}
+		}
+		return (
+		<Link to='/login' className="btn btn-success btn-lg">
+		{t("checkout.signIn")}</Link>
+		)
+	}
+\end{lstlisting}
+
+\noindent \textbf{Erklärung:} \\
+- \texttt{if (props.isAuthenticated)}: Zeigt die Optionen nur für eingeloggte Benutzer.\\
+- \texttt{!props.isCheckedOut \&\& props.currentLoans < 5}: Ausleih-Button erscheint, wenn das Buch noch nicht  ausgeliehen ist und weniger als 5 aktive Ausleihen bestehen.\\
+- \texttt{props.isCheckedOut}: Zeigt Meldung, dass Buch bereits ausgeliehen wurde.\\
+- \texttt{!props.isCheckedOut} bei 5 Ausleihen: Zeigt Fehlermeldung zur max. Grenze.\\
+- \texttt{else}: Bei nicht eingeloggten Nutzern erscheint der Login-Link.
+
+\subsection*{Einbindung des Buttons in die Oberfläche}
+
+Die Methode renderButton() wird innerhalb des return-Blocks der Komponente CheckoutAndReviewBox.tsx wie folgt eingebunden: {renderButton()}.
+
+\section{Verfahren zur Rückgabe eines Buches}\index{Verfahren zur Rückgabe eines Buches}
+Im Folgenden wird das Verfahren zur Rückgabe eines Buches sowohl im Backend als auch im Frontend erläutert.
+
+\subsection{Backend-Prozess}\index{Backend-Prozess}
+Der Rückgabeprozess nutzt die bereits beschriebenen Repositories \ref{lst:Checkout-repo} und \ref{lst:Payment-repo}. 
+
+\subsection*{Geschäftslogik: Die Methode \texttt{returnBook} im BookService.java} 
+
+Die zentrale Logik zur Rückgabe befindet sich in der folgenden Methode \ref{returnBook().java}:
+
+\begin{lstlisting}[style=pseudocode, caption=returnBook() Methode in BookService.java, label=returnBook().java, breaklines=true]
+	public void returnBook(String userEmail, Long bookId) throws ParseException {
+		Book book = bookRepository.findById(bookId)
+		.orElseThrow(() -> new BookNotAvailableException("Book with ID " + bookId + " is not available."));
+		
+		Checkout checkout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
+		if (checkout == null) {
+			throw new BookNotAvailableException("No active checkout found for book with ID " + bookId + ".");
+		}
+		
+		book.setCopiesInStock(book.getCopiesInStock() + 1);
+		bookRepository.save(book);
+		
+		LocalDate dueDate = LocalDate.parse(checkout.getReturnDate());
+		LocalDate today = LocalDate.now();
+		long daysOverdue = ChronoUnit.DAYS.between(dueDate, today);
+		
+		if (daysOverdue > 0) {
+			Payment payment = paymentRepository.findByUserEmail(userEmail);
+			if (payment == null) {
+				payment = new Payment();
+				payment.setUserEmail(userEmail);
+				payment.setAmount(0.0);
+			}
+			payment.setAmount(payment.getAmount() + daysOverdue * 2);
+			paymentRepository.save(payment);
+		}
+		
+		checkoutRepository.deleteById(checkout.getId());
+		
+		History history = History.builder()
+		.userEmail(userEmail)
+		.checkoutDate(checkout.getCheckoutDate())
+		.returnedDate(LocalDate.now().toString())
+		.title(book.getTitle())
+		.author(book.getAuthor())
+		.overview(book.getOverview())
+		.image(book.getImage())
+		.build();
+		
+		historyRepository.save(history);
+	}
+\end{lstlisting}
+
+\noindent \textbf{Erklärung:}\\
+- \texttt{findById()}: Holt das Buch-Objekt aus der Datenbank oder wirft eine Exception.\\
+- \texttt{findByUserEmailAndBookId()}: Holt die Ausleihe dieses Nutzers für das Buch.\\
+- Wenn kein Checkout existiert, wird eine Ausnahme geworfen.\\
+- Das Buch wird wieder auf Lager erhöht und gespeichert.\\
+- Das Rückgabedatum wird geprüft, um eventuelle Verspätungsgebühren zu berechnen.\\
+- Falls überfällig, wird der Betrag berechnet (z.\,B. 2 Euro pro Tag) und gespeichert.\\
+- Der Checkout-Eintrag wird gelöscht.\\
+- Abschließend wird ein History-Eintrag mit allen Buch- und Ausleihinformationen gespeichert.
+
+
+\subsection*{Rückgabe-Endpunkt im Controller}
+
+Die Controller-Methode(siehe  \ref{lst:returnBook()}) ist für die Entgegennahme der Anfrage aus dem Frontend zuständig:
+
+\begin{lstlisting}[language=Java, caption=returnBook() Endpoint in BookController.java, label=lst:returnBook()]
+	@PutMapping("/secure/return")
+	public void returnBook(Authentication authentication,
+	@RequestParam Long bookId) throws ParseException {
+		String userEmail = authentication.getName();
+		bookService.returnBook(userEmail, bookId);
+	}
+\end{lstlisting}
+
+\noindent \textbf{Erklärung:}\\
+- Der Endpunkt verarbeitet eine PUT-Anfrage mit dem Buch-ID als Parameter.\\
+- Die E-Mail des Benutzers wird über das Authentication-Objekt extrahiert.\\
+- Der Service übernimmt die Logik für die Rückgabe.
+
+\subsection{Frontend-Prozess}\index{Frontend-Prozess}
+Die Rückgabe eines Buches erfolgt durch einen Button innerhalb der Benutzeroberfläche  der ausgeliehenen Bücher. Der Button ist wie folgt definiert (siehe \ref{retrurnBook-Button}):
+
+\begin{lstlisting}[style=pseudocode, caption=retrurnBook-Button in LoanDetailsModal.tsx, label=retrurnBook-Button]
+	<button
+	onClick={() => props.returnBook(props.userLoanSummary.book.id)}
+	type="button"
+	data-bs-dismiss="modal"
+	className="btn btn-outline-success rounded-pill py-1 px-2 mb-2 small"
+	>
+	{t("loanDetails.returnBook")}
+	</button>
+\end{lstlisting}
+
+\noindent \textbf{Erklärung:} \\
+- \texttt{onClick={() => props.returnBook(props.userLoanSummary.book.id)}}: Beim Klick wird die Funktion \texttt{returnBook()} mit der \texttt{bookId} des ausgeliehenen Buches aufgerufen.\\
+- \texttt{data-bs-dismiss="modal"}: Schließt das Bootstrap-Modal nach dem Klick automatisch.\\
+- \texttt{className="..."}: Definiert das Styling des Buttons (grün, umrandet, abgerundet, klein).\\
+- \texttt{{t("loanDetails.returnBook")}}: Holt den lokalisierten Text für „Buch zurückgeben“ aus der Übersetzungsdatei.
+
+\noindent Beim Klicken auf den Button wird die Methode \texttt{returnBook()} (siehe \ref{returnBook-fucntion}) aufgerufen, welche als \texttt{async} Funktion in der Datei \texttt{loans.tsx} definiert ist:
+
+
+\begin{lstlisting}[style=pseudocode, caption=returnBook() in Loans.tsx, label=returnBook-fucntion, breaklines=true]
+	async function returnBook(bookId: number) {
+		const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/return?bookId=${bookId}`;
+		const requestOptions = {
+			method: 'PUT',
+			headers: {
+				Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+				'Content-Type': 'application/json'
+			}
+		};
+		const response = await fetch(apiUrl, requestOptions);
+		if (!response.ok) {
+			throw new Error('Something went wrong while returning the book!');
+		}
+		setCheckout(!checkout);
+	}
+\end{lstlisting}
+
+\noindent \textbf{Erklärung:} \\
+- \texttt{const apiUrl = ...}: Erstellt die API-URL mit Query-Parameter \texttt{bookId}, um das Rückgabe-Ende im Backend anzusprechen.\\
+- \texttt{const requestOptions = \{\}}: Konfiguriert die HTTP-Anfrage mit Methode und Headern.\\
+- \texttt{method: 'PUT'}: Gibt an, dass es sich um eine \texttt{PUT}-Anfrage handelt (für Rückgabe geeignet).\\
+- \texttt{Authorization: \texttt{Bearer ...}}: Hängt das JWT-Token im Header an, um die Anfrage zu authentifizieren.\\
+- \texttt{'Content-Type': 'application/json'}: Gibt das Format der übertragenen Daten an.\\
+- \texttt{const response = await fetch(...)}: Führt die Anfrage asynchron aus und wartet auf die Antwort.\\
+- \texttt{if (!response.ok)}: Überprüft, ob ein Fehler vom Server zurückgegeben wurde.\\
+- \texttt{throw new Error(...)}: Löst bei Fehlern eine Ausnahme mit passender Meldung aus.\\
+- \texttt{setCheckout(!checkout)}: Aktualisiert den \texttt{checkout}-State, um die Oberfläche neu zu laden bzw. den Rückgabezustand zu reflektieren.

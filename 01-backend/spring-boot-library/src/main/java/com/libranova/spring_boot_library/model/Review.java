@@ -24,17 +24,19 @@ public class Review {
     @Column(name = "user_email", nullable = false)
     private String userEmail;
 
-    @Column(name = "date")
+    @Column(name = "created_at")
     @CreationTimestamp
-    private Date date;
+    private Date createdAt;
 
-    @Column(name = "rating", nullable = false)
-    private double rating;
+    @Column(name = "rating_value", nullable = false)
+    private double ratingValue;
 
     @Column(name = "book_id")
     private long bookId;
 
-    @Column(name = "review_description", columnDefinition = "TEXT")
-    private String reviewDescription;
+    @Column(name = "comment", columnDefinition = "TEXT")
+    private String comment;
 
+    @Column(name = "language")
+    private String language;
 }

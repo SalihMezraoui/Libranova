@@ -6,30 +6,32 @@ import { Link } from "react-router-dom";
 import { Pagination } from "../../Widgets/Pagination";
 import { useTranslation } from "react-i18next";
 
-
 export const HistoryTab = () => {
 
+    // Okta authentication state and translation hooks
     const { authState } = useOktaAuth();
-    const { t } = useTranslation();
-    const [isLoadingHistory, setIsLoadingHistory] = useState(true);
-    const [httpError, setHttpError] = useState(null);
+    const { t, i18n } = useTranslation();
+
+    // State to manage loading and error states
+    const [loadingHistory, setLoadingHistory] = useState(true);
+    const [httpError, setHttpError] = useState<string | null>(null);
 
     // State to hold the history data
     const [history, setHistory] = useState<History[]>([]);
 
-    // pagination state
-    const [currentPage, setCurrentPage] = useState(1);
+    // pagination states
+    const [actualPage, setActualPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
-        const fetchHistory = async () => {
+        const retrieveHistory = async () => {
             if (authState && authState.isAuthenticated) {
-                const apiUrl = `${process.env.REACT_APP_API_URL}/histories/search/findBooksByUserEmail?userEmail=${authState.accessToken?.claims.sub}&page=${currentPage - 1}&size=5`;
+                const apiUrl = `${process.env.REACT_APP_API_URL}/histories/search/findBooksByUserEmail?userEmail=${authState.accessToken?.claims.sub}&page=${actualPage - 1}&size=5`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                    }
+                    },
                 };
                 const response = await fetch(apiUrl, requestOptions);
                 if (!response.ok) {
@@ -40,18 +42,17 @@ export const HistoryTab = () => {
                 setHistory(jsonResponse._embedded.histories);
                 setTotalPages(jsonResponse.page.totalPages);
             }
-            setIsLoadingHistory(false);
-        }
-        fetchHistory().catch((error: any) => {
-            setIsLoadingHistory(false);
-            setHttpError(error.message || "Something went wrong!");
-        })
-    }, [authState, currentPage]);
+            setLoadingHistory(false);
+        };
 
-    if (isLoadingHistory) {
-        return (
-            <BreathingLoader />
-        )
+        retrieveHistory().catch((error: any) => {
+            setLoadingHistory(false);
+            setHttpError(error.message || "Something went wrong!");
+        });
+    }, [authState, actualPage]);
+
+    if (loadingHistory) {
+        return <BreathingLoader />;
     }
 
     if (httpError) {
@@ -63,8 +64,8 @@ export const HistoryTab = () => {
     }
 
     const paginate = (pageNumber: number) => {
-        setCurrentPage(pageNumber);
-    }
+        setActualPage(pageNumber);
+    };
 
     return (
         <div className="container py-4">
@@ -72,49 +73,68 @@ export const HistoryTab = () => {
                 <>
                     <h3 className="mb-4 fw-semibold text-secondary">{t("historyTab.title")}</h3>
 
-                    {history.map((historyItem) => (
-                        <div key={historyItem.id} className="mb-4">
-                            <div className="card shadow-sm border-0 p-3 rounded-4 bg-light-subtle">
-                                <div className="row g-3 align-items-center">
-                                    {/* Book Image */}
-                                    <div className="col-md-2 text-center">
-                                        <img
-                                            src={
-                                                historyItem.image ||
-                                                require('../../../Images/Books/book-1.png')
-                                            }
-                                            width={130}
-                                            height={200}
-                                            alt="Book"
-                                            className="rounded-3 border"
-                                        />
-                                    </div>
+                    {history.map((historyItem) => {
+                        const checkoutDate = new Date(historyItem.checkoutAt);
+                        const returnedDate = new Date(historyItem.returnedAt);
 
-                                    {/* Book Details */}
-                                    <div className="col-md-6">
-                                        <div className="card-body p-0">
-                                            <h4 className="fw-bold text-dark mb-1">{historyItem.title}</h4>
-                                            <p className="text-muted fst-italic mb-2">{historyItem.author}</p>
-                                            <p className="text-body">{historyItem.overview}</p>
+                        const formattedCheckoutDate = checkoutDate.toLocaleDateString(i18n.language, {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        });
+
+                        const formattedReturnedDate = returnedDate.toLocaleDateString(i18n.language, {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        });
+
+                        return (
+                            <div key={historyItem.id} className="mb-4">
+                                <div className="card shadow-sm border-0 p-3 rounded-4 bg-light-subtle">
+                                    <div className="row g-3 align-items-center">
+                                        {/* Book Image */}
+                                        <div className="col-md-2 text-center">
+                                            <img
+                                                src={
+                                                    historyItem.image ||
+                                                    require('../../../Images/Books/book-1.png')
+                                                }
+                                                width={130}
+                                                height={200}
+                                                alt="Book"
+                                                className="rounded-3 border"
+                                            />
                                         </div>
-                                    </div>
 
-                                    {/* Dates */}
-                                    <div className="col-md-4">
-                                        <div className="bg-light-subtle border-start border-3 border-primary ps-3 ms-2 rounded">
-                                            <p className="mb-2 small text-primary-emphasis">
-                                                <strong>{t("historyTab.checkedOut")}:</strong> {historyItem.checkoutDate}
-                                            </p>
-                                            <p className="mb-0 small text-success-emphasis">
-                                                <strong>{t("historyTab.returnedOn")}:</strong> {historyItem.returnedDate}
-                                            </p>
+                                        {/* Book Details */}
+                                        <div className="col-md-6">
+                                            <div className="card-body p-0">
+                                                <h4 className="fw-bold text-dark mb-1">{historyItem.title}</h4>
+                                                <p className="text-muted fst-italic mb-2">{historyItem.author}</p>
+                                                <p className="text-body" style={{ textAlign: "justify" }}>
+                                                    {historyItem.overview}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        {/* Dates */}
+                                        <div className="col-md-4">
+                                            <div className="bg-light-subtle border-start border-3 border-primary ps-3 ms-2 rounded">
+                                                <p className="mb-2 small text-primary-emphasis">
+                                                    <strong>{t("historyTab.checkedOut")}:</strong> {formattedCheckoutDate}
+                                                </p>
+                                                <p className="mb-0 small text-success-emphasis">
+                                                    <strong>{t("historyTab.returnedOn")}:</strong> {formattedReturnedDate}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                <hr className="opacity-25" />
                             </div>
-                            <hr className="opacity-25" />
-                        </div>
-                    ))}
+                        );
+                    })}
                 </>
             ) : (
                 <div className="text-center mt-5">
@@ -131,13 +151,12 @@ export const HistoryTab = () => {
             {totalPages > 1 && (
                 <div className="mt-4">
                     <Pagination
-                        currentPage={currentPage}
+                        currentPage={actualPage}
                         totalPages={totalPages}
                         paginate={paginate}
                     />
                 </div>
             )}
         </div>
-
     );
-}
+};

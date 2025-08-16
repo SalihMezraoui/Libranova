@@ -19,6 +19,17 @@
         "next": "Weiter",
         "more": "Mehr anzeigen"
     },
+    "bookShowCase": {
+        "welcomeMessage": "Willkommen bei Libranova",
+        "welcomeDescription": "Deine persönliche Plattform für handverlesene Bücher, inspirierende Empfehlungen und literarische Highlights – alles nur einen Klick entfernt.",
+        "browseBooks": "Stöbere in Büchern",
+        "browseBooksDescription": "Stöbere in einer sorgfältig ausgewählten Sammlung von Büchern.",
+        "personalRecommendations": "Persönliche Empfehlungen",
+        "personalRecommendationsDescription": "Erhalte Vorschläge, die perfekt zu deinen Interessen passen.",
+        "trackReadingProgress": "Lesefortschritt verfolgen",
+        "trackReadingProgressDescription": "Behalte den Überblick über deine aktuelle Leseliste und abgeschlossene Bücher.",
+        "signIn": "Jetzt registrieren"
+    },
     "librarySupport": {
         "title": "Fehlt dir ein bestimmtes Buch?",
         "subtitle": "Solltest du nicht finden, was du suchst, kontaktiere gerne unsere Admins persönlich.",
@@ -29,16 +40,21 @@
     },
     "header": {
         "home": "Startseite",
+        "aboutUs": "Über uns",
         "searchBooks": "Bücher suchen",
         "libraryActivity": "Bibliotheksaktivität",
+        "messages": "Mein Posteingang",
         "overdueCharges": "Überfällige Gebühren",
         "admin": "Admin",
+        "hello": "Hallo",
         "login": "Login",
         "logout": "Abmelden"
     },
     "footer": {
         "home": "Startseite",
-        "searchBooks": "Bücher suchen"
+        "searchBooks": "Bücher suchen",
+        "aboutUs": "Über uns",
+        "accessibility": "Barrierefreiheit"
     },
     "checkout": {
         "checkout": "Ausleihen",
@@ -60,6 +76,13 @@
         "title": "Neueste Rezensionen",
         "seeAll": "Alle Rezensionen anzeigen",
         "noReviews": "Noch keine Rezensionen."
+    },
+    "about_us": {
+        "title": "Über uns",
+        "description": "Libranova ist ein modernes Bibliotheksverwaltungssystem, gegründet im Jahr 2024, das das Ausleihen von Büchern einfacher, schneller und angenehmer macht. Wir bieten eine riesige Auswahl an Titeln – von zeitlosen Klassikern bis hin zu den neuesten Veröffentlichungen – damit jeder Leser etwas findet, das ihm gefällt. Mit flexiblen Verlängerungsmöglichkeiten, exklusivem Zugang zu neu erschienenen Büchern und personalisierten Empfehlungen begleitet Sie Libranova auf Ihrem gesamten Leseweg. Ob Student, Forscher oder Freizeitleser – unsere Plattform verbindet Sie jederzeit und überall mit der Welt des Wissens.",
+        "point1": "Leihen Sie neu erschienene Bücher sofort nach ihrer Veröffentlichung aus",
+        "point2": "Verlängern Sie Ihre Ausleihfrist mit nur wenigen Klicks",
+        "point3": "Greifen Sie jederzeit und überall auf eine große Auswahl an Büchern zu"
     },
     "libraryActivity": {
         "loans": "Ausleihen",
@@ -130,6 +153,7 @@
             "frontend": "Front-End",
             "backend": "Back-End",
             "dataScience": "Data Science",
+            "cyberSecurity": "Cyber-Sicherheit",
             "devops": "DevOps"
         }
     },
@@ -148,8 +172,8 @@
         "author": "Autor",
         "total": "Gesamt",
         "available": "Verfügbar",
-        "increaseBtn": "Anzahl erhöhen",
-        "decreaseBtn": "Anzahl verringern",
+        "increaseBtn": "Erhöhen",
+        "decreaseBtn": "Verringern",
         "remove": "Löschen",
         "deleteConfirmTitle": "Möchten Sie \"{{title}}\" wirklich löschen?",
         "deleteWarning": "Diese Aktion kann nicht rückgängig gemacht werden.",
@@ -198,12 +222,17 @@
         "search_button": "Suchen",
         "category": "Kategorie",
         "viewDetails": "Details anzeigen",
+        "available": "Verfügbar",
+        "notAvailable": "Nicht verfügbar",
+        "unknown": "Unbekannt",
+        "author": "Autor:",
         "categories": {
             "category": "Kategorie",
             "all": "Alle",
             "fe": "Front-End",
             "be": "Back-End",
             "data": "Data Science",
+            "sc": "Cyber-Sicherheit",
             "devops": "DevOps"
         },
         "total_results": "Anzahl der Ergebnisse:",
@@ -223,5 +252,29 @@
         "submit_button": "Bewertung absenden",
         "star_option": "{{count}} Stern",
         "star_option_plural": "{{count}} Sterne"
+    },
+    "accessibility": {
+        "title": "Barrierefreiheit",
+        "description": "Unsere Anwendung ist so gestaltet, dass sie für alle zugänglich ist, unabhängig vom Gerät oder den Fähigkeiten der Nutzer*innen.",
+        "keyboard": "Vollständig per Tastatur steuerbar",
+        "keyboard_desc": "Die Anwendung ist komplett ohne Maus bedienbar. Alle interaktiven Elemente können in einer logischen Reihenfolge mit der Tab-Taste erreicht werden, wobei sichtbare Fokusindikatoren für Orientierung sorgen. Skip-Links ermöglichen das schnelle Springen zum Hauptinhalt, und ARIA-Attribute gewährleisten die Kompatibilität mit unterstützenden Technologien.",
+        "responsive": "Optimiert für Mobilgeräte, Tablets und Desktop-Computer",
+        "responsive_desc": "Die Benutzeroberfläche passt sich dynamisch an verschiedene Bildschirmgrößen an, unter Einsatz von responsiven Designtechniken wie flexiblen Layouts, CSS-Media-Queries und skalierbaren Elementen. So wird eine konsistente und zugängliche Nutzererfahrung auf Smartphones, Tablets, Laptops und Desktop-Computern gewährleistet.",
+        "colors": "Hoher Kontrast und augenfreundliche Farbpalette",
+        "colors_desc": "Die Farben wurden so gewählt, dass sie den WCAG 2.1 AA Kontrastanforderungen entsprechen und die Lesbarkeit für Nutzer*innen mit Sehbehinderungen verbessern. Zusätzlich werden alternative Texte und farbunabhängige Hinweise verwendet, damit wichtige Informationen nicht allein durch Farbe vermittelt werden.",
+        "clarity": "Klare Struktur und beschreibende Elemente",
+        "clarity_desc": "Die Anwendung verwendet semantische HTML5-Elemente, aussagekräftige Überschriften und ARIA-Landmarks, um eine klare Struktur zu schaffen. Beschriftungen und Anleitungen sind in einfacher Sprache verfasst, um die Navigation für alle Nutzer*innen, einschließlich Menschen mit kognitiven Beeinträchtigungen, zu erleichtern.",
+        "multilang": "Verfügbar in mehreren Sprachen (Englisch und Deutsch)",
+        "multilang_desc": "Alle sichtbaren Texte sind sowohl auf Englisch als auch auf Deutsch verfügbar. Nutzer*innen können die Sprache über einen Sprachumschalter sofort wechseln, wobei die Inhalte dynamisch ohne Neuladen der Seite aktualisiert werden.",
+        "show_more": "Mehr anzeigen",
+        "hide": "Weniger anzeigen"
+    },
+    "paymenthistory": {
+        "history": "Zahlungshistorie",
+        "invoice_ref": "Rechnungsreferenz",
+        "date": "Datum",
+        "amount": "Betrag",
+        "method": "Zahlungsmethode",
+        "no_history": "Keine Zahlungshistorie verfügbar."
     }
 }

@@ -78,12 +78,19 @@
 		</dependency>
 
 		<!-- Spring Boot Starter Test -->
+		<!-- Spring Boot Starter Test (JUnit 5 + Mockito included) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
+		<!-- For Mockito with JUnit 5 -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<!-- SpringDoc OpenAPI (Swagger) -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

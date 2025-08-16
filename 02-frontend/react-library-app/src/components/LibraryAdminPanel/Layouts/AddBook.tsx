@@ -5,17 +5,25 @@ import { useTranslation } from "react-i18next";
 
 export const AddBook = () => {
 
-    const { authState } = useOktaAuth();
-    const { t } = useTranslation();
-    const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
-    const [overview, setOverview] = useState('');
-    const [totalCopies, setTotalCopies] = useState(0);
-    const [category, setCategory] = useState('Category');
-    const [image, setImage] = useState<any>(null);
-    const [showWarning, setShowWarning] = useState(false);
-    const [showSuccess, setShowSuccess] = useState(false);
-    const [fileName, setFileName] = useState('');
+    //  Auth & localisation
+    const { authState } = useOktaAuth(); // Handles authentication state from Okta
+    const { t } = useTranslation(); // For translations/localisation
+
+    // Book details
+    const [overview, setOverview] = useState(''); // Book overview text
+    const [category, setCategory] = useState('Category'); // Book category
+    const [author, setAuthor] = useState(''); // Book author name
+    const [title, setTitle] = useState(''); // Book title
+    const [totalCopies, setTotalCopies] = useState(0); // Number of copies
+
+    // Media
+    const [image, setImage] = useState<any>(null); // Book cover image
+    const [fileName, setFileName] = useState(''); // File name for uploaded image
+
+    // UI feedback states
+    const [showSuccess, setShowSuccess] = useState(false); // Success message visibility
+    const [showWarning, setShowWarning] = useState(false); // Warning message visibility
+
 
 
     function categorySelector(input: any) {
@@ -42,7 +50,7 @@ export const AddBook = () => {
     }
 
     async function addNewBook() {
-        const apiUrl = `${process.env.REACT_APP_API_URL}/admin/secure/add-book`;
+        const apiUrl = `${process.env.REACT_APP_API_URL}/admin/secure/post/book`;
         if (authState?.isAuthenticated && title !== '' && author !== '' && category !== 'category'
             && overview !== '' && totalCopies > 0) {
             const book: AddBookModel = new AddBookModel(
@@ -58,8 +66,8 @@ export const AddBook = () => {
                 body: JSON.stringify(book)
             };
 
-            const response = await fetch(apiUrl, requestOptions);
-            if (!response.ok) {
+            const data = await fetch(apiUrl, requestOptions);
+            if (!data.ok) {
                 throw new Error('Network response was not ok');
             }
             setTitle('');
@@ -137,6 +145,7 @@ export const AddBook = () => {
                                         {category === 'FE' && t("addBook.category.frontend")}
                                         {category === 'BE' && t("addBook.category.backend")}
                                         {category === 'Data' && t("addBook.category.dataScience")}
+                                        {category === 'SC' && t("addBook.category.cyberSecurity")}
                                         {category === 'DevOps' && t("addBook.category.devops")}
                                         {(!category || category === 'Category') && t("addBook.selectCategory")}
                                     </button>
@@ -145,6 +154,7 @@ export const AddBook = () => {
                                         <li><a className="dropdown-item" onClick={() => categorySelector('FE')}>{t("addBook.category.frontend")}</a></li>
                                         <li><a className="dropdown-item" onClick={() => categorySelector('BE')}>{t("addBook.category.backend")}</a></li>
                                         <li><a className="dropdown-item" onClick={() => categorySelector('Data')}>{t("addBook.category.dataScience")}</a></li>
+                                        <li><a className="dropdown-item" onClick={() => categorySelector('SC')}>{t("addBook.category.cyberSecurity")}</a></li>
                                         <li><a className="dropdown-item" onClick={() => categorySelector('DevOps')}>{t("addBook.category.devops")}</a></li>
                                     </ul>
                                 </div>

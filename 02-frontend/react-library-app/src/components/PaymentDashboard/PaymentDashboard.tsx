@@ -5,22 +5,36 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Link } from "react-router-dom";
 import PaymentDetailsRequest from "../../models/PaymentDetailsRequest";
 import { useTranslation } from "react-i18next";
+import PaymentHistory from "../../models/PaymentHistory";
 
 
 export const PaymentDashboard = () => {
 
+    // Hooks
     const { authState } = useOktaAuth();
     const { t } = useTranslation();
-    const [httpError, setHttpError] = useState(false);
+
+    // UI / interaction states
     const [showSuccessToast, setShowSuccessToast] = useState(false);
     const [submitDisactivated, setSubmitDisactivated] = useState(false);
+
+    // Data states
     const [charges, setCharges] = useState(0);
+
+    // Status / error states
     const [loadingCharges, setLoadingCharges] = useState(true);
+    const [httpError, setHttpError] = useState(false);
+
+    // Payment history states
+    const [paymentHistory, setPaymentHistory] = useState<PaymentHistory[]>([]);
+    const [loadingPaymentHistory, setLoadingPaymentHistory] = useState(true);
+    const [paymentHistoryError, setPaymentHistoryError] = useState<string | null>(null);
+
 
     useEffect(() => {
-        const fetchCharges = async () => {
+        const loadCharges = async () => {
             if (authState && authState.isAuthenticated) {
-                const apiUrl = `${process.env.REACT_APP_API_URL}/payments/search/findByUserEmail?userEmail=${authState.accessToken?.claims.sub}`;
+                const apiUrl = `${process.env.REACT_APP_API_URL}/payments/search/findPaymentsByUserEmail?userEmail=${authState.accessToken?.claims.sub}`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
@@ -36,79 +50,132 @@ export const PaymentDashboard = () => {
                 setLoadingCharges(false);
             }
         }
-        fetchCharges().catch((error: any) => {
+        loadCharges().catch((error: any) => {
             setLoadingCharges(false);
             setHttpError(error.message);
         });
     }, [authState]);
 
-    const elements = useElements();
+    useEffect(() => {
+        const fetchPaymentHistory = async () => {
+            if (!(authState && authState.isAuthenticated)) {
+                setLoadingPaymentHistory(false);
+                return;
+            }
+
+            try {
+                const email = String(authState.accessToken?.claims.sub || "");
+                const base = `${process.env.REACT_APP_API_URL}/paymentHistories/search/findByUserEmail`;
+
+                // no pagination params, just sort by date descending
+                const url = `${base}?userEmail=${encodeURIComponent(email)}&sort=paymentDate,desc`;
+
+                const res = await fetch(url, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                });
+
+                if (!res.ok) throw new Error("Failed to fetch payment history");
+
+                const data = await res.json();
+                const items: PaymentHistory[] = data?._embedded?.paymentHistories ?? [];
+
+                setPaymentHistory(items);
+                setPaymentHistoryError(null);
+            } catch (err: any) {
+                setPaymentHistoryError(err?.message || "Unable to load payment history");
+            } finally {
+                setLoadingPaymentHistory(false);
+            }
+        };
+
+        fetchPaymentHistory();
+    }, [authState]);
+
     const stripe = useStripe();
+    const elements = useElements();
 
     async function handlePayment() {
-        if (!stripe || !elements || !elements.getElement(CardElement)) {
+        const cardElement = elements?.getElement(CardElement);
+
+        if (!stripe || !elements || !cardElement) {
+            console.warn("Stripe, elements, or card element not ready.");
             return;
         }
 
         setSubmitDisactivated(true);
+        setHttpError(false);
 
-        let paymentDetails = new PaymentDetailsRequest(Math.round(charges * 100), 'USD', authState?.accessToken?.claims.sub);
+        try {
+            const userEmail = authState?.accessToken?.claims.sub;
+            const amountInCents = Math.round(charges * 100);
+            const currency = "EUR";
 
-        const apiUrl = `${process.env.REACT_APP_API_URL}/payments/secure/intent`;
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(paymentDetails)
-        };
-        const response = await fetch(apiUrl, requestOptions);
-        if (!response.ok) {
-            setHttpError(true);
-            setSubmitDisactivated(false);
-            throw new Error('Failed to create payment intent');
-        }
-        const data = await response.json();
+            const paymentDetails = new PaymentDetailsRequest(amountInCents, currency, userEmail);
 
-        stripe.confirmCardPayment(
-            data.client_secret, {
-            payment_method: {
-                card: elements.getElement(CardElement)!,
-                billing_details: {
-                    email: authState?.accessToken?.claims.sub,
-                }
-            }
-        }, { handleActions: false }
-        ).then(async function (outcome: any) {
-            if (outcome.error) {
-                setSubmitDisactivated(false);
-                alert('Payment failed: ' + outcome.error.message);
-            } else {
-                const paymentApiUrl = `${process.env.REACT_APP_API_URL}/payments/secure/execute`;
-                const paymentRequestOptions = {
-                    method: 'PUT',
+            // Create payment intent
+            const intentResponse = await fetch(
+                `${process.env.REACT_APP_API_URL}/payments/secure/intent`,
+                {
+                    method: "POST",
                     headers: {
                         Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
-                        'Content-Type': 'application/json',
-                    }
-                };
-                const paymentResponse = await fetch(paymentApiUrl, paymentRequestOptions);
-                if (!paymentResponse.ok) {
-                    setHttpError(true);
-                    setSubmitDisactivated(false);
-                    throw new Error('Failed to execute payment');
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(paymentDetails),
                 }
-                setCharges(0);
-                setShowSuccessToast(true);
-                setTimeout(() => {
-                    setShowSuccessToast(false);
-                }, 3000);
-                setSubmitDisactivated(false);
+            );
+
+            if (!intentResponse.ok) {
+                setHttpError(true);
+                throw new Error("Failed to create payment intent");
             }
-        });
-        setHttpError(false);
+
+            const { client_secret } = await intentResponse.json();
+
+            // Confirm payment
+            const outcome = await stripe.confirmCardPayment(client_secret, {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: { email: userEmail },
+                },
+            }, { handleActions: false });
+
+            if (outcome.error) {
+                alert("Payment failed: " + outcome.error.message);
+                return;
+            }
+
+            // Execute payment
+            const executeResponse = await fetch(
+                `${process.env.REACT_APP_API_URL}/payments/secure/execute`,
+                {
+                    method: "PUT",
+                    headers: {
+                        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            if (!executeResponse.ok) {
+                setHttpError(true);
+                throw new Error("Failed to execute payment");
+            }
+
+            // Reset state
+            setCharges(0);
+            setShowSuccessToast(true);
+            setTimeout(() => setShowSuccessToast(false), 3000);
+
+        } catch (error: any) {
+            console.error(error);
+            setHttpError(true);
+        } finally {
+            setSubmitDisactivated(false);
+        }
     }
+
 
     if (loadingCharges) {
         return <BreathingLoader />;
@@ -116,7 +183,7 @@ export const PaymentDashboard = () => {
 
     if (httpError) {
         return (
-            <div className='container mt-5'>
+            <div className='alert alert-danger text-center mt-5'>
                 <p>{httpError}</p>
             </div>
         );
@@ -141,14 +208,16 @@ export const PaymentDashboard = () => {
                     </div>
                 </div>
             )}
+
             <div className="container py-5">
                 <div className="row justify-content-center">
                     <div className="col-md-8 col-lg-6">
+                        {/* Payment section */}
                         {charges > 0 ? (
-                            <div className="shadow rounded bg-light p-4">
+                            <div className="shadow rounded bg-light p-4 mb-5">
                                 <div className="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
                                     <h4 className="fw-bold text-primary m-0">{t('payment.pending_payment')}</h4>
-                                    <span className="badge bg-danger fs-6">${charges}</span>
+                                    <span className="badge bg-danger fs-6">€{charges}</span>
                                 </div>
 
                                 <div className="mb-3">
@@ -169,8 +238,7 @@ export const PaymentDashboard = () => {
                                 </button>
                             </div>
                         ) : (
-
-                            <div className="text-center shadow rounded bg-light bg-opacity-10 p-5">
+                            <div className="text-center shadow rounded bg-light bg-opacity-10 p-5 mb-5">
                                 <h4 className="fw-bold text-success mb-3">{t('payment.no_payment')} 🎉</h4>
                                 <Link to="search" className="btn btn-outline-success px-4 py-2">
                                     {t('payment.go_to_library')}
@@ -184,7 +252,67 @@ export const PaymentDashboard = () => {
                         )}
                     </div>
                 </div>
+
+                {/* Payment history table section (new row) */}
+                <div className="row justify-content-center">
+                    <div className="col-12"> {/* Full width table */}
+                        <hr className="my-5 border border-secondary" />
+                        <h5 className="fw-bold mb-3">{t('paymenthistory.history')}</h5>
+
+                        {loadingPaymentHistory ? (
+                            <BreathingLoader />
+                        ) : paymentHistoryError ? (
+                            <div className="alert alert-danger">{paymentHistoryError}</div>
+                        ) : paymentHistory.length === 0 ? (
+                            <p className="text-muted">{t('paymenthistory.no_history')}</p>
+                        ) : (
+                            <div className="table-responsive">
+                                <table
+                                    className="table align-middle shadow-sm rounded overflow-hidden"
+                                    style={{ tableLayout: "auto", width: "100%" }}
+                                >
+                                    <thead style={{ backgroundColor: "#c17078ff", color: "white" }}>
+                                        <tr>
+                                            <th style={{ minWidth: "200px", padding: "12px 20px" }}>
+                                                {t('paymenthistory.invoice_ref')}
+                                            </th>
+                                            <th style={{ minWidth: "180px", padding: "12px 20px" }}>
+                                                {t('paymenthistory.date')}
+                                            </th>
+                                            <th style={{ minWidth: "120px", padding: "12px 20px" }}>
+                                                {t('paymenthistory.amount')}
+                                            </th>
+                                            <th style={{ minWidth: "150px", padding: "12px 20px" }}>
+                                                {t('paymenthistory.method')}
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style={{ backgroundColor: "white" }}>
+                                        {paymentHistory.map((payment) => (
+                                            <tr key={payment.id}>
+                                                <td className="fw-semibold text-gray">{payment.invoiceReference}</td>
+                                                <td>
+                                                    {new Date(payment.paymentDate).toLocaleDateString(undefined, {
+                                                        day: "2-digit",
+                                                        month: "short",
+                                                        year: "numeric",
+                                                        hour: "2-digit",
+                                                        minute: "2-digit",
+                                                    })}
+                                                </td>
+                                                <td className="fw-bold text-success">€{payment.amount?.toFixed(2)}</td>
+                                                <td>{payment.methodType}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
+
         </>
     );
+
 }

@@ -7,10 +7,15 @@ import { useTranslation } from "react-i18next";
 
 export const SearchBookPage = () => {
 
+    // Initialize translation hook
     const { t } = useTranslation();
+
+    // Data states
     const [books, setBooks] = useState<Book[]>([]);
     const [loading, setLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
+
+    // Pagination & search states
     const [currentPage, setCurrentPage] = useState(1);
     const [booksPerPage] = useState(6);
     const [totalBooks, setTotalBooks] = useState(0);
@@ -20,55 +25,54 @@ export const SearchBookPage = () => {
     const [category, setCategory] = useState('Category');
 
     useEffect(() => {
-        const fetchBooks = async () => {
-            const start = performance.now();
+        const loadBooks = async () => {
+            const startTime = performance.now();
 
-            let url: string;
+            try {
+                const isSearch = searchUrl.trim().length > 0;
+                const pageParam = currentPage - 1;
+                const baseUrl = `${process.env.REACT_APP_API_URL}/books`;
+                const apiUrl = isSearch
+                    ? `${baseUrl}${searchUrl.replace('<pageNumber>', String(pageParam))}`
+                    : `${baseUrl}/search/findByDeletedFalse?page=${pageParam}&size=${booksPerPage}`;
 
-            if (searchUrl === '') {
-                url = `${process.env.REACT_APP_API_URL}/books/search/findByDeletedFalse?page=${currentPage - 1}&size=${booksPerPage}`;
-            } else {
-                url = `${process.env.REACT_APP_API_URL}/books${searchUrl.replace('<pageNumber>', `${currentPage - 1}`)}`;
+                const res = await fetch(apiUrl);
+                if (!res.ok) {
+                    throw new Error('Something went wrong while fetching books.');
+                }
+
+                const data = await res.json();
+                const { totalElements, totalPages: pages } = data.page;
+
+                setTotalBooks(totalElements);
+                setTotalPages(pages);
+
+                const mappedBooks: Book[] = data._embedded.books.map((book: any) => ({
+                    id: book.id,
+                    title: book.title,
+                    author: book.author,
+                    overview: book.overview,
+                    totalCopies: book.totalCopies,
+                    copiesInStock: book.copiesInStock,
+                    category: book.category,
+                    image: book.image,
+                }));
+
+                setBooks(mappedBooks);
+                setLoading(false);
+
+                const endTime = performance.now();
+                console.log(`⏱️ Reaktionszeit (Such-/Filteraktion): ${(endTime - startTime).toFixed(2)} ms`);
+            } catch (err: any) {
+                setLoading(false);
+                setHttpError(err.message);
             }
-
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Something went wrong!');
-            }
-
-            const jsonResponse = await response.json();
-            const responseData = jsonResponse._embedded.books;
-
-            setTotalBooks(jsonResponse.page.totalElements);
-            setTotalPages(jsonResponse.page.totalPages);
-
-            const loadedBooks: Book[] = [];
-            for (const key in responseData) {
-                loadedBooks.push({
-                    id: responseData[key].id,
-                    title: responseData[key].title,
-                    author: responseData[key].author,
-                    overview: responseData[key].overview,
-                    totalCopies: responseData[key].totalCopies,
-                    copiesInStock: responseData[key].copiesInStock,
-                    category: responseData[key].category,
-                    image: responseData[key].image,
-                });
-            }
-
-            setBooks(loadedBooks);
-            setLoading(false);
-            const end = performance.now();
-            console.log(`⏱️ Reaktionszeit (Such-/Filteraktion): ${(end - start).toFixed(2)} ms`);
         };
 
-        fetchBooks().catch((error: any) => {
-            setLoading(false);
-            setHttpError(error.message);
-        });
-
+        loadBooks();
         window.scrollTo(0, 0);
     }, [currentPage, searchUrl]);
+
 
     if (loading) {
         return (
@@ -78,8 +82,8 @@ export const SearchBookPage = () => {
 
     if (httpError) {
         return (
-            <div className='container mt-5'>
-                <p>{httpError}</p>
+            <div className="alert alert-danger mt-4" role="alert">
+                {httpError}
             </div>
         );
     }
@@ -127,6 +131,7 @@ export const SearchBookPage = () => {
             categoryInput.toLowerCase() === 'fe' ||
             categoryInput.toLowerCase() === 'be' ||
             categoryInput.toLowerCase() === 'data' ||
+            categoryInput.toLowerCase() === 'sc' ||
             categoryInput.toLowerCase() === 'devops'
         ) {
             setSearchUrl(`/search/findByCategoryAndDeletedFalse?category=${categoryInput}&page=<pageNumber>&size=${booksPerPage}`);
@@ -138,10 +143,10 @@ export const SearchBookPage = () => {
     };
 
 
-    const indexOfLastBook = currentPage * booksPerPage;
-    const indexOfFirstBook = indexOfLastBook - booksPerPage;
-    let lastItem = booksPerPage * currentPage <= totalBooks ?
-        booksPerPage * currentPage : totalBooks;
+    const lastBookIndex = currentPage * booksPerPage;
+    const firstBookIndex = lastBookIndex - booksPerPage;
+
+    const displayedLastItem = Math.min(lastBookIndex, totalBooks);
 
     const paginate = (pageNumber: number) => {
         setCurrentPage(pageNumber);
@@ -178,6 +183,7 @@ export const SearchBookPage = () => {
                                     {category === 'FE' && t("search_page.categories.fe")}
                                     {category === 'BE' && t("search_page.categories.be")}
                                     {category === 'Data' && t("search_page.categories.data")}
+                                    {category === 'SC' && t("search_page.categories.sc")}
                                     {category === 'DevOps' && t("search_page.categories.devops")}
                                     {category === 'All' && t("search_page.categories.all")}
                                     {category === 'Category' && t("search_page.categories.category")}
@@ -204,6 +210,11 @@ export const SearchBookPage = () => {
                                             {t('search_page.categories.data')}
                                         </a>
                                     </li>
+                                    <li onClick={() => categoryHandler('SC')}>
+                                        <a className='dropdown-item' href='#'>
+                                            {t('search_page.categories.sc')}
+                                        </a>
+                                    </li>
                                     <li onClick={() => categoryHandler('DevOps')}>
                                         <a className='dropdown-item' href='#'>
                                             {t('search_page.categories.devops')}
@@ -220,8 +231,8 @@ export const SearchBookPage = () => {
                             </div>
                             <p className='text-muted'>
                                 {t('search_page.showing_results', {
-                                    from: indexOfFirstBook + 1,
-                                    to: lastItem,
+                                    from: firstBookIndex + 1,
+                                    to: displayedLastItem,
                                     total: totalBooks
                                 })}
                             </p>

@@ -10,15 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("https://localhost:3000")
+@CrossOrigin(origins = "${frontend.url}", allowCredentials = "true")
 @RestController
-@RequestMapping("/api/payments/secure")
+@RequestMapping("/api/payments")
 @RequiredArgsConstructor
 public class PaymentController {
 
     private final PaymentService paymentService;
 
-    @PostMapping("/intent")
+    @PostMapping("/secure/intent")
     public ResponseEntity<String> generatePaymentIntent(@RequestBody PaymentDetailsRequest paymentDetailsRequest)
             throws StripeException {
 
@@ -27,7 +27,7 @@ public class PaymentController {
         return ResponseEntity.ok(paymentIntent.toJson());
     }
 
-    @PutMapping("/execute")
+    @PutMapping("/secure/execute")
     public ResponseEntity<String> processPayment(Authentication authentication) {
         String userEmail = authentication.getName();
 

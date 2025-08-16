@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin("https://localhost:3000")
+@CrossOrigin(origins = "${frontend.url}", allowCredentials = "true")
 @RequestMapping("/api/reviews")
 @RestController
 @RequiredArgsConstructor
@@ -14,7 +14,7 @@ public class ReviewController
 {
     private final ReviewService reviewService;
 
-    @GetMapping("/secure/hasreviewed")
+    @GetMapping("/secure/has-reviewed")
     public boolean hasReviewed(Authentication auth, @RequestParam Long bookId) throws Exception
     {
         String userEmail = auth.getName();
@@ -22,7 +22,7 @@ public class ReviewController
         return reviewService.hasReviewed(userEmail, bookId);
     }
 
-    @PostMapping("/secure")
+    @PostMapping("/secure/add-review")
     public void addReview(Authentication authentication, @RequestBody ReviewRequest reviewRequest) throws Exception
     {
         String userEmail = authentication.getName();

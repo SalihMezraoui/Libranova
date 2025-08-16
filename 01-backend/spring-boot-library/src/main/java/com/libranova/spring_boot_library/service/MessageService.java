@@ -16,7 +16,7 @@ public class MessageService
 {
     private final MessageRepository messageRepository;
 
-    public void saveMessage(Message messageRequest, String userEmail){
+    public void submitMessage(Message messageRequest, String userEmail){
         Message message = Message.builder()
                 .subject(messageRequest.getSubject())
                 .inquiry(messageRequest.getInquiry())
@@ -25,14 +25,14 @@ public class MessageService
         messageRepository.save(message);
     }
 
-    public void updateMessageResponse(QuestionRequest questionRequest, String userEmail){
-        Message message = messageRepository.findById(questionRequest.getId())
+    public void updateMessageResponse(QuestionRequest questionRequest, String userEmail) {
+        var updatedMessage = messageRepository.findById(questionRequest.getId())
+                .map(message -> {
+                    message.setAdminEmail(userEmail);
+                    message.setResponse(questionRequest.getResponse());
+                    message.setAnswered(true);
+                    return messageRepository.save(message);
+                })
                 .orElseThrow(() -> new RuntimeException("Message not found with id: " + questionRequest.getId()));
-
-        message.setAdminEmail(userEmail);
-        message.setResponse(questionRequest.getResponse());
-        message.setClosed(true);
-        messageRepository.save(message);
     }
-
 }

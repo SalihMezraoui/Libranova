@@ -19,6 +19,17 @@
         "next": "Next",
         "more": "Show more"
     },
+    "bookShowCase": {
+        "welcomeMessage": "Welcome to Libranova",
+        "welcomeDescription": "Your personal platform for handpicked books, inspiring recommendations, and literary highlights — all just a click away.",
+        "browseBooks": "Browse Books",
+        "browseBooksDescription": "Explore a carefully curated collection of books.",
+        "personalRecommendations": "Personal Recommendations",
+        "personalRecommendationsDescription": "Receive suggestions perfectly matched to your interests.",
+        "trackReadingProgress": "Track Reading Progress",
+        "trackReadingProgressDescription": "Keep track of your current reading list and completed books.",
+        "signIn": "Sign Up Now"
+    },
     "librarySupport": {
         "title": "Missing a specific book?",
         "subtitle": "If you can’t find what you’re looking for, feel free to contact our admins personally.",
@@ -29,16 +40,28 @@
     },
     "header": {
         "home": "Home",
+        "aboutUs": "About Us",
         "searchBooks": "Search Books",
         "libraryActivity": "Library Activity",
+        "messages": "My Inbox",
         "overdueCharges": "Overdue Charges",
         "admin": "Admin",
+        "hello": "Hi",
         "login": "Login",
         "logout": "Logout"
     },
+    "about_us": {
+        "title": "About Us",
+        "description": "Libranova is a modern library management system founded in 2024, designed to make borrowing books easier, faster, and more enjoyable. We offer a vast collection of titles, from timeless classics to the latest releases, ensuring every reader finds something they love. With flexible borrowing extensions, exclusive access to newly released books, and personalised recommendations, Libranova is here to inspire and support your reading journey. Whether you are a student, researcher, or casual reader, our platform connects you to the world of knowledge — anytime, anywhere.",
+        "point1": "Borrow newly released books as soon as they become available",
+        "point2": "Extend your borrowing period with just a few clicks",
+        "point3": "Access a wide range of books anytime, anywhere"
+    },
     "footer": {
         "home": "Home",
-        "searchBooks": "Search Books"
+        "searchBooks": "Search Books",
+        "aboutUs": "About Us",
+        "accessibility": "Accessibility"
     },
     "checkout": {
         "checkout": "Checkout",
@@ -130,6 +153,7 @@
             "frontend": "Frontend",
             "backend": "Backend",
             "dataScience": "Data Science",
+            "cyberSecurity": "Cyber Security",
             "devops": "DevOps"
         }
     },
@@ -148,8 +172,8 @@
         "author": "Author",
         "total": "Total",
         "available": "Available",
-        "increaseBtn": "Increase Quantity",
-        "decreaseBtn": "Decrease Quantity",
+        "increaseBtn": "Increase",
+        "decreaseBtn": "Decrease",
         "remove": "Remove",
         "deleteConfirmTitle": "Are you sure you want to delete \"{{title}}\"?",
         "deleteWarning": "This action cannot be undone.",
@@ -198,12 +222,17 @@
         "search_button": "Search",
         "category": "Category",
         "viewDetails": "View Details",
+        "available": "Available",
+        "notAvailable": "Not available",
+        "unknown": "Unknown",
+        "author": "Author:",
         "categories": {
             "category": "Category",
             "all": "All",
             "fe": "Frontend",
             "be": "Backend",
             "data": "Data Science",
+            "sc": "Cyber Security",
             "devops": "DevOps"
         },
         "total_results": "Total results:",
@@ -223,5 +252,29 @@
         "submit_button": "Submit review",
         "star_option": "{{count}} star",
         "star_option_plural": "{{count}} stars"
+    },
+    "accessibility": {
+        "title": "Accessibility",
+        "description": "Our application is designed to be accessible for everyone, regardless of device or ability.",
+        "keyboard": "Fully navigable via keyboard controls",
+        "keyboard_desc": "The application is fully usable without a mouse. All interactive components can be accessed in a logical sequence using the Tab key, with visible focus indicators for clarity. Skip links are implemented to allow quick navigation to main content, and ARIA attributes ensure compatibility with assistive technologies.",
+        "responsive": "Optimised for mobile, tablet, and desktop",
+        "responsive_desc": "The interface adapts dynamically to different screen sizes using responsive design techniques, including fluid layouts, CSS media queries, and scalable elements. This ensures a consistent and accessible experience on smartphones, tablets, laptops, and desktop computers.",
+        "colors": "High-contrast, visually friendly colour palette",
+        "colors_desc": "Colours have been selected to meet WCAG 2.1 AA contrast standards, improving readability for users with visual impairments. Alternative text and colour-independent cues are used to ensure important information is not conveyed by colour alone.",
+        "clarity": "Clear structure and descriptive elements",
+        "clarity_desc": "The application uses semantic HTML5 elements, descriptive headings, and ARIA landmarks to give a clear structure. Labels and instructions are written in plain language, making navigation straightforward for all users, including those with cognitive disabilities.",
+        "multilang": "Available in multiple languages (English and German)",
+        "multilang_desc": "All user-facing text is available in both English and German. Users can switch languages instantly via a language selector, with text dynamically reloaded without requiring a page refresh.",
+        "show_more": "Show more",
+        "hide": "Hide"
+    },
+    "paymenthistory": {
+        "history": "Payment History",
+        "invoice_ref": "Invoice Reference",
+        "date": "Date",
+        "amount": "Amount",
+        "method": "Payment Method",
+        "no_history": "No payment history available."
     }
 }

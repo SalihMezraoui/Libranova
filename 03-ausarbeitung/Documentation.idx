@@ -1,23 +1,64 @@
-\indexentry{Überblick|hyperpage}{1}
-\indexentry{Anforderungen|hyperpage}{1}
-\indexentry{Entwurf und Konzeption|hyperpage}{6}
-\indexentry{Einführung in UML|hyperpage}{6}
-\indexentry{Klassendiagramm|hyperpage}{6}
+\indexentry{Motivation|hyperpage}{1}
+\indexentry{Ziele der Arbeit|hyperpage}{1}
+\indexentry{Enführung|hyperpage}{3}
+\indexentry{Existierende Systeme|hyperpage}{3}
+\indexentry{Thalia Website|hyperpage}{3}
+\indexentry{Stadtbücherei Trier|hyperpage}{4}
+\indexentry{Beitrag von LibraNova|hyperpage}{4}
+\indexentry{Fazit|hyperpage}{5}
+\indexentry{Back-End Technologien|hyperpage}{6}
+\indexentry{Java|hyperpage}{6}
+\indexentry{Spring Boot|hyperpage}{6}
+\indexentry{verwendete Abhängigkeiten|hyperpage}{7}
+\indexentry{Hibernate|hyperpage}{7}
+\indexentry{REST-API|hyperpage}{8}
+\indexentry{Spring Security|hyperpage}{8}
+\indexentry{Stripe API|hyperpage}{9}
 \indexentry{Front-End Technologien|hyperpage}{9}
 \indexentry{HTML/CSS|hyperpage}{9}
-\indexentry{Bootstrap|hyperpage}{9}
-\indexentry{Typescript|hyperpage}{10}
+\indexentry{Bootstrap|hyperpage}{10}
+\indexentry{TypeScript|hyperpage}{10}
 \indexentry{React|hyperpage}{10}
-\indexentry{Back-End Technologien|hyperpage}{10}
-\indexentry{Java|hyperpage}{11}
-\indexentry{Spring Boot|hyperpage}{11}
-\indexentry{Spring Boot!Dependencies|hyperpage}{13}
-\indexentry{REST-API|hyperpage}{13}
-\indexentry{Datenbankstruktur|hyperpage}{17}
-\indexentry{Authentifizierungs- und Autorisierungsprotokolle|hyperpage}{19}
-\indexentry{Entwicklungsumgebung und Versionskontrolle|hyperpage}{21}
-\indexentry{Testen und Qualitätssicherung|hyperpage}{22}
-\indexentry{Abschnitt|hyperpage}{23}
-\indexentry{Abschnitt|hyperpage}{23}
-\indexentry{Abschnitt|hyperpage}{23}
-\indexentry{Abschnitt|hyperpage}{23}
+\indexentry{i18next|hyperpage}{11}
+\indexentry{Datenbanktechnologien|hyperpage}{11}
+\indexentry{Authentifizierungs- und Autorisierungsprotokolle|hyperpage}{12}
+\indexentry{Version Control mit Git und GitHub|hyperpage}{13}
+\indexentry{Testen und Qualitätssicherung|hyperpage}{13}
+\indexentry{Modellierung mit UML|hyperpage}{14}
+\indexentry{Architektur|hyperpage}{15}
+\indexentry{UML|hyperpage}{16}
+\indexentry{Klassendiagramm|hyperpage}{16}
+\indexentry{Systemanforderungen|hyperpage}{20}
+\indexentry{Funktionale Anforderungen|hyperpage}{20}
+\indexentry{Nicht-funktionale Anforderungen|hyperpage}{20}
+\indexentry{Technische Anforderungen|hyperpage}{21}
+\indexentry{Algorithmen|hyperpage}{21}
+\indexentry{Buchausleihe|hyperpage}{21}
+\indexentry{Verlängerung der Buchausleihe|hyperpage}{22}
+\indexentry{Backend-Architektur|hyperpage}{23}
+\indexentry{Projektinitialisierung|hyperpage}{23}
+\indexentry{Paketstruktur|hyperpage}{25}
+\indexentry{Teststrategie|hyperpage}{27}
+\indexentry{Frontend-Struktur|hyperpage}{28}
+\indexentry{Frontend-Initialisierung|hyperpage}{28}
+\indexentry{React-Projektstruktur|hyperpage}{30}
+\indexentry{Internationalisierung mit i18next|hyperpage}{32}
+\indexentry{Datenbankmodell und Persistenz|hyperpage}{35}
+\indexentry{Datenbankschema|hyperpage}{35}
+\indexentry{Datenpersistenz mit Spring Data und Hibernate|hyperpage}{37}
+\indexentry{Ausleihprozess eines Buches|hyperpage}{39}
+\indexentry{Backend-Prozess|hyperpage}{39}
+\indexentry{Frontend-Prozess|hyperpage}{43}
+\indexentry{Verfahren zur Rückgabe eines Buches|hyperpage}{45}
+\indexentry{Backend-Prozess|hyperpage}{45}
+\indexentry{Frontend-Prozess|hyperpage}{46}
+\indexentry{Startseite|hyperpage}{49}
+\indexentry{Header und Navigation|hyperpage}{49}
+\indexentry{Footer|hyperpage}{50}
+\indexentry{Hauptteil|hyperpage}{50}
+\indexentry{Karussell und Buch-Browser|hyperpage}{50}
+\indexentry{Link zur Bibliotheksdienste|hyperpage}{51}
+\indexentry{Bildungs- und E-Learning-Plattformen|hyperpage}{60}
+\indexentry{Mobile Nutzung|hyperpage}{61}
+\indexentry{Personalisierte Empfehlungen|hyperpage}{61}
+\indexentry{Fernleihe und Reservierungsbenachrichtigungen|hyperpage}{61}

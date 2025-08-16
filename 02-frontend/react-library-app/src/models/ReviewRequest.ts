@@ -1,13 +1,13 @@
 class ReviewRequest {
 
-    rating: number;
+    ratingValue: number;
     bookId: number;
-    reviewDescription?: string;
+    comment?: string;
 
-    constructor(rating: number, bookId: number, reviewDescription?: string) {
-        this.rating = rating;
+    constructor(ratingValue: number, bookId: number, comment?: string) {
+        this.ratingValue = ratingValue;
         this.bookId = bookId;
-        this.reviewDescription = reviewDescription;
+        this.comment = comment;
     }
 }
 export default ReviewRequest;

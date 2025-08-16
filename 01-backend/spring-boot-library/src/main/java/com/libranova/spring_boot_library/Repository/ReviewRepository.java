@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface ReviewRepository extends JpaRepository<Review, Long>
 {
-    Page<Review> findByBookId(@RequestParam("book_id") Long bookId , Pageable pageable);
+    Page<Review> findReviewsByBookId(@RequestParam("book_id") Long bookId , Pageable pageable);
 
-    Review findByUserEmailAndBookId(String userEmail, Long bookId);
+    Review findReviewByUserEmailAndBookId(String userEmail, Long bookId);
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM Review r WHERE r.bookId = :book_id")
-    void deleteAllByBookId(@Param("book_id") Long bookId);
+    @Query("DELETE FROM Review r WHERE r.bookId = :targetBookId")
+    void removeReviewsByBookId(@Param("targetBookId") Long bookId);
 }

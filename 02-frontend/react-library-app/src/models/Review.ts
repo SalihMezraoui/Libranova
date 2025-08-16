@@ -1,25 +1,25 @@
 class Review {
     id: number;
     userEmail: string;
-    date: string; 
-    rating: number;
+    createdAt: string; 
+    ratingValue: number;
     bookId: number;
-    reviewDescription?: string;
+    comment?: string;
 
     constructor(
         id: number,
         userEmail: string,
-        date: string,
-        rating: number,
+        createdAt: string,
+        ratingValue: number,
         bookId: number,
-        reviewDescription: string
+        comment: string
     ) {
         this.id = id;
         this.userEmail = userEmail;
-        this.date = date;
-        this.rating = rating;
+        this.createdAt = createdAt;
+        this.ratingValue = ratingValue;
         this.bookId = bookId;
-        this.reviewDescription = reviewDescription;
+        this.comment = comment;
     }
 
     

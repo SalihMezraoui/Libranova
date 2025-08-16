@@ -5,6 +5,13 @@ import { Link } from "react-router-dom";
 import { BreathingLoader } from "../../Widgets/BreathingLoader";
 import { useTranslation } from "react-i18next";
 
+const chunkArray = (arr: Book[], size: number): Book[][] => {
+    const chunks = [];
+    for (let i = 0; i < arr.length; i += size) {
+        chunks.push(arr.slice(i, i + size));
+    }
+    return chunks;
+};
 
 export const Carousel = () => {
 
@@ -15,7 +22,7 @@ export const Carousel = () => {
 
 
     useEffect(() => {
-        const fetchBooks = async () => {
+        const fetchAllBooks = async () => {
             const apiUrl: string = `${process.env.REACT_APP_API_URL}/books/search/findByDeletedFalse`;
 
             const url: string = `${apiUrl}?page=0&size=9`;
@@ -47,7 +54,7 @@ export const Carousel = () => {
             setLoading(false);
 
         };
-        fetchBooks().catch((error: any) => {
+        fetchAllBooks().catch((error: any) => {
             setLoading(false);
             setHttpError(error.message);
         })
@@ -66,62 +73,96 @@ export const Carousel = () => {
             </div>
         );
     }
+
+    const slides = chunkArray(books, 3);
+
     return (
-        <div className='container mt-5' style={{ height: 550 }}>
-            <div className='books-header'>
+        <div className="container mt-5" style={{ minHeight: 570 }}>
+            <div className="books-header mb-3">
                 <h3>{t("carousel.title")}</h3>
             </div>
-            <div id='booksSlider' className='carousel carousel-dark slide mt-5 
-                d-none d-lg-block' data-bs-interval='false'>
 
-                {/* Desktop-Karussel */}
-                <div className='carousel-inner'>
-                    <div className='carousel-item active'>
-                        <div className='row d-flex justify-content-center align-items-center'>
-                            {books.slice(0, 3).map((book) => (
-                                <BookReturn book={book} key={book.id} />
-                            ))}
+            {/* Desktop Carousel */}
+            <div
+                id="booksSlider"
+                className="carousel carousel-dark slide d-none d-lg-block"
+                data-bs-interval="false"
+            >
+                <div className="carousel-inner">
+                    {slides.map((slideBooks, idx) => (
+                        <div
+                            key={idx}
+                            className={`carousel-item${idx === 0 ? " active" : ""}`}
+                        >
+                            <div className="row justify-content-center align-items-center">
+                                {slideBooks.map((book) => (
+                                    <BookReturn key={book.id} book={book} />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                    <div className='carousel-item'>
-                        <div className='row d-flex justify-content-center align-items-center'>
-                            {books.slice(3, 6).map((book) => (
-                                <BookReturn book={book} key={book.id} />
-                            ))}
-                        </div>
-                    </div>
-                    <div className='carousel-item'>
-                        <div className='row d-flex justify-content-center align-items-center'>
-                            {books.slice(6, 9).map((book) => (
-                                <BookReturn book={book} key={book.id} />
-                            ))}
-                        </div>
-                    </div>
+                    ))}
+                </div>
 
-                    <button className='carousel-control-prev position-absolute top-50 start-0 translate-middle-y ms-0 z-1 rounded-circle border-0'
-                        type='button' data-bs-target='#booksSlider' data-bs-slide='prev'
-                        style={{ width: '3rem', height: '3rem', padding: '0.5rem', backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
-                        <span className='carousel-control-prev-icon' aria-hidden='true'></span>
-                        <span className='visually-hidden'>{t("carousel.prev")}</span>
-                    </button>
+                <button
+                    className="carousel-control-prev position-absolute top-50 start-0 translate-middle-y ms-0 rounded-circle border-0"
+                    type="button"
+                    data-bs-target="#booksSlider"
+                    data-bs-slide="prev"
+                    style={{
+                        width: "3rem",
+                        height: "3rem",
+                        padding: "0.5rem",
+                        backgroundColor: "rgba(0,0,0,0.25)",
+                        zIndex: 10,
+                    }}
+                >
+                    <span className="carousel-control-prev-icon" aria-hidden="true" />
+                    <span className="visually-hidden">{t("carousel.prev")}</span>
+                </button>
 
-                    <button className='carousel-control-next position-absolute top-50 end-0 translate-middle-y me-0 z-1 rounded-circle border-0'
-                        type='button' data-bs-target='#booksSlider' data-bs-slide='next'
-                        style={{ width: '3rem', height: '3rem', padding: '0.5rem', backgroundColor: 'rgba(0, 0, 0, 0.25)' }}>
-                        <span className='carousel-control-next-icon' aria-hidden='true'></span>
-                        <span className='visually-hidden'>{t("carousel.next")}</span>
-                    </button>
+                <button
+                    className="carousel-control-next position-absolute top-50 end-0 translate-middle-y me-0 rounded-circle border-0"
+                    type="button"
+                    data-bs-target="#booksSlider"
+                    data-bs-slide="next"
+                    style={{
+                        width: "3rem",
+                        height: "3rem",
+                        padding: "0.5rem",
+                        backgroundColor: "rgba(0,0,0,0.25)",
+                        zIndex: 10,
+                    }}
+                >
+                    <span className="carousel-control-next-icon" aria-hidden="true" />
+                    <span className="visually-hidden">{t("carousel.next")}</span>
+                </button>
+            </div>
+
+            {/* Mobile Carousel - horizontal scroll */}
+            <div className="d-lg-none mt-4 px-3">
+                <div
+                    className="d-flex overflow-auto gap-3 pb-2"
+                    style={{ scrollSnapType: "x mandatory" }}
+                >
+                    {books.map((book) => (
+                        <div
+                            key={book.id}
+                            className="flex-shrink-0"
+                            style={{ scrollSnapAlign: "start", minWidth: 200 }}
+                        >
+                            <BookReturn book={book} />
+                        </div>
+                    ))}
                 </div>
             </div>
 
-            {/* Mobile-karussel */}
-            <div className='d-lg-none mt-4 px-3'>
-                <div className='row d-flex justify-content-center align-items-center'>
-                    <BookReturn book={books[7]} key={books[7].id} />
-                </div>
-            </div>
-            <div className='books-footer mt-3'>
-                <Link className='btn btn-outline-secondary btn-lg hover-grow' to='/search'>{t("carousel.more")}</Link>
+            <div className="books-footer mt-3 text-center">
+                <Link
+                    className="btn btn-outline-secondary btn-lg hover-grow"
+                    to="/search"
+                >
+                    {t("carousel.more")}
+                </Link>
             </div>
         </div>
     );

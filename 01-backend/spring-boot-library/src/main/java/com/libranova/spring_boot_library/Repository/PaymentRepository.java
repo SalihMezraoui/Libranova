@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
     // Custom query to find payments by user email
-    Payment findByUserEmail(String userEmail);
+    Payment findPaymentsByUserEmail(String userEmail);
 }

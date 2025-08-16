@@ -15,13 +15,13 @@ export const Messages = () => {
     const [messages, setMessages] = useState<Message[]>([]);
 
     const [messagesPerPage, setMessagesPerPage] = useState(5);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [actualPage, setActualPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
-        const fetchMessages = async () => {
+        const loadMessages = async () => {
             if (authState && authState?.isAuthenticated) {
-                const apiUrl = `${process.env.REACT_APP_API_URL}/messages/search/findByUserEmail?userEmail=${authState?.accessToken?.claims.sub}&page=${currentPage - 1}&size=${messagesPerPage}`;
+                const apiUrl = `${process.env.REACT_APP_API_URL}/messages/search/findMessagesByUserEmail?userEmail=${authState?.accessToken?.claims.sub}&page=${actualPage - 1}&size=${messagesPerPage}`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
@@ -29,23 +29,23 @@ export const Messages = () => {
                         'Content-Type': 'application/json',
                     }
                 };
-                const response = await fetch(apiUrl, requestOptions);
-                if (!response.ok) {
+                const data = await fetch(apiUrl, requestOptions);
+                if (!data.ok) {
                     throw new Error('Something went wrong while fetching messages!');
                 }
-                const responseData = await response.json();
+                const responseData = await data.json();
                 setMessages(responseData._embedded.messages);
                 setTotalPages(responseData.page.totalPages);
             }
             setIsLoading(false);
         }
-        fetchMessages().catch((error: any) => {
+        loadMessages().catch((error: any) => {
             setIsLoading(false);
             setHttpError(error.message || "Something went wrong while fetching messages!");
         })
         window.scrollTo(0, 0);
 
-    }, [authState, currentPage]);
+    }, [authState, actualPage]);
 
     if (isLoading) {
         return <BreathingLoader />;
@@ -53,16 +53,14 @@ export const Messages = () => {
 
     if (httpError) {
         return (
-            <div className="container mt-5">
-                <div className="alert alert-danger text-center" role="alert">
-                    {httpError}
-                </div>
+            <div className="alert alert-danger text-center" role="alert">
+                {httpError}
             </div>
         );
     }
 
     const paginate = (pageNumber: number) => {
-        setCurrentPage(pageNumber);
+        setActualPage(pageNumber);
     }
 
     return (
@@ -76,7 +74,10 @@ export const Messages = () => {
                                 <div className="card-body">
                                     <div className="mb-2"></div>
                                     <h5 className="card-title text-dark">
-                                        <span className="text-muted">{t("messages.case")} #{message.id}:</span> {message.subject}
+                                        <span className="text-muted">{t("messages.case")}
+                                            <span className="text-muted">({message.id}):</span>
+                                        </span>
+                                        <span className="text-dark"> {message.subject}</span>
                                     </h5>
                                     <h6 className="card-subtitle text-secondary mb-2">{message.userEmail}</h6>
                                     <p className="card-text">{message.inquiry}</p>
@@ -104,14 +105,14 @@ export const Messages = () => {
                 :
                 <div className="container mt-5">
                     <div className="alert alert-info text-center" role="alert">
-                         {t("messages.noMessages")}
+                        {t("messages.noMessages")}
                     </div>
                 </div>
             }
             {totalPages > 1 && (
                 <div className="mt-4">
                     <Pagination
-                        currentPage={currentPage}
+                        currentPage={actualPage}
                         totalPages={totalPages}
                         paginate={paginate}
                     />

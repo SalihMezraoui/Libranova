@@ -30,8 +30,8 @@ export const UpdateBookQuantity: React.FC<{ book: Book, deleteBook: any }> = (pr
             }
         };
 
-        const response = await fetch(apiUrl, requestOptions);
-        if (!response.ok) {
+        const data = await fetch(apiUrl, requestOptions);
+        if (!data.ok) {
             throw new Error('Failed to increment book quantity.');
         }
         setBookQuantity(prev => prev + 1);
@@ -48,8 +48,8 @@ export const UpdateBookQuantity: React.FC<{ book: Book, deleteBook: any }> = (pr
             }
         };
 
-        const response = await fetch(apiUrl, requestOptions);
-        if (!response.ok) {
+        const data = await fetch(apiUrl, requestOptions);
+        if (!data.ok) {
             throw new Error('Failed to decrement book quantity.');
         }
         setBookQuantity(prev => prev - 1);
@@ -72,7 +72,7 @@ export const UpdateBookQuantity: React.FC<{ book: Book, deleteBook: any }> = (pr
         });
 
         if (result.isConfirmed) {
-            const apiUrl = `${process.env.REACT_APP_API_URL}/admin/secure/delete/book?bookId=${props.book.id}`;
+            const apiUrl = `${process.env.REACT_APP_API_URL}/admin/secure/remove/book?bookId=${props.book.id}`;
             const requestOptions = {
                 method: 'DELETE',
                 headers: {
@@ -128,10 +128,10 @@ export const UpdateBookQuantity: React.FC<{ book: Book, deleteBook: any }> = (pr
                         <div className="d-flex flex-wrap gap-2 mt-3">
                             <div className="d-flex gap-2 flex-wrap justify-content-center">
                                 <button className="btn btn-sm btn-success" onClick={incrementQuantity}>
-                                    {t("bookCard.increaseBtn")}
+                                    <i className="bi bi-plus-lg me-1"></i>{t("bookCard.increaseBtn")}
                                 </button>
                                 <button className="btn btn-sm btn-warning text-dark" onClick={decrementQuantity} disabled={left <= 0}>
-                                    {t("bookCard.decreaseBtn")}
+                                    <i className="bi bi-dash-lg me-1"></i>{t("bookCard.decreaseBtn")}
                                 </button>
                             </div>
                             <div className="d-flex justify-content-center align-items-center h-100">

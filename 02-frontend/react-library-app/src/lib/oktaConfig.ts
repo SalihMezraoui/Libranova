@@ -5,4 +5,5 @@ export const oktaConfig = {
     scopes: ['openid', 'profile', 'email'], 
     pkce: true,
     disableHttpsCheck: true,
+    // logo: '/logo-signin-widget.png',
 }

@@ -11,12 +11,9 @@ import java.util.List;
 
 public interface CheckoutRepository extends JpaRepository<Checkout, Long>
 {
-    Checkout findByUserEmailAndBookId(String userEmail, Long bookId);
+    // Custom query to find a checkout by user email and book ID
+    Checkout findByBookIdAndUserEmail(Long bookId, String userEmail);
 
     List<Checkout> findByUserEmail(String userEmail);
 
-    @Modifying
-    @Transactional
-    @Query("DELETE FROM Checkout c WHERE c.bookId = :book_id")
-    void deleteAllByBookId(@Param("book_id") Long bookId);
 }

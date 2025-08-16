@@ -2,12 +2,13 @@ import { use, useEffect, useState } from "react";
 import Book from "../../models/Book";
 import { BreathingLoader } from "../Widgets/BreathingLoader";
 import { RatingStars } from "../Widgets/RatingStars";
-import { CheckoutAndReviewBox } from "./CheckoutAndReviewBox";
+import { ReviewCheckoutPanel } from "./ReviewCheckoutPanel";
 import Review from "../../models/Review";
 import { RecentReviews } from "./RecentReviews";
 import { useOktaAuth } from "@okta/okta-react";
 import ReviewRequest from "../../models/ReviewRequest";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 
 
 export const CheckoutBook = () => {
@@ -41,88 +42,94 @@ export const CheckoutBook = () => {
 
     const [showError, setShowError] = useState(false);
 
-    const bookId = (window.location.pathname).split('/')[2];
+    const { bookId } = useParams<{ bookId: string }>();
+
 
     useEffect(() => {
-        const fetchBook = async () => {
-            const apiUrl: string = `${process.env.REACT_APP_API_URL}/books/search/findByIdAndDeletedFalse?id=${bookId}`;
+        const loadBookDetails = async () => {
+            try {
+                const endpoint = `${process.env.REACT_APP_API_URL}/books/search/findByIdAndDeletedFalse?id=${bookId}`;
+                const res = await fetch(endpoint);
 
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
-                throw new Error('Something went wrong!');
+                if (!res.ok) {
+                    throw new Error(`Failed to fetch book (status: ${res.status})`);
+                }
+
+                const data = await res.json();
+
+                const bookData: Book = {
+                    id: data.id,
+                    title: data.title,
+                    author: data.author,
+                    overview: data.overview,
+                    overviewDe: data.overviewDe,
+                    totalCopies: data.totalCopies,
+                    copiesInStock: data.copiesInStock,
+                    category: data.category,
+                    image: data.image,
+                };
+
+                setBook(bookData);
+            } catch (err: any) {
+                setHttpError(err.message ?? 'Unexpected error occurred');
+            } finally {
+                setLoading(false);
             }
-
-            const jsonResponse = await response.json();
-
-            const loadedBook: Book = {
-                id: jsonResponse.id,
-                title: jsonResponse.title,
-                author: jsonResponse.author,
-                overview: jsonResponse.overview,
-                overviewDe: jsonResponse.overviewDe,
-                totalCopies: jsonResponse.totalCopies,
-                copiesInStock: jsonResponse.copiesInStock,
-                category: jsonResponse.category,
-                image: jsonResponse.image,
-            };
-            console.log(loadedBook);
-            setBook(loadedBook);
-            setLoading(false);
-
         };
-        fetchBook().catch((error: any) => {
-            setLoading(false);
-            setHttpError(error.message);
-        })
-    }, [isBookCheckedOut]);
+
+        loadBookDetails();
+    }, [bookId, isBookCheckedOut]);
+
 
     useEffect(() => {
-        const fetchReviews = async () => {
-            const apiUrl: string = `${process.env.REACT_APP_API_URL}/reviews/search/findByBookId?bookId=${bookId}`;
+        const retrieveReviews = async () => {
+            const url = `${process.env.REACT_APP_API_URL}/reviews/search/findReviewsByBookId?bookId=${bookId}`;
 
-            const response = await fetch(apiUrl);
-            if (!response.ok) {
+            const res = await fetch(url);
+            if (!res.ok) {
                 throw new Error('Something went wrong!');
             }
 
-            const jsonResponse = await response.json();
+            const data = await res.json();
+            const reviewsArray = data._embedded.reviews;
 
-            const responseData = jsonResponse._embedded.reviews
+            const parsedReviews: Review[] = [];
+            let totalRating = 0;
 
-            const loadedReviews: Review[] = [];
-
-            let totalStars: number = 0;
-
-            for (const key in responseData) {
-                loadedReviews.push({
-                    id: responseData[key].id,
-                    userEmail: responseData[key].userEmail,
-                    date: responseData[key].date,
-                    rating: responseData[key].rating,
-                    bookId: responseData[key].bookId,
-                    reviewDescription: responseData[key].reviewDescription,
+            for (const index in reviewsArray) {
+                const review = reviewsArray[index];
+                parsedReviews.push({
+                    id: review.id,
+                    userEmail: review.userEmail,
+                    createdAt: review.createdAt,
+                    ratingValue: review.ratingValue,
+                    bookId: review.bookId,
+                    comment: review.comment,
                 });
-                totalStars += responseData[key].rating;
+                totalRating += review.ratingValue;
             }
 
-            if (loadedReviews) {
-                const rounded = (Math.round((totalStars / loadedReviews.length) * 2) / 2).toFixed(1);
-                setNumberOfStars(parseFloat(rounded));
+            if (parsedReviews.length > 0) {
+                const averageRating = totalRating / parsedReviews.length;
+                const roundedRating = (Math.round(averageRating * 2) / 2).toFixed(1);
+                setNumberOfStars(parseFloat(roundedRating));
             }
 
-            setReviews(loadedReviews);
+            setReviews(parsedReviews);
             setIsLoadingReview(false);
         };
-        fetchReviews().catch((error: any) => {
+
+        retrieveReviews().catch((error: any) => {
             setIsLoadingReview(false);
             setHttpError(error.message);
-        })
+        });
     }, [isReviewRemaining]);
 
+
     useEffect(() => {
-        const fetchUserBookReview = async () => {
+        const checkUserReviewStatus = async () => {
             if (authState && authState.isAuthenticated) {
-                const apiUrl = `${process.env.REACT_APP_API_URL}/reviews/secure/hasreviewed?bookId=${bookId}`;
+                const apiUrl = `${process.env.REACT_APP_API_URL}/reviews/secure/has-reviewed?bookId=${bookId}`;
                 const response = {
                     method: 'GET',
                     headers: {
@@ -139,7 +146,7 @@ export const CheckoutBook = () => {
             }
             setIsLoadingReviewRemaining(false);
         }
-        fetchUserBookReview().catch((error: any) => {
+        checkUserReviewStatus().catch((error: any) => {
             setIsLoadingReviewRemaining(false);
             setHttpError(error.message);
         })
@@ -148,7 +155,7 @@ export const CheckoutBook = () => {
     useEffect(() => {
         const fetchUserLoans = async () => {
             if (authState && authState.isAuthenticated) {
-                const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/currentloans/size`;
+                const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/active-loans/size`;
                 const response = {
                     method: 'GET',
                     headers: {
@@ -174,7 +181,7 @@ export const CheckoutBook = () => {
     useEffect(() => {
         const fetchIsBookCheckedOut = async () => {
             if (authState && authState.isAuthenticated) {
-                const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/ischeckedout?bookId=${bookId}`;
+                const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/loans/exists?bookId=${bookId}`;
                 const response = {
                     method: 'GET',
                     headers: {
@@ -205,14 +212,16 @@ export const CheckoutBook = () => {
 
     if (httpError) {
         return (
-            <div className='container mt-5'>
-                <p>{httpError}</p>
+            <div className="container mt-5 text-center">
+                <div className="alert alert-danger" role="alert" style={{ maxWidth: 400, margin: "auto" }}>
+                    {httpError}
+                </div>
             </div>
         );
     }
 
     async function checkoutBook() {
-        const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/checkout?bookId=${bookId}`;
+        const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/loans/checkout?bookId=${bookId}`;
         const response = {
             method: 'PUT',
             headers: {
@@ -229,15 +238,12 @@ export const CheckoutBook = () => {
         setIsBookCheckedOut(true);
     }
 
-    async function submitReview(starInput: number, reviewDescription: string) {
+    async function submitReview(rating: number, comment: string) {
 
-        let bookId: number = 0;
-        if (book?.id) {
-            bookId = book.id;
-        }
+        const bookId = book?.id ?? 0;
 
-        const reviewRequest = new ReviewRequest(starInput, bookId, reviewDescription);
-        const apiUrl = `${process.env.REACT_APP_API_URL}/reviews/secure`;
+        const reviewRequest = new ReviewRequest(rating, bookId, comment);
+        const apiUrl = `${process.env.REACT_APP_API_URL}/reviews/secure/add-review`;
         const response = {
             method: 'POST',
             headers: {
@@ -261,7 +267,7 @@ export const CheckoutBook = () => {
                     <div className="alert alert-danger mt-4"
                         role="alert">{t('alerts.checkoutError')}
                     </div>}
-                <div className="row mt-5">
+                <div className="row g-4 mt-5">
                     <div className="col-lg-3">
                         <div className="book-cover shadow-lg rounded-3 overflow-hidden">
                             {book?.image ? (
@@ -296,7 +302,7 @@ export const CheckoutBook = () => {
                             <RatingStars rating={numberOfStars} size={22} />
                         </div>
                     </div>
-                    <CheckoutAndReviewBox book={book} mobile={false} currentLoans={currentLoans}
+                    <ReviewCheckoutPanel book={book} mobile={false} currentLoans={currentLoans}
                         isAuthenticated={authState?.isAuthenticated} isCheckedOut={isBookCheckedOut}
                         checkoutBook={checkoutBook} isReviewRemaining={isReviewRemaining} submitReview={submitReview} />
                 </div>
@@ -323,11 +329,19 @@ export const CheckoutBook = () => {
                     <div className="ml-2">
                         <h2 className="fw-bold mb-2">{book?.title}</h2>
                         <h5 className="text-primary mb-3">{book?.author}</h5>
-                        <p className="card-text">{book?.overview}</p>
+                        <button
+                            className="btn btn-sm btn-outline-secondary mb-2"
+                            onClick={() => setLanguage(language === 'en' ? 'de' : 'en')}
+                        >
+                            {language === 'en' ? 'Deutsch anzeigen' : 'Show English'}
+                        </button>
+                        <p className="card-text">
+                            {language === 'en' ? book?.overview : book?.overviewDe}
+                        </p>
                         <RatingStars rating={numberOfStars} size={22} />
                     </div>
                 </div>
-                <CheckoutAndReviewBox book={book} mobile={true} currentLoans={currentLoans}
+                <ReviewCheckoutPanel book={book} mobile={true} currentLoans={currentLoans}
                     isAuthenticated={authState?.isAuthenticated} isCheckedOut={isBookCheckedOut}
                     checkoutBook={checkoutBook} isReviewRemaining={isReviewRemaining} submitReview={submitReview} />
                 <hr />

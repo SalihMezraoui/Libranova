@@ -39,17 +39,17 @@ public class BookService {
 
     public Book checkoutBook(String userEmail, Long bookId) throws Exception {
         Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new BookNotAvailableException("Buch mit ID nicht gefunden: " + bookId));
+                .orElseThrow(() -> new BookNotAvailableException("Book with ID " + bookId + " is not available."));
 
         checkAvailability(book, userEmail);
 
         List<Checkout> userCheckouts = checkoutRepository.findByUserEmail(userEmail);
         boolean hasOverdueBooks = hasOverdueBooks(userCheckouts);
 
-        Payment payment = paymentRepository.findByUserEmail(userEmail);
+        Payment payment = paymentRepository.findPaymentsByUserEmail(userEmail);
 
         if ((payment != null && payment.getAmount() > 0) || (payment != null && hasOverdueBooks)) {
-            throw new Exception("Checkout blocked due to pending payment or overdue items.");
+            throw new Exception("The loan has been blocked due to outstanding payments or overdue books.");
         }
 
         if (payment == null) {
@@ -62,8 +62,114 @@ public class BookService {
         return book;
     }
 
+    public void returnBook(String userEmail, Long bookId) throws ParseException {
+
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new BookNotAvailableException("Book with ID \" + bookId + \" is not available."));
+
+        Checkout checkout = checkoutRepository.findByBookIdAndUserEmail(bookId, userEmail);
+        if (checkout == null) {
+            throw new BookNotAvailableException("No active checkout found for book with ID " + bookId + ".");
+        }
+
+        book.setCopiesInStock(book.getCopiesInStock() + 1);
+        bookRepository.save(book);
+
+        // Calculate days overdue
+        LocalDate dueDate = LocalDate.parse(checkout.getReturnedAt());
+        LocalDate today = LocalDate.now();
+        long daysOverdue = ChronoUnit.DAYS.between(dueDate, today);
+
+        if (daysOverdue > 0) {
+            Payment payment = paymentRepository.findPaymentsByUserEmail(userEmail);
+            if (payment == null) {
+                payment = new Payment();
+                payment.setUserEmail(userEmail);
+                payment.setAmount(0.0);
+            }
+
+            payment.setAmount(payment.getAmount() + daysOverdue * 2);
+            paymentRepository.save(payment);
+        }
+
+        checkoutRepository.deleteById(checkout.getId());
+
+        History history = History.builder()
+                .userEmail(userEmail)
+                .checkoutAt(checkout.getCheckoutAt())
+                .returnedAt(LocalDate.now().toString())
+                .renewalCount(checkout.getRenewalCount())
+                .title(book.getTitle())
+                .author(book.getAuthor())
+                .overview(book.getOverview())
+                .image(book.getImage())
+                .build();
+
+        historyRepository.save(history);
+    }
+
+    public void extendLoan(String userEmail, Long bookId) throws Exception {
+        Checkout checkout = checkoutRepository.findByBookIdAndUserEmail(bookId, userEmail);
+        if (checkout == null) {
+            throw new BookNotAvailableException("Keine aktive Ausleihe für Buch mit ID " + bookId + " gefunden.");
+        }
+
+        LocalDate returnDate = LocalDate.parse(checkout.getReturnedAt());
+        LocalDate today = LocalDate.now();
+
+        if (!returnDate.isBefore(today)) {
+            checkout.setReturnedAt(today.plusDays(7).toString());
+            checkout.setRenewalCount(checkout.getRenewalCount() + 1);
+            checkoutRepository.save(checkout);
+        } else {
+            throw new Exception("Das Buch kann nicht verlängert werden, da es bereits überfällig ist.");
+        }
+    }
+
+    public List<UserLoansSummary> getUserLoansSummary(String userEmail) throws ParseException {
+        // Retrieving all checkouts for the user
+        List<Checkout> checkouts = checkoutRepository.findByUserEmail(userEmail);
+
+        // Extracting book IDs from checkouts
+        List<Long> bookIds = checkouts.stream()
+                .map(Checkout::getBookId)
+                .toList();
+
+        // Get corresponding books
+        List<Book> books = bookRepository.findBooksByBookIds(bookIds);
+
+        // date objects
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = sdf.parse(LocalDate.now().toString());
+
+        // map of bookId -> returnDate
+        Map<Long, String> returnDateMap = checkouts.stream()
+                .collect(Collectors.toMap(Checkout::getBookId, Checkout::getReturnedAt));
+
+        // Build response list
+        List<UserLoansSummary> summaryList = new ArrayList<>();
+        for (Book book : books) {
+            String returnDateStr = returnDateMap.get(book.getId());
+            if (returnDateStr != null) {
+                Date returnDate = sdf.parse(returnDateStr);
+                long diffMillis = returnDate.getTime() - today.getTime();
+                int daysRemaining = (int) TimeUnit.MILLISECONDS.toDays(diffMillis);
+                summaryList.add(new UserLoansSummary(book, daysRemaining));
+            }
+        }
+
+        return summaryList;
+    }
+
+    public int getNumberOfLoans(String userEmail) {
+        return checkoutRepository.findByUserEmail(userEmail).size();
+    }
+
+    public boolean checkoutBookByUserEmail(String userEmail, Long bookId) {
+        return checkoutRepository.findByBookIdAndUserEmail(bookId, userEmail) != null;
+    }
     private void checkAvailability(Book book, String userEmail) {
-        if (checkoutRepository.findByUserEmailAndBookId(userEmail, book.getId()) != null) {
+        if (checkoutRepository.findByBookIdAndUserEmail(book.getId(), userEmail) != null) {
             throw new BookNotAvailableException("Das Buch ist bereits ausgeliehen.");
         }
         if (book.getCopiesInStock() <= 0) {
@@ -75,7 +181,7 @@ public class BookService {
         LocalDate today = LocalDate.now();
 
         for (Checkout checkout : checkouts) {
-            LocalDate returnDate = LocalDate.parse(checkout.getReturnDate());
+            LocalDate returnDate = LocalDate.parse(checkout.getReturnedAt());
             if (returnDate.isBefore(today)) {
                 return true;
             }
@@ -98,114 +204,14 @@ public class BookService {
     }
 
     private void createCheckoutRecord(String userEmail, Book book) {
-        Checkout checkout = new Checkout(userEmail, LocalDate.now().toString(),
-                LocalDate.now().plusDays(CHECKOUT_PERIOD_DAYS).toString(), book.getId());
-        checkoutRepository.save(checkout);
-    }
-
-    public boolean checkoutBookByUserEmail(String userEmail, Long bookId) {
-        return checkoutRepository.findByUserEmailAndBookId(userEmail, bookId) != null;
-    }
-
-    public int getNumberOfLoans(String userEmail) {
-        return checkoutRepository.findByUserEmail(userEmail).size();
-    }
-
-    public List<UserLoansSummary> getUserLoansSummary(String userEmail) throws ParseException {
-        // Retrieving all checkouts for the user
-        List<Checkout> checkouts = checkoutRepository.findByUserEmail(userEmail);
-
-        // Extracting book IDs from checkouts
-        List<Long> bookIds = checkouts.stream()
-                .map(Checkout::getBookId)
-                .toList();
-
-        // Get corresponding books
-        List<Book> books = bookRepository.findBooksByBookIds(bookIds);
-
-        // date objects
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date today = sdf.parse(LocalDate.now().toString());
-
-        // map of bookId -> returnDate
-        Map<Long, String> returnDateMap = checkouts.stream()
-                .collect(Collectors.toMap(Checkout::getBookId, Checkout::getReturnDate));
-
-        // Build response list
-        List<UserLoansSummary> summaryList = new ArrayList<>();
-        for (Book book : books) {
-            String returnDateStr = returnDateMap.get(book.getId());
-            if (returnDateStr != null) {
-                Date returnDate = sdf.parse(returnDateStr);
-                long diffMillis = returnDate.getTime() - today.getTime();
-                int daysRemaining = (int) TimeUnit.MILLISECONDS.toDays(diffMillis);
-                summaryList.add(new UserLoansSummary(book, daysRemaining));
-            }
-        }
-
-        return summaryList;
-    }
-
-    public void returnBook(String userEmail, Long bookId) throws ParseException {
-
-        Book book = bookRepository.findById(bookId)
-                .orElseThrow(() -> new BookNotAvailableException("Buch mit ID " + bookId + " ist nicht verfügbar."));
-
-        Checkout checkout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
-        if (checkout == null) {
-            throw new BookNotAvailableException("Keine aktive Ausleihe für Buch mit ID " + bookId + " gefunden.");
-        }
-
-        book.setCopiesInStock(book.getCopiesInStock() + 1);
-        bookRepository.save(book);
-
-        // Calculate days overdue
-        LocalDate dueDate = LocalDate.parse(checkout.getReturnDate());
-        LocalDate today = LocalDate.now();
-        long daysOverdue = ChronoUnit.DAYS.between(dueDate, today);
-
-        if (daysOverdue > 0) {
-            Payment payment = paymentRepository.findByUserEmail(userEmail);
-            if (payment == null) {
-                payment = new Payment();
-                payment.setUserEmail(userEmail);
-                payment.setAmount(0.0);
-            }
-
-            payment.setAmount(payment.getAmount() + daysOverdue * 2);
-            paymentRepository.save(payment);
-        }
-
-        checkoutRepository.deleteById(checkout.getId());
-
-        History history = History.builder()
+        Checkout checkout = Checkout.builder()
                 .userEmail(userEmail)
-                .checkoutDate(checkout.getCheckoutDate())
-                .returnedDate(LocalDate.now().toString())
-                .title(book.getTitle())
-                .author(book.getAuthor())
-                .overview(book.getOverview())
-                .image(book.getImage())
+                .checkoutAt(LocalDate.now().toString())
+                .returnedAt(LocalDate.now().plusDays(CHECKOUT_PERIOD_DAYS).toString())
+                .bookId(book.getId())
+                .renewalCount(0)
                 .build();
 
-        historyRepository.save(history);
+        checkoutRepository.save(checkout);
     }
-
-    public void renewLoan(String userEmail, Long bookId) throws Exception {
-        Checkout checkout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
-        if (checkout == null) {
-            throw new BookNotAvailableException("Keine aktive Ausleihe für Buch mit ID " + bookId + " gefunden.");
-        }
-
-        LocalDate returnDate = LocalDate.parse(checkout.getReturnDate());
-        LocalDate today = LocalDate.now();
-
-        if (!returnDate.isBefore(today)) {
-            checkout.setReturnDate(today.plusDays(7).toString());
-            checkoutRepository.save(checkout);
-        } else {
-            throw new Exception("Das Buch kann nicht verlängert werden, da es bereits überfällig ist.");
-        }
-    }
-
 }

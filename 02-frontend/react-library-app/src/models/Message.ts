@@ -5,7 +5,7 @@ class Message {
     userEmail?: string;
     adminEmail?: string;
     response?: string;
-    closed?: boolean;
+    answered?: boolean;
 
     constructor(subject: string, inquiry: string) {
         this.subject = subject;

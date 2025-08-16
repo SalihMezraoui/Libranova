@@ -21,10 +21,10 @@ public class Message
     @Column(name = "user_email")
     private String userEmail;
 
-    @Column(name = "title")
+    @Column(name = "subject")
     private String subject;
 
-    @Column(name = "question")
+    @Column(name = "inquiry")
     private String inquiry;
 
     @Column(name = "admin_email")
@@ -33,12 +33,9 @@ public class Message
     @Column(name = "response")
     private String response;
 
-    @Column(name = "closed")
-    private boolean closed;
+    @Column(name = "submission_date")
+    private String submissionDate;
 
-    public Message(String subject, String inquiry)
-    {
-        this.subject = subject;
-        this.inquiry = inquiry;
-    }
+    @Column(name = "answered")
+    private boolean answered;
 }

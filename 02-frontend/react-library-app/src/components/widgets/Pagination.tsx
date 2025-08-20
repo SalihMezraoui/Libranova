@@ -10,7 +10,6 @@ interface PaginationProps {
 export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, paginate }) => {
   const { t } = useTranslation();
 
-  // Generate visible pages around current page (2 before and 2 after)
   const visiblePages = Array.from(
     { length: 5 },
     (_, i) => i + currentPage - 2

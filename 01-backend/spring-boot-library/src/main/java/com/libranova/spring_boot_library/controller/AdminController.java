@@ -28,6 +28,7 @@ public class AdminController
         adminService.addNewBook(addBook);
         System.out.println("[INFO] Book added successfully: " + addBook.getTitle());
     }
+
     @PutMapping("/secure/increment/book/copies")
     public void incrementBookCopies(@RequestParam Long bookId, JwtAuthenticationToken jwt) throws AccessDeniedException {
         String userType = jwt.getToken().getClaimAsString("userType");

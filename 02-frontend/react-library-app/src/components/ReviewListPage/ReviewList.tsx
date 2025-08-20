@@ -75,11 +75,9 @@ export const ReviewList = () => {
         )
     }
 
-    // Calculate indexes for slicing reviews
     const indexOfLastReview = Math.min(actualPage * pageSize, totalReviews);
     const indexOfFirstReview = indexOfLastReview - pageSize;
 
-    // Handler to change pages
     const paginate = (pageNumber: number) => setActualPage(pageNumber);
 
     return (

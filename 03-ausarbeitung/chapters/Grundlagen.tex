@@ -50,7 +50,7 @@ Hibernate ist ein typensicheres Java-ORM-Framework, das automatische Abbildung z
 
 \subsection{Spring Security}\index{Spring Security}
 
-Spring Security ist ein anpassbares Framework zur Verwaltung von Authentifizierung und Autorisierung in Java-Anwendungen. Es bietet wiederverwendbare Module, Schutz gegen Web-Schwachstellen wie CSRF und flexible Integrationsmöglichkeiten für unterschiedliche Anwendungsfälle. Unsachgemäße Konfiguration kann jedoch Sicherheitsrisiken bergen  \cite{SPRNGSECURITY2025}
+Spring Security ist ein anpassbares Framework zur Verwaltung von Authentifizierung und Autorisierung in Java-Anwendungen. Es bietet wiederverwendbare Module, Schutz gegen Web-Schwachstellen wie CSRF und flexible Integrationsmöglichkeiten für unterschiedliche Anwendungsfälle. Unsachgemäße Konfiguration kann jedoch Sicherheitsrisiken bergen  \cite{SPRNGSECURITY2025}.
 
 \noindent Im \textit{LibraNova}-Projekt wird Spring Security eingesetzt, um die REST-API-Endpunkte abzusichern und den Zugriff zu kontrollieren.
 
@@ -74,11 +74,12 @@ Dieser Abschnitt befasst sich mit den verwendeten Frontend-Technologien, darunte
 HTML und CSS bilden die Grundlage für die Entwicklung und Gestaltung von Webseiten. HTML definiert die Struktur und den Inhalt der Seite, während CSS für das visuelle Erscheinungsbild zuständig ist – einschließlich Layout, Farben und Schriftarten. Gemeinsam ermöglichen sie die Erstellung ansprechender und übersichtlich strukturierter Benutzeroberflächen \cite{HTMLCSS2025a, HTMLCSS2025b}.
 
 \subsection{Bootstrap}\index{Bootstrap}
-Bootstrap ist ein weit verbreitetes, quelloffenes Framework zur Entwicklung responsiver und mobiler Webanwendungen. Es stellt eine Vielzahl vordefinierter CSS-Klassen sowie JavaScript-Komponenten bereit, die eine schnelle und konsistente Gestaltung von Benutzeroberflächen ermöglichen \cite{BOOTSTRAP2025}. \\
-In \textit{LibraNova} wurde Bootstrap eingesetzt, um das Layout flexibel zu gestalten und sicherzustellen, dass sich die Benutzeroberfläche auf verschiedenen Bildschirmgrößen (z.\,B. Desktop, Tablet, Smartphone) dynamisch anpasst. Hierfür wurden gezielt Klassen wie \texttt{container}, \texttt{row} und \texttt{col-md-*} verwendet.
+Bootstrap ist ein weit verbreitetes, quelloffenes Framework zur Entwicklung responsiver und mobiler Webanwendungen. Es stellt eine Vielzahl vordefinierter CSS-Klassen sowie JavaScript-Komponenten bereit, die eine schnelle und konsistente Gestaltung von Benutzeroberflächen ermöglichen \cite{BOOTSTRAP2025}. 
+
+\noindent In \textit{LibraNova} wurde Bootstrap eingesetzt, um das Layout flexibel zu gestalten und sicherzustellen, dass sich die Benutzeroberfläche auf verschiedenen Bildschirmgrößen (z.\,B. Desktop, Tablet, Smartphone) dynamisch anpasst. 
 
 \subsection{TypeScript}\index{TypeScript}
-TypeScript wurde von Microsoft entwickelt und ist eine Programmiersprache, die JavaScript erweitert und optionale statische Typisierung sowie moderne Sprachfunktionen bietet. Sie ermöglicht es Entwickler:innen, viele häufige Fehler bereits während der Entwicklungsphase zu erkennen, wobei das ursprüngliche Laufzeitverhalten von JavaScript erhalten bleibt. Für die Entwicklung der React-basierten Benutzeroberfläche wurde bewusst TypeScript anstelle von reinem JavaScript gewählt. Die Gründe dafür liegen in der besseren Code-Wartbarkeit, der verbesserten Autovervollständigung in modernen IDEs und der höheren Typsicherheit, die gerade in größeren Anwendungen wie einem Bibliotheksverwaltungssystem eine zentrale Rolle spielt. \cite{MICROSOFT2025, TYPESCRIPT2025}.
+TypeScript wurde von Microsoft entwickelt und ist eine Programmiersprache, die JavaScript erweitert und optionale statische Typisierung sowie moderne Sprachfunktionen bietet. Sie ermöglicht es Entwickler:innen, viele häufige Fehler bereits während der Entwicklungsphase zu erkennen, wobei das ursprüngliche Laufzeitverhalten von JavaScript erhalten bleibt. Für die Entwicklung der React-basierten Benutzeroberfläche wurde bewusst TypeScript anstelle von reinem JavaScript gewählt. Die Gründe dafür liegen in der besseren Code-Wartbarkeit, der verbesserten Autovervollständigung in modernen IDEs und der höheren Typsicherheit, die gerade in größeren Anwendungen wie einem Bibliotheksverwaltungssystem eine zentrale Rolle spielt \cite{MICROSOFT2025, TYPESCRIPT2025}.
 
 
 
@@ -100,7 +101,7 @@ MySQL ist ein weit verbreitetes Open-Source-Datenbankmanagementsystem, das Daten
 \subsection{MySQL-Workbench und SQL}
 MySQL Workbench ist ein grafisches Werkzeug zur Modellierung, Verwaltung und Migration von MySQL-Datenbanken. Es bietet Funktionen wie visuelles Datenbankdesign, Ausführung von SQL-Abfragen, Serveradministration sowie Datenmigration aus anderen Datenbanksystemen \cite{ORACLE2025d}. 
 
-\noindent SQL (Structured Query Language), entwickelt von Don Chamberlin und Ray Boyce bei IBM, ist eine standardisierte Sprache zur Verwaltung relationaler Datenbanken. Sie ermöglicht das Einfügen, Abfragen, Aktualisieren und Löschen von Daten mit wenigen Befehlen. Durch \texttt{JOIN}-Operationen können Daten aus mehreren Tabellen effizient verknüpft und Redundanzen vermieden werden. SQL ist ein Kernbestandteil moderner datengetriebener Anwendungen und kommt in nahezu allen relationalen Datenbanksystemen zum Einsatz \cite{IBM2025}. 
+\noindent SQL entwickelt von Don Chamberlin und Ray Boyce bei IBM, ist eine standardisierte Sprache zur Verwaltung relationaler Datenbanken. Sie ermöglicht das Einfügen, Abfragen, Aktualisieren und Löschen von Daten mit wenigen Befehlen. Durch \texttt{JOIN}-Operationen können Daten aus mehreren Tabellen effizient verknüpft und Redundanzen vermieden werden. SQL ist ein Kernbestandteil moderner datengetriebener Anwendungen und kommt in nahezu allen relationalen Datenbanksystemen zum Einsatz \cite{IBM2025}. 
 
 \section{Authentifizierungs- und Autorisierungsprotokolle}\index{Authentifizierungs- und Autorisierungsprotokolle}
 
@@ -144,7 +145,7 @@ Postman ist eine umfassende Plattform für die Arbeit mit APIs und unterstützt 
 
 \section{Modellierung mit UML}\index{Modellierung mit UML}
 
-Die Unified Modeling Language (UML) ist ein wesentliches Werkzeug im Bereich Entwurf. UML ist eine standardisierte Modellierungssprache, die eine Vielzahl von Diagrammen bietet, um unterschiedliche Aspekte eines Systems darzustellen. Diese Diagramme helfen dabei, komplexe Systeme zu visualisieren, zu dokumentieren und zu kommunizieren \cite{UML2025}. Eine Auswahl relevanter Diagramme zur Konzeption der Webanwendung wird im folgenden Kapitel vorgestellt, um einen Überblick über den strukturellen Aufbau und das Zusammenspiel der Systemkomponenten zu geben.
+UML ist ein wesentliches Werkzeug im Bereich Entwurf und ist eine standardisierte Modellierungssprache, die eine Vielzahl von Diagrammen bietet, um unterschiedliche Aspekte eines Systems darzustellen. Diese Diagramme helfen dabei, komplexe Systeme zu visualisieren, zu dokumentieren und zu kommunizieren \cite{UML2025}. Eine Auswahl relevanter Diagramme zur Konzeption der Webanwendung wird im folgenden Kapitel vorgestellt, um einen Überblick über den strukturellen Aufbau und das Zusammenspiel der Systemkomponenten zu geben.
 
 
                                                                                                                                                                                                                                                                                         

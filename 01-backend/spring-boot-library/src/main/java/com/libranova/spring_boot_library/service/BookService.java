@@ -83,9 +83,10 @@ public class BookService {
         if (daysOverdue > 0) {
             Payment payment = paymentRepository.findPaymentsByUserEmail(userEmail);
             if (payment == null) {
-                payment = new Payment();
-                payment.setUserEmail(userEmail);
-                payment.setAmount(0.0);
+                payment = Payment.builder()
+                        .userEmail(userEmail)
+                        .amount(0.0)
+                        .build();
             }
 
             payment.setAmount(payment.getAmount() + daysOverdue * 2);
@@ -170,10 +171,10 @@ public class BookService {
     }
     private void checkAvailability(Book book, String userEmail) {
         if (checkoutRepository.findByBookIdAndUserEmail(book.getId(), userEmail) != null) {
-            throw new BookNotAvailableException("Das Buch ist bereits ausgeliehen.");
+            throw new BookNotAvailableException("The book has already been borrowed.");
         }
         if (book.getCopiesInStock() <= 0) {
-            throw new BookNotAvailableException("Keine Kopien zur Ausleihe verfügbar.");
+            throw new BookNotAvailableException("No copies available for loan.");
         }
     }
 
@@ -191,9 +192,10 @@ public class BookService {
     }
 
     private void createZeroPayment(String userEmail) {
-        Payment newPayment = new Payment();
-        newPayment.setUserEmail(userEmail);
-        newPayment.setAmount(0.0);
+        Payment newPayment = Payment.builder()
+                .userEmail(userEmail)
+                .amount(0.0)
+                .build();
         paymentRepository.save(newPayment);
     }
 

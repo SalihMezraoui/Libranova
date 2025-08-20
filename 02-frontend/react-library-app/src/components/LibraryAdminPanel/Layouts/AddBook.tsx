@@ -6,23 +6,23 @@ import { useTranslation } from "react-i18next";
 export const AddBook = () => {
 
     //  Auth & localisation
-    const { authState } = useOktaAuth(); // Handles authentication state from Okta
-    const { t } = useTranslation(); // For translations/localisation
+    const { authState } = useOktaAuth(); 
+    const { t } = useTranslation(); 
 
     // Book details
-    const [overview, setOverview] = useState(''); // Book overview text
-    const [category, setCategory] = useState('Category'); // Book category
-    const [author, setAuthor] = useState(''); // Book author name
-    const [title, setTitle] = useState(''); // Book title
-    const [totalCopies, setTotalCopies] = useState(0); // Number of copies
+    const [overview, setOverview] = useState(''); 
+    const [category, setCategory] = useState('Category'); 
+    const [author, setAuthor] = useState(''); 
+    const [title, setTitle] = useState(''); 
+    const [totalCopies, setTotalCopies] = useState(0); 
 
     // Media
-    const [image, setImage] = useState<any>(null); // Book cover image
-    const [fileName, setFileName] = useState(''); // File name for uploaded image
+    const [image, setImage] = useState<any>(null); 
+    const [fileName, setFileName] = useState(''); 
 
     // UI feedback states
-    const [showSuccess, setShowSuccess] = useState(false); // Success message visibility
-    const [showWarning, setShowWarning] = useState(false); // Warning message visibility
+    const [showSuccess, setShowSuccess] = useState(false); 
+    const [showWarning, setShowWarning] = useState(false); 
 
 
 

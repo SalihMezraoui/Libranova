@@ -114,7 +114,6 @@ class BookServiceTest {
         book.setOverview("Overview");
         book.setImage("image.png");
 
-        // Setup checkout with due date in the past
         Checkout checkout = new Checkout();
         checkout.setId(10L);
         checkout.setBookId(1L);
@@ -123,7 +122,6 @@ class BookServiceTest {
         checkout.setReturnedAt(LocalDate.now().minusDays(3).toString()); // overdue 3 days
         checkout.setRenewalCount(0);
 
-        // Setup payment
         Payment payment = new Payment();
         payment.setUserEmail("user@example.com");
         payment.setAmount(0.0);
@@ -134,16 +132,12 @@ class BookServiceTest {
 
         bookService.returnBook("user@example.com", 1L);
 
-        // Verify book stock incremented
         verify(bookRepository).save(book);
 
-        // Verify checkout deleted
         verify(checkoutRepository).deleteById(checkout.getId());
 
-        // Verify history saved
         verify(historyRepository).save(any(History.class));
 
-        // Verify payment updated with overdue
         assertEquals(6.0, payment.getAmount()); // 3 days * 2
         verify(paymentRepository).save(payment);
     }

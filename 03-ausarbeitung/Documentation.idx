@@ -1,6 +1,6 @@
 \indexentry{Motivation|hyperpage}{1}
 \indexentry{Ziele der Arbeit|hyperpage}{1}
-\indexentry{Enführung|hyperpage}{3}
+\indexentry{Einführung|hyperpage}{3}
 \indexentry{Existierende Systeme|hyperpage}{3}
 \indexentry{Thalia Website|hyperpage}{3}
 \indexentry{Stadtbücherei Trier|hyperpage}{4}
@@ -30,35 +30,32 @@
 \indexentry{Klassendiagramm|hyperpage}{16}
 \indexentry{Systemanforderungen|hyperpage}{20}
 \indexentry{Funktionale Anforderungen|hyperpage}{20}
-\indexentry{Nicht-funktionale Anforderungen|hyperpage}{20}
-\indexentry{Technische Anforderungen|hyperpage}{21}
-\indexentry{Algorithmen|hyperpage}{21}
-\indexentry{Buchausleihe|hyperpage}{21}
-\indexentry{Verlängerung der Buchausleihe|hyperpage}{22}
-\indexentry{Backend-Architektur|hyperpage}{23}
-\indexentry{Projektinitialisierung|hyperpage}{23}
-\indexentry{Paketstruktur|hyperpage}{25}
-\indexentry{Teststrategie|hyperpage}{27}
-\indexentry{Frontend-Struktur|hyperpage}{28}
-\indexentry{Frontend-Initialisierung|hyperpage}{28}
-\indexentry{React-Projektstruktur|hyperpage}{30}
-\indexentry{Internationalisierung mit i18next|hyperpage}{32}
-\indexentry{Datenbankmodell und Persistenz|hyperpage}{35}
-\indexentry{Datenbankschema|hyperpage}{35}
-\indexentry{Datenpersistenz mit Spring Data und Hibernate|hyperpage}{37}
-\indexentry{Ausleihprozess eines Buches|hyperpage}{39}
-\indexentry{Backend-Prozess|hyperpage}{39}
-\indexentry{Frontend-Prozess|hyperpage}{43}
-\indexentry{Verfahren zur Rückgabe eines Buches|hyperpage}{45}
-\indexentry{Backend-Prozess|hyperpage}{45}
-\indexentry{Frontend-Prozess|hyperpage}{46}
-\indexentry{Startseite|hyperpage}{49}
-\indexentry{Header und Navigation|hyperpage}{49}
-\indexentry{Footer|hyperpage}{50}
-\indexentry{Hauptteil|hyperpage}{50}
-\indexentry{Karussell und Buch-Browser|hyperpage}{50}
-\indexentry{Link zur Bibliotheksdienste|hyperpage}{51}
-\indexentry{Bildungs- und E-Learning-Plattformen|hyperpage}{60}
-\indexentry{Mobile Nutzung|hyperpage}{61}
-\indexentry{Personalisierte Empfehlungen|hyperpage}{61}
-\indexentry{Fernleihe und Reservierungsbenachrichtigungen|hyperpage}{61}
+\indexentry{Nicht-funktionale Anforderungen|hyperpage}{21}
+\indexentry{Technische Anforderungen|hyperpage}{22}
+\indexentry{Algorithmen|hyperpage}{22}
+\indexentry{Buchausleihe|hyperpage}{22}
+\indexentry{Verlängerung der Buchausleihe|hyperpage}{23}
+\indexentry{Backend-Architektur|hyperpage}{24}
+\indexentry{Projektinitialisierung|hyperpage}{24}
+\indexentry{Paketstruktur|hyperpage}{26}
+\indexentry{Teststrategie|hyperpage}{28}
+\indexentry{Frontend-Struktur|hyperpage}{29}
+\indexentry{Frontend-Initialisierung|hyperpage}{29}
+\indexentry{React-Projektstruktur|hyperpage}{31}
+\indexentry{Internationalisierung mit i18next|hyperpage}{33}
+\indexentry{Datenbankmodell und Persistenz|hyperpage}{36}
+\indexentry{Datenbankschema|hyperpage}{36}
+\indexentry{Datenpersistenz mit Spring Data und Hibernate|hyperpage}{38}
+\indexentry{Ausleihprozess eines Buches|hyperpage}{41}
+\indexentry{Backend-Prozess|hyperpage}{41}
+\indexentry{Frontend-Prozess|hyperpage}{45}
+\indexentry{Verfahren zur Rückgabe eines Buches|hyperpage}{47}
+\indexentry{Backend-Prozess|hyperpage}{47}
+\indexentry{Frontend-Prozess|hyperpage}{48}
+\indexentry{Startseite|hyperpage}{51}
+\indexentry{Kopfzeile|hyperpage}{51}
+\indexentry{Footer|hyperpage}{52}
+\indexentry{Karussell und Buch-Browser|hyperpage}{52}
+\indexentry{Bildungs- und E-Learning-Plattformen|hyperpage}{62}
+\indexentry{Mobile Nutzung|hyperpage}{63}
+\indexentry{Personalisierte Empfehlungen|hyperpage}{63}

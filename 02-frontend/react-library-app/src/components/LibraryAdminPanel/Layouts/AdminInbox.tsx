@@ -94,7 +94,6 @@ export const AdminInbox = () => {
             setButtonSubmit(prev => !prev);
         } catch (error) {
             console.error(error);
-            // optionally show a user-friendly error notification here
         }
     }
 

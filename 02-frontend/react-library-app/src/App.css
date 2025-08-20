@@ -10,8 +10,8 @@
 
 .hero-section {
   text-align: center;
-  color: #212529; /* same as Bootstrap's text-dark */
-  padding: 3rem 0; /* py-5 equivalent */
+  color: #212529; 
+  padding: 3rem 0; 
   background: linear-gradient(135deg, #efeabcff, #4cd0e7ff);
 }
 

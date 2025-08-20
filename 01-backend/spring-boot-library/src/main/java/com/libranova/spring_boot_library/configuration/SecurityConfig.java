@@ -27,7 +27,6 @@ public class SecurityConfig
                         , "/api/messages/secure/**"
                         , "/api/admin/secure/**").authenticated()
                         .anyRequest().permitAll()
-                        //.anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}))
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()));

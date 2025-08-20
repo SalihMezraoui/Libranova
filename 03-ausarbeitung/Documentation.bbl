@@ -217,7 +217,14 @@
 \newblock \url{https://spring.io/projects/spring-data-rest}, 2025.
 \newblock Download am 06.08.2025.
 
-\bibitem[ST25c]{STRIPEAPI2025}
+\bibitem[ST25c]{SPRINGBOOAPP2025}
+{\sc SPRING-Team}: {\em {Using the @SpringBootApplication Annotation}}.
+\newblock
+  \url{https://docs.spring.io/spring-boot/docs/2.0.x/reference/html/using-boot-using-springbootapplication-annotation.html},
+  2025.
+\newblock Download am 16. August 2025.
+
+\bibitem[ST25d]{STRIPEAPI2025}
 {\sc Stripe-Team}: {\em Stripe API Documentation}.
 \newblock \url{https://docs.stripe.com/api}, 2025.
 \newblock Download am 03. Juli 2025.

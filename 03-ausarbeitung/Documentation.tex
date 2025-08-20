@@ -48,7 +48,7 @@
 \usepackage{float}
 
 \usepackage{pdflscape}
-
+\usepackage{tabularx}
 
 % newly added packages
 \usepackage{ragged2e}
@@ -171,9 +171,6 @@
 
 
 
-
-
-
 %------------------ Manuelle Silbentrennung ------------------------------------
 \hyphenation{Ele-men-tar-ob-jek-te ab-ge-tas-tet Aus-wer-tung House-holder-Matrix Least-Squares-Al-go-ri-th-men}
 
@@ -190,7 +187,7 @@
 \supervisor{Prof. Dr.-Ing. Georg Schneider}
 
 \address{Trier}
-\submitdate{den 15.08.2025}
+\submitdate{den 19.08.2025}
 
 %------------------ Projektart -------------------------------------------------
 %\project{Bachelor-Projektarbeit}
@@ -215,8 +212,8 @@
 \end{otherlanguage}
 \tableofcontents										% Inhaltsverzeichnis
 \listoffigures											% Abbildungsverzeichnis (optional)
-%\listoftables											% Tabellenverzeichnis (optional)
-%\lstlistoflistings										% Listings (optional)
+\listoftables											% Tabellenverzeichnis (optional)
+\lstlistoflistings										% Listings (optional)
 
 
 %------------------ Kapitel ----------------------------------------------------
@@ -240,9 +237,10 @@
 
 %------------------ Anhänge ----------------------------------------------------
 \begin{appendix}
-	\include{chapters/Systemanforderungen}							
-	\include{chapters/Abkürzungsverzeichnis}							% Glossar (optional)
-	\include{chapters/Selbststaendigkeitserklaerung}	% Selbstständigkeitserklärung
+	\include{chapters/Systemanforderungen}	
+	\include{chapters/Quellcode}													
+	\include{chapters/Glossar}							% Glossar (optional)
+	\include{chapters/Eigenstaendigkeitserklaerung}	
 \end{appendix}
 
 

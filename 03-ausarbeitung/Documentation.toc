@@ -6,7 +6,7 @@
 \contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Ziele der Arbeit}{1}{section.1.2}%
 \contentsline {chapter}{\numberline {2}Verwandte Arbeiten}{3}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Enführung}{3}{section.2.1}%
+\contentsline {section}{\numberline {2.1}Einführung}{3}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Existierende Systeme}{3}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Thalia Website}{3}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Stadtbücherei Trier}{4}{subsection.2.2.2}%
@@ -48,55 +48,55 @@
 \contentsline {subsection}{\numberline {4.2.2}Sequenzdiagramme}{18}{subsection.4.2.2}%
 \contentsline {section}{\numberline {4.3}Anforderungen an das System}{20}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Funktionale Anforderungen}{20}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Nicht-funktionale Anforderungen}{20}{subsection.4.3.2}%
-\contentsline {subsection}{\numberline {4.3.3}Technische Anforderungen}{21}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}Wichtige Algorithmen (Pseudocode)}{21}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Buchausleihe}{21}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Verlängerung der Buchausleihe}{22}{subsection.4.4.2}%
-\contentsline {chapter}{\numberline {5}Realisierung}{23}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Backend-Architektur}{23}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Projektinitialisierung und Startklasse}{23}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}Modulare Paketstruktur des Backends}{25}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}Teststrategie und Testintegration}{27}{subsection.5.1.3}%
-\contentsline {section}{\numberline {5.2}Frontend-Struktur}{28}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Einstiegspunkt der React-Anwendung}{28}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}React-Projektstruktur}{30}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Internationalisierung mit i18next}{32}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}Datenbankmodell und Persistenz}{35}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Datenbankschema}{35}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Datenpersistenz mit Spring Data und Hibernate}{37}{subsection.5.3.2}%
-\contentsline {chapter}{\numberline {6}Implementierung}{39}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Ausleihprozess eines Buches}{39}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Backend-Prozess}{39}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Frontend-Prozess}{43}{subsection.6.1.2}%
-\contentsline {section}{\numberline {6.2}Verfahren zur Rückgabe eines Buches}{45}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Backend-Prozess}{45}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Frontend-Prozess}{46}{subsection.6.2.2}%
-\contentsline {chapter}{\numberline {7}Beispiel}{49}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Startseite}{49}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Header und Navigation}{49}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Footer}{50}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}Hauptteil}{50}{subsection.7.1.3}%
-\contentsline {section}{\numberline {7.2}Seitenübersicht}{52}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}Buchsuche}{52}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}Buchseite}{52}{subsection.7.2.2}%
-\contentsline {section}{\numberline {7.3}Bibliotheksaktivität}{54}{section.7.3}%
-\contentsline {subsection}{\numberline {7.3.1}Ausleihen}{54}{subsection.7.3.1}%
-\contentsline {subsection}{\numberline {7.3.2}Ausleihhistorie}{55}{subsection.7.3.2}%
-\contentsline {section}{\numberline {7.4}Bibliotheksdienste}{55}{section.7.4}%
-\contentsline {section}{\numberline {7.5}Bezahlungsseite}{57}{section.7.5}%
-\contentsline {section}{\numberline {7.6}Admin-Bereich}{58}{section.7.6}%
-\contentsline {subsection}{\numberline {7.6.1}Neues Buch hinzufügen}{58}{subsection.7.6.1}%
-\contentsline {subsection}{\numberline {7.6.2}Bücher verwalten}{58}{subsection.7.6.2}%
-\contentsline {subsection}{\numberline {7.6.3}Nachrichten}{59}{subsection.7.6.3}%
-\contentsline {chapter}{\numberline {8}Anwendungsszenarien}{60}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Bildungs- und E-Learning-Plattformen}{60}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Mobile Nutzung}{61}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Personalisierte Empfehlungen}{61}{section.8.3}%
-\contentsline {section}{\numberline {8.4}Fernleihe und Reservierungsbenachrichtigungen}{61}{section.8.4}%
-\contentsline {section}{\numberline {8.5}Reservierungsbenachrichtigungen}{61}{section.8.5}%
-\contentsline {chapter}{\numberline {9}Resümee und Ausblick}{62}{chapter.9}%
-\contentsline {chapter}{Literaturverzeichnis}{63}{chapter*.27}%
-\contentsline {chapter}{Systemanforderungen}{67}{appendix.A}%
-\contentsline {chapter}{Abkürzungsverzeichnis}{71}{appendix.B}%
-\contentsline {chapter}{Selbstständigkeitserklärung}{72}{appendix.C}%
+\contentsline {subsection}{\numberline {4.3.2}Nicht-funktionale Anforderungen}{21}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Technische Anforderungen}{22}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}Wichtige Algorithmen (Pseudocode)}{22}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Buchausleihe}{22}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Verlängerung der Buchausleihe}{23}{subsection.4.4.2}%
+\contentsline {chapter}{\numberline {5}Realisierung}{24}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Backend-Architektur}{24}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Projektinitialisierung und Startklasse}{24}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Modulare Paketstruktur des Backends}{26}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Teststrategie und Testintegration}{28}{subsection.5.1.3}%
+\contentsline {section}{\numberline {5.2}Frontend-Struktur}{29}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Einstiegspunkt der React-Anwendung}{29}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}React-Projektstruktur}{31}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Internationalisierung mit i18next}{33}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Datenbankmodell und Persistenz}{36}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Datenbankschema}{36}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Datenpersistenz mit Spring Data und Hibernate}{38}{subsection.5.3.2}%
+\contentsline {chapter}{\numberline {6}Implementierung}{41}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Ausleihprozess eines Buches}{41}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Backend-Prozess}{41}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Frontend-Prozess}{45}{subsection.6.1.2}%
+\contentsline {section}{\numberline {6.2}Verfahren zur Rückgabe eines Buches}{47}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Backend-Prozess}{47}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Frontend-Prozess}{48}{subsection.6.2.2}%
+\contentsline {chapter}{\numberline {7}Beispiel}{51}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Startseite}{51}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Kopfzeile}{51}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Footer}{52}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Karussell und Buch-Browser}{52}{subsection.7.1.3}%
+\contentsline {section}{\numberline {7.2}Seitenübersicht}{53}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Buchsuche}{53}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Buchseite}{54}{subsection.7.2.2}%
+\contentsline {section}{\numberline {7.3}Bibliotheksaktivität}{55}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}Ausleihen}{55}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}Ausleihhistorie}{56}{subsection.7.3.2}%
+\contentsline {section}{\numberline {7.4}Bibliotheksdienste}{57}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Bezahlungsseite}{58}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Admin-Bereich}{59}{section.7.6}%
+\contentsline {subsection}{\numberline {7.6.1}Neues Buch hinzufügen}{60}{subsection.7.6.1}%
+\contentsline {subsection}{\numberline {7.6.2}Bücher verwalten}{60}{subsection.7.6.2}%
+\contentsline {subsection}{\numberline {7.6.3}Nachrichten}{61}{subsection.7.6.3}%
+\contentsline {chapter}{\numberline {8}Anwendungsszenarien}{62}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Bildungs- und E-Learning-Plattformen}{62}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Mobile Nutzung}{63}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Personalisierte Empfehlungen}{63}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Reservierungsbenachrichtigungen}{63}{section.8.4}%
+\contentsline {chapter}{\numberline {9}Resümee und Ausblick}{64}{chapter.9}%
+\contentsline {chapter}{Literaturverzeichnis}{65}{chapter*.28}%
+\contentsline {chapter}{Systemanforderungen}{69}{appendix.A}%
+\contentsline {chapter}{Quellcode}{73}{appendix.B}%
+\contentsline {chapter}{Glossar}{76}{appendix.C}%
+\contentsline {chapter}{Eigenständigkeitserklärung}{78}{appendix.D}%

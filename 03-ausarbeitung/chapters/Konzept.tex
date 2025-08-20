@@ -91,19 +91,47 @@ Die folgenden Unterabschnitte beschreiben die zentralen Anforderungen an das Sys
 \subsection{Funktionale Anforderungen}\index{Funktionale Anforderungen}
 
 
-Funktionale Anforderungen definieren, welche Dienste das System leisten soll und wie es sich bei bestimmten Eingaben oder in bestimmten Situationen verhalten soll.\\ \\
-Die Tabelle \ref{tab:functional-requirements} zeigt alle funktionalen Anforderungen der Anwendung.
+Funktionale Anforderungen definieren, welche Dienste das System leisten soll und wie es sich bei bestimmten Eingaben oder in bestimmten Situationen verhalten soll.
+
+\noindent Die wichtigsten funktionalen Anforderungen von \textit{LibraNova} sind:
+\begin{itemize}
+	\item \textbf{Buchverwaltung:} Nutzer können Bücher suchen, deren Verfügbarkeit prüfen, ausleihen, zurückgeben, verlängern sowie Rezensionen und Bewertungen verfassen.  
+	\item \textbf{Administrationsfunktionen:} Administratoren können Bücher hinzufügen, bearbeiten (z.\,B. Anzahl der Exemplare ändern) und aus dem Katalog löschen.  
+	\item \textbf{Benutzerfunktionen:} Nutzer können ihre Ausleihen und die Ausleihhistorie einsehen und Zahlungen über Stripe abwickeln.  
+	\item \textbf{Such- und Filterfunktionen:} Das System bietet eine Suche nach Titel oder Kategorie, zeigt die Ergebnisse paginiert an und unterstützt eine mehrsprachige Anzeige der Buchbeschreibungen (Deutsch/Englisch).  
+	\item \textbf{Systemfeedback:} Das System informiert über nicht verfügbare Bücher, gelöschte Medien in der Ausleihliste sowie über Gebühren bei verspäteter Rückgabe.  
+\end{itemize}
+
+\noindent Eine vollständige Übersicht aller funktionalen Anforderungen befindet sich in Anhang \ref{tab:functional-requirements}.
 
 \subsection{Nicht-funktionale Anforderungen}\index{Nicht-funktionale Anforderungen}
 
-Nicht-funktionale Anforderungen beschreiben die Qualitätsmerkmale und Randbedingungen des Systems, wie etwa Leistung, Sicherheit, Benutzbarkeit und Zuverlässigkeit\\ \\
-Die  Tabelle \ref{tab:non-functional-requirements} fasst die wichtigsten nicht-funktionalen Anforderungen für LibraNova zusammen.
+Nicht-funktionale Anforderungen beschreiben die Qualitätsmerkmale und Randbedingungen des Systems, wie etwa Leistung, Sicherheit, Benutzbarkeit und Zuverlässigkeit.
+
+\noindent Die wichtigsten nicht-funktionalen Anforderungen von \textit{LibraNova} sind:
+
+\begin{itemize}
+	\item \textbf{Benutzerfreundlichkeit:} Die Anwendung muss eine konsistente, intuitive und responsive Benutzeroberfläche bieten, die auf verschiedenen Geräten, Bildschirmgrößen und gängigen Browsern funktioniert. Zudem wird eine zweisprachige Oberfläche (Deutsch/Englisch) bereitgestellt.  
+	\item \textbf{Sicherheit:} Sichere Kommunikation über HTTPS, Schutz durch gültige Tokens, klare Trennung von Benutzerrollen sowie Zugriffsbeschränkung auf geschützte Endpunkte.  
+	\item \textbf{Leistung:} Such- und Filterfunktionen sowie Login-Vorgänge müssen kurze Reaktionszeiten gewährleisten, um eine flüssige Nutzung zu ermöglichen.  
+	\item \textbf{Barrierefreiheit:} Erfüllung grundlegender WCAG-2.1-Anforderungen (Level AA), um auch Nutzern mit Einschränkungen einen Zugang zu ermöglichen.  
+	\item \textbf{Wartbarkeit und Erweiterbarkeit:} Modularer Aufbau der Backend-Services sowie eine aktuelle und entwicklerfreundliche API-Dokumentation.  
+\end{itemize}
+
+\noindent Eine vollständige Übersicht aller nicht-funktionalen Anforderungen befindet sich in Anhang \ref{tab:non-functional-requirements}.
 
 \subsection{Technische  Anforderungen}\index{Technische Anforderungen}
 
-Technische Anforderungen beschreiben, welche Technologien, Werkzeuge und Methoden für die Entwicklung und den Betrieb von LibraNova verwendet werden. Dazu gehören zum Beispiel Programmiersprachen, Frameworks, Schnittstellen und Protokolle.\\ \\
-Die Tabelle \ref{tab:technical-requirements} zeigt die wichtigsten technischen Anforderungen von LibraNova.
+Technische Anforderungen beschreiben, welche Technologien, Werkzeuge und Methoden für die Entwicklung und den Betrieb von LibraNova verwendet werden. Dazu gehören zum Beispiel Programmiersprachen, Frameworks, Schnittstellen und Protokolle.
 
+\noindent Die wichtigsten technischen Anforderungen von \textit{LibraNova} sind:
+\begin{itemize}
+	\item \textbf{Architektur:} Spring Boot als Backend mit RESTful APIs, React als Frontend sowie eine relationale MySQL-Datenbank für die Persistenz.  
+	\item \textbf{Sicherheit und Authentifizierung:} HTTPS, JWT-Token, OAuth2/OpenID Connect mit Okta sowie CORS-Restriktionen für das vertrauenswürdige Frontend.  
+	\item \textbf{Entwicklung und Qualitätssicherung:} Nutzung von Spring Data JPA/REST, Swagger-Dokumentation, Lombok sowie Unit-Tests mit JUnit und Mockito.  
+\end{itemize}
+
+\noindent Eine vollständige Übersicht aller technischen Anforderungen befindet sich in Anhang \ref{tab:technical-requirements}.
 
 \section{Wichtige Algorithmen (Pseudocode)}\index{Algorithmen}
 
@@ -130,8 +158,8 @@ Der folgende Pseudocode \ref{lst:buchausleihe} beschreibt den vollständigen Abl
 	        - Ja → Zeige aktiven Button >> Ausleihen <<
 	6.  Klickt der Benutzer auf >> Ausleihen <<:
 	     a. Hat der Benutzer überfälligen Bücher oder unbezahlten Gebühren?
-	         - Nein -> Lege Ausleiheintrag in der Datenbank an (7 Tage Leihfrist) 
-	         - Ja -> Zeige Meldung: >> Bitte geben Sie überfällige Bücher zurück und begleichen Sie offene Gebühren, bevor Sie neue Bücher ausleihen können. <<
+	         - Nein → Lege Ausleiheintrag in der Datenbank an (7 Tage Leihfrist) 
+	         - Ja → Zeige Meldung: >> Bitte geben Sie überfällige Bücher zurück und begleichen Sie offene Gebühren, bevor Sie neue Bücher ausleihen können. <<
 \end{lstlisting}
 
 

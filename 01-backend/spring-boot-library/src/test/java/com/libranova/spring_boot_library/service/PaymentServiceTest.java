@@ -55,7 +55,6 @@ class PaymentServiceTest {
         PaymentIntent mockIntent = mock(PaymentIntent.class);
 
         try (MockedStatic<PaymentIntent> paymentIntentMock = mockStatic(PaymentIntent.class)) {
-            // explicitly use anyMap() for Map<String, Object>
             paymentIntentMock.when(() ->
                     PaymentIntent.create(anyMap()) // this ensures the Map-based overload is chosen
             ).thenReturn(mockIntent);

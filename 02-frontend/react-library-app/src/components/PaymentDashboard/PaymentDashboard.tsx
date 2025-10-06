@@ -271,7 +271,7 @@ export const PaymentDashboard = () => {
                                     className="table align-middle shadow-sm rounded overflow-hidden"
                                     style={{ tableLayout: "auto", width: "100%" }}
                                 >
-                                    <thead style={{ backgroundColor: "#c17078ff", color: "white" }}>
+                                    <thead style={{ backgroundColor: "#d381c3ff", color: "white" }}>
                                         <tr>
                                             <th style={{ minWidth: "200px", padding: "12px 20px" }}>
                                                 {t('paymenthistory.invoice_ref')}
@@ -300,7 +300,7 @@ export const PaymentDashboard = () => {
                                                         minute: "2-digit",
                                                     })}
                                                 </td>
-                                                <td className="fw-bold text-success">€{payment.amount?.toFixed(2)}</td>
+                                                <td className="fw-bold text-dark">€{payment.amount?.toFixed(2)}</td>
                                                 <td>{payment.methodType}</td>
                                             </tr>
                                         ))}

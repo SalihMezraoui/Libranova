@@ -65,6 +65,9 @@ The application also features a robust **authentication and authorization** syst
 ### 🐳 Deployment & Containerization:
 - **Docker** to containerize backend, frontend, and database  
 
+## Demo
+For a detailed demonstration of the application, including screenshots and an analysis of the results, please refer to the **Documentation.pdf** located in the **03-ausarbeitung** folder of this repository. The documentation includes visual aids in the section **"Beispiel"** for a deeper understanding of the application’s functionality and user interface.
+
 ## Acknowledgments
 
 Special thanks to my supervisor **Prof. Dr. Georg Schneider** for continuous support and academic guidance throughout the Bachelor thesis period.

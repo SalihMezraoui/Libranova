@@ -17,27 +17,43 @@ import java.util.List;
 @Configuration
 public class SecurityConfig
 {
-    @Bean
+    @Bean // Declares that the returned object (SecurityFilterChain) will be managed by Spring
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                // Disables CSRF protection for simplicity, since this is a stateless API, since my app
+                // does not use cookies or sessions, and is not vulnerable to CSRF attacks.
+                // the app uses OAuth2 tokens for authentication, which are not vulnerable to CSRF.
                 .csrf(csrf -> csrf.disable())
+                // Configure authorization rules
                 .authorizeHttpRequests(configurer -> configurer
+                        // Require authentication for these "secure" paths
                         .requestMatchers("/api/books/secure/**"
                         , "/api/reviews/secure/**"
                         , "/api/messages/secure/**"
-                        , "/api/admin/secure/**").authenticated()
+                        , "/api/admin/secure/**"
+                        , "/api/payments/secure/**").authenticated()
+                        // All other requests are allowed without authentication
                         .anyRequest().permitAll()
                 )
+                // Enable OAuth2 Resource Server with JWT validation
+                // This is how Spring checks tokens issued by Okta
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> {}))
+
+                // Enable CORS using our custom configuration
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()));
 
+        // Ensure Spring uses HTTP header-based content negotiation
+        // This tells Spring how to decide whether to return JSON, XML, etc.
         http.setSharedObject(ContentNegotiationStrategy.class, new HeaderContentNegotiationStrategy());
+
+        // Configure Okta-specific 401 response body (for unauthenticated requests)
         Okta.configureResourceServer401ResponseBody(http);
 
+        // Build and return the security filter chain
         return http.build();
     }
 
-    @Bean
+    @Bean // Declare a bean for CORS configuration
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 

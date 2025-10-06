@@ -62,7 +62,7 @@ public class BookService {
         return book;
     }
 
-    public void returnBook(String userEmail, Long bookId) throws ParseException {
+    public void returnBook(String userEmail, Long bookId) {
 
         Book book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new BookNotAvailableException("Book with ID \" + bookId + \" is not available."));

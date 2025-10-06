@@ -57,7 +57,7 @@ public class BookController
 
     @PutMapping("/secure/loans/return")
     public void returnBook(Authentication authentication,
-                           @RequestParam Long bookId) throws ParseException {
+                           @RequestParam Long bookId) {
         String userEmail = authentication.getName();
         System.out.println("[returnBook] Extracted userEmail: " + userEmail);
         bookService.returnBook(userEmail, bookId);

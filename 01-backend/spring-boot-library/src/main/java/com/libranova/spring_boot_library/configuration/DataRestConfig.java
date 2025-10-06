@@ -2,6 +2,7 @@ package com.libranova.spring_boot_library.configuration;
 
 import com.libranova.spring_boot_library.model.Book;
 import com.libranova.spring_boot_library.model.Message;
+import com.libranova.spring_boot_library.model.Payment;
 import com.libranova.spring_boot_library.model.Review;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -38,6 +39,9 @@ public class DataRestConfig implements RepositoryRestConfigurer
         log.info("Disabling unsafe HTTP methods on Message entity.");
         restrictHttpMethodsForEntity(Message.class, restConfig, blockedMethods);
 
+        log.info("Disabling unsafe HTTP methods on Payment entity.");
+        restrictHttpMethodsForEntity(Payment.class, restConfig, blockedMethods);
+
         // Configure CORS to accept requests only from the frontend origin
         log.info("Setting CORS mapping for frontend origin: {}", FRONTEND_URL);
         cors.addMapping(restConfig.getBasePath() + "/**")
@@ -54,10 +58,12 @@ public class DataRestConfig implements RepositoryRestConfigurer
     private void restrictHttpMethodsForEntity(Class<?> entityClass,
                                               RepositoryRestConfiguration config,
                                               HttpMethod[] methods) {
+
         config.getExposureConfiguration()
                 .forDomainType(entityClass)
                 .withItemExposure((metadata, httpMethods) -> httpMethods.disable(methods))
                 .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(methods));
+
         log.debug("Restricted HTTP methods {} for entity: {}", methods, entityClass.getSimpleName());
     }
 }

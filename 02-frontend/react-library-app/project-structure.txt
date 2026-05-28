@@ -1,0 +1,65 @@
+.
+├── localhost.conf
+├── package-lock.json
+├── package.json
+├── project-structure.txt
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── Libranova-logo.png
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   └── robots.txt
+├── README.md
+├── src
+│   ├── access
+│   │   ├── OktaAuthWidget.jsx
+│   │   └── OktaLoginWidget.jsx
+│   ├── App.css
+│   ├── App.tsx
+│   ├── components
+│   │   ├── AboutUs
+│   │   ├── Accessibility
+│   │   ├── CheckoutBook
+│   │   ├── Footer
+│   │   ├── LibraryActivityPage
+│   │   ├── LibraryAdminPanel
+│   │   ├── MainPage
+│   │   ├── MessagesPage
+│   │   ├── NavBar
+│   │   ├── PaymentDashboard
+│   │   ├── ReviewListPage
+│   │   ├── SearchBookPage
+│   │   └── Widgets
+│   ├── i18n.ts
+│   ├── Images
+│   │   ├── Books
+│   │   └── Public
+│   ├── index.css
+│   ├── index.tsx
+│   ├── lib
+│   │   └── oktaConfig.ts
+│   ├── locales
+│   │   ├── de
+│   │   └── en
+│   ├── models
+│   │   ├── AddBoookModel.ts
+│   │   ├── Book.ts
+│   │   ├── History.ts
+│   │   ├── Message.ts
+│   │   ├── MessageRequest.ts
+│   │   ├── PaymentDetailsRequest.ts
+│   │   ├── PaymentHistory.ts
+│   │   ├── Review.ts
+│   │   ├── ReviewRequest.ts
+│   │   └── UserLoansSummary.ts
+│   ├── okta-widget-custom.css
+│   ├── react-app-env.d.ts
+│   └── setupTests.ts
+├── ssl-localhost-libranova
+│   ├── localhost.crt
+│   └── localhost.key
+└── tsconfig.json
+
+27 directories, 36 files

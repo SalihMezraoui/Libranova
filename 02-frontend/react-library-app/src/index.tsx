@@ -10,7 +10,7 @@ import './i18n';
 
 
 
-const stripePromise = loadStripe('pk_test_51PnJ8rDUPioq8BEVm3mcZ7CAONShTf4MCYrcKVOGspnOzMt9GFd9K5Ali0L31g5fQc7y9v6tBXlqlpLgCaXfFl4M00f42qg6lr');
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY!);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

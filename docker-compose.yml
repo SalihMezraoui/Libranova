@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: libranova-mysql-new
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./01-backend/spring-boot-library
+    container_name: libranova-backend
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8443:8443"
+    environment:
+      DB_HOST: mysql
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      OKTA_CLIENT_ID: ${OKTA_CLIENT_ID}
+      OKTA_ISSUER: ${OKTA_ISSUER}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      SSL_KEYSTORE_PASSWORD: ${SSL_KEYSTORE_PASSWORD}
+      FRONTEND_URL: ${FRONTEND_URL}
+
+  frontend:
+    build: ./02-frontend/react-library-app
+    container_name: libranova-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+
+volumes:
+  mysql_data:

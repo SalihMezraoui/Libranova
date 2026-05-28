@@ -1,6 +1,5 @@
 # Secrets - never commit these
 .env
-02-frontend/react-library-app/.env
 
 # Java / Maven
 target/
@@ -37,5 +36,3 @@ Thumbs.db
 *.log
 logs/
 
-# Project specific
-01-backend/spring-boot-library/src/main/java/com/libranova/spring_boot_library/dto/ReviewRequest.java

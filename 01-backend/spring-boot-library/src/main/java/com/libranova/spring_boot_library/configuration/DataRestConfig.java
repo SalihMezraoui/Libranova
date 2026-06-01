@@ -4,6 +4,7 @@ import com.libranova.spring_boot_library.model.Book;
 import com.libranova.spring_boot_library.model.Message;
 import com.libranova.spring_boot_library.model.Payment;
 import com.libranova.spring_boot_library.model.Review;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
@@ -15,7 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DataRestConfig implements RepositoryRestConfigurer
 {
-    private static final String FRONTEND_URL = "https://localhost:3000";
+    @Value("${frontend.url}")
+    private String frontendUrl;
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration restConfig, CorsRegistry cors) {
@@ -43,9 +45,9 @@ public class DataRestConfig implements RepositoryRestConfigurer
         restrictHttpMethodsForEntity(Payment.class, restConfig, blockedMethods);
 
         // Configure CORS to accept requests only from the frontend origin
-        log.info("Setting CORS mapping for frontend origin: {}", FRONTEND_URL);
+        log.info("Setting CORS mapping for frontend origin: {}", frontendUrl);
         cors.addMapping(restConfig.getBasePath() + "/**")
-                .allowedOrigins(FRONTEND_URL);
+                .allowedOrigins(frontendUrl);
     }
 
     /**

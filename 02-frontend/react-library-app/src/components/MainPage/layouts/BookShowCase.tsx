@@ -1,9 +1,9 @@
-import { useOktaAuth } from "@okta/okta-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export const BookShowCase = () => {
-  const { authState } = useOktaAuth();
+  const { isAuthenticated } = useAuth0();
   const { t } = useTranslation();
 
   return (
@@ -12,7 +12,7 @@ export const BookShowCase = () => {
         <h1 className="display-5 fw-bold">{t("bookShowCase.welcomeMessage")}</h1>
         <p className="lead mb-4">{t("bookShowCase.welcomeDescription")}</p>
 
-        {authState?.isAuthenticated ? (
+        {isAuthenticated ? (
           <Link className="btn btn-lg btn-outline-dark shadow-sm" to="/search">
             {t("bookShowCase.browseBooks")}
           </Link>

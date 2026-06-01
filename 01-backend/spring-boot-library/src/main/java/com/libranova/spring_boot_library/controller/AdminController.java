@@ -18,7 +18,7 @@ public class AdminController
 
     @PostMapping("/secure/post/book")
     public void addNewBook(@RequestBody AddBook addBook, JwtAuthenticationToken jwt) throws AccessDeniedException {
-        String userType = jwt.getToken().getClaimAsString("userType");
+        String userType = jwt.getToken().getClaimAsString("https://libranova.com/userType");
         System.out.println("[DEBUG] addNewBook called by userType: " + userType);
 
         if (!"admin".equals(userType)) {
@@ -31,7 +31,7 @@ public class AdminController
 
     @PutMapping("/secure/increment/book/copies")
     public void incrementBookCopies(@RequestParam Long bookId, JwtAuthenticationToken jwt) throws AccessDeniedException {
-        String userType = jwt.getToken().getClaimAsString("userType");
+        String userType = jwt.getToken().getClaimAsString("https://libranova.com/userType");
         System.out.println("[DEBUG] incrementBookCopies called by userType: " + userType + " for bookId: " + bookId);
 
         if (!"admin".equals(userType)) {
@@ -43,7 +43,7 @@ public class AdminController
 
     @PutMapping("/secure/decrement/book/copies")
     public void decrementBookCopies(@RequestParam Long bookId, JwtAuthenticationToken jwt) throws AccessDeniedException {
-        String userType = jwt.getToken().getClaimAsString("userType");
+        String userType = jwt.getToken().getClaimAsString("https://libranova.com/userType");
         System.out.println("[DEBUG] decrementBookCopies called by userType: " + userType + " for bookId: " + bookId);
 
         if (!"admin".equals(userType)) {
@@ -55,7 +55,7 @@ public class AdminController
 
     @DeleteMapping("/secure/remove/book")
     public void deleteBook(@RequestParam Long bookId, JwtAuthenticationToken jwt) throws AccessDeniedException {
-        String userType = jwt.getToken().getClaimAsString("userType");
+        String userType = jwt.getToken().getClaimAsString("https://libranova.com/userType");
         System.out.println("[DEBUG] deleteBook called by userType: " + userType + " for bookId: " + bookId);
 
         if (!"admin".equals(userType)) {

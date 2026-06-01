@@ -1,29 +1,27 @@
-import { useOktaAuth } from "@okta/okta-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import AddBookModel from "../../../models/AddBoookModel";
 import { useTranslation } from "react-i18next";
 
 export const AddBook = () => {
 
-    //  Auth & localisation
-    const { authState } = useOktaAuth(); 
-    const { t } = useTranslation(); 
+    const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+    const { t } = useTranslation();
 
     // Book details
-    const [overview, setOverview] = useState(''); 
-    const [category, setCategory] = useState('Category'); 
-    const [author, setAuthor] = useState(''); 
-    const [title, setTitle] = useState(''); 
-    const [totalCopies, setTotalCopies] = useState(0); 
+    const [overview, setOverview] = useState('');
+    const [category, setCategory] = useState('Category');
+    const [author, setAuthor] = useState('');
+    const [title, setTitle] = useState('');
+    const [totalCopies, setTotalCopies] = useState(0);
 
     // Media
-    const [image, setImage] = useState<any>(null); 
-    const [fileName, setFileName] = useState(''); 
+    const [image, setImage] = useState<any>(null);
+    const [fileName, setFileName] = useState('');
 
     // UI feedback states
-    const [showSuccess, setShowSuccess] = useState(false); 
-    const [showWarning, setShowWarning] = useState(false); 
-
+    const [showSuccess, setShowSuccess] = useState(false);
+    const [showWarning, setShowWarning] = useState(false);
 
 
     function categorySelector(input: any) {
@@ -51,8 +49,9 @@ export const AddBook = () => {
 
     async function addNewBook() {
         const apiUrl = `${process.env.REACT_APP_API_URL}/admin/secure/post/book`;
-        if (authState?.isAuthenticated && title !== '' && author !== '' && category !== 'category'
+        if (isAuthenticated && title !== '' && author !== '' && category !== 'category'
             && overview !== '' && totalCopies > 0) {
+            const token = await getAccessTokenSilently();
             const book: AddBookModel = new AddBookModel(
                 title, author, overview, totalCopies, category
             );
@@ -60,7 +59,7 @@ export const AddBook = () => {
             const requestOptions = {
                 method: 'POST',
                 headers: {
-                    Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(book)
@@ -151,11 +150,11 @@ export const AddBook = () => {
                                     </button>
 
                                     <ul className="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                                        <li><a className="dropdown-item" onClick={() => categorySelector('FE')}>{t("addBook.category.frontend")}</a></li>
-                                        <li><a className="dropdown-item" onClick={() => categorySelector('BE')}>{t("addBook.category.backend")}</a></li>
-                                        <li><a className="dropdown-item" onClick={() => categorySelector('Data')}>{t("addBook.category.dataScience")}</a></li>
-                                        <li><a className="dropdown-item" onClick={() => categorySelector('SC')}>{t("addBook.category.cyberSecurity")}</a></li>
-                                        <li><a className="dropdown-item" onClick={() => categorySelector('DevOps')}>{t("addBook.category.devops")}</a></li>
+                                        <li><button type="button" className="dropdown-item" onClick={() => categorySelector('FE')}>{t("addBook.category.frontend")}</button></li>
+                                        <li><button type="button" className="dropdown-item" onClick={() => categorySelector('BE')}>{t("addBook.category.backend")}</button></li>
+                                        <li><button type="button" className="dropdown-item" onClick={() => categorySelector('Data')}>{t("addBook.category.dataScience")}</button></li>
+                                        <li><button type="button" className="dropdown-item" onClick={() => categorySelector('SC')}>{t("addBook.category.cyberSecurity")}</button></li>
+                                        <li><button type="button" className="dropdown-item" onClick={() => categorySelector('DevOps')}>{t("addBook.category.devops")}</button></li>
                                     </ul>
                                 </div>
                             </div>
@@ -207,7 +206,6 @@ export const AddBook = () => {
                                 </span>
                             </div>
                         </div>
-
 
                         <div className="mt-4 text-center">
                             <button

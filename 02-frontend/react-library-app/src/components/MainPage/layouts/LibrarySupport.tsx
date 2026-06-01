@@ -1,4 +1,4 @@
-import { useOktaAuth } from "@okta/okta-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import librarySupportImage from '../../../Images/Public/image-2.jpg';  // relative path from LibrarySupport.tsx
@@ -6,7 +6,7 @@ import librarySupportImage from '../../../Images/Public/image-2.jpg';  // relati
 
 export const LibrarySupport = () => {
 
-    const { authState } = useOktaAuth();
+    const { isAuthenticated } = useAuth0();
     const { t } = useTranslation();
 
     return (
@@ -18,7 +18,7 @@ export const LibrarySupport = () => {
                         <h1 className="display-2 fw-bold mb-3">{t("librarySupport.title")}</h1>
                         <p className="lead text-secondary mb-4">{t("librarySupport.subtitle")}</p>
                         <div className="d-flex gap-3">
-                            {authState?.isAuthenticated ? (
+                            {isAuthenticated ? (
                                 <Link
                                     to="/messages"
                                     className="btn btn-primary btn-lg px-4 hover-scale"

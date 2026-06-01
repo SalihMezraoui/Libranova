@@ -1,4 +1,4 @@
-import { useOktaAuth } from "@okta/okta-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import UserLoansSummary from "../../../models/UserLoansSummary";
 import { BreathingLoader } from "../../Widgets/BreathingLoader";
@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 export const Loans = () => {
 
-    const { authState } = useOktaAuth();
+    const { isAuthenticated, getAccessTokenSilently } = useAuth0();
     const { t } = useTranslation();
     const [httpError, setHttpError] = useState(null);
 
@@ -18,18 +18,19 @@ export const Loans = () => {
 
     useEffect(() => {
         const fetchUserLoans = async () => {
-            if (!authState?.isAuthenticated) {
+            if (!isAuthenticated) {
                 setLoadingLoans(false);
                 return;
             }
 
             try {
+                const token = await getAccessTokenSilently();
                 const response = await fetch(
                     `${process.env.REACT_APP_API_URL}/books/secure/active-loans`,
                     {
                         method: 'GET',
                         headers: {
-                            Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                            Authorization: `Bearer ${token}`,
                             'Content-Type': 'application/json',
                         },
                     }
@@ -50,7 +51,7 @@ export const Loans = () => {
 
         fetchUserLoans();
         window.scrollTo(0, 0);
-    }, [authState, checkout]);
+    }, [isAuthenticated, checkout, getAccessTokenSilently]);
 
 
     if (loadingLoans) {
@@ -68,11 +69,12 @@ export const Loans = () => {
     }
 
     async function returnBook(bookId: number) {
+        const token = await getAccessTokenSilently();
         const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/loans/return?bookId=${bookId}`;
         const requestOptions = {
             method: 'PUT',
             headers: {
-                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
         };
@@ -84,11 +86,12 @@ export const Loans = () => {
     }
 
     async function extendLoan(bookId: number) {
+        const token = await getAccessTokenSilently();
         const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/loans/extend?bookId=${bookId}`;
         const requestOptions = {
             method: 'PUT',
             headers: {
-                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
         };

@@ -32,7 +32,6 @@ export const PostAReview: React.FC<PostAReviewProps> = ({ submitReview }) => {
         className="dropdown-toggle"
         id="submitReviewDropdown"
         data-bs-toggle="dropdown"
-        aria-expanded="false"
       >
         {t("post_review.title")}
       </h5>

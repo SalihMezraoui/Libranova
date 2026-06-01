@@ -4,13 +4,10 @@ import { Header } from './components/NavBar/Header';
 import { Footer } from './components/Footer/Footer';
 import { MainPage } from './components/MainPage/MainPage';
 import { SearchBookPage } from './components/SearchBookPage/SearchBookPage';
-import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { CheckoutBook } from './components/CheckoutBook/CheckoutBook';
-import { ok } from 'assert';
-import { OktaAuth, toRelativeUrl } from '@okta/okta-auth-js';
-import { oktaConfig } from './lib/oktaConfig';
-import { LoginCallback, SecureRoute, Security } from '@okta/okta-react';
-import OktaLoginWidget from './access/OktaLoginWidget';
+import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
+import { LoginPage } from './Auth/LoginPage';
 import { ReviewList } from './components/ReviewListPage/ReviewList';
 import { LibraryActivity } from './components/LibraryActivityPage/LibraryActivity';
 import { MessagePage } from './components/MessagesPage/MessagePage';
@@ -19,59 +16,67 @@ import { PaymentDashboard } from './components/PaymentDashboard/PaymentDashboard
 import Accessibility from './components/Accessibility/Accessibility';
 import AboutUs from './components/AboutUs/AboutUs';
 
-
-const oktaAuth = new OktaAuth(oktaConfig);
+const ProtectedRoute = ({ component, ...args }: any) => {
+    const WrappedComponent = React.useMemo(
+        () => withAuthenticationRequired(component, {
+            onRedirecting: () => (
+                <div className="container mt-5 text-center">
+                    <div className="spinner-border" role="status" />
+                </div>
+            )
+        }),
+        [component]
+    );
+    return <Route {...args} component={WrappedComponent} />;
+};
 
 export const App = () => {
+    const { isLoading } = useAuth0();
 
-  const customAuthHandler = () => {
-    history.push('/login');
-  }
+    if (isLoading) {
+        return (
+            <div className="d-flex justify-content-center mt-5">
+                <div className="spinner-border" role="status" />
+            </div>
+        );
+    }
 
-  const history = useHistory();
-
-  const restoreOriginalUri = async (_oktaAuth: any, originalUri: any) => {
-    history.replace(toRelativeUrl(originalUri || '/', window.location.origin));
-  };
-
-  return (
-    <div className='d-flex flex-column min-vh-100'>
-      <Security oktaAuth={oktaAuth} restoreOriginalUri={restoreOriginalUri} onAuthRequired={customAuthHandler}>
-        <Header />
-        <div className='flex-grow-1'>
-          <Switch>
-            <Route path='/' exact>
-              <Redirect to='/home' />
-            </Route>
-            <Route path='/home'>
-              <MainPage />
-            </Route>
-            <Route path='/search'>
-              <SearchBookPage />
-            </Route>
-            <Route path='/reviewsList/:bookId'>
-              <ReviewList />
-            </Route>
-            <Route path='/checkout/:bookId'>
-              <CheckoutBook />
-            </Route>
-            <Route path='/accessibility'>
-              <Accessibility />
-            </Route>
-            <Route path='/aboutUs'>
-              <AboutUs/>
-            </Route>
-            <Route path='/login' render={() => <OktaLoginWidget config={oktaConfig} />} />
-            <Route path='login/callback' component={LoginCallback} />
-            <SecureRoute path='/libraryActivity'> <LibraryActivity /> </SecureRoute>
-            <SecureRoute path='/messages'> <MessagePage /> </SecureRoute>
-            <SecureRoute path='/admin'> <LibraryAdminPanel /> </SecureRoute>
-            <SecureRoute path='/charges'> <PaymentDashboard /> </SecureRoute>
-
-          </Switch>
+    return (
+        <div className='d-flex flex-column min-vh-100'>
+            <Header />
+            <div className='flex-grow-1'>
+                <Switch>
+                    <Route path='/' exact>
+                        <Redirect to='/home' />
+                    </Route>
+                    <Route path='/home'>
+                        <MainPage />
+                    </Route>
+                    <Route path='/search'>
+                        <SearchBookPage />
+                    </Route>
+                    <Route path='/reviewsList/:bookId'>
+                        <ReviewList />
+                    </Route>
+                    <Route path='/checkout/:bookId'>
+                        <CheckoutBook />
+                    </Route>
+                    <Route path='/accessibility'>
+                        <Accessibility />
+                    </Route>
+                    <Route path='/aboutUs'>
+                        <AboutUs />
+                    </Route>
+                    <Route path='/login'>
+                        <LoginPage />
+                    </Route>
+                    <ProtectedRoute path='/libraryActivity' component={LibraryActivity} />
+                    <ProtectedRoute path='/messages' component={MessagePage} />
+                    <ProtectedRoute path='/admin' component={LibraryAdminPanel} />
+                    <ProtectedRoute path='/charges' component={PaymentDashboard} />
+                </Switch>
+            </div>
+            <Footer />
         </div>
-        <Footer />
-      </Security>
-    </div>
-  );
-}
+    );
+};

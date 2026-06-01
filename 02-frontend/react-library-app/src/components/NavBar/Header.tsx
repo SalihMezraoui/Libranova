@@ -1,34 +1,30 @@
 import { Link, NavLink } from 'react-router-dom';
-import styles from './Header.module.css';
-import { useOktaAuth } from '@okta/okta-react';
+import { useAuth0 } from '@auth0/auth0-react';
 import { BreathingLoader } from '../Widgets/BreathingLoader';
-import { ok } from 'assert';
 import { useTranslation } from 'react-i18next';
 
 
 export const Header = () => {
 
-    const { oktaAuth, authState } = useOktaAuth();
+    const { isAuthenticated, isLoading, user, logout } = useAuth0();
     const { t, i18n } = useTranslation();
 
-
-    if (!authState) {
+    if (isLoading) {
         return <BreathingLoader />;
     }
 
-    const manageLogout = async () => oktaAuth.signOut();
+    const manageLogout = () => logout({ logoutParams: { returnTo: window.location.origin } });
 
     let username =
-        authState.accessToken?.claims?.given_name ||
-        authState.accessToken?.claims?.preferred_username ||
-        authState.accessToken?.claims?.sub ||
+        user?.given_name ||
+        user?.email ||
         'User';
 
-    // If it's an email, grab only the part before '@'
     if (username.includes('@')) {
         username = username.split('@')[0];
     }
-    console.log('authState', authState);
+
+    const isAdmin = user?.['https://libranova.com/userType'] === 'admin';
 
     return (
         <nav className='navbar navbar-expand-lg navbar-dark main-color py-3'>
@@ -59,12 +55,12 @@ export const Header = () => {
                         <li className='nav-item'>
                             <NavLink className='nav-link hover-underline' to='/search'> {t("header.searchBooks")}</NavLink>
                         </li>
-                        {authState.isAuthenticated && authState.accessToken?.claims?.userType === 'admin' && (
+                        {isAuthenticated && isAdmin && (
                             <li className='nav-item'>
                                 <NavLink className='nav-link hover-underline' to='/admin'> {t("header.admin")}</NavLink>
                             </li>
                         )}
-                        {authState.isAuthenticated && authState.accessToken?.claims?.userType !== 'admin' && (
+                        {isAuthenticated && !isAdmin && (
                             <>
                                 <li className='nav-item'>
                                     <NavLink className='nav-link hover-underline' to='/libraryActivity'> {t("header.libraryActivity")}</NavLink>
@@ -79,8 +75,7 @@ export const Header = () => {
                         )}
                     </ul>
                     <div className="d-flex align-items-center gap-2">
-                        {/* Greeting for logged-in user */}
-                        {authState.isAuthenticated && (
+                        {isAuthenticated && (
                             <div className="d-flex align-items-center me-3 px-3 py-1 rounded-pill bg-dark text-light shadow-sm">
                                 <span className="me-2">👋</span>
                                 <span className="fw-semibold">{t("header.hello")}, {username}</span>
@@ -118,7 +113,7 @@ export const Header = () => {
                             </ul>
                         </div>
 
-                        {!authState.isAuthenticated ? (
+                        {!isAuthenticated ? (
                             <Link type="button" className="btn btn-auth rounded-pill px-4 ms-2" to="/login">
                                 👤 {t("header.login")}
                             </Link>

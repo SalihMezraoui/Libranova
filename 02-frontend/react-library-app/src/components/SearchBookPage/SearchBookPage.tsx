@@ -190,35 +190,35 @@ export const SearchBookPage = () => {
                                 </button>
 
                                 <ul className='dropdown-menu rounded-3 shadow-sm' aria-labelledby='categoryDropdownButton'>
-                                    <li onClick={() => categoryHandler('All')}>
-                                        <a className='dropdown-item' href='#'>
+                                    <li>
+                                        <button type='button' className='dropdown-item' onClick={() => categoryHandler('All')}>
                                             {t('search_page.categories.all')}
-                                        </a>
+                                        </button>
                                     </li>
-                                    <li onClick={() => categoryHandler('FE')}>
-                                        <a className='dropdown-item' href='#'>
+                                    <li>
+                                        <button type='button' className='dropdown-item' onClick={() => categoryHandler('FE')}>
                                             {t('search_page.categories.fe')}
-                                        </a>
+                                        </button>
                                     </li>
-                                    <li onClick={() => categoryHandler('BE')}>
-                                        <a className='dropdown-item' href='#'>
+                                    <li>
+                                        <button type='button' className='dropdown-item' onClick={() => categoryHandler('BE')}>
                                             {t('search_page.categories.be')}
-                                        </a>
+                                        </button>
                                     </li>
-                                    <li onClick={() => categoryHandler('Data')}>
-                                        <a className='dropdown-item' href='#'>
+                                    <li>
+                                        <button type='button' className='dropdown-item' onClick={() => categoryHandler('Data')}>
                                             {t('search_page.categories.data')}
-                                        </a>
+                                        </button>
                                     </li>
-                                    <li onClick={() => categoryHandler('SC')}>
-                                        <a className='dropdown-item' href='#'>
+                                    <li>
+                                        <button type='button' className='dropdown-item' onClick={() => categoryHandler('SC')}>
                                             {t('search_page.categories.sc')}
-                                        </a>
+                                        </button>
                                     </li>
-                                    <li onClick={() => categoryHandler('DevOps')}>
-                                        <a className='dropdown-item' href='#'>
+                                    <li>
+                                        <button type='button' className='dropdown-item' onClick={() => categoryHandler('DevOps')}>
                                             {t('search_page.categories.devops')}
-                                        </a>
+                                        </button>
                                     </li>
                                 </ul>
                             </div>

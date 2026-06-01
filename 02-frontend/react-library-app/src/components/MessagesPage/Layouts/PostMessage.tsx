@@ -1,12 +1,11 @@
-import { useOktaAuth } from "@okta/okta-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import Message from "../../../models/Message";
 import { useTranslation } from "react-i18next";
 
 export const PostMessage = () => {
 
-    // External hooks
-    const { authState } = useOktaAuth();
+    const { isAuthenticated, getAccessTokenSilently } = useAuth0();
     const { t } = useTranslation();
 
     // Form state
@@ -20,12 +19,13 @@ export const PostMessage = () => {
 
     async function submitMessage() {
         const apiUrl = `${process.env.REACT_APP_API_URL}/messages/secure/post/message`;
-        if (authState?.isAuthenticated && subject !== "" && inquiry !== "") {
+        if (isAuthenticated && subject !== "" && inquiry !== "") {
+            const token = await getAccessTokenSilently();
             const messageRequest: Message = new Message(subject, inquiry);
             const requestOptions = {
                 method: 'POST',
                 headers: {
-                    Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(messageRequest)

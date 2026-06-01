@@ -1,4 +1,4 @@
-import { useOktaAuth } from "@okta/okta-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import Message from "../../../models/Message";
 import { BreathingLoader } from "../../Widgets/BreathingLoader";
@@ -9,8 +9,7 @@ import { useTranslation } from "react-i18next";
 
 export const AdminInbox = () => {
 
-    // Auth & Translation hooks
-    const { authState } = useOktaAuth();
+    const { isAuthenticated, getAccessTokenSilently } = useAuth0();
     const { t } = useTranslation();
 
     // Loading & error states
@@ -21,8 +20,7 @@ export const AdminInbox = () => {
     const [inbox, setInbox] = useState<Message[]>([]);
 
     // Pagination states
-
-    const [questionsPerPage, setQuestionsPerPage] = useState(5);
+    const questionsPerPage = 5;
     const [actualPage, setActualPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
@@ -32,14 +30,14 @@ export const AdminInbox = () => {
 
     useEffect(() => {
         const fetchInbox = async () => {
-            if (authState && authState.isAuthenticated) {
+            if (isAuthenticated) {
+                const token = await getAccessTokenSilently();
                 const apiUrl = `${process.env.REACT_APP_API_URL}/messages/search/findByAnswered?answered=false&page=${actualPage - 1}&size=${questionsPerPage}`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
-                        Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                        Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json'
-
                     }
                 };
                 const response = await fetch(apiUrl, requestOptions);
@@ -58,7 +56,7 @@ export const AdminInbox = () => {
             setHttpError(error.message || "Something went wrong!");
         })
         window.scrollTo(0, 0);
-    }, [authState, actualPage, buttonSubmit]);
+    }, [isAuthenticated, actualPage, buttonSubmit, getAccessTokenSilently, questionsPerPage]);
 
     if (isLoadingInbox) {
         return <BreathingLoader />;
@@ -70,17 +68,18 @@ export const AdminInbox = () => {
 
 
     async function handleSubmitResponse(id: number, responseText: string) {
-        if (!authState || !authState.isAuthenticated || responseText === '' || id == null) {
+        if (!isAuthenticated || responseText === '' || id == null) {
             return;
         }
 
+        const token = await getAccessTokenSilently();
         const apiUrl = `${process.env.REACT_APP_API_URL}/messages/secure/admin/answer/message`;
 
         const messageRequestModel: MessageRequest = new MessageRequest(id, responseText);
         const requestOptions = {
             method: 'PUT',
             headers: {
-                Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(messageRequestModel),

@@ -1,4 +1,4 @@
-import { useOktaAuth } from "@okta/okta-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import Message from "../../../models/Message";
 import { BreathingLoader } from "../../Widgets/BreathingLoader";
@@ -7,25 +7,26 @@ import { useTranslation } from "react-i18next";
 
 export const Messages = () => {
 
-    const { authState } = useOktaAuth();
+    const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
 
     const [messages, setMessages] = useState<Message[]>([]);
 
-    const [messagesPerPage, setMessagesPerPage] = useState(5);
+    const messagesPerPage = 5;
     const [actualPage, setActualPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
         const loadMessages = async () => {
-            if (authState && authState?.isAuthenticated) {
-                const apiUrl = `${process.env.REACT_APP_API_URL}/messages/search/findMessagesByUserEmail?userEmail=${authState?.accessToken?.claims.sub}&page=${actualPage - 1}&size=${messagesPerPage}`;
+            if (isAuthenticated) {
+                const token = await getAccessTokenSilently();
+                const apiUrl = `${process.env.REACT_APP_API_URL}/messages/search/findMessagesByUserEmail?userEmail=${user?.email}&page=${actualPage - 1}&size=${messagesPerPage}`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
-                        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                        Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json',
                     }
                 };
@@ -45,7 +46,7 @@ export const Messages = () => {
         })
         window.scrollTo(0, 0);
 
-    }, [authState, actualPage]);
+    }, [isAuthenticated, actualPage, getAccessTokenSilently, messagesPerPage, user?.email]);
 
     if (isLoading) {
         return <BreathingLoader />;

@@ -1,4 +1,4 @@
-import { useOktaAuth } from "@okta/okta-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import History from "../../../models/History";
 import { BreathingLoader } from "../../Widgets/BreathingLoader";
@@ -8,8 +8,7 @@ import { useTranslation } from "react-i18next";
 
 export const HistoryTab = () => {
 
-    // Okta authentication state and translation hooks
-    const { authState } = useOktaAuth();
+    const { isAuthenticated, user } = useAuth0();
     const { t, i18n } = useTranslation();
 
     // State to manage loading and error states
@@ -25,8 +24,8 @@ export const HistoryTab = () => {
 
     useEffect(() => {
         const retrieveHistory = async () => {
-            if (authState && authState.isAuthenticated) {
-                const apiUrl = `${process.env.REACT_APP_API_URL}/histories/search/findBooksByUserEmail?userEmail=${authState.accessToken?.claims.sub}&page=${actualPage - 1}&size=5`;
+            if (isAuthenticated) {
+                const apiUrl = `${process.env.REACT_APP_API_URL}/histories/search/findBooksByUserEmail?userEmail=${user?.email}&page=${actualPage - 1}&size=5`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
@@ -49,7 +48,7 @@ export const HistoryTab = () => {
             setLoadingHistory(false);
             setHttpError(error.message || "Something went wrong!");
         });
-    }, [authState, actualPage]);
+    }, [isAuthenticated, actualPage, user?.email]);
 
     if (loadingHistory) {
         return <BreathingLoader />;

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Review from "../../models/Review";
 import { BreathingLoader } from "../Widgets/BreathingLoader";
-import { ReviewComponent } from "../Widgets/ReviewComponent";
 import { Pagination } from "../Widgets/Pagination";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
@@ -18,15 +17,14 @@ export const ReviewList = () => {
 
     // Pagination states
     const [actualPage, setActualPage] = useState(1);
-    const [pageSize, setPageSize] = useState(5);
-    const [totalReviews, setTotalReviews] = useState(0);
+    const pageSize = 5;
+    const [totalReviews, setTotalReviews] = useState(0); // eslint-disable-line @typescript-eslint/no-unused-vars
     const [totalPages, setTotalPages] = useState(0);
 
     // Get bookId from URL (robustly)
     const location = useLocation();
     const bookId = location.pathname.split("/")[2] ?? null;
 
-    console.log("ReviewList bookId:", bookId);
 
     useEffect(() => {
         (async () => {
@@ -74,9 +72,6 @@ export const ReviewList = () => {
             </div>
         )
     }
-
-    const indexOfLastReview = Math.min(actualPage * pageSize, totalReviews);
-    const indexOfFirstReview = indexOfLastReview - pageSize;
 
     const paginate = (pageNumber: number) => setActualPage(pageNumber);
 

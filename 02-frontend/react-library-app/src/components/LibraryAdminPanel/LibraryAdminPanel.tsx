@@ -1,13 +1,14 @@
-import { useOktaAuth } from "@okta/okta-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { AdminInbox } from "./Layouts/AdminInbox";
 import { AddBook } from "./Layouts/AddBook";
 import { UpdateBooksQuantity } from "./Layouts/UpdateBooksQuantity";
 import { useTranslation } from "react-i18next";
+
 export const LibraryAdminPanel = () => {
 
-    const { authState } = useOktaAuth();
+    const { user } = useAuth0();
     const { t } = useTranslation();
 
     const [updateBooksQuantity, setUpdateBooksQuantity] = useState(false);
@@ -28,7 +29,7 @@ export const LibraryAdminPanel = () => {
         setMessagesSectionToggled(true);
     }
 
-    if (!authState?.accessToken?.claims?.userType) {
+    if (!user?.['https://libranova.com/userType']) {
         return <Redirect to='/home' />
     }
 

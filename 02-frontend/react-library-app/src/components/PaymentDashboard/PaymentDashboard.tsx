@@ -1,4 +1,4 @@
-import { useOktaAuth } from "@okta/okta-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import { BreathingLoader } from "../Widgets/BreathingLoader";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
@@ -10,8 +10,7 @@ import PaymentHistory from "../../models/PaymentHistory";
 
 export const PaymentDashboard = () => {
 
-    // Hooks
-    const { authState } = useOktaAuth();
+    const { isAuthenticated, getAccessTokenSilently, user } = useAuth0();
     const { t } = useTranslation();
 
     // UI / interaction states
@@ -33,8 +32,8 @@ export const PaymentDashboard = () => {
 
     useEffect(() => {
         const loadCharges = async () => {
-            if (authState && authState.isAuthenticated) {
-                const apiUrl = `${process.env.REACT_APP_API_URL}/payments/search/findPaymentsByUserEmail?userEmail=${authState.accessToken?.claims.sub}`;
+            if (isAuthenticated) {
+                const apiUrl = `${process.env.REACT_APP_API_URL}/payments/search/findPaymentsByUserEmail?userEmail=${user?.email}`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
@@ -54,20 +53,18 @@ export const PaymentDashboard = () => {
             setLoadingCharges(false);
             setHttpError(error.message);
         });
-    }, [authState]);
+    }, [isAuthenticated, user?.email]);
 
     useEffect(() => {
         const fetchPaymentHistory = async () => {
-            if (!(authState && authState.isAuthenticated)) {
+            if (!isAuthenticated) {
                 setLoadingPaymentHistory(false);
                 return;
             }
 
             try {
-                const email = String(authState.accessToken?.claims.sub || "");
+                const email = user?.email || "";
                 const base = `${process.env.REACT_APP_API_URL}/paymentHistories/search/findByUserEmail`;
-
-                // no pagination params, just sort by date descending
                 const url = `${base}?userEmail=${encodeURIComponent(email)}&sort=paymentDate,desc`;
 
                 const res = await fetch(url, {
@@ -90,7 +87,7 @@ export const PaymentDashboard = () => {
         };
 
         fetchPaymentHistory();
-    }, [authState]);
+    }, [isAuthenticated, user?.email]);
 
     const stripe = useStripe();
     const elements = useElements();
@@ -107,7 +104,8 @@ export const PaymentDashboard = () => {
         setHttpError(false);
 
         try {
-            const userEmail = authState?.accessToken?.claims.sub;
+            const token = await getAccessTokenSilently();
+            const userEmail = user?.email;
             const amountInCents = Math.round(charges * 100);
             const currency = "EUR";
 
@@ -119,7 +117,7 @@ export const PaymentDashboard = () => {
                 {
                     method: "POST",
                     headers: {
-                        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                        Authorization: `Bearer ${token}`,
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify(paymentDetails),
@@ -152,7 +150,7 @@ export const PaymentDashboard = () => {
                 {
                     method: "PUT",
                     headers: {
-                        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                        Authorization: `Bearer ${token}`,
                         "Content-Type": "application/json",
                     },
                 }

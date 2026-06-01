@@ -45,7 +45,7 @@ public class MessageController
         String userEmail = authentication.getName();
 
         if (authentication instanceof JwtAuthenticationToken jwtAuth) {
-            String admin = jwtAuth.getToken().getClaim("userType");
+            String admin = jwtAuth.getToken().getClaim("https://libranova.com/userType");
 
             if (admin == null || !admin.equals("admin")) {
                 throw new AccessDeniedException("Unauthorized access: Only admins can update messages.");

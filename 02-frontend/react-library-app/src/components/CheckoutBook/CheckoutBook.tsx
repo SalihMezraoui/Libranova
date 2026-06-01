@@ -5,7 +5,7 @@ import { RatingStars } from "../Widgets/RatingStars";
 import { ReviewCheckoutPanel } from "./ReviewCheckoutPanel";
 import Review from "../../models/Review";
 import { RecentReviews } from "./RecentReviews";
-import { useOktaAuth } from "@okta/okta-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import ReviewRequest from "../../models/ReviewRequest";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 
 export const CheckoutBook = () => {
 
-    const { authState } = useOktaAuth();
+    const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 
     const { t } = useTranslation();
 
@@ -123,17 +123,18 @@ export const CheckoutBook = () => {
             setIsLoadingReview(false);
             setHttpError(error.message);
         });
-    }, [isReviewRemaining]);
+    }, [isReviewRemaining, bookId]);
 
 
     useEffect(() => {
         const checkUserReviewStatus = async () => {
-            if (authState && authState.isAuthenticated) {
+            if (isAuthenticated) {
+                const token = await getAccessTokenSilently();
                 const apiUrl = `${process.env.REACT_APP_API_URL}/reviews/secure/has-reviewed?bookId=${bookId}`;
                 const response = {
                     method: 'GET',
                     headers: {
-                        Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                        Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     }
                 };
@@ -150,16 +151,17 @@ export const CheckoutBook = () => {
             setIsLoadingReviewRemaining(false);
             setHttpError(error.message);
         })
-    }, [authState]);
+    }, [isAuthenticated, bookId, getAccessTokenSilently]);
 
     useEffect(() => {
         const fetchUserLoans = async () => {
-            if (authState && authState.isAuthenticated) {
+            if (isAuthenticated) {
+                const token = await getAccessTokenSilently();
                 const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/active-loans/size`;
                 const response = {
                     method: 'GET',
                     headers: {
-                        Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                        Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     }
                 };
@@ -176,16 +178,17 @@ export const CheckoutBook = () => {
             setIsLoadingCurrentLoans(false);
             setHttpError(error.message);
         })
-    }, [authState, isBookCheckedOut]);
+    }, [isAuthenticated, isBookCheckedOut, getAccessTokenSilently]);
 
     useEffect(() => {
         const fetchIsBookCheckedOut = async () => {
-            if (authState && authState.isAuthenticated) {
+            if (isAuthenticated) {
+                const token = await getAccessTokenSilently();
                 const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/loans/exists?bookId=${bookId}`;
                 const response = {
                     method: 'GET',
                     headers: {
-                        Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                        Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json'
                     }
                 };
@@ -202,7 +205,7 @@ export const CheckoutBook = () => {
             setIsLoadingBookCheckedOut(false);
             setHttpError(error.message);
         })
-    }, [authState]);
+    }, [isAuthenticated, bookId, getAccessTokenSilently]);
 
     if (loading || isLoadingReview || isLoadingCurrentLoans || isLoadingBookCheckedOut || isLoadingReviewRemaining) {
         return (
@@ -221,11 +224,12 @@ export const CheckoutBook = () => {
     }
 
     async function checkoutBook() {
+        const token = await getAccessTokenSilently();
         const apiUrl = `${process.env.REACT_APP_API_URL}/books/secure/loans/checkout?bookId=${bookId}`;
         const response = {
             method: 'PUT',
             headers: {
-                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
         };
@@ -239,7 +243,7 @@ export const CheckoutBook = () => {
     }
 
     async function submitReview(rating: number, comment: string) {
-
+        const token = await getAccessTokenSilently();
         const bookId = book?.id ?? 0;
 
         const reviewRequest = new ReviewRequest(rating, bookId, comment);
@@ -247,7 +251,7 @@ export const CheckoutBook = () => {
         const response = {
             method: 'POST',
             headers: {
-                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(reviewRequest)
@@ -303,7 +307,7 @@ export const CheckoutBook = () => {
                         </div>
                     </div>
                     <ReviewCheckoutPanel book={book} mobile={false} currentLoans={currentLoans}
-                        isAuthenticated={authState?.isAuthenticated} isCheckedOut={isBookCheckedOut}
+                        isAuthenticated={isAuthenticated} isCheckedOut={isBookCheckedOut}
                         checkoutBook={checkoutBook} isReviewRemaining={isReviewRemaining} submitReview={submitReview} />
                 </div>
                 <hr />
@@ -342,7 +346,7 @@ export const CheckoutBook = () => {
                     </div>
                 </div>
                 <ReviewCheckoutPanel book={book} mobile={true} currentLoans={currentLoans}
-                    isAuthenticated={authState?.isAuthenticated} isCheckedOut={isBookCheckedOut}
+                    isAuthenticated={isAuthenticated} isCheckedOut={isBookCheckedOut}
                     checkoutBook={checkoutBook} isReviewRemaining={isReviewRemaining} submitReview={submitReview} />
                 <hr />
                 <RecentReviews reviews={reviews} bookId={book?.id} mobile={true} />

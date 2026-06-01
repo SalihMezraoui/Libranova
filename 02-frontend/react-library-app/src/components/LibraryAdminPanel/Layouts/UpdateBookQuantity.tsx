@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import Book from "../../../models/Book";
-import { useOktaAuth } from "@okta/okta-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import Swal from 'sweetalert2';
 import { useTranslation } from "react-i18next";
 
 export const UpdateBookQuantity: React.FC<{ book: Book, deleteBook: any }> = (props) => {
 
-    const { authState } = useOktaAuth();
+    const { getAccessTokenSilently } = useAuth0();
     const { t } = useTranslation();
     const [bookQuantity, setBookQuantity] = useState<number>(0);
     const [left, setLeft] = useState<number>(0);
@@ -20,12 +20,12 @@ export const UpdateBookQuantity: React.FC<{ book: Book, deleteBook: any }> = (pr
     }, []);
 
     async function incrementQuantity() {
-
+        const token = await getAccessTokenSilently();
         const apiUrl = `${process.env.REACT_APP_API_URL}/admin/secure/increment/book/copies?bookId=${props.book.id}`;
         const requestOptions = {
             method: 'PUT',
             headers: {
-                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
             }
         };
@@ -39,11 +39,12 @@ export const UpdateBookQuantity: React.FC<{ book: Book, deleteBook: any }> = (pr
     }
 
     async function decrementQuantity() {
+        const token = await getAccessTokenSilently();
         const apiUrl = `${process.env.REACT_APP_API_URL}/admin/secure/decrement/book/copies?bookId=${props.book.id}`;
         const requestOptions = {
             method: 'PUT',
             headers: {
-                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
             }
         };
@@ -72,11 +73,12 @@ export const UpdateBookQuantity: React.FC<{ book: Book, deleteBook: any }> = (pr
         });
 
         if (result.isConfirmed) {
+            const token = await getAccessTokenSilently();
             const apiUrl = `${process.env.REACT_APP_API_URL}/admin/secure/remove/book?bookId=${props.book.id}`;
             const requestOptions = {
                 method: 'DELETE',
                 headers: {
-                    Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                    Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 }
             };

@@ -10,6 +10,5 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
-COPY src/main/resources/libranova-keystore.p12 ./libranova-keystore.p12
-EXPOSE 8443
+EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]

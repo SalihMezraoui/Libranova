@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Book from "../../models/Book";
-import { BreathingLoader } from "../Widgets/BreathingLoader";
-import { RatingStars } from "../Widgets/RatingStars";
+import { BreathingLoader } from "../widgets/BreathingLoader";
+import { RatingStars } from "../widgets/RatingStars";
 import { ReviewCheckoutPanel } from "./ReviewCheckoutPanel";
 import Review from "../../models/Review";
 import { RecentReviews } from "./RecentReviews";

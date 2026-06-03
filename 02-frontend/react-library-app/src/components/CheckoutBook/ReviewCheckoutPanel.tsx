@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Book from "../../models/Book";
-import { PostAReview } from "../Widgets/PostAReview";
+import { PostAReview } from "../widgets/PostAReview";
 import { useTranslation } from "react-i18next";
 import React, { useMemo } from "react";
 

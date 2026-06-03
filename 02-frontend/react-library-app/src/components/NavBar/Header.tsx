@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { BreathingLoader } from '../Widgets/BreathingLoader';
+import { BreathingLoader } from '../widgets/BreathingLoader';
 import { useTranslation } from 'react-i18next';
 
 

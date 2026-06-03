@@ -1,6 +1,9 @@
 # Secrets - never commit these
 .env
 
+# Claude Code project settings
+.claude/
+
 # Java / Maven
 target/
 *.class

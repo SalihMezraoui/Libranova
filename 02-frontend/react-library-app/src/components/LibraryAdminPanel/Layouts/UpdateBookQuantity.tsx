@@ -17,6 +17,7 @@ export const UpdateBookQuantity: React.FC<{ book: Book, deleteBook: any }> = (pr
             props.book.copiesInStock ? setLeft(props.book.copiesInStock) : setLeft(0);
         };
         loadBook();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     async function incrementQuantity() {

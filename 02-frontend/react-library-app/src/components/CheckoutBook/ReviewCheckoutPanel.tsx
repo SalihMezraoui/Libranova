@@ -63,6 +63,7 @@ export const ReviewCheckoutPanel: React.FC<{
         {t("checkout.maxReached")}
       </p>
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     props.isAuthenticated,
     props.isCheckedOut,

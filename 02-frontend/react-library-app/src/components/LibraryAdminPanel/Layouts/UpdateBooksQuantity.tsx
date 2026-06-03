@@ -63,6 +63,7 @@ export const UpdateBooksQuantity = () => {
             setLoading(false);
             setHttpError(error.message);
         })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [actualPage, bookRemove]);
 
     const lastBookIndex = actualPage * booksPerPage;

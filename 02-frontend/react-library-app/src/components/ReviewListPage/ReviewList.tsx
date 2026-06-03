@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Review from "../../models/Review";
-import { BreathingLoader } from "../Widgets/BreathingLoader";
-import { Pagination } from "../Widgets/Pagination";
+import { BreathingLoader } from "../widgets/BreathingLoader";
+import { Pagination } from "../widgets/Pagination";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 

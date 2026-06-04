@@ -75,7 +75,7 @@ public class BookService {
         book.setCopiesInStock(book.getCopiesInStock() + 1);
         bookRepository.save(book);
 
-        // Calculate days overdue
+        // Calculate days overdue — late fee: 2€ per day
         LocalDate dueDate = LocalDate.parse(checkout.getReturnedAt());
         LocalDate today = LocalDate.now();
         long daysOverdue = ChronoUnit.DAYS.between(dueDate, today);

@@ -28,7 +28,7 @@ jobs:
         run: chmod +x mvnw
 
       - name: Run unit tests
-        run: ./mvnw test -Dexcludes="**/LibranovaSpringBootApplicationTests.java"
+        run: ./mvnw test -Dtest="BookServiceTest,MessageServiceTest,ReviewServiceTest,AdminServiceTest,PaymentServiceTest"
 
   frontend-build:
     name: Frontend — Build

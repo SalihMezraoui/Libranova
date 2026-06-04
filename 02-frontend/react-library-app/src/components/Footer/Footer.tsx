@@ -13,7 +13,7 @@ export const Footer = () => {
                     
                     <p className="mb-0 d-flex align-items-center">
                         <i className="bi bi-book-half me-2"></i>
-                        © Libranova App, Inc
+                        © Libranova App, Inc 2025
                     </p>
 
                     <nav className="nav">

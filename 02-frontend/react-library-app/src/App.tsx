@@ -13,6 +13,7 @@ import { LibraryActivity } from './components/LibraryActivityPage/LibraryActivit
 import { MessagePage } from './components/MessagesPage/MessagePage';
 import { LibraryAdminPanel } from './components/LibraryAdminPanel/LibraryAdminPanel';
 import { PaymentDashboard } from './components/PaymentDashboard/PaymentDashboard';
+import { WishlistPage } from './components/WishlistPage/WishlistPage';
 import Accessibility from './components/Accessibility/Accessibility';
 import AboutUs from './components/AboutUs/AboutUs';
 
@@ -74,6 +75,7 @@ export const App = () => {
                     <ProtectedRoute path='/messages' component={MessagePage} />
                     <ProtectedRoute path='/admin' component={LibraryAdminPanel} />
                     <ProtectedRoute path='/charges' component={PaymentDashboard} />
+                    <ProtectedRoute path='/wishlist' component={WishlistPage} />
                 </Switch>
             </div>
             <Footer />

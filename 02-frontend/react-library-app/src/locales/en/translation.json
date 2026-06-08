@@ -43,12 +43,22 @@
         "aboutUs": "About Us",
         "searchBooks": "Search Books",
         "libraryActivity": "Library Activity",
+        "wishlist": "Wishlist",
         "messages": "My Inbox",
         "overdueCharges": "Overdue Charges",
         "admin": "Admin",
         "hello": "Hi",
         "login": "Login",
         "logout": "Logout"
+    },
+    "wishlist": {
+        "title": "My Wishlist",
+        "empty": "Your wishlist is empty.",
+        "browseBooks": "Browse Books",
+        "remove": "Remove",
+        "viewDetails": "View Details",
+        "saveForLater": "Save for Later",
+        "removeFromWishlist": "Remove from Wishlist"
     },
     "about_us": {
         "title": "About Us",

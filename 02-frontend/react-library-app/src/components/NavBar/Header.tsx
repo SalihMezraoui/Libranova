@@ -66,6 +66,9 @@ export const Header = () => {
                                     <NavLink className='nav-link hover-underline' to='/libraryActivity'> {t("header.libraryActivity")}</NavLink>
                                 </li>
                                 <li className='nav-item'>
+                                    <NavLink className='nav-link hover-underline' to='/wishlist'> {t("header.wishlist")}</NavLink>
+                                </li>
+                                <li className='nav-item'>
                                     <NavLink className='nav-link hover-underline' to='/messages'> {t("header.messages")}</NavLink>
                                 </li>
                                 <li className='nav-item'>

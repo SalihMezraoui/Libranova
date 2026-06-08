@@ -13,6 +13,8 @@ export const ReviewCheckoutPanel: React.FC<{
   checkoutBook: any;
   isReviewRemaining: boolean;
   submitReview: any;
+  isWishlisted: boolean;
+  toggleWishlist: () => void;
 }> = (props) => {
   const { t } = useTranslation();
 
@@ -123,6 +125,16 @@ export const ReviewCheckoutPanel: React.FC<{
       </header>
 
       {checkoutButton}
+
+      {props.isAuthenticated && (
+        <button
+          onClick={props.toggleWishlist}
+          className={`btn btn-outline-${props.isWishlisted ? 'danger' : 'secondary'} btn-sm w-100 mt-2`}
+        >
+          <i className={`bi bi-heart${props.isWishlisted ? '-fill' : ''} me-2`}></i>
+          {props.isWishlisted ? t('wishlist.removeFromWishlist') : t('wishlist.saveForLater')}
+        </button>
+      )}
 
       <hr className="my-4" />
 

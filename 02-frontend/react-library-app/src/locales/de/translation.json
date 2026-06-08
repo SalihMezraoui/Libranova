@@ -43,12 +43,22 @@
         "aboutUs": "Über uns",
         "searchBooks": "Bücher suchen",
         "libraryActivity": "Bibliotheksaktivität",
+        "wishlist": "Wunschliste",
         "messages": "Mein Posteingang",
         "overdueCharges": "Überfällige Gebühren",
         "admin": "Admin",
         "hello": "Hallo",
         "login": "Login",
         "logout": "Abmelden"
+    },
+    "wishlist": {
+        "title": "Meine Wunschliste",
+        "empty": "Deine Wunschliste ist leer.",
+        "browseBooks": "Bücher stöbern",
+        "remove": "Entfernen",
+        "viewDetails": "Details anzeigen",
+        "saveForLater": "Für später speichern",
+        "removeFromWishlist": "Von der Wunschliste entfernen"
     },
     "footer": {
         "home": "Startseite",

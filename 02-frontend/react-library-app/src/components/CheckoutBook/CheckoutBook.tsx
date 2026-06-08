@@ -37,6 +37,10 @@ export const CheckoutBook = () => {
     const [isBookCheckedOut, setIsBookCheckedOut] = useState(false);
     const [isLoadingBookCheckedOut, setIsLoadingBookCheckedOut] = useState(true);
 
+    // Wishlist state
+    const [isWishlisted, setIsWishlisted] = useState(false);
+    const [isLoadingWishlist, setIsLoadingWishlist] = useState(true);
+
     // Language state
     const [language, setLanguage] = useState<'en' | 'de'>('en');
 
@@ -207,7 +211,33 @@ export const CheckoutBook = () => {
         })
     }, [isAuthenticated, bookId, getAccessTokenSilently]);
 
-    if (loading || isLoadingReview || isLoadingCurrentLoans || isLoadingBookCheckedOut || isLoadingReviewRemaining) {
+    useEffect(() => {
+        const fetchWishlistStatus = async () => {
+            if (isAuthenticated) {
+                const token = await getAccessTokenSilently();
+                const res = await fetch(`${process.env.REACT_APP_API_URL}/wishlists/secure/exists?bookId=${bookId}`, {
+                    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+                });
+                if (res.ok) setIsWishlisted(await res.json());
+            }
+            setIsLoadingWishlist(false);
+        };
+        fetchWishlistStatus().catch(() => setIsLoadingWishlist(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isAuthenticated, bookId]);
+
+    async function toggleWishlist() {
+        const token = await getAccessTokenSilently();
+        const method = isWishlisted ? 'DELETE' : 'POST';
+        const endpoint = isWishlisted ? 'remove' : 'add';
+        await fetch(`${process.env.REACT_APP_API_URL}/wishlists/secure/${endpoint}?bookId=${bookId}`, {
+            method,
+            headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
+        });
+        setIsWishlisted(!isWishlisted);
+    }
+
+    if (loading || isLoadingReview || isLoadingCurrentLoans || isLoadingBookCheckedOut || isLoadingReviewRemaining || isLoadingWishlist) {
         return (
             <BreathingLoader size={80} color="#003366" speed={1} />
         );
@@ -308,7 +338,8 @@ export const CheckoutBook = () => {
                     </div>
                     <ReviewCheckoutPanel book={book} mobile={false} currentLoans={currentLoans}
                         isAuthenticated={isAuthenticated} isCheckedOut={isBookCheckedOut}
-                        checkoutBook={checkoutBook} isReviewRemaining={isReviewRemaining} submitReview={submitReview} />
+                        checkoutBook={checkoutBook} isReviewRemaining={isReviewRemaining} submitReview={submitReview}
+                        isWishlisted={isWishlisted} toggleWishlist={toggleWishlist} />
                 </div>
                 <hr />
                 <RecentReviews reviews={reviews} bookId={book?.id} mobile={false} />
@@ -347,7 +378,8 @@ export const CheckoutBook = () => {
                 </div>
                 <ReviewCheckoutPanel book={book} mobile={true} currentLoans={currentLoans}
                     isAuthenticated={isAuthenticated} isCheckedOut={isBookCheckedOut}
-                    checkoutBook={checkoutBook} isReviewRemaining={isReviewRemaining} submitReview={submitReview} />
+                    checkoutBook={checkoutBook} isReviewRemaining={isReviewRemaining} submitReview={submitReview}
+                    isWishlisted={isWishlisted} toggleWishlist={toggleWishlist} />
                 <hr />
                 <RecentReviews reviews={reviews} bookId={book?.id} mobile={true} />
             </div>

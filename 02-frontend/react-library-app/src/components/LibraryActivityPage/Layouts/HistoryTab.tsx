@@ -1,9 +1,9 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import History from "../../../models/History";
-import { BreathingLoader } from "../../Widgets/BreathingLoader";
+import { BreathingLoader } from "../../widgets/BreathingLoader";
 import { Link } from "react-router-dom";
-import { Pagination } from "../../Widgets/Pagination";
+import { Pagination } from "../../widgets/Pagination";
 import { useTranslation } from "react-i18next";
 
 export const HistoryTab = () => {

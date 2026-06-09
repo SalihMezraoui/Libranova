@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import Book from "../../models/Book";
-import { BreathingLoader } from "../Widgets/BreathingLoader";
+import { BreathingLoader } from "../widgets/BreathingLoader";
 import { useTranslation } from "react-i18next";
 
 export const WishlistPage = () => {

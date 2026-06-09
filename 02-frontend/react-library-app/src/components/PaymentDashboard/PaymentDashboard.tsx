@@ -1,6 +1,6 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
-import { BreathingLoader } from "../Widgets/BreathingLoader";
+import { BreathingLoader } from "../widgets/BreathingLoader";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { Link } from "react-router-dom";
 import PaymentDetailsRequest from "../../models/PaymentDetailsRequest";

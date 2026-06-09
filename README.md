@@ -4,10 +4,7 @@
 
 ## Live Demo
 
-| | URL |
-|---|---|
-| Frontend | https://libranova-lac.vercel.app |
-| Backend API | https://libranova-production-eda2.up.railway.app |
+👉 **[https://libranova-lac.vercel.app](https://libranova-lac.vercel.app)**
 
 ---
 

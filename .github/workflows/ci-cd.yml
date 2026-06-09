@@ -28,7 +28,7 @@ jobs:
         run: chmod +x mvnw
 
       - name: Run unit tests
-        run: ./mvnw test -Dtest="BookServiceTest,MessageServiceTest,ReviewServiceTest,AdminServiceTest,PaymentServiceTest"
+        run: ./mvnw test -Dtest="BookServiceTest,MessageServiceTest,ReviewServiceTest,AdminServiceTest,PaymentServiceTest,WishlistServiceTest,BookControllerTest,AdminControllerTest,MessageControllerTest,ReviewControllerTest,PaymentControllerTest,WishlistControllerTest"
 
   frontend-build:
     name: Frontend — Build

@@ -31,7 +31,8 @@ public class SecurityConfig
                         , "/api/reviews/secure/**"
                         , "/api/messages/secure/**"
                         , "/api/admin/secure/**"
-                        , "/api/payments/secure/**").authenticated()
+                        , "/api/payments/secure/**"
+                        , "/api/wishlists/secure/**").authenticated()
                         .anyRequest().permitAll()
                 )
                 // Validate JWTs issued by Auth0; use our converter so getName() returns the user's email

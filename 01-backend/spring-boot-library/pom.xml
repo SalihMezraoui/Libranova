@@ -90,6 +90,13 @@
 			<artifactId>mockito-junit-jupiter</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- For MockMvc controller tests with JWT security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 		<!-- SpringDoc OpenAPI (Swagger) -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

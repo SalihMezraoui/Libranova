@@ -13,7 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.AccessDeniedException;
+import org.springframework.security.access.AccessDeniedException;
 
 @CrossOrigin(origins = "${frontend.url}", allowCredentials = "true")
 @RestController
@@ -41,7 +41,7 @@ public class MessageController
     }
 
     @PutMapping("/secure/admin/answer/message")
-    public void updateMessageResponse(@RequestBody QuestionRequest questionRequest, Authentication authentication) throws AccessDeniedException {
+    public void updateMessageResponse(@RequestBody QuestionRequest questionRequest, Authentication authentication) {
         String userEmail = authentication.getName();
 
         if (authentication instanceof JwtAuthenticationToken jwtAuth) {

@@ -8,6 +8,22 @@
 
 ---
 
+## Screenshots
+
+| Home — Book Catalog | Book Detail & Wishlist |
+|---|---|
+| ![Home](docs/screenshots/home.png) | ![Book Detail](docs/screenshots/book-detail.png) |
+
+| Wishlist | Shelf (Loans) |
+|---|---|
+| ![Wishlist](docs/screenshots/wishlist.png) | ![Shelf](docs/screenshots/shelf.png) |
+
+| Admin — Book Management |
+|---|
+| ![Admin](docs/screenshots/admin.png) |
+
+---
+
 This project was developed as part of my **Bachelorarbeit (Bachelor's Thesis)**.
 
 ## Overview

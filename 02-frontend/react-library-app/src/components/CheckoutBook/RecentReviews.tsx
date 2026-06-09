@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Review from "../../models/Review";
-import { ReviewComponent } from "../widgets/ReviewComponent";
+import { ReviewComponent } from "../Widgets/ReviewComponent";
 import { useTranslation } from "react-i18next";
 
 interface RecentReviewsProps {

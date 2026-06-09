@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import UserLoansSummary from "../../../models/UserLoansSummary";
-import { BreathingLoader } from "../../widgets/BreathingLoader";
+import { BreathingLoader } from "../../Widgets/BreathingLoader";
 import { Link } from "react-router-dom";
 import { LoanDetailsModal } from "./LoanDetailsModal";
 import { useTranslation } from "react-i18next";

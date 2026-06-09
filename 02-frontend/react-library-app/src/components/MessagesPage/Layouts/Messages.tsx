@@ -1,8 +1,8 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import Message from "../../../models/Message";
-import { BreathingLoader } from "../../widgets/BreathingLoader";
-import { Pagination } from "../../widgets/Pagination";
+import { BreathingLoader } from "../../Widgets/BreathingLoader";
+import { Pagination } from "../../Widgets/Pagination";
 import { useTranslation } from "react-i18next";
 
 export const Messages = () => {

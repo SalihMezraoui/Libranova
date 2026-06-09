@@ -1,72 +1,132 @@
-# LibraNova: Full-Stack Library Management System with Spring Boot and React 
+# LibraNova: Full-Stack Library Management System
 
-This project was developed as part of my **Bachelorarbeit (Bachelor’s Thesis)**.
+[![CI/CD Pipeline](https://github.com/SalihMezraoui/Libranova/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/SalihMezraoui/Libranova/actions/workflows/ci-cd.yml)
+
+## Live Demo
+
+| | URL |
+|---|---|
+| Frontend | https://libranova-lac.vercel.app |
+| Backend API | https://libranova-production-eda2.up.railway.app |
+
+---
+
+This project was developed as part of my **Bachelorarbeit (Bachelor's Thesis)**.
 
 ## Overview
 
 **LibraNova** is a modern, responsive library management web application designed to enhance the user experience for both readers and administrators. Built with **React** (frontend) and **Spring Boot** (backend), the application enables users to search for books, borrow available books, submit reviews, and interact with real-time book data. Administrators can efficiently manage the catalog by adding, removing, or updating book quantities, as well as responding to user inquiries.
 
-The application also features a robust **authentication and authorization** system using **JWT**, **OAuth2**, and **OpenID Connect**, and integrates **Stripe API** for secure payments related to paid services.
+The application features a robust **authentication and authorization** system using **Auth0** (OAuth2, OpenID Connect, JWT), and integrates the **Stripe API** for secure payments related to overdue charges.
 
 ## Core Functionalities
 
 ### 👥 User Features
-1. **User Registration & Login**  
-   - Secure account login using JWT & OAuth2.  
-   - Role-based access (user/admin) using **Spring Security**.
+1. **User Registration & Login**
+   - Secure login via **Auth0** (OAuth2 / OpenID Connect / JWT).
+   - Role-based access (user/admin) enforced by **Spring Security**.
 
-2. **Book Discovery & Borrowing**  
-   - Search books by title, author, or category.  
+2. **Book Discovery & Borrowing**
+   - Search books by title, author, or category.
    - View availability and borrow up to **five books** at a time.
- 
-3. **Book Details & Reviews**  
-   - View ratings and reviews for each book.  
+
+3. **Book Details & Reviews**
+   - View ratings and reviews for each book.
    - Submit personal reviews after borrowing.
-  
-4. **Shelf page**  
-   - Track current borrowings and return history.  
+
+4. **Wishlist**
+   - Save books for later with a heart button on the book detail page.
+   - View and manage all saved books from the dedicated Wishlist page.
+
+5. **Shelf Page**
+   - Track current borrowings and return history.
    - Extend borrow periods and return books manually.
-  
-5. **Inquiries**  
-   - Send inquiries to library admins.  
+
+6. **Inquiries**
+   - Send inquiries to library admins.
    - Browse the response history of answered messages.
 
+7. **Payments**
+   - Pay overdue charges securely via **Stripe**.
+
 ### 🛠️ Admin Features
-1. **Book Catalog Management**  
-   - Add and update book entries and quantities.  
-   - Delete books or update stock information. 
+1. **Book Catalog Management**
+   - Add and update book entries and quantities.
+   - Delete books or update stock information.
 
-2. **User Communication**  
+2. **User Communication**
    - Read and respond to user messages and inquiries.
-
-3. **Payment Integration**  
-   - Handle paid services via secure **Stripe API**.
 
 ## Technologies Used
 
-### 📌 Back-End:
-- **Spring Boot** for RESTful API development
-- **Spring Security** with **JWT**, **OAuth2**, and **OpenID Connect** for secure authentication
+### 📌 Back-End
+- **Spring Boot** — RESTful API development
+- **Spring Security** with **Auth0** (OAuth2, OpenID Connect, JWT)
 - **Spring Data JPA** with **MySQL**
-- **Spring Data REST** for automatic repository exposure  
-- **Stripe API** for payment handling
-- **Swagger** for API documentation  
-- **HTTPS** with **SSL/TLS** encryption for secure communication
-  
-### 🎯 Front-End:
-- **React** (with **TypeScript**) for UI
-- **Bootstrap**, **HTML**, and **CSS** for responsive design  
-- **i18next** for multilingual support (English & German)  
+- **Spring Data REST** — automatic repository exposure
+- **Stripe API** — payment handling
+- **HTTPS** with SSL/TLS encryption
 
-### 🧪 Testing:
-- **JUnit** & **Mockito** for backend testing
-- **Postman** for API testing and integration validation  
+### 🎯 Front-End
+- **React** with **TypeScript**
+- **Bootstrap** for responsive design
+- **i18next** — multilingual support (English & German)
+- **Auth0 React SDK** — authentication
 
-### 🐳 Deployment & Containerization:
-- **Docker** to containerize backend, frontend, and database  
+### 🧪 Testing
+- **JUnit** & **Mockito** — backend unit tests (service layer)
+- **Postman** — manual API testing
 
-## Demo
-For a detailed demonstration of the application, including screenshots and an analysis of the results, please refer to the **Documentation.pdf** located in the **03-ausarbeitung** folder of this repository. The documentation includes visual aids in the section **"Beispiel"** for a deeper understanding of the application’s functionality and user interface.
+### 🚀 Deployment & CI/CD
+- **Railway** — backend + MySQL database hosting
+- **Vercel** — frontend hosting
+- **Docker** — backend containerization (Railway builds from Dockerfile)
+- **GitHub Actions** — CI/CD pipeline (automated tests + deployment)
+
+## CI/CD Pipeline
+
+Every push to `main` triggers the following automated pipeline:
+
+```
+Push to main
+    ↓
+GitHub Actions:
+  ├── Job 1: Backend unit tests (Java 17 / Maven)
+  └── Job 2: Frontend build (Node 20 / React)
+              ↓ both pass
+  ├── Job 3: Deploy frontend → Vercel
+  └── Railway: auto-deploys backend (waits for CI)
+```
+
+## How to Run Locally
+
+### Prerequisites
+- Java 17
+- Node.js 20
+- MySQL
+- Auth0 account
+
+### Backend
+
+1. Clone the repo
+2. Create a local MySQL database called `libranova_db`
+3. Copy `.env.example` and fill in your values
+4. Run:
+```bash
+cd 01-backend/spring-boot-library
+./mvnw spring-boot:run
+```
+
+### Frontend
+
+1. Copy `02-frontend/react-library-app/.env.example` to `.env`
+2. Fill in your Auth0 and API values
+3. Run:
+```bash
+cd 02-frontend/react-library-app
+npm install --legacy-peer-deps
+npm start
+```
 
 ## Acknowledgments
 

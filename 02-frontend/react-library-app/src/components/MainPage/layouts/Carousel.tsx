@@ -2,7 +2,7 @@ import { BookReturn } from "./BookReturn";
 import { useEffect, useState } from 'react';
 import Book from "../../../models/Book";
 import { Link } from "react-router-dom";
-import { BreathingLoader } from "../../widgets/BreathingLoader";
+import { BreathingLoader } from "../../Widgets/BreathingLoader";
 import { useTranslation } from "react-i18next";
 
 const chunkArray = (arr: Book[], size: number): Book[][] => {

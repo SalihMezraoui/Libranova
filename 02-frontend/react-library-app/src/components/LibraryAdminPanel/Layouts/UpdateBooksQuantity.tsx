@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Book from "../../../models/Book";
-import { BreathingLoader } from "../../widgets/BreathingLoader";
-import { Pagination } from "../../widgets/Pagination";
+import { BreathingLoader } from "../../Widgets/BreathingLoader";
+import { Pagination } from "../../Widgets/Pagination";
 import { UpdateBookQuantity } from "./UpdateBookQuantity";
 import { useTranslation } from "react-i18next";
 

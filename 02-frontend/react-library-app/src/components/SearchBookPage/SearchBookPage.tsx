@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Book from "../../models/Book";
 import { SearchBook } from "./layouts/SearchBook";
-import { Pagination } from "../widgets/Pagination";
-import { BreathingLoader } from "../widgets/BreathingLoader";
+import { Pagination } from "../Widgets/Pagination";
+import { BreathingLoader } from "../Widgets/BreathingLoader";
 import { useTranslation } from "react-i18next";
 
 export const SearchBookPage = () => {

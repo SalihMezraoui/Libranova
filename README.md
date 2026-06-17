@@ -78,6 +78,7 @@ The application features a robust **authentication and authorization** system us
 - **Spring Data JPA** with **MySQL**
 - **Spring Data REST** — automatic repository exposure
 - **Stripe API** — payment handling
+- **springdoc-openapi (Swagger UI)** — interactive API documentation
 - **HTTPS** with SSL/TLS encryption
 
 ### 🎯 Front-End
@@ -87,8 +88,12 @@ The application features a robust **authentication and authorization** system us
 - **Auth0 React SDK** — authentication
 
 ### 🧪 Testing
-- **JUnit** & **Mockito** — backend unit tests (service layer)
+- **JUnit 5** — test framework
+- **Mockito** — service-layer unit tests with mocked repositories (`@Mock` / `@InjectMocks`)
+- **Spring MVC Test (MockMvc)** — controller-layer tests via `@WebMvcTest`, services mocked with `@MockBean`
+- **Spring Security Test** — authorization tests (JWT, CSRF, 401 on unauthenticated requests)
 - **Postman** — manual API testing
+- **12 test classes** covering all service and controller layers (Book, Review, Message, Admin, Payment, Wishlist)
 
 ### 🚀 Deployment & CI/CD
 - **Railway** — backend + MySQL database hosting
@@ -128,6 +133,11 @@ GitHub Actions:
 ```bash
 cd 01-backend/spring-boot-library
 ./mvnw spring-boot:run
+```
+
+Run the test suite:
+```bash
+./mvnw test
 ```
 
 ### Frontend

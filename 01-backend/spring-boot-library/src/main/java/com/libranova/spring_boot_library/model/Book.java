@@ -24,10 +24,10 @@ public class Book
     @Column(name = "author")
     private String author;
 
-    @Column(name = "overview")
+    @Column(name = "overview", columnDefinition = "TEXT")
     private String overview;
 
-    @Column(name = "overview_de")
+    @Column(name = "overview_de", columnDefinition = "TEXT")
     private String overviewDe;
 
     @Column(name = "total_copies")

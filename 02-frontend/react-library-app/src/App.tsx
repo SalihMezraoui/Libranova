@@ -16,6 +16,7 @@ import { PaymentDashboard } from './components/PaymentDashboard/PaymentDashboard
 import { WishlistPage } from './components/WishlistPage/WishlistPage';
 import Accessibility from './components/Accessibility/Accessibility';
 import AboutUs from './components/AboutUs/AboutUs';
+import { Analytics } from '@vercel/analytics/react';
 
 const ProtectedRoute = ({ component, ...args }: any) => {
     const WrappedComponent = React.useMemo(
@@ -79,6 +80,7 @@ export const App = () => {
                 </Switch>
             </div>
             <Footer />
+            <Analytics />
         </div>
     );
 };
